@@ -38,10 +38,29 @@
 			display: block;
 		}
 		</style>
+		<script>
+			function HideElement(id)
+			{
+				document.getElementById(id).style.display="none";
+			}
+			function ShowElement(id)
+			{
+				document.getElementById(id).style.display="block";
+			}
+		</script>
 	</head>
 	<body>
 		<div id='M_Head'>
 			<h1>【Barren Land 蛮荒大陆】</h1>
+		</div>
+		<div id='M_Start'>
+			<span class='sel' onclick='~function(){HideElement("M_Start");}'><h4>开始</h4></span>
+			<span class='sel' onclick='~function(){alert("读档功能未开放，敬请期待！");}()'><h4>读档</h4></span>
+			<hr>
+		</div>
+		<div id='M_CR'>
+			<h3>【选择职业】</h3> <br>
+			
 			<hr>
 		</div>
 		<div id='M_Foot'>
