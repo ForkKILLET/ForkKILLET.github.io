@@ -7,7 +7,6 @@
 		{
 			color: green;
 			background-color: white;
-			font-size: 25px;
 			padding: 10px;
 			border: 2px solid green;
 			border-radius: 10px;
@@ -19,6 +18,23 @@
 		{
 			color: white;
 			background-color: green;
+		}
+		.selbox
+		{
+			width: 14px;
+			height: 14px;
+			border-radius:50px;
+			border: 2px solid green;
+			background-color: white;
+		}
+		.selboxdot
+		{
+			width: 5px;
+			height: 5px;
+			border-radius:50px;
+			border: 2px solid green;
+			background-color: green;
+			margin: 2.5px;
 		}
       
 		body
@@ -47,26 +63,68 @@
 			{
 				document.getElementById(id).style.display="block";
 			}
+			
+			function FormSelbox(id)
+			{
+				document.getElementById(id).dataset.sel="/";
+			}
+			function FormSelbox(id)
+			{
+				document.getElementById(id).dataset.sel="/";
+			}
+			function AddSelbox(form,id)
+			{
+				document.getElementById(id).dataset.form=form;
+				document.getElementById(id).onclick=function()
+				{
+					if(document.getElementById(this.dataset.form).dataset.sel!="/")document.getElementById(document.getElementById(this.dataset.form).dataset.sel).firstElementChild.style.display="none";
+					document.getElementById(this.dataset.form).dataset.sel=this.id;
+					this.firstElementChild.style.display="block";
+				}
+			}
+			function SubmitSelbox(form,id,f_submit)
+			{
+				document.getElementById(id).dataset.form=form;
+				document.getElementById(form).dataset.submit=f_submit;
+				document.getElementById(id).onclick=function()
+				{
+					eval(document.getElementById(this.dataset.form).dataset.submit);
+					submit(document.getElementById(this.dataset.form).dataset.sel);
+					this.firstElementChild.style.display="block";
+				}
+			}
+			
+			function Killit()
+			{
+				FormSelbox("SbF-t");
+				AddSelbox("SbF-t","Sb-A");
+				AddSelbox("SbF-t","Sb-B");
+				SubmitSelbox("SbF-t","SbS-t",function submit(sel){alert(sel);}
+			}
 		</script>
 	</head>
-	<body>
+	<body onload="Killit()">
 		<div id='M_Head'>
 			<h1>【Barren Land 蛮荒大陆】</h1>
 			<hr>
 		</div>
 		<div id='M_Start'>
-			<span class='sel' onclick='~function(){HideElement("M_Start");}()'><h4>开始</h4></span>
-			<span class='sel' onclick='~function(){alert("读档功能未开放，敬请期待！");}()'><h4>读档</h4></span>
+			<span class='sel' onclick='~function(){HideElement("M_Start");ShowElement("M_CR");}()'><h3>开始</h3></span>
+			<span class='sel' onclick='~function(){alert("读档功能未开放，敬请期待！");}()'><h3>读档</h3></span>
 			<hr>
 		</div>
 		<div id='M_CR' style='display: none;'>
 			<h3>【选择职业】</h3> <br>
-			
+			<div id="SbF_CR">
+			<span id="Sb_CR_Archer" class="selbox"><span class="selboxdot" style="display: none;"></span></span>
+			<span id="Sb_CR_Magican" class="selbox"><span class="selboxdot" style="display: none;"></span></span>
+			<span id="SbS_CR" class='sel'><h3>确定</h3></span>
+		</div>
 			<hr>
 		</div>
 		<div id='M_Foot'>
 			<h3>by 【Ice__Lava~~ 冰の岩浆】 on 【2018-09-29】</h3> <br>
-			<span class='sel' onclick='~function(){alert("谢谢！游戏内容正在疯狂敲代码中！敬请期待！");}()'><h4>点赞</h4></span>
+			<span class='sel' onclick='~function(){alert("谢谢！游戏内容正在疯狂敲代码中！敬请期待！");}()'><h3>点赞</h3></span>
 		</div>
 	</body>
 </html>
