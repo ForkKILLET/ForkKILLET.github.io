@@ -141,10 +141,10 @@
 				function submit(sel)
 				{
 					sel=sel.substring(8);
-					if(sel=="")ShowDialog("<h3>请先选择职业再提交！</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>");
+					if(sel=="")ShowDialog("<h2>【有些问题】</h2><h3>请先选择职业再提交！</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>");
 					else
 					{
-						ShowDialog("<h3>你选择了【"+sel+"】作为你的职业！</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>");
+						ShowDialog("<h2>【嘿！消息】</h2><h3>你选择了【"+sel+"】作为你的职业！</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>");
 						RV=[];
 						RV[0]=
 						{
@@ -186,28 +186,31 @@
 		<div id="cover" class="cover"></div>
 		<div id="dialog" class="dialog"></div>
 		<div id='M_页头'>
-			<h1>【Barren Land 蛮荒大陆】</h1>
+			<h1>【Barren Land 蛮荒大陆】</h1> <br>
+			<h2>【健康游戏忠告】</h2>
+			<h3>抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。</h3>
+			<h3>适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</h3>	
 			<hr>
 		</div>
 		<div id='M_开始'>
 			<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_创建角色");}()'><h3>开始</h3></span>
-			<span class='sel' onclick='~function(){~function(){ShowDialog("<h3>【作者の话】</h3> <br> <h3>非常抱歉！读档功能未开放，敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()}()'><h3>读档</h3></span>
+			<span class='sel' onclick='~function(){~function(){ShowDialog("<h2>【作者の话】</h2> <br> <h3>非常抱歉！读档功能未开放，敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()}()'><h3>读档</h3></span>
 			<hr>
 		</div>
 		<div id='M_创建角色' style='display: none;'>
-			<h3>【创建角色】</h3> <br>
-			<h3>请选择你的职业。</h3>
+			<h2>【创建角色】</h2>
+			<h3>请选择你的职业。</h3> <br>
 			<div id="SbF_创建角色">
 			<span id='Sb_创建角色_弓箭手' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【弓箭手】 身材不算强壮也不算羸弱，食量平均。用敏捷的优势击败少数敌人，擅长出其不意地刺杀，逃跑速度也是一流；不适合长时间地战斗。</h3> <br>
 			<span id='Sb_创建角色_魔法师' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【魔法师】 似乎一阵风都能将其刮走，可能是因为不常吃东西的缘故。运用神秘的力量重创大量敌人；虽说脆皮但精神力极强，可以几天不睡觉。</h3> <br>
-			<span id='Sb_创建角色_重战士' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【重战士】 吨位较突出，对食物的要求量极大。熟练使用各式冷兵器，单打独斗不是问题；就算遇到人群，也能杀开一条血路。战斗时十分兴奋。</h3> <br>
+			<span id='Sb_创建角色_重战士' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【重战士】 吨位较突出，对食物的要求极大。熟练使用各式冷兵器，单打独斗没问题；就算遇到人群，也能杀开一条血路。战斗时变得十分兴奋。</h3> <br>
 			<span id='SbS_创建角色' class='sel'><h3>确定</h3></span>
 		</div>
 			<hr>
 		</div>
 		<div id='M_页尾'>
-			<h3>【Ice--Lava~~ 冰の岩浆】 最后一次升级于 【2018-10-03】</h3> <br>
-			<span class='sel' onclick='~function(){ShowDialog("<h3>【作者の话】</h3> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
+			<h2>【Ice--Lava~~ 冰の岩浆】【ForkΨEnd】 最后一次升级于 【2018-10-03】</h2> <br>
+			<span class='sel' onclick='~function(){ShowDialog("<h2>【作者の话】</h2> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
 		</div>
 	</body>
 </html>
