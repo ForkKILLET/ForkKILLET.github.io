@@ -1,4 +1,4 @@
-# Welcome to 【Barren Land】 by 【Ice--Lava\~\~】【ForkΨEnd】.  欢迎来到 【冰の岩浆】最后升级于【2018-10-03】的【蛮荒大陆】 
+# Welcome to 【Barren Land】 by 【Ice--Lava\~\~】【ForkΨEnd】.
 ## Last update time 最后更新时间: 【2018-10-03】
 ## [Goto the game 进入游戏](http://forkfg.github.io/index.html)
 ## 【FAQ 常见问题解答】
@@ -6,11 +6,12 @@
   **A:** Maybe your browser version is too low. 可能你的浏览器版本太低。
 
 ## 【QwQ】
-ForkΨEnd is coding hardly!  
-ForkΨEnd正在疯狂敲代码！
+ForkΨEnd is coding hardly! Never stop! 
+ForkΨEnd正在疯狂敲代码！永不弃坑！
 
 ## 【Plans 任务计划】
 - [ ] 【2018-10-03】 完成选择职业
 - [x] 【2018-10-03】 完成输入用户名，完成创建角色
 - [x] 【2018-10-03】 完成第一天的剧情 ★ 
 - [x] 【2018-10-03】 完成读档 ★  
+
