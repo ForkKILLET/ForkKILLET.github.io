@@ -64,6 +64,7 @@
 				document.getElementById(id).style.display="block";
 			}
 			
+			
 			function FormSelbox(id)
 			{
 				document.getElementById(id).dataset.sel="/";
@@ -94,16 +95,37 @@
 				}
 			}
 			
+			var RV;
 			function Killit()
 			{
-				FormSelbox("SbF_选择职业");
-				AddSelbox("SbF_选择职业","Sb_选择职业_弓箭手");
-				AddSelbox("SbF_选择职业","Sb_选择职业_魔法师");
-				SubmitSelbox("SbF_选择职业","SbS_选择职业",
+				FormSelbox("SbF_创建角色");
+				AddSelbox("SbF_创建角色","Sb_创建角色_弓箭手");
+				AddSelbox("SbF_创建角色","Sb_创建角色_魔法师");
+				SubmitSelbox("SbF_创建角色","SbS_创建角色",
 				function submit(sel)
 				{
-					if(sel=="Sb_选择职业_弓箭手")alert("你选择了【弓箭手】作为你的职业！剧情正在疯狂敲代码中！敬请期待！");
-					if(sel=="Sb_选择职业_魔法师")alert("你选择了【魔法师】作为你的职业！剧情正在疯狂敲代码中！敬请期待！");
+					sel=sel.substring(8);
+					RV=[];
+					RV[0]=
+					{
+						"弓箭手":
+						{
+							健康度: 150,
+							健康度_: 200,
+							饱食度: 100,
+							饱食度_: 200,
+							
+							
+						},
+						"魔法师":
+						{
+							健康度: 150,
+							健康度_: 180,
+							饱食度: 100,
+							饱食度_: 180,
+						}
+					}[sel];
+					alert("你选择了【"+sel+"】作为你的职业！);
 				});
 			}
 		</script>
@@ -114,16 +136,16 @@
 			<hr>
 		</div>
 		<div id='M_开始'>
-			<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_选择职业");}()'><h3>开始</h3></span>
+			<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_创建角色");}()'><h3>开始</h3></span>
 			<span class='sel' onclick='~function(){alert("读档功能未开放，敬请期待！");}()'><h3>读档</h3></span>
 			<hr>
 		</div>
-		<div id='M_选择职业' style='display: none;'>
-			<h3>【选择职业】</h3> <br>
-			<div id="SbF_选择职业">
-			<span id="Sb_选择职业_弓箭手" class="selbox" style="position:absolute"><span class="selboxdot" style="display: none;"></span></span><h3 style="margin-left: 20px;">弓箭手</h3> <br>
-			<span id="Sb_选择职业_魔法师" class="selbox" style="position:absolute"><span class="selboxdot" style="display: none;"></span></span><h3 style="margin-left: 20px;">魔法师</h3>
-			<span id="SbS_选择职业" class='sel'><h3>确定</h3></span>
+		<div id='M_创建角色' style='display: none;'>
+			<h3>【创建角色】</h3> <br>
+			<div id="SbF_创建角色">
+			<span id="Sb_创建角色_弓箭手" class="selbox" style="position:absolute"><span class="selboxdot" style="display: none;"></span></span><h3 style="margin-left: 20px;">弓箭手</h3> <br>
+			<span id="Sb_创建角色_魔法师" class="selbox" style="position:absolute"><span class="selboxdot" style="display: none;"></span></span><h3 style="margin-left: 20px;">魔法师</h3>
+			<span id="SbS_创建角色" class='sel'><h3>确定</h3></span>
 		</div>
 			<hr>
 		</div>
