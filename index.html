@@ -36,6 +36,31 @@
 			background-color: green;
 			margin: 2.5px;
 		}
+		.cover
+		{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 9999;
+			opacity: 0.7;
+			background-color: black;
+			display: none;
+		}
+		.dialog
+		{
+			z-index: 10000;
+			position: absolute;
+			color: green;
+			background-color: #d0e4fe;
+			padding: 10px;
+			border: 2px solid green;
+			border-radius: 10px;
+			margin: 10px;
+			display: none;
+		}
+
       
 		body
 		{
@@ -94,7 +119,17 @@
 					this.firstElementChild.style.display="block";
 				}
 			}
-			
+			function ShowDialog(html)
+			{
+				document.getElementById("cover").style.display="block";
+				document.getElementById("dialog").style.display="block";
+				document.getElementById("dialog").innerHTML=html;
+			}
+			function HideDialog()
+			{
+				document.getElementById("cover").style.display="none";
+				document.getElementById("dialog").style.display="none";
+			}
 			var RV;
 			function Killit()
 			{
@@ -105,34 +140,41 @@
 				function submit(sel)
 				{
 					sel=sel.substring(8);
-					RV=[];
-					RV[0]=
+					if(sel=="")ShowDialog("<h3>请先选择职业再提交！</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>");
+					else
 					{
-						"弓箭手":
+						ShowDialog("<h3>你选择了【"+sel+"】作为你的职业！</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>");
+						RV=[];
+						RV[0]=
 						{
-							健康值: 150,
-							健康值_: 200,
-							饱食值: 100,
-							饱食值_: 200,
-							精力值: 20,
-							精力值_: 25
-						},
-						"魔法师":
-						{
-							健康值: 150,
-							健康值_: 180,
-							饱食值: 100,
-							饱食值_: 180,
-							精力值: 25,
-							精力值_: 45
-						}
-					}[sel];
-					alert("你选择了【"+sel+"】作为你的职业！");
+							"弓箭手":
+							{
+								健康值: 150,
+								健康值_: 200,
+								饱食值: 100,
+								饱食值_: 200,
+								精力值: 20,
+								精力值_: 25
+							},
+							"魔法师":
+							{
+								健康值: 150,
+								健康值_: 180,
+								饱食值: 100,
+								饱食值_: 180,
+								精力值: 25,
+								精力值_: 45
+							}
+						}[sel];
+						HideElement("SbF_创建角色");
+					}
 				});
 			}
 		</script>
 	</head>
 	<body onload="Killit()">
+		<div id="cover" class="cover"></div>
+		<div id="dialog" class="dialog"></div>
 		<div id='M_页头'>
 			<h1>【Barren Land 蛮荒大陆】</h1>
 			<hr>
@@ -145,15 +187,15 @@
 		<div id='M_创建角色' style='display: none;'>
 			<h3>【创建角色】</h3> <br>
 			<div id="SbF_创建角色">
-			<span id="Sb_创建角色_弓箭手" class="selbox" style="position:absolute"><span class="selboxdot" style="display: none;"></span></span><h3 style="margin-left: 20px;">弓箭手</h3> <br>
-			<span id="Sb_创建角色_魔法师" class="selbox" style="position:absolute"><span class="selboxdot" style="display: none;"></span></span><h3 style="margin-left: 20px;">魔法师</h3>
-			<span id="SbS_创建角色" class='sel'><h3>确定</h3></span>
+			<span id='Sb_创建角色_弓箭手' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>弓箭手</h3> <br>
+			<span id='Sb_创建角色_魔法师' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>魔法师</h3>
+			<span id='SbS_创建角色' class='sel'><h3>确定</h3></span>
 		</div>
 			<hr>
 		</div>
 		<div id='M_页尾'>
-			<h3>by 【Ice__Lava~~ 冰の岩浆】 on 【2018-09-29】</h3> <br>
-			<span class='sel' onclick='~function(){alert("谢谢！游戏内容正在疯狂敲代码中！敬请期待！");}()'><h3>点赞</h3></span>
+			<h3>by 【Ice--Lava~~ 冰の岩浆】 on 【2018-09-29】</h3> <br>
+			<span class='sel' onclick='~function(){ShowDialog("<h3>谢谢！游戏内容正在疯狂敲代码中！敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
 		</div>
 	</body>
 </html>
