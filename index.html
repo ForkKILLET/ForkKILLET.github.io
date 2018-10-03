@@ -136,6 +136,7 @@
 				FormSelbox("SbF_创建角色");
 				AddSelbox("SbF_创建角色","Sb_创建角色_弓箭手");
 				AddSelbox("SbF_创建角色","Sb_创建角色_魔法师");
+				AddSelbox("SbF_创建角色","Sb_创建角色_重战士");
 				SubmitSelbox("SbF_创建角色","SbS_创建角色",
 				function submit(sel)
 				{
@@ -154,7 +155,7 @@
 								饱食值: 100,
 								饱食值_: 200,
 								精力值: 20,
-								精力值_: 25
+								精力值_: 30
 							},
 							"魔法师":
 							{
@@ -164,6 +165,15 @@
 								饱食值_: 180,
 								精力值: 25,
 								精力值_: 45
+							},
+							"重战士":
+							{
+								健康值: 150,
+								健康值_: 175,
+								饱食值: 120,
+								饱食值_: 220,
+								精力值: 20,
+								精力值_: 25
 							}
 						}[sel];
 						HideElement("SbF_创建角色");
@@ -181,21 +191,23 @@
 		</div>
 		<div id='M_开始'>
 			<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_创建角色");}()'><h3>开始</h3></span>
-			<span class='sel' onclick='~function(){alert("读档功能未开放，敬请期待！");}()'><h3>读档</h3></span>
+			<span class='sel' onclick='~function(){~function(){ShowDialog("<h3>【作者の话】</h3> <br> <h3>非常抱歉！读档功能未开放，敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()}()'><h3>读档</h3></span>
 			<hr>
 		</div>
 		<div id='M_创建角色' style='display: none;'>
 			<h3>【创建角色】</h3> <br>
+			<h3>请选择你的职业。</h3>
 			<div id="SbF_创建角色">
-			<span id='Sb_创建角色_弓箭手' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>弓箭手</h3> <br>
-			<span id='Sb_创建角色_魔法师' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>魔法师</h3>
+			<span id='Sb_创建角色_弓箭手' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【弓箭手】 身材不算强壮也不算羸弱，食量平均。用敏捷的优势击败少数敌人，擅长出其不意地刺杀，逃跑速度也是一流；不适合长时间地战斗。</h3> <br>
+			<span id='Sb_创建角色_魔法师' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【魔法师】 似乎一阵风都能将其刮走，可能是因为不常吃东西的缘故。运用神秘的力量重创大量敌人；虽说脆皮但精神力极强，可以几天不睡觉。</h3> <br>
+			<span id='Sb_创建角色_重战士' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【重战士】 吨位较突出，对食物的要求量极大。熟练使用各式冷兵器，单打独斗不是问题；就算遇到人群，也能杀开一条血路。战斗时十分兴奋。</h3> <br>
 			<span id='SbS_创建角色' class='sel'><h3>确定</h3></span>
 		</div>
 			<hr>
 		</div>
 		<div id='M_页尾'>
-			<h3>by 【Ice--Lava~~ 冰の岩浆】 on 【2018-09-29】</h3> <br>
-			<span class='sel' onclick='~function(){ShowDialog("<h3>谢谢！游戏内容正在疯狂敲代码中！敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
+			<h3>【Ice--Lava~~ 冰の岩浆】 最后一次升级于 【2018-10-03】</h3> <br>
+			<span class='sel' onclick='~function(){ShowDialog("<h3>【作者の话】</h3> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
 		</div>
 	</body>
 </html>
