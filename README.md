@@ -6,7 +6,7 @@
   **A:** Maybe your browser version is too low. 可能你的浏览器版本太低。
 
 ## 【QwQ】
-ForkΨEnd is coding hardly! Never stop! 
+ForkΨEnd is coding hardly! Never stop!  
 ForkΨEnd正在疯狂敲代码！永不弃坑！
 
 ## 【Plans 任务计划】
@@ -14,4 +14,3 @@ ForkΨEnd正在疯狂敲代码！永不弃坑！
 - [x] 【2018-10-03】 完成输入用户名，完成创建角色
 - [x] 【2018-10-03】 完成第一天的剧情 ★ 
 - [x] 【2018-10-03】 完成读档 ★  
-
