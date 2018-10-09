@@ -101,20 +101,54 @@
 			
 			function SetFocus(id)
 			{
-				document.getElementById("focus").dataset.sel="id";
+				document.getElementById("focus").dataset.sel=id;
 			}
 			function GetFocus()
 			{
-				var id_focus=document.getElementById("focus");
-				return id_focus.innerHTML;
+				return document.getElementById("focus").dataset.sel;
 			}
-			function AddInput(id)
+			function EndInput()
 			{
-				document.getElementById(id).dataset.value="";
-				document.getElementById(id).onclick=function(e)
+				document.body.removeEventListener("keydown",NowInput);
+				document.getElementById(GetFocus()).style.boxShadow=undefined;
+				SetFocus("/");
+			}
+			function NowInput(event)
+			{
+				console.log(event);
+				var $focus=document.getElementById(GetFocus());
+				if(event.keyCode==13)EndInput();
+				else if((event.keyCode==8||event.keyCode==46)&&$focus.dataset.len>0)
 				{
-					this.style.boxShadow="0 0 10px green";
+					$focus.innerHTML=$focus.innerHTML.substring(0,$focus.dataset.len--);
+					//$focus.dataset.value=$focus.innerHTML.substring(0,$focus.dataset.len--);
+				}
+				else if(event.keyCode!=103&&$focus.dataset.len<$focus.dataset.len_)
+				{
+					$focus.innerHTML+=String.fromCharCode(event.keyCode);
+					$focus.dataset.len++;
+					//$focus.dataset.value+=String.fromCharCode(event.keyCode);
+				}
+			}
+			function StartInput()
+			{
+				document.getElementById(GetFocus()).style.boxShadow="0 0 10px green";
+				document.body.addEventListener("keydown",NowInput);
+			}
+			function FormInput(id)
+			{
+				document.getElementById(id).dataset.value="/";
+			}
+			function AddInput(id,len_,form)
+			{
+				var $input=document.getElementById(id);
+				$input.dataset.form=form;
+				$input.dataset.len_=len_;
+				$input.dataset.len=0;
+				$input.onclick=function(e)
+				{
 					SetFocus(this.id);
+					StartInput();
 				}
 			}
 			function FormSelbox(id)
@@ -163,6 +197,8 @@
 				if(event&&event.preventDefault)event.preventDefault();
 				else window.event.returnValue=false;
 				
+				SetFocus("/");
+				ShowDialog("<h2>【健康游戏忠告】</h2><h3>抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。</h3><h3>适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>")
 				FormSelbox("SbF_创建角色");
 				AddSelbox("SbF_创建角色","Sb_创建角色_弓箭手");
 				AddSelbox("SbF_创建角色","Sb_创建角色_魔法师");
@@ -210,17 +246,17 @@
 						ShowElement("TF_用户名");
 					}
 				});
+				FormInput("T_用户名");
+				AddInput("T_用户名",8,"TF_用户名");
 			}
 		</script>
 	</head>
 	<body onload="Killit()">
+		<div id="focus" style="display: none;"></div>
 		<div id="cover" class="cover"></div>
 		<div id="dialog" class="dialog"></div>
 		<div id='M_页头'>
 			<h1>【Barren Land 蛮荒大陆】</h1> <br>
-			<h2>【健康游戏忠告】</h2>
-			<h3>抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。</h3>
-			<h3>适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</h3>	
 			<hr>
 		</div>
 		<div id='M_开始'>
