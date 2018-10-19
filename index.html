@@ -90,115 +90,138 @@
 		}
 		</style>
 		<script>
+			function NF(){}
+			function Log(str)
+			{
+				console.log(str);
+			}
+			function Element(id)
+			{
+				return document.getElementById(id);
+			}
 			function HideElement(id)
 			{
-				document.getElementById(id).style.display="none";
+				Element(id).style.display="none";
 			}
 			function ShowElement(id)
 			{
-				document.getElementById(id).style.display="block";
+				Element(id).style.display="block";
 			}
-			
 			function SetFocus(id)
 			{
-				document.getElementById("focus").dataset.sel=id;
+				Element("focus").dataset.sel=id;
 			}
 			function GetFocus()
 			{
-				return document.getElementById("focus").dataset.sel;
-			}
-			function EndInput()
-			{
-				document.body.removeEventListener("keydown",NowInput);
-				document.getElementById(GetFocus()).style.boxShadow=undefined;
-				SetFocus("/");
+				return Element("focus").dataset.sel;
 			}
 			function NowInput(event)
 			{
-				console.log(event);
-				var $focus=document.getElementById(GetFocus());
-				if(event.keyCode==13)EndInput();
-				else if((event.keyCode==8||event.keyCode==46)&&$focus.dataset.len>0)
+				function EndInput()
 				{
-					$focus.innerHTML=$focus.innerHTML.substring(0,$focus.dataset.len--);
-					//$focus.dataset.value=$focus.innerHTML.substring(0,$focus.dataset.len--);
+					document.body.removeEventListener("keydown",NowInput);
+					Element(GetFocus()).style.boxShadow="";
+					SetFocus("/");
 				}
-				else if(event.keyCode!=103&&$focus.dataset.len<$focus.dataset.len_)
+				var $focus=Element(GetFocus());
+				var $form=Element($focus.dataset.form);
+				if(event.key=="Enter")EndInput();
+				else if((event.key=="Backspace")&&$form.dataset.len>0)
 				{
-					$focus.innerHTML+=String.fromCharCode(event.keyCode);
-					$focus.dataset.len++;
-					//$focus.dataset.value+=String.fromCharCode(event.keyCode);
+					$form.dataset.value=$form.dataset.value.substring(0,--$form.dataset.len);
+					if($form.dataset.len==0)
+					{
+						$form.dataset.value="/";
+						$focus.innerHTML="<b></b>";
+					}
+					else $focus.innerHTML="<b>"+$form.dataset.value+"</b>";
+				}
+				else if(event.key.length==1&&(event.key>="a"&&event.key<="z"||event.key>="A"&&event.key<="Z"||event.key=="_")&&$form.dataset.len<$form.dataset.len_)
+				{
+					if($form.dataset.len++==0)$form.dataset.value=event.key;
+					else $form.dataset.value+=event.key;
+					$focus.innerHTML="<b>"+$form.dataset.value+"</b>";
 				}
 			}
 			function StartInput()
 			{
-				document.getElementById(GetFocus()).style.boxShadow="0 0 10px green";
+				Element(GetFocus()).style.boxShadow="0 0 10px green";
 				document.body.addEventListener("keydown",NowInput);
 			}
 			function FormInput(id)
 			{
-				document.getElementById(id).dataset.value="/";
+				Element(id).dataset.value="/";
 			}
-			function AddInput(id,len_,form)
+			function AddInput(form,id,len_)
 			{
-				var $input=document.getElementById(id);
+				var $input=Element(id);
 				$input.dataset.form=form;
-				$input.dataset.len_=len_;
-				$input.dataset.len=0;
+				var $form=Element($input.dataset.form);
+				$form.dataset.len_=len_;
+				$form.dataset.len=0;
 				$input.onclick=function(e)
 				{
 					SetFocus(this.id);
 					StartInput();
 				}
 			}
-			function FormSelbox(id)
+			function SubmitInput(form,id,f_submit)
 			{
-				document.getElementById(id).dataset.sel="/";
+				var $input=Element(id);
+				$input.dataset.form=form;
+				Element(form).dataset.submit=f_submit;
+				Element(id).onclick=function()
+				{
+					eval(Element(this.dataset.form).dataset.submit);
+					submit(Element(this.dataset.form).dataset.value);
+				}
 			}
 			function FormSelbox(id)
 			{
-				document.getElementById(id).dataset.sel="/";
+				Element(id).dataset.sel="/";
 			}
 			function AddSelbox(form,id)
 			{
-				document.getElementById(id).dataset.form=form;
-				document.getElementById(id).onclick=function()
+				var $selbox=Element(id);
+				$selbox.dataset.form=form;
+				$selbox.onclick=function()
 				{
-					if(document.getElementById(this.dataset.form).dataset.sel!="/")document.getElementById(document.getElementById(this.dataset.form).dataset.sel).firstElementChild.style.display="none";
-					document.getElementById(this.dataset.form).dataset.sel=this.id;
+					let $form_=Element(this.dataset.form);
+					if($form_.dataset.sel!="/")Element($form_.dataset.sel).firstElementChild.style.display="none";
+					Element(this.dataset.form).dataset.sel=this.id;
 					this.firstElementChild.style.display="block";
 				}
 			}
 			function SubmitSelbox(form,id,f_submit)
 			{
-				document.getElementById(id).dataset.form=form;
-				document.getElementById(form).dataset.submit=f_submit;
-				document.getElementById(id).onclick=function()
+				$input=Element(id);
+				$input.dataset.form=form;
+				$input.onclick=function()
 				{
-					eval(document.getElementById(this.dataset.form).dataset.submit);
-					submit(document.getElementById(this.dataset.form).dataset.sel);
-					this.firstElementChild.style.display="block";
+					eval(Element(this.dataset.form).dataset.submit);
+					submit(Element(this.dataset.form).dataset.sel);
 				}
+				Element(form).dataset.submit=f_submit;
 			}
 			function ShowDialog(html)
 			{
-				document.getElementById("cover").style.display="block";
-				document.getElementById("dialog").style.display="block";
-				document.getElementById("dialog").innerHTML=html;
+				Element("cover").style.display="block";
+				Element("dialog").style.display="block";
+				Element("dialog").innerHTML=html;
 			}
 			function HideDialog()
 			{
-				document.getElementById("cover").style.display="none";
-				document.getElementById("dialog").style.display="none";
+				Element("cover").style.display="none";
+				Element("dialog").style.display="none";
 			}
 			var RV;
-			function Killit()
+			function Killet()
 			{
 				if(event&&event.preventDefault)event.preventDefault();
 				else window.event.returnValue=false;
 				
 				SetFocus("/");
-				ShowDialog("<h2>【健康游戏忠告】</h2><h3>抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。</h3><h3>适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>")
+				ShowDialog("<h2>【健康游戏忠告】</h2><h3>抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。</h3><h3>适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</h3><span class='sel' onclick='HideDialog()'><h3>确定</h3></span>")
 				FormSelbox("SbF_创建角色");
 				AddSelbox("SbF_创建角色","Sb_创建角色_弓箭手");
 				AddSelbox("SbF_创建角色","Sb_创建角色_魔法师");
@@ -207,12 +230,12 @@
 				function submit(sel)
 				{
 					sel=sel.substring(8);
-					if(sel=="")ShowDialog("<h2>【有些问题】</h2><h3>请先选择职业再提交！</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>");
+					if(sel=="")ShowDialog("<h2>【有些问题】</h2><h3>请先选择职业再提交！</h3><span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
 					else
 					{
-						ShowDialog("<h2>【嘿！消息】</h2><h3>你选择了【"+sel+"】作为你的职业！</h3><span class=sel onclick=HideDialog()><h3>确定</h3></span>");
-						RV=[];
-						RV[0]=
+						ShowDialog("<h2>【嘿！消息】</h2><h3>你选择了【"+sel+"】作为你的职业！</h3><span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
+						角色信息=[];
+						角色信息[0]=
 						{
 							"弓箭手":
 							{
@@ -246,12 +269,17 @@
 						ShowElement("TF_用户名");
 					}
 				});
-				FormInput("T_用户名");
-				AddInput("T_用户名",8,"TF_用户名");
+				FormInput("TF_用户名");
+				AddInput("TF_用户名","T_用户名",8);
+				SubmitInput("TF_用户名","TS_用户名",
+				function submit(value)
+				{
+					ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+value+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3><span class='sel' onclick='~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_描述\")}()'><h3>确定</h3></span>");
+				});
 			}
 		</script>
 	</head>
-	<body onload="Killit()">
+	<body onload="Killet()">
 		<div id="focus" style="display: none;"></div>
 		<div id="cover" class="cover"></div>
 		<div id="dialog" class="dialog"></div>
@@ -276,11 +304,18 @@
 			<div id="TF_用户名" style="display: none;">
 				<h3>请输入用户名。</h3> <br>
 				<span id="T_用户名" class="input"><b></b></span>
+				<span id="TS_用户名" class='sel'><h3>提交</h3></span>
 			</div>
 			<hr>
 		</div>
+		<div id="M_描述" style='display: none;'>
+			<h2>【域灵】</h2>
+			<h3 id="K_角色信息" style='display: none;'></h3>
+			<h3>作者正在码剧情，请谅解！</h3>
+			<hr>
+		</div>
 		<div id='M_页尾'>
-			<h2>【Ice--Lava~~ 冰の岩浆】【ForkΨEnd】 最后一次升级于 【2018-10-08】</h2> <br>
+			<h2>【Ice--Lava~~ 冰の岩浆】【ForkΨEnd】 最后一次升级于 【2018-10-19】</h2> <br>
 			<span class='sel' onclick='~function(){ShowDialog("<h2>【作者の话】</h2> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
 		</div>
 	</body>
