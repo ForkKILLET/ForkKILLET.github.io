@@ -274,7 +274,8 @@
 				SubmitInput("TF_用户名","TS_用户名",
 				function submit(value)
 				{
-					ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+value+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3><span class='sel' onclick='~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_描述\")}()'><h3>确定</h3></span>");
+					if(value=="/")ShowDialog("<h2>【有些问题】</h2><h3>名字不得为空哦~</h3><span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
+					else ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+value+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3><span class='sel' onclick='~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_描述\")}()'><h3>确定</h3></span>");
 				});
 			}
 		</script>
@@ -309,9 +310,8 @@
 			<hr>
 		</div>
 		<div id="M_描述" style='display: none;'>
-			<h2>【域灵】</h2>
-			<h3 id="K_角色信息" style='display: none;'></h3>
-			<h3>作者正在码剧情，请谅解！</h3>
+			<h2>【你的状态】</h2>
+			<h3 id="K_角色信息"></h3>
 			<hr>
 		</div>
 		<div id='M_页尾'>
