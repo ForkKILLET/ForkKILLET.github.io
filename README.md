@@ -1,6 +1,6 @@
 # 【Ice--Lava\~\~】·【Barren Land】
 ## [Goto the code in github](https://github.com/ForkFG/ForkFG.github.io/blob/master/index.html)  
-## [Goto the site 【https:// g.ILBR.tk】](https://g.ILBR.tk)  
+## [Goto the game 【https:// g.ILBR.tk】](https://g.ILBR.tk)  
 
 ---
 
