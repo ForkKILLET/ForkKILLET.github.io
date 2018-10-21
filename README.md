@@ -7,7 +7,7 @@
 # 【Actions】
 ## [Goto 【Fork Ψ Killet】's home in Luogu](https://www.luogu.org/space/show?uid=125210)
 ## Posts on Luogu 
-- ## [Goto " AD: 【Ice--Lava\~\~】·【Barren Land】 【Version】 0.0.4!]()
+- ## [Goto " AD: 【Ice--Lava\~\~】·【Barren Land】 【Version】 0.0.4! "]()
 
 ---
 
