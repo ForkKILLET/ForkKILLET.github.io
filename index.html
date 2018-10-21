@@ -91,13 +91,30 @@
 		</style>
 		<script>
 			function NF(){}
-			function Log(str)
+			function Log(txt)
 			{
-				console.log(str);
+				console.log(txt);
 			}
 			function Element(id)
 			{
 				return document.getElementById(id);
+			}
+			function Type(id,cbf,if$clear,txt,time)
+			{
+                if(!arguments[4])var time=80;
+				var $txt=Element(id);
+				if(if$clear)$txt.innerHTML="";
+				var i=0;
+				function _Killet()
+				{
+					if(!txt[i])clearInterval(timer$),cbf();
+					else if(txt[i]==" ")$txt.innerHTML+="&nbsp;"
+					else if(txt[i]=="$")$txt.innerHTML+="<br>";
+					else if(txt[i]=="^")$txt.innerHTML+="\"";
+					else $txt.innerHTML+=txt[i];
+					i++;
+				}
+				var timer$=setInterval(_Killet,time);
 			}
 			function HideElement(id)
 			{
@@ -125,23 +142,26 @@
 				}
 				var $focus=Element(GetFocus());
 				var $form=Element($focus.dataset.form);
+				var len_=parseInt($form.dataset.len_);
+				var len=parseInt($form.dataset.len);
 				if(event.key=="Enter")EndInput();
-				else if((event.key=="Backspace")&&$form.dataset.len>0)
+				else if((event.key=="Backspace")&&len>0)
 				{
-					$form.dataset.value=$form.dataset.value.substring(0,--$form.dataset.len);
-					if($form.dataset.len==0)
+					$form.dataset.value=$form.dataset.value.substring(0,--len);
+					if(len==0)
 					{
 						$form.dataset.value="/";
-						$focus.innerHTML="<b></b>";
+						$focus.innerHTML="<h3>&nbsp;</h3>";
 					}
-					else $focus.innerHTML="<b>"+$form.dataset.value+"</b>";
+					else $focus.innerHTML="<h3>"+$form.dataset.value+"</h3>";
 				}
-				else if(event.key.length==1&&(event.key>="a"&&event.key<="z"||event.key>="A"&&event.key<="Z"||event.key=="_")&&$form.dataset.len<$form.dataset.len_)
+				else if(event.key.length==1&&(event.key>="a"&&event.key<="z"||event.key>="A"&&event.key<="Z"||event.key=="_")&&len<len_)
 				{
-					if($form.dataset.len++==0)$form.dataset.value=event.key;
+					if(len++==0)$form.dataset.value=event.key;
 					else $form.dataset.value+=event.key;
-					$focus.innerHTML="<b>"+$form.dataset.value+"</b>";
+					$focus.innerHTML="<h3>"+$form.dataset.value+"</h3>";
 				}
+				$form.dataset.len=len;
 			}
 			function StartInput()
 			{
@@ -214,14 +234,16 @@
 				Element("cover").style.display="none";
 				Element("dialog").style.display="none";
 			}
-			var RV;
+			var 角色信息;
+			var 时间=0;
 			function Killet()
 			{
 				if(event&&event.preventDefault)event.preventDefault();
 				else window.event.returnValue=false;
 				
 				SetFocus("/");
-				ShowDialog("<h2>【健康游戏忠告】</h2><h3>抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。</h3><h3>适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</h3><span class='sel' onclick='HideDialog()'><h3>确定</h3></span>")
+				ShowDialog("<h2>【健康游戏忠告】</h2><h3>抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。</h3><h3>适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</h3>\
+							<span class='sel' onclick='HideDialog()'><h3>确定</h3></span>")
 				FormSelbox("SbF_创建角色");
 				AddSelbox("SbF_创建角色","Sb_创建角色_弓箭手");
 				AddSelbox("SbF_创建角色","Sb_创建角色_魔法师");
@@ -230,10 +252,12 @@
 				function submit(sel)
 				{
 					sel=sel.substring(8);
-					if(sel=="")ShowDialog("<h2>【有些问题】</h2><h3>请先选择职业再提交！</h3><span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
+					if(sel=="")ShowDialog("<h2>【有些问题】</h2><h3>请先选择职业再提交！</h3>\
+										   <span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
 					else
 					{
-						ShowDialog("<h2>【嘿！消息】</h2><h3>你选择了【"+sel+"】作为你的职业！</h3><span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
+						ShowDialog("<h2>【嘿！消息】</h2><h3>你选择了【"+sel+"】作为你的职业！</h3>\
+									<span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
 						角色信息=[];
 						角色信息[0]=
 						{
@@ -266,16 +290,21 @@
 							}
 						}[sel];
 						HideElement("SbF_创建角色");
-						ShowElement("TF_用户名");
+						ShowElement("TF_名字");
 					}
 				});
-				FormInput("TF_用户名");
-				AddInput("TF_用户名","T_用户名",8);
-				SubmitInput("TF_用户名","TS_用户名",
+				FormInput("TF_名字");
+				AddInput("TF_名字","T_名字",12);
+				SubmitInput("TF_名字","TS_名字",
 				function submit(value)
 				{
-					if(value=="/")ShowDialog("<h2>【有些问题】</h2><h3>名字不得为空哦~</h3><span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
-					else ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+value+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3><span class='sel' onclick='~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_描述\")}()'><h3>确定</h3></span>");
+					if(value=="/")ShowDialog("<h2>【有些问题】</h2><h3>名字不得为空哦~</h3>\
+											  <span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
+					else ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+value+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3>\
+									 <span class='sel' onclick='\
+									 ~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_描述\");ShowElement(\"K_对话\");Type(\"Kt_角色信息\",\
+									 function(){var $x=Element(\"B_选项一\");ShowElement(\"B_选项一\");$x.innerHTML=\"确定\";$x.onclick=function(){HideElement(\"B_选项一\");ShowElement()};},true,\"【蛮荒大陆】存在于另一个世界，$而我们【域灵】就是沟通【宇宙】和【蛮荒大陆】的唯一方法...$每个【域灵】都有一个称为【域】的小空间，由于两个世界的【规则】不同，$所以一个世界的物品不能存在于另一个里，而【域】，就相当于一个中转站，不受【规则】的限制。$接下来您将进入我的【域】，准备好了吗？\");\
+									 '><h3>确定</h3></span>");
 				});
 			}
 		</script>
@@ -290,33 +319,46 @@
 		</div>
 		<div id='M_开始'>
 			<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_创建角色");}()'><h3>开始</h3></span>
-			<span class='sel' onclick='~function(){~function(){ShowDialog("<h2>【作者の话】</h2> <br> <h3>非常抱歉！读档功能未开放，敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()}()'><h3>读档</h3></span>
+			<span class='sel' onclick='~function(){~function(){ShowDialog("<h2>【作者の话】</h2> <br> <h3>非常抱歉！读档功能未开放，敬请期待！</h3>\
+									   <span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()}()'><h3>读档</h3></span>
 			<hr>
 		</div>
 		<div id='M_创建角色' style='display: none;'>
 			<h2>【创建角色】</h2>
-			<h3>请选择你的职业。</h3> <br>
+			<h3>请选择您的职业。</h3> <br>
 			<div id="SbF_创建角色">
-				<span id='Sb_创建角色_弓箭手' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【弓箭手】 身材不算强壮也不算羸弱，食量平均。用敏捷的优势击败少数敌人，擅长出其不意地刺杀，逃跑速度也是一流；不适合长时间地战斗。</h3> <br>
-				<span id='Sb_创建角色_魔法师' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【魔法师】 似乎一阵风都能将其刮走，可能是因为不常吃东西的缘故。运用神秘的力量重创大量敌人；虽说脆皮但精神力极强，可以几天不睡觉。</h3> <br>
-				<span id='Sb_创建角色_重战士' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span><h3 style='margin-left: 20px;'>【重战士】 吨位较突出，对食物的要求极大。熟练使用各式冷兵器，单打独斗没问题；就算遇到人群，也能杀开一条血路。战斗时变得十分兴奋。</h3> <br>
+				<span id='Sb_创建角色_弓箭手' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span>
+				<h3 style='margin-left: 20px;'>【弓箭手】 身材不算强壮也不算羸弱，食量平均。用敏捷的优势击败少数敌人，擅长出其不意地刺杀，逃跑速度也是一流；不适合长时间地战斗。</h3> <br>
+				<span id='Sb_创建角色_魔法师' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span>
+				<h3 style='margin-left: 20px;'>【魔法师】 似乎一阵风都能将其刮走，可能是因为不常吃东西的缘故。运用神秘的力量重创大量敌人；虽说脆皮但精神力极强，可以几天不睡觉。</h3> <br>
+				<span id='Sb_创建角色_重战士' class='selbox' style="position:absolute"><span class='selboxdot' style='display: none;'></span></span>
+				<h3 style='margin-left: 20px;'>【重战士】 吨位较突出，对食物的要求极大。熟练使用各式冷兵器，单打独斗没问题；就算遇到人群，也能杀开一条血路。战斗时变得十分兴奋。</h3> <br>
 				<span id='SbS_创建角色' class='sel'><h3>确定</h3></span>
 			</div>
-			<div id="TF_用户名" style="display: none;">
-				<h3>请输入用户名。</h3> <br>
-				<span id="T_用户名" class="input"><b></b></span>
-				<span id="TS_用户名" class='sel'><h3>提交</h3></span>
+			<div id="TF_名字" style="display: none;">
+				<h3>请输入您的名字。</h3> <br>
+				<span id="T_名字" class="input"><h3>&nbsp;</h3></span>
+				<span id="TS_名字" class='sel'><h3>提交</h3></span>
 			</div>
 			<hr>
 		</div>
 		<div id="M_描述" style='display: none;'>
-			<h2>【你的状态】</h2>
-			<h3 id="K_角色信息"></h3>
+			<h3 id="K_角色信息" style='display: none;'>
+				<h2 id="Kt_角色信息"></h2>
+			</h3>
+			<h3 id="K_对话" style='display: none;'>
+				<h2 id="Kt_对话"></h2>
+			</h3>
+			<span id="B_选项一" class='sel' onclick='' style='display: none;'></span>
+			<span id="B_选项二" class='sel' onclick='' style='display: none;'></span>
+			<span id="B_选项三" class='sel' onclick='' style='display: none;'></span>
+			<span id="B_选项四" class='sel' onclick='' style='display: none;'></span>
 			<hr>
 		</div>
 		<div id='M_页尾'>
-			<h2>【Ice--Lava~~ 冰の岩浆】【ForkΨEnd】 最后一次升级于 【2018-10-19】</h2> <br>
-			<span class='sel' onclick='~function(){ShowDialog("<h2>【作者の话】</h2> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3><span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
+			<h2>【Ice--Lava~~ 冰の岩浆】【ForkΨEnd】 最后一次升级于 【2018-10-20】</h2> <br>
+				<span class='sel' onclick='~function(){ShowDialog("<h2>【作者の话】</h2> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3>\
+									   <span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
 		</div>
 	</body>
 </html>
