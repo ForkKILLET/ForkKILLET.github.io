@@ -3,95 +3,95 @@
 	<head>
 		<title>【Barren Land 蛮荒大陆】</title>
 		<style>
-		.sel,.key
-		{
-			color: green;
-			background-color: white;
-			padding: 10px;
-			border: 2px solid green;
-			border-radius: 10px;
-			margin: 10px;
-			width: 200px;
-			line-height: 25px;
-		}
-		.sel:hover
-		{
-			color: white;
-			background-color: green;
-		}
-		.selbox
-		{
-			width: 14px;
-			height: 14px;
-			border-radius:50px;
-			border: 2px solid green;
-			background-color: white;
-		}
-		.selboxdot
-		{
-			width: 5px;
-			height: 5px;
-			border-radius:50px;
-			border: 2px solid green;
-			background-color: green;
-			margin: 2.5px;
-		}
-		.input
-		{
-			color: green;
-			background-color: white;
-			padding: 10px;
-			border: 2px solid green;
-			border-radius: 10px;
-			margin: 10px;
-			width: 200px;
-			line-height: 25px;
-		}
-		.cover
-		{
-			width: 100%;
-			height: 100%;
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: 9999;
-			opacity: 0.7;
-			background-color: black;
-			display: none;
-		}
-		.dialog
-		{
-			z-index: 10000;
-			position: absolute;
-			color: green;
-			background-color: #d0e4fe;
-			padding: 10px;
-			border: 2px solid green;
-			border-radius: 10px;
-			margin: 10px;
-			display: none;
-		}
-      
-		body
-		{
-			background-color: #d0e4fe;
-			color: green;
-			font-family: "宋体";
-			margin: 30px;
-		}
-		h1,h2,h3,h4,h5,h6,p,b
-		{
-			margin: 2px;
-			font-family: "宋体";
-		}
-		span
-		{
-			display: block;
-		}
-		a
-		{
-			text-decoration: none;
-		}
+			.sel,.key
+			{
+				color: green;
+				background-color: white;
+				padding: 10px;
+				border: 2px solid green;
+				border-radius: 10px;
+				margin: 10px;
+				width: 200px;
+				line-height: 25px;
+			}
+			.sel:hover
+			{
+				color: white;
+				background-color: green;
+			}
+			.selbox
+			{
+				width: 14px;
+				height: 14px;
+				border-radius:50px;
+				border: 2px solid green;
+				background-color: white;
+			}
+			.selboxdot
+			{
+				width: 5px;
+				height: 5px;
+				border-radius:50px;
+				border: 2px solid green;
+				background-color: green;
+				margin: 2.5px;
+			}
+			.input
+			{
+				color: green;
+				background-color: white;
+				padding: 10px;
+				border: 2px solid green;
+				border-radius: 10px;
+				margin: 10px;
+				width: 200px;
+				line-height: 25px;
+			}
+			.cover
+			{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 9999;
+				opacity: 0.7;
+				background-color: black;
+				display: none;
+			}
+			.dialog
+			{
+				z-index: 10000;
+				position: absolute;
+				color: green;
+				background-color: #d0e4fe;
+				padding: 10px;
+				border: 2px solid green;
+				border-radius: 10px;
+				margin: 10px;
+				display: none;
+			}
+	      
+			body
+			{
+				background-color: #d0e4fe;
+				color: green;
+				font-family: "宋体";
+				margin: 30px;
+			}
+			h1,h2,h3,h4,h5,h6,p,b
+			{
+				margin: 2px;
+				font-family: "宋体";
+			}
+			span
+			{
+				display: block;
+			}
+			a
+			{
+				text-decoration: none;
+			}
 		</style>
 		<script>
 			function NF(){}
@@ -103,9 +103,8 @@
 			{
 				return document.getElementById(id);
 			}
-			function Type(id,cbf,if$clear,txt,time)
+			function Type(id,cbf,if$clear,txt,time=60)
 			{
-                if(!arguments[4])var time=80;
 				var $txt=Element(id);
 				if(if$clear)$txt.innerHTML="";
 				var i=0;
@@ -172,9 +171,9 @@
 				Element(GetFocus()).style.boxShadow="0 0 10px green";
 				document.body.addEventListener("keydown",NowInput);
 			}
-			function FormInput(id)
+			function FormInput(form)
 			{
-				Element(id).dataset.value="/";
+				Element(form).dataset.value="/";
 			}
 			function AddInput(form,id,len_)
 			{
@@ -200,9 +199,9 @@
 					submit(Element(this.dataset.form).dataset.value);
 				}
 			}
-			function FormSelbox(id)
+			function FormSelbox(form)
 			{
-				Element(id).dataset.sel="/";
+				Element(form).dataset.sel="/";
 			}
 			function AddSelbox(form,id)
 			{
@@ -240,6 +239,14 @@
 			}
 			var 角色信息;
 			var 时间=0;
+			var 天数=0;
+			function Go()
+			{
+				if(天数==1) //操作教程，硬码
+				{
+					if(时间==0)ShowDialog("<h2>【作者の话】</h2> <br> <h3>非常抱歉！第一天的剧情尚未完成，作者正在努力码码码！！！</h3>");
+				}
+			}
 			function Killet()
 			{
 				if(event&&event.preventDefault)event.preventDefault();
@@ -305,8 +312,8 @@
 					if(value=="/")ShowDialog("<h2>【有些问题】</h2><h3>名字不得为空哦~</h3>\
 											  <span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
 					else ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+value+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3>\
-									 <span class='sel' onclick=' ~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_描述\");ShowElement(\"K_对话\");Type(\"Kt_角色信息\",\
-									 function(){var $x=Element(\"B_选项一\");ShowElement(\"B_选项一\");$x.innerHTML=\"<h3>确定</h3>\";$x.onclick=function(){HideElement(\"B_选项一\");};},true,\
+									 <span class='sel' onclick=' ~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_描述\");ShowElement(\"K_对话\");ShowElement(\"Kt_对话\");Element(\"Kt_对话\").innerHTML=\"【域灵】：\";Type(\"K_对话\",\
+									 function(){var $x=Element(\"B_选项一\");ShowElement(\"B_选项一\");$x.innerHTML=\"<h3>确定</h3>\";$x.onclick=function(){HideElement(\"B_选项一\");天数=1;Go();};},true,\
 									 \"【蛮荒大陆】存在于另一个世界，$而我们【域灵】就是沟通【宇宙】和【蛮荒大陆】的唯一方法...$每个【域灵】都有一个称为【域】的小空间，由于两个世界的【规则】不同，$所以一个世界的物品不能存在于另一个里，而【域】，就相当于一个中转站，不受【规则】的限制。$接下来您将进入我的【域】，准备好了吗？\");}()\
 									 '><h3>确定</h3></span>");
 				});
@@ -347,12 +354,10 @@
 			<hr>
 		</div>
 		<div id="M_描述" style='display: none;'>
-			<h3 id="K_角色信息" style='display: none;'>
-				<h2 id="Kt_角色信息"></h2>
-			</h3>
-			<h3 id="K_对话" style='display: none;'>
-				<h2 id="Kt_对话"></h2>
-			</h3>
+			<h2 id="Kt_角色信息" style='display: none;'></h2>
+			<h3 id="K_角色信息" style='display: none;'></h3>
+			<h2 id="Kt_对话" style='display: none;'></h2>
+			<h3 id="K_对话" style='display: none;'></h3>
 			<span id="B_选项一" class='sel' onclick='' style='display: none;'></span>
 			<span id="B_选项二" class='sel' onclick='' style='display: none;'></span>
 			<span id="B_选项三" class='sel' onclick='' style='display: none;'></span>
