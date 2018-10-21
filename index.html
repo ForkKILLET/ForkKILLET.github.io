@@ -305,9 +305,9 @@
 					if(value=="/")ShowDialog("<h2>【有些问题】</h2><h3>名字不得为空哦~</h3>\
 											  <span class='sel' onclick='HideDialog()'><h3>确定</h3></span>");
 					else ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+value+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3>\
-									 <span class='sel' onclick='\
-									 ~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_描述\");ShowElement(\"K_对话\");Type(\"Kt_角色信息\",\
-									 function(){var $x=Element(\"B_选项一\");ShowElement(\"B_选项一\");$x.innerHTML=\"确定\";$x.onclick=function(){HideElement(\"B_选项一\");ShowElement()};},true,\"【蛮荒大陆】存在于另一个世界，$而我们【域灵】就是沟通【宇宙】和【蛮荒大陆】的唯一方法...$每个【域灵】都有一个称为【域】的小空间，由于两个世界的【规则】不同，$所以一个世界的物品不能存在于另一个里，而【域】，就相当于一个中转站，不受【规则】的限制。$接下来您将进入我的【域】，准备好了吗？\");\
+									 <span class='sel' onclick=' ~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_描述\");ShowElement(\"K_对话\");Type(\"Kt_角色信息\",\
+									 function(){var $x=Element(\"B_选项一\");ShowElement(\"B_选项一\");$x.innerHTML=\"确定\";$x.onclick=function(){HideElement(\"B_选项一\");};},true,\
+									 \"【蛮荒大陆】存在于另一个世界，$而我们【域灵】就是沟通【宇宙】和【蛮荒大陆】的唯一方法...$每个【域灵】都有一个称为【域】的小空间，由于两个世界的【规则】不同，$所以一个世界的物品不能存在于另一个里，而【域】，就相当于一个中转站，不受【规则】的限制。$接下来您将进入我的【域】，准备好了吗？\");}\
 									 '><h3>确定</h3></span>");
 				});
 			}
