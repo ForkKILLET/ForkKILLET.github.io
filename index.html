@@ -111,12 +111,13 @@
 			}
 		</style>
 		<script>
-			var if$debug=true;
+			//配置变量
+			var if$debug=false;
 			//基本功能
 			function NF(){}
 			function Log(txt)
 			{
-				console.log(txt);
+				if(if$debug)console.log(txt);
 			}
 			function Element(id)
 			{
