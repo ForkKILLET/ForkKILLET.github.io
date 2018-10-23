@@ -15,5 +15,5 @@
 ---
 
 # 【Update infomation】
-## 【Last time】 2018-10-16 by 【Fork Ψ Killet】 
-## 【Version】 0.0.4
+## 【Last time】 2018-10-23 by 【Fork Ψ Killet】 
+## 【Version】 0.1.2
