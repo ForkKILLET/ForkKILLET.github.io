@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<title>【Barren Land 蛮荒大陆】</title>
 		<style>
 			.line
@@ -40,18 +40,18 @@
 			{
 				width: 14px;
 				height: 14px;
-				border-radius:50px;
+				border-radius: 50px;
 				border: 2px solid green;
 				background-color: white;
 			}
-			.selboxdot
+			.selbox>:first-child
 			{
 				width: 5px;
 				height: 5px;
-				border-radius:50px;
+				border-radius:50%;
 				border: 2px solid green;
 				background-color: green;
-				margin: 2.5px;
+				margin: 2.4px;
 			}
 			.input
 			{
@@ -91,6 +91,7 @@
 	      
 			body
 			{
+				user-select: none;
 				background-color: #d0e4fe;
 				color: green;
 				font-family: "宋体";
@@ -112,7 +113,7 @@
 		</style>
 		<script>
 			//配置变量
-			var if$debug=false;
+			var if$debug=true;
 			//基本功能
 			function NF(){}
 			function Log(txt)
@@ -125,7 +126,7 @@
 			}
 			function Type(id,cbf$,if$clear,txt,time=30)
 			{
-				if(if$debug)time=2;
+				if(if$debug)time=0.5;
 				var $txt=Element(id);
 				if(if$clear)$txt.innerHTML="";
 				var i=0;
@@ -135,7 +136,7 @@
 					else if(txt[i]==" ")$txt.innerHTML+="&nbsp;"
 					else if(txt[i]=="$")$txt.innerHTML+="<br>";
 					else if(txt[i]=="%")$txt.innerHTML+="<div class='lines'></div>";
-					else if(txt[i]=="^")$txt.innerHTML+="\"";
+					else if(txt[i]=="#")$txt.innerHTML+="<div class='line'></div>";
 					else $txt.innerHTML+=txt[i];
 					i++;
 				}
@@ -279,8 +280,8 @@
 				石杖: {介绍: "一个套了破壳子的魔法单元而已。", 重量: 3, 制作: "手工", 材料: {石头: 5, 魔法单元: 1}, 蓄力: 3, 攻击: [0,2,3]},
 				钝剑: {介绍: "又细又轻，没啥威力，小心散架。", 重量: 3, 制作: "手工", 材料: {树枝: 2, 石头: 4}, 蓄力: 2, 攻击: [1,2]},
 				//衣着
-				毛衣: {介绍: "神秘物品，没有人知道它的来历。", 重量: 0, 制作: "玄学", 护甲: 1},
-				盾牌: {介绍: "再也不怕被弓箭射死了，大概吧。", 重量: 2, 制作: "玄学", 格挡: 1},
+				毛衣: {介绍: "神秘物品，没有人知道它的来历。", 重量: 0, 制作: "tan90°", 护甲: 1},
+				盾牌: {介绍: "再也不怕被弓箭射死了，大概吧。", 重量: 2, 制作: "制器桌", 格挡: 1},
 				//食物
 				萝卜干: {介绍: "无味且涩，旅途中勉强填饱肚子。", 重量: 0.2, 制作: "火炉", 健康值: 0, 饱食值: 2, 精力值: 0, 保质期: 25},
 				//材料
@@ -289,9 +290,14 @@
 				魔法单元: {介绍: "令人着魔的小东西，你不觉得吗？", 重量: 0.5},
 				箭: {介绍: "光秃秃的，但谁也不愿意被它扎。", 重量: 0.1}
 			}
-			var 角色信息=[],玩家=0;
+			var 角色信息=[],玩家=0,敌人一=101;
 			var 时间=0;
 			var 天数=0;
+			function 信息(cbf$)
+			{
+				Element("Kt_角色信息").innerHTML="【域牌】";
+				Type("K_角色信息",cbf$,true,"【"+角色信息[玩家].名字+"】: 【健康值: "+角色信息[玩家].健康值+"/ "+角色信息[玩家].健康值_+"】* 【饱食值: "+角色信息[玩家].饱食值+"/ "+角色信息[玩家].饱食值_+"】* 【健康值: "+角色信息[玩家].精力值+"/ "+角色信息[玩家].精力值_+"】#");
+			}
 			function 走起()
 			{
 				HideElement("M_操作");
@@ -299,12 +305,19 @@
 				{
 					if(时间==0)
 					{
-
-						Element("Kt_描述").innerHTML="【域】*【传送点】<div class='line'></div>";
-						Type("K_描述",function(){ShowElement("M_操作");ShowElement("B_背包");ShowElement("B_走起");},true,"你眼前闪过一道刺眼的灰光，于是你眯起了眼睛，几秒过后，眼前的世界完全变了...%眼前空空荡荡，仿佛连墙壁都看不到。你好一会才从这小说里才会出现的场景里回过神来。$^这就是【域】吗？^%【域灵】:$^没错。现在请跟我来【储物间】，这里有一些我从【蛮荒大陆】搜集来的必需品。$你可以看看这个背包，随后跟我来。^$");
+						Element("Kt_描述").innerHTML="【域】* 【传送点】<div class='lines'></div>";
+						Type("K_描述",function(){ShowElement("M_操作");ShowElement("B_背包");ShowElement("B_走起");},true,"你眼前闪过一道刺眼的灰光，于是你眯起了眼睛，几秒过后，眼前的世界完全变了……%眼前空空荡荡，仿佛连墙壁都看不到。你好一会才从这小说里才会出现的场景里回过神来。$“这就是【域】吗？”%【域灵】:$“没错。现在请跟我来【储物间】，这里有一些我从【蛮荒大陆】搜集来的必需品。$你可以带上这个背包，随后跟我来。”$%【域灵】指向的地方躺着一只不知由什么材料做成的军绿色背包，于是你走过去把它背在了身上。");
 					}
-					if(时间<1)时间++;
-					else ShowDialog("<h2>【作者の话】</h2> <br> <h3>作者正在努力码第二个时间点的剧情，敬请期待！ <br> 【注意】：不是咕咕咕！ </h3>")
+					else if(时间==1)
+					{
+						Type("K_描述",function(){ShowElement("K_选项");ShowElement("B_选项一");var $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>好嘞~</h3>";$B_选项一.onclick=function(){HideElement("K_选项");ShowElement("B_选项一");信息(function(){ShowElement("M_操作");});};},true,"【域灵】掏出一块银白色的牌子: “"+角色信息[玩家].名字+"，还有这个，叫做【域牌】，目前它的功能就是显示你的【信息】，我劝你不要弄丢……”%“诶，这TM不就是把我带到这个什么【域】里面的牌子嘛！”%【域灵】: “……闭嘴！那啥，把它系在手上吧，方便看。”");
+					}
+					else if(时间==2)
+					{
+						Type("K_描述",function(){信息(function(){ShowElement("K_选项");ShowElement("B_选项一");var $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>来吧！</h3>";$B_选项一.onclick=function(){战斗([玩家,敌人一]);};});},true,"你小心地系好了【域牌】，暗自对眼前这个新奇的世界增添了几丝佩服：“这高科技，怕不是领先我大中华几万年……”%【域灵】:$“这不算什么，等你看到魔法玄学一类，emmm……$不过现在请先随我来【训练室】，这里会模拟与你【信息】相似的虚拟对手，来和这个【训练木偶】‘切磋切磋’吧！”")
+					}
+					if(时间<3)时间++;
+					else ShowDialog("<h2>【咕咕咕】</h2> <br> <h3>作者正在努力码后续的剧情，敬请期待！ <br> 【注意】：不是咕咕咕！ </h3>")
 				}
 			}
 			function 称重()
@@ -317,9 +330,7 @@
 			{
 				ShowElement("M_背包");
 				HideElement("M_操作");
-				/*DEBUG:
 				Log(角色信息[玩家]);
-				*/
 				var $M_背包=Element("M_背包");
 				var $Br_背包=Element("Br_背包");
 				var $K_物品=NewElement("K_物品","div");
@@ -330,9 +341,13 @@
 				for(var i in 角色信息[玩家].物品)
 				{
 					var $i=NewElement("","h3");
-					$i.innerHTML="<br>【"+i+"* "+角色信息[玩家].物品[i].数量+"】: "+百科全书[i].介绍;
+					$i.innerHTML="<br>【"+i+"* "+角色信息[玩家].物品[i].数量+"】: "+百科全书[i].介绍+"<div class='lines'></div>";
 					$K_物品.appendChild($i);
 				}
+			}
+			function 战斗(参战人数,参战人员)
+			{
+				ShowDialog("<h2>【咕咕咕】</h2> <br> <h3>战斗函数尚未完成，敬请期待！</h3>");
 			}
 			function 准备工作()
 			{
@@ -342,11 +357,11 @@
 				SetFocus("/");
 				ShowDialog("<h2>【健康游戏忠告】</h2><h3>抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。</h3><h3>适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</h3>\
 							<span class='sel' onclick='HideDialog();'><h3>确定</h3></span>")
-				FormSelbox("SbF_创建角色");
-				AddSelbox("SbF_创建角色","Sb_创建角色_弓箭手");
-				AddSelbox("SbF_创建角色","Sb_创建角色_魔法师");
-				AddSelbox("SbF_创建角色","Sb_创建角色_重战士");
-				SubmitSelbox("SbF_创建角色","SbS_创建角色",
+				FormSelbox("SbF_选择职业");
+				AddSelbox("SbF_选择职业","Sb_选择职业_弓箭手");
+				AddSelbox("SbF_选择职业","Sb_选择职业_魔法师");
+				AddSelbox("SbF_选择职业","Sb_选择职业_重战士");
+				SubmitSelbox("SbF_选择职业","SbS_选择职业",
 				function submit(sel)
 				{
 					sel=sel.substring(8);
@@ -409,7 +424,7 @@
 								物品_: 25
 							}
 						}[sel];
-						HideElement("SbF_创建角色");
+						HideElement("SbF_选择职业");
 						ShowElement("TF_名字");
 					}
 				});
@@ -424,9 +439,9 @@
 					{
 						角色信息[玩家].名字=value;
 						ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+角色信息[0].名字+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3>\
-								 <span class='sel' onclick=' ~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_看板\");Element(\"Kt_描述\").innerHTML=\"【宇宙】*【小区】*【家】<div class=&apos;lines&apos;></div>\";Type(\"K_描述\",\
-								 function(){var $i=Element(\"B_选项一\");ShowElement(\"B_选项一\");$i.innerHTML=\"<h3>确定</h3>\";$i.onclick=function(){HideElement(\"B_选项一\");天数=1;走起();};},true,\
-								 \"【域灵】:$...【蛮荒大陆】存在于另一个世界，$而我们【域灵】就是沟通【宇宙】和【蛮荒大陆】的唯一方法...$每个【域灵】都有一个称为【域】的小空间，由于两个世界的【规则】不同，$所以一个世界的物品不能存在于另一个里，而【域】，就相当于一个中转站，不受【规则】的限制。$接下来您将进入我的【域】，准备好了吗？\");}()\
+								 <span class='sel' onclick=' ~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_看板\");Element(\"Kt_描述\").innerHTML=\"【宇宙】* 【小区】* 【家】<div class=&apos;lines&apos;></div>\";Type(\"K_描述\",\
+								 function(){var $i=Element(\"B_选项一\");ShowElement(\"K_选项\");ShowElement(\"B_选项一\");$i.innerHTML=\"<h3>确定</h3>\";$i.onclick=function(){HideElement(\"K_选项\");HideElement(\"B_选项一\");天数=1;走起();};},true,\
+								 \"【域灵】:$“……【蛮荒大陆】可是说是另一个世界，$而我们【域灵】就是沟通【宇宙】和【蛮荒大陆】的唯一方法……$每个【域灵】都有一个称为【域】的小空间，由于两个世界的【规则】不同，$所以一个世界的物品不能存在于另一个里，而【域】，就相当于一个中转站，不受【规则】的限制。$接下来您将进入我的【域】，准备好了吗？”\");}()\
 								 '><h3>确定</h3></span>");
 					}
 				});
@@ -442,22 +457,23 @@
 			<div class='line'></div>
 		</div>
 		<div id='M_开始'>
-			<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_看板");Element("Kt_描述").innerHTML="*【小区】*【家】<div class=&apos;line&apos;></div>";Type("K_描述",function(){ShowElement("B_选项一");var $i=Element("B_选项一");$i.innerHTML="<h3>看看写了啥</h3>";$i.onclick=function(){HideElement("B_选项一");HideElement("M_看板");ShowElement("M_创建角色");}},0,"作为一只21岁的御宅族，你对收集东西hin有兴趣...%^当！^椅子后面传来不明的声音。^什么鬼？^扭头一看，居然是一块奇怪的牌子。$你把它捡了起来，看到牌子竟像手机一样，显示着一些文字...");}()'><h3>开始</h3></span>
-			<span class='sel' onclick='~function(){~function(){ShowDialog("<h2>【作者の话】</h2> <br> <h3>非常抱歉！读档功能未开放，敬请期待！</h3>\
+			<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_看板");Element("Kt_描述").innerHTML="* 【小区】* 【家】<div class=&apos;lines&apos;></div>";Type("K_描述",function(){ShowElement("K_选项");ShowElement("B_选项一");var $i=Element("B_选项一");$i.innerHTML="<h3>看看写了啥</h3>";$i.onclick=function(){HideElement("K_选项");ShowElement("B_选项一");HideElement("M_看板");ShowElement("M_创建角色");}},0,"作为一只21岁的御宅族，你对收集东西hin有兴趣，家里成堆的手办、印章、电子产品和叉子【划去】……%“当！”椅子后面传来不明的声音。“什么鬼，难道那个绿蓝的挂件又掉了？”扭头一看，居然是一块奇怪的银白色牌子。$你把它捡了起来，看到牌子竟像手机一样，显示着一些文字……");}()'><h3>开始</h3></span>
+			<span class='sel' onclick='~function(){~function(){ShowDialog("<h2>【咕咕咕】</h2> <br> <h3>非常抱歉！读档功能未开放，敬请期待！</h3>\
 									   <span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()}()'><h3>读档</h3></span>
 			<div class='line'></div>
 		</div>
 		<div id='M_创建角色' style='display: none;'>
 			<h2>【创建角色】</h2>
-			<h3>请选择您的职业。</h3> <br>
-			<div id='SbF_创建角色'>
-				<span id='Sb_创建角色_弓箭手' class='selbox' style='position:absolute'><span class='selboxdot' style='display: none;'></span></span>
+			<div class='lines'></div>
+			<div id='SbF_选择职业'>
+				<h3>请选择您的职业。</h3> <br>
+				<span id='Sb_选择职业_弓箭手' class='selbox' style='position:absolute'><span style='display: none;'></span></span>
 				<h3 style='margin-left: 20px;'>【弓箭手】 身材不算强壮也不算羸弱，食量平均。用敏捷的优势击败少数敌人，擅长出其不意地刺杀，逃跑速度也是一流；不适合长时间地战斗。</h3> <br>
-				<span id='Sb_创建角色_魔法师' class='selbox' style='position:absolute'><span class='selboxdot' style='display: none;'></span></span>
+				<span id='Sb_选择职业_魔法师' class='selbox' style='position:absolute'><span style='display: none;'></span></span>
 				<h3 style='margin-left: 20px;'>【魔法师】 似乎一阵风都能将其刮走，可能是因为不常吃东西的缘故。运用神秘的力量重创大量敌人；虽说脆皮但精神力极强，可以几天不睡觉。</h3> <br>
-				<span id='Sb_创建角色_重战士' class='selbox' style='position:absolute'><span class='selboxdot' style='display: none;'></span></span>
+				<span id='Sb_选择职业_重战士' class='selbox' style='position:absolute'><span style='display: none;'></span></span>
 				<h3 style='margin-left: 20px;'>【重战士】 吨位较突出，对食物的要求极大。熟练使用各式冷兵器，单打独斗没问题；就算遇到人群，也能杀开一条血路。战斗时变得十分兴奋。</h3> <br>
-				<span id='SbS_创建角色' class='sel'><h3>确定</h3></span>
+				<span id='SbS_选择职业' class='sel'><h3>确定</h3></span>
 			</div>
 			<div id='TF_名字' style='display: none;'>
 				<h3>请输入您的名字。</h3> <br>
@@ -471,10 +487,14 @@
 			<h3 id='K_角色信息'></h3>
 			<h2 id='Kt_描述'</h2>
 			<h3 id='K_描述'></h3>
-			<span id='B_选项一' class='sel' style='display: none;'></span>
-			<span id='B_选项二' class='sel' style='display: none;'></span>
-			<span id='B_选项三' class='sel' style='display: none;'></span>
-			<span id='B_选项四' class='sel' style='display: none;'></span>
+			<div id='K_选项'>
+				<div class='lines'></div>
+				<h2 id='Kt_选项'></h2>
+				<span id='B_选项一' class='sel' style='display: none;'></span>
+				<span id='B_选项二' class='sel' style='display: none;'></span>
+				<span id='B_选项三' class='sel' style='display: none;'></span>
+				<span id='B_选项四' class='sel' style='display: none;'></span>
+			</div>
 			<div class='line'></div>
 		</div>
 		<div id='M_操作' style='display: none;'>
@@ -484,12 +504,13 @@
 		</div>
 		<div id='M_背包' style='display: none;'>
 			<h2 id='Kt_背包'>【背包】</h2>
+			<div class='lines'></div>
 			<span id='Br_背包' class='sel' onclick='~function(){ShowElement("M_操作");HideElement("M_背包");DelElement("K_物品");}()'><h3>返回</h3></span>
 			<div class='line'></div>
 		</div>
 		<div id='M_页尾'>
-			<h2>【Ice--Lava~~ 冰の岩浆】*【Fork Ψ Killet】 最后一次升级于 【2018-10-23】</h2> <br>
-				<span class='sel' onclick='~function(){ShowDialog("<h2>【作者の话】</h2> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3>\
+			<h2>【Ice--Lava~~ 冰の岩浆】* 【Fork Ψ Killet】 最后一次升级于 【2018-10-23】</h2> <br>
+				<span class='sel' onclick='~function(){ShowDialog("<h2>【嘿！消息】</h2> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3>\
 									   	   <span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
 			<a href='https://github.com/ForkFG/ForkFG.github.io' target="_blank"><span class='sel'><h3>跳转至 Github</h3></span></a>
 		</div>
