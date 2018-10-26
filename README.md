@@ -11,9 +11,10 @@
 - ## [Goto " 更新预告: 【冰の岩浆】·【蛮荒大陆】 【版本】 0.1.1！ "](https://www.luogu.org/discuss/show/75313)
 - ## [Goto " 正式更新: 【冰の岩浆】·【蛮荒大陆】 【版本】 0.1.1！ "](https://www.luogu.org/discuss/show/75562)
 - ## [Goto " 重发: 【蛮荒大陆】更新辣！ "](https://www.luogu.org/discuss/show/75569)
+- ## [Goto " 重发：【蛮荒大陆】更新辣！V0.1.3 "](https://www.luogu.org/discuss/show/76440)
 
 ---
 
 # 【Update infomation】
-## 【Last time】 2018-10-23 by 【Fork Ψ Killet】 
-## 【Version】 0.1.2
+## 【Last time】 2018-10-25 by 【Fork Ψ Killet】 
+## 【Version】 0.1.3
