@@ -12,6 +12,7 @@
 - ## [Goto " 正式更新: 【冰の岩浆】·【蛮荒大陆】 【版本】 0.1.1！ "](https://www.luogu.org/discuss/show/75562)
 - ## [Goto " 重发: 【蛮荒大陆】更新辣！ "](https://www.luogu.org/discuss/show/75569)
 - ## [Goto " 重发: 【蛮荒大陆】更新辣！V0.1.3 "](https://www.luogu.org/discuss/show/76440)
+- ## [Goto " 【蛮荒大陆】总算™的更新辣辣辣！！！！！ "](https://www.luogu.org/discuss/show/79991)
 
 ---
 
