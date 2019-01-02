@@ -6,7 +6,8 @@
 		<style>
 			.line
 			{
-				border-top: green 1.75px solid;
+				/* 原主题: border-top: green 1.75px solid;*/
+				/* 新年主题: */ border-top: #ffc166 1.75px solid;
 				border-bottom: white 1px solid;
 				border-radius: 5px;
 				margin: 15px;
@@ -14,7 +15,8 @@
 			}
 			.lines
 			{
-				border-top: green 1.75px dotted;
+				/* 原主题: border-top: green 1.75px dotted;*/
+				/* 新年主题: */ border-top: #ffc166 1.75px dotted;
 				border-bottom: white 1px dotted;
 				border-radius: 5px;
 				margin: 10px;
@@ -22,10 +24,13 @@
 			}
 			.sel,.key
 			{
-				color: green;
-				background-color: white;
+				/* 原主题: color: green;*/
+				/* 新年主题: */ color: #ffc166;
+				/* 原主题: background-color: white; */ 
+				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
 				padding: 10px;
-				border: 2px solid green;
+				/* 原主题: border: 2px solid green;*/
+				/* 新年主题: */ border: 2px solid #ffc166;
 				border-radius: 10px;
 				margin: 10px;
 				line-height: 25px;
@@ -33,8 +38,10 @@
 			}
 			.vkkey
 			{
-				color: green;
-				background-color: white;
+				/* 原主题: color: green;*/
+				/* 新年主题: */ color: #ffc166;
+				/* 原主题: background-color: white; */ 
+				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
 				padding: 10px;
 				border: 2px solid green;
 				border-radius: 10px;
@@ -61,8 +68,10 @@
 			}
 			.sel:hover,.vkkey:active
 			{
-				color: white;
-				background-color: green;
+				/* 原主题: color: green;*/
+				/* 新年主题: */ color: #ff4b4b;
+				/* 原主题: background-color: green; */ 
+				/* 新年主题: */ background: #ffc166;
 			}
 			.selbox
 			{
@@ -71,24 +80,31 @@
 				width: 14px;
 				height: 14px;
 				border-radius: 50px;
-				border: 2px solid green;
-				background-color: white;
+				/* 原主题: border: 2px solid green;*/
+				/* 新年主题: */ border: 2px solid #ffc166;
+				/* 原主题: background-color: white; */ 
+				/* 新年主题: */ background: #ff4b4b;
 			}
 			.selbox>:first-child
 			{
 				width: 5px;
 				height: 5px;
 				border-radius:50%;
-				border: 2px solid green;
-				background-color: green;
+				/* 原主题: border: 2px solid green;*/
+				/* 新年主题: */ border: 2px solid #ffc166;
+				/* 原主题: background-color: green; */ 
+				/* 新年主题: */ background: #ffc166;
 				margin: 2.4px;
 			}
 			.input
 			{
-				color: green;
-				background-color: white;
+				/* 原主题: color: green;*/
+				/* 新年主题: */ color: #ffc166;
+				/* 原主题: background-color: white; */ 
+				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
 				padding: 10px;
-				border: 2px solid green;
+				/* 原主题: border: 2px solid green;*/
+				/* 新年主题: */ border: 2px solid #ffc166;
 				border-radius: 10px;
 				margin: 10px;
 				width: 200px;
@@ -110,20 +126,34 @@
 			{
 				z-index: 10000;
 				position: absolute;
-				color: green;
-				background-color: #d0e4fe;
+				/* 原主题: color: green;*/
+				/* 新年主题: */ color: #ffc166;
+				/* 原主题: background-color: #d0e4fe; */ 
+				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
 				padding: 10px;
-				border: 2px solid green;
+				/* 原主题: border: 2px solid green;*/
+				/* 新年主题: */ border: 2px solid #ffc166;
 				border-radius: 10px;
 				margin: 10px;
 				display: none;
+			}
+			.bm
+			{
+				position: relative;
+				width: 20px;
+				height: 20px;
+				background-color: transparent;
+				top: -20px;
+				left: -20px;
 			}
 	      
 			body
 			{
 				user-select: none;
-				background-color: #d0e4fe;
-				color: green;
+				/* 原主题: background-color: #d0e4fe; */ 
+				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
+				/* 原主题: color: green;*/
+				/* 新年主题: */ color: #ffc166;
 				font-family: "宋体";
 				margin: 40px;
 			}
@@ -186,13 +216,13 @@
 			}
 			function NewElement(id,tab)
 			{
-				var $i=document.createElement(tab);
+				let $i=document.createElement(tab);
 				$i.id=id;
 				return $i;
 			}
 			function DelElement(id)
 			{
-				var $i=Element(id);
+				let $i=Element(id);
 				$i.parentNode.removeChild($i);
 			}
 			function SetFocus(id)
@@ -253,14 +283,14 @@
 					}
 					Element(GetFocus()).style.boxShadow="";
 				}	
-				var $focus=Element(GetFocus());
-				var $form=Element($focus.dataset.form);
-				var len_=parseInt($form.dataset.len_);
-				var len=parseInt($form.dataset.len);
+				let $focus=Element(GetFocus());
+				let $form=Element($focus.dataset.form);
+				let len_=parseInt($form.dataset.len_);
+				let len=parseInt($form.dataset.len);
 				if(if$mobile)
 				{
-					var char=event;
-					Log("Recv: "+char);
+					let char=event;
+					Log("Input char: "+char);
 					if(char=='CL')
 					{
 						HideElement("B_vk_q");ShowElement("B_vk_Q",1);
@@ -365,7 +395,7 @@
 			}
 			function StartInput()
 			{
-				Element(GetFocus()).style.boxShadow="0 0 10px green";
+				Element(GetFocus()).style.boxShadow="0 0 10px #ffc166";
 				if(if$mobile)
 				{
 					ShowVirtualKeyboard();
@@ -378,9 +408,9 @@
 			}
 			function AddInput(form,id,len_)
 			{
-				var $input=Element(id);
+				let $input=Element(id);
 				$input.dataset.form=form;
-				var $form=Element($input.dataset.form);
+				let $form=Element($input.dataset.form);
 				$form.dataset.len_=len_;
 				$form.dataset.len=0;
 				$input.onclick=function(e)
@@ -391,7 +421,7 @@
 			}
 			function SubmitInput(form,id,f_submit)
 			{
-				var $input=Element(id);
+				let $input=Element(id);
 				$input.dataset.form=form;
 				Element(form).dataset.submit=f_submit;
 				Element(id).onclick=function()
@@ -406,7 +436,7 @@
 			}
 			function AddSelbox(form,id)
 			{
-				var $selbox=Element(id);
+				let $selbox=Element(id);
 				$selbox.dataset.form=form;
 				$selbox.onclick=function()
 				{
@@ -438,7 +468,32 @@
 				Element("cover").style.display="none";
 				Element("dialog").style.display="none";
 			}
-
+			var BitmapValue=
+			{
+				"test":[
+				[0,0,1,0,0],
+				[0,1,0,1,0],
+				[1,0,1,0,1],
+				[0,1,0,1,0],
+				[0,0,1,0,0]]
+			}
+			function PaintBitmap(id,name)
+			{
+				let $i=Element(id);
+				$i.className="bm";
+				let s="",v=BitmapValue[name];
+				Log("BitmapValue of \""+name+"\": "+v);
+				for(let i=0;i<5;i++)
+				{
+					for(let j=0;j<5;j++)
+					{
+						s+=((i+1)*20).toString()+"px "+((j+1)*20).toString()+"px "+(v[i][j]?"green":"#d0e4fe")+(i==4&&j==4?";":", ");
+					}
+				}
+				Log("s1: "+s);
+				$i.style.boxShadow=s;
+				Log("s2: "+$i.style.boxShadow);
+			}
 //游戏内容
 			var 百科全书=
 			{
@@ -546,11 +601,11 @@
 					else if(时间==1)
 					{
 						Element("Kt_描述").innerHTML="【域】* 【储物间】<div class='lines'></div>";
-						Type("K_描述",function(){ShowElement("K_选项");ShowElement("B_选项一");var $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>好嘞~</h3>";$B_选项一.onclick=function(){HideElement("K_选项");ShowElement("B_选项一");信息(function(){ShowElement("M_操作");});};},true,"【域灵】掏出一块银白色的牌子: “"+角色信息[玩家].名字+"，还有这个，叫做【域牌】，目前它的功能就是显示你的【信息】，我劝你不要弄丢……”%“诶，这TM不就是把我带到这个什么【域】里面的牌子嘛！”%【域灵】: “……闭嘴！那啥，把它系在手上吧，方便看。”");
+						Type("K_描述",function(){ShowElement("K_选项");ShowElement("B_选项一");let $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>好嘞~</h3>";$B_选项一.onclick=function(){HideElement("K_选项");ShowElement("B_选项一");信息(function(){ShowElement("M_操作");});};},true,"【域灵】掏出一块银白色的牌子: “"+角色信息[玩家].名字+"，还有这个，叫做【域牌】，目前它的功能就是显示你的【信息】，我劝你不要弄丢……”%“诶，这TM不就是把我带到这个什么【域】里面的牌子嘛！”%【域灵】: “……闭嘴！那啥，把它系在手上吧，方便看。”");
 					}
 					else if(时间==2)
 					{
-						Type("K_描述",function(){信息(function(){ShowElement("K_选项");ShowElement("B_选项一");var $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>来吧！</h3>";$B_选项一.onclick=function(){Element("Kt_描述").innerHTML="【域】* 【训练室】<div class='lines'></div>";敌人一=百科全书["训练木偶"];战斗(2,[玩家,敌人一],"【训练木偶】: “你算老几？滚一边去！”%“我靠，拽了是吧？打死你个龟孙儿~~”");};});},true,"你小心地系好了【域牌】，暗自对眼前这个新奇的世界增添了几丝佩服：“这高科技，怕不是领先我大中华几万年……”%【域灵】:$“这不算什么，等你看到魔法玄学一类，emmm……$不过现在请先随我来【训练室】，这里会模拟与你【信息】相似的虚拟对手，来和这个【训练木偶】‘切磋切磋’吧！”")
+						Type("K_描述",function(){信息(function(){ShowElement("K_选项");ShowElement("B_选项一");let $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>来吧！</h3>";$B_选项一.onclick=function(){Element("Kt_描述").innerHTML="【域】* 【训练室】<div class='lines'></div>";敌人一=百科全书["训练木偶"];战斗(2,[玩家,敌人一],"【训练木偶】: “你算老几？滚一边去！”%“我靠，拽了是吧？打死你个龟孙儿~~”");};});},true,"你小心地系好了【域牌】，暗自对眼前这个新奇的世界增添了几丝佩服：“这高科技，怕不是领先我大中华几万年……”%【域灵】:$“这不算什么，等你看到魔法玄学一类，emmm……$不过现在请先随我来【训练室】，这里会模拟与你【信息】相似的虚拟对手，来和这个【训练木偶】‘切磋切磋’吧！”")
 					}
 					if(时间<3)时间++;
 					else ShowDialog("<h2>【咕咕咕】</h2> <br> <h3>作者正在努力码后续的剧情，敬请期待！ <br> 【注意】：不是咕咕咕！ </h3>")
@@ -558,8 +613,8 @@
 			}
 			function 称重()
 			{
-				var w=0;
-				for(var i in 角色信息[玩家].物品)w+=角色信息[玩家].物品[i].数量*百科全书[i].重量;
+				let w=0;
+				for(let i in 角色信息[玩家].物品)w+=角色信息[玩家].物品[i].数量*百科全书[i].重量;
 				return w;
 			}
 			function 背包()
@@ -567,16 +622,16 @@
 				ShowElement("M_背包");
 				HideElement("M_操作");
 				Log(角色信息[玩家]);
-				var $M_背包=Element("M_背包");
-				var $Br_背包=Element("Br_背包");
-				var $K_物品=NewElement("K_物品","div");
+				let $M_背包=Element("M_背包");
+				let $Br_背包=Element("Br_背包");
+				let $K_物品=NewElement("K_物品","div");
 				$M_背包.insertBefore($K_物品,$Br_背包);
-				var $K_重量=NewElement("K_重量","h3");
+				let $K_重量=NewElement("K_重量","h3");
 				$K_重量.innerHTML="【重量: "+称重()+"/ "+角色信息[玩家].物品_+"】<div class='lines'></div>";
 				$K_物品.appendChild($K_重量);
-				for(var i in 角色信息[玩家].物品)
+				for(let i in 角色信息[玩家].物品)
 				{
-					var $i=NewElement("","h3");
+					let $i=NewElement("","h3");
 					$i.innerHTML="<br>【"+i+"* "+角色信息[玩家].物品[i].数量+"】: "+百科全书[i].介绍+"<div class='lines'></div>";
 					$K_物品.appendChild($i);
 				}
@@ -584,7 +639,7 @@
 			function 战斗(参战人数,参战人员,str$开始)
 			{
 				// ShowDialog("<h2>【咕咕咕】</h2> <br> <h3>战斗函数尚未完成，敬请期待！</h3>");
-				var 回合=1;
+				let 回合=1;
 				function 怼()
 				{
 					HideElement("B_选项一");
@@ -598,7 +653,7 @@
 					},0,"%现在是【第 "+回合+" 回合】。$");
 					回合++;
 				}
-				Type("K_描述",function(){var $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>怼他！</h3>";$B_选项一.onclick=怼;},1,str$开始);
+				Type("K_描述",function(){let $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>怼他！</h3>";$B_选项一.onclick=怼;},1,str$开始);
 			}
 			function 准备工作()
 			{
@@ -657,7 +712,7 @@
 						角色信息[玩家].名字=value;
 						ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+角色信息[0].名字+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3>\
 								 <span class='sel' onclick=' ~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_看板\");Element(\"Kt_描述\").innerHTML=\"【宇宙】* 【小区】* 【家】<div class=&apos;lines&apos;></div>\";Type(\"K_描述\",\
-								 function(){var $i=Element(\"B_选项一\");ShowElement(\"K_选项\");ShowElement(\"B_选项一\");$i.innerHTML=\"<h3>确定</h3>\";$i.onclick=function(){HideElement(\"K_选项\");HideElement(\"B_选项一\");天数=1;走起();};},true,\
+								 function(){let $i=Element(\"B_选项一\");ShowElement(\"K_选项\");ShowElement(\"B_选项一\");$i.innerHTML=\"<h3>确定</h3>\";$i.onclick=function(){HideElement(\"K_选项\");HideElement(\"B_选项一\");天数=1;走起();};},true,\
 								 \"【域灵】:$“……【蛮荒大陆】可说是另一个世界，$我们【域灵】就是沟通【宇宙】和【蛮荒大陆】的唯一方法……$每个【域灵】都有一个称为【域】的小空间，由于两个世界的【规则】不同，$所以一个世界的物品不能存在于另一个里，而【域】就相当于中转站，不受【规则】的限制。$接下来您将进入我的【域】，准备好了吗？”\");}()\
 								 '><h3>确定</h3></span>");
 					}
@@ -670,7 +725,8 @@
 		<div id='cover' class='cover'></div>
 		<div id='dialog' class='dialog'></div>
 		<div id='P_页头'>
-			<h1>【Barren Land 蛮荒大陆】 【Version】 0.3.0</h1> <br>
+			<h1>【Barren Land 蛮荒大陆】 【Version】 0.3.0 【新年快落~~】</h1> <br>
+			<div id='bm_test'></div>
 			<div id='SbF_适配'>
 				<div class='lines'></div>
 				<h3>为了更好地游戏，请选择你正在使用的设备。</h3> <br>
@@ -684,7 +740,7 @@
 		</div>
 		<div id='P_主体'>
 			<div id='M_开始'>
-				<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_看板");Element("Kt_描述").innerHTML="* 【小区】* 【家】<div class=&apos;lines&apos;></div>";Type("K_描述",function(){ShowElement("K_选项");ShowElement("B_选项一");var $i=Element("B_选项一");$i.innerHTML="<h3>看看写了啥</h3>";$i.onclick=function(){HideElement("K_选项");ShowElement("B_选项一");HideElement("M_看板");ShowElement("M_创建角色");}},0,"作为一只21岁的御宅族，你对收集东西hin有兴趣，家里成堆的手办、印章、电子产品和叉子【划去】……%“当！”椅子后面传来不明的声音。“什么鬼，难道那个绿蓝的挂件又掉了？”扭头一看，居然是一块奇怪的银白色牌子。$你把它捡了起来，看到牌子竟像手机一样，显示着一些文字……");}()'><h3>开始</h3></span>
+				<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_看板");Element("Kt_描述").innerHTML="* 【小区】* 【家】<div class=&apos;lines&apos;></div>";Type("K_描述",function(){ShowElement("K_选项");ShowElement("B_选项一");let $i=Element("B_选项一");$i.innerHTML="<h3>看看写了啥</h3>";$i.onclick=function(){HideElement("K_选项");ShowElement("B_选项一");HideElement("M_看板");ShowElement("M_创建角色");}},0,"作为一只21岁的御宅族，你对收集东西hin有兴趣，家里成堆的手办、印章、电子产品和叉子【划去】……%“当！”椅子后面传来不明的声音。“什么鬼，难道那个绿蓝的挂件又掉了？”扭头一看，居然是一块奇怪的银白色牌子。$你把它捡了起来，看到牌子竟像手机一样，显示着一些文字……");}()'><h3>开始</h3></span>
 				<span class='sel' onclick='~function(){~function(){ShowDialog("<h2>【咕咕咕】</h2> <br> <h3>非常抱歉！读档功能未开放，敬请期待！</h3>\
 										   <span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()}()'><h3>读档</h3></span>
 				<div class='line'></div>
@@ -710,7 +766,7 @@
 				<div class='line'></div>
 			</div>
 			<div id='M_看板' style='display: none;'>
-				<div id='Kc_角色信息' style='display: none; background-color: white; border: 2px solid green; border-radius: 10px;'>
+				<div id='Kc_角色信息' style='display: none; background-color: white; border: 2px solid #ffc166; border-radius: 10px;'>
 					<h2 id='Kt_角色信息'></h2>
 					<h3 id='K_角色信息'></h3>
 				</div>
@@ -752,7 +808,7 @@
 			<div class='line'></div>
 		</div>
 		<div id='P_页尾'>
-			<h2>【Ice--Lava~~ 冰の岩浆】* 【Fork Ψ Killet】 最后一次升级于 【2018-11-04】</h2> <br>
+			<h2>【Ice--Lava~~ 冰の岩浆】* 【Fork Ψ Killet】 最后一次升级于 【2019-01-02】</h2> <br>
 			<span class='sel' onclick='~function(){ShowDialog("<h2>【嘿！消息】</h2> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3>\
 									   <span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
 			<a href='https://github.com/ForkFG/ForkFG.github.io' target="_blank"><span class='sel'><h3>跳转至 Github</h3></span></a>
