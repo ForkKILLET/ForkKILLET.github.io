@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title>【Barren Land 蛮荒大陆】</title>
+		<title>【Mushouse 蘑菇小屋】</title>
 		<style>
-			.line
+			.Line
 			{
 				/* 原主题: border-top: green 1.75px solid;*/
 				/* 新年主题: */ border-top: #ffc166 1.75px solid;
@@ -13,49 +13,50 @@
 				margin: 15px;
 				width: 100%;
 			}
-			.lines
+			.Lines
 			{
 				/* 原主题: border-top: green 1.75px dotted;*/
 				/* 新年主题: */ border-top: #ffc166 1.75px dotted;
 				border-bottom: white 1px dotted;
 				border-radius: 5px;
 				margin: 10px;
-				width: 75%;
+				width: 100%;
 			}
-			.sel,.key
+			.Select,.Key
 			{
 				/* 原主题: color: green;*/
 				/* 新年主题: */ color: #ffc166;
 				/* 原主题: background-color: white; */ 
-				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
-				padding: 10px;
+				/* 新年主题: */ background: linear-gradient(to right, #ff2d2d, #fb9168);
+				padding: 7px;
 				/* 原主题: border: 2px solid green;*/
 				/* 新年主题: */ border: 2px solid #ffc166;
 				border-radius: 10px;
 				margin: 10px;
 				line-height: 25px;
-				width: 200px;
+				width: 300px;
 			}
-			.vkkey
+			.VirtualKeyboardKey
 			{
 				/* 原主题: color: green;*/
 				/* 新年主题: */ color: #ffc166;
 				/* 原主题: background-color: white; */ 
-				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
+				/* 新年主题: */ background: linear-gradient(to right, #ff2d2d, #fb9168);
 				padding: 10px;
-				border: 2px solid green;
+				/* 原主题: border: 2px solid green;*/
+				/* 新年主题: */ border: 2px solid #ffc166;
 				border-radius: 10px;
 				margin: 3px 0;
 				line-height: 25px;
 				display: inline-block;
 			}
-			.vk
+			.VirtualKeyboard
 			{
 				position: absolute;
 				bottom: 30px;
 				z-index: 2;
 			}
-			.vkcover
+			.VirtualKeyboardCover
 			{				
 				position: fixed;
 				width: 100%;
@@ -66,26 +67,27 @@
 				background-color: black;
 				z-index: -1;
 			}
-			.sel:hover,.vkkey:active
+			.Select:hover,.VirtualKeyboardKey:active
 			{
 				/* 原主题: color: green;*/
-				/* 新年主题: */ color: #ff4b4b;
+				/* 新年主题: */ color: #ff2d2d;
 				/* 原主题: background-color: green; */ 
 				/* 新年主题: */ background: #ffc166;
 			}
-			.selbox
+			.Radio
 			{
 				position: absolute;
 				display: inline-block;
 				width: 14px;
 				height: 14px;
-				border-radius: 50px;
+				border-radius: 50%;
 				/* 原主题: border: 2px solid green;*/
 				/* 新年主题: */ border: 2px solid #ffc166;
 				/* 原主题: background-color: white; */ 
-				/* 新年主题: */ background: #ff4b4b;
+				/* 新年主题: */ background: #ff2d2d;
+				margin: 7px 0;
 			}
-			.selbox>:first-child
+			.Radio>:first-child
 			{
 				width: 5px;
 				height: 5px;
@@ -94,15 +96,15 @@
 				/* 新年主题: */ border: 2px solid #ffc166;
 				/* 原主题: background-color: green; */ 
 				/* 新年主题: */ background: #ffc166;
-				margin: 2.4px;
+				margin: 2.6px;
 			}
-			.input
+			.Input
 			{
 				/* 原主题: color: green;*/
 				/* 新年主题: */ color: #ffc166;
 				/* 原主题: background-color: white; */ 
-				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
-				padding: 10px;
+				/* 新年主题: */ background: linear-gradient(to right, #ff2d2d, #fb9168);
+				padding: 7px;
 				/* 原主题: border: 2px solid green;*/
 				/* 新年主题: */ border: 2px solid #ffc166;
 				border-radius: 10px;
@@ -110,7 +112,7 @@
 				width: 200px;
 				line-height: 25px;
 			}
-			.cover
+			.Cover
 			{
 				width: 100%;
 				height: 100%;
@@ -122,14 +124,14 @@
 				background-color: black;
 				display: none;
 			}
-			.dialog
+			.Dialog
 			{
 				z-index: 10000;
 				position: absolute;
 				/* 原主题: color: green;*/
 				/* 新年主题: */ color: #ffc166;
 				/* 原主题: background-color: #d0e4fe; */ 
-				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
+				/* 新年主题: */ background: linear-gradient(to right, #ff2d2d, #fb9168);
 				padding: 10px;
 				/* 原主题: border: 2px solid green;*/
 				/* 新年主题: */ border: 2px solid #ffc166;
@@ -137,7 +139,7 @@
 				margin: 10px;
 				display: none;
 			}
-			.bm
+			.Bitmap
 			{
 				position: relative;
 				width: 20px;
@@ -146,21 +148,41 @@
 				top: -20px;
 				left: -20px;
 			}
-	      
+			.SuperTitle
+			{
+				margin: 5px;
+				font-family: "宋体";
+				font-size: 32px;
+				line-height: 38px;
+			}
+			.Title
+			{
+				margin: 5px;
+				font-family: "宋体";
+				font-size: 23px;
+				line-height: 29px;
+			}
+			.Text
+			{
+				margin: 5px;
+				font-family: "宋体";
+				font-size: 18px;
+				line-height: 24px;
+			}
 			body
 			{
 				user-select: none;
 				/* 原主题: background-color: #d0e4fe; */ 
-				/* 新年主题: */ background: linear-gradient(to right, #ff4b4b, #ffbaba);
+				/* 新年主题: */ background: linear-gradient(to right, #ff2d2d, #fb9168);
 				/* 原主题: color: green;*/
 				/* 新年主题: */ color: #ffc166;
 				font-family: "宋体";
 				margin: 40px;
 			}
-			h1,h2,h3,h4,h5,h6,p,b
+			b
 			{
-				margin: 2px;
 				font-family: "宋体";
+				display: inline-block;
 			}
 			span
 			{
@@ -173,10 +195,10 @@
 		</style>
 		<script>
 //配置变量
-			var if$debug=false;
+			var if$debug=true;
 			var if$mobile=false;
-			var ver="0.3.0";
-			var date="2018-11-04";
+			var ver="0.0.0";
+			var date="2019-01-06";
 //基本功能
 			function NF(){}
 			function Log(txt)
@@ -198,8 +220,8 @@
 					if(!txt[i])clearInterval(timer$),cbf$();
 					else if(txt[i]==" ")$txt.innerHTML+="&nbsp;"
 					else if(txt[i]=="$")$txt.innerHTML+="<br>";
-					else if(txt[i]=="%")$txt.innerHTML+="<div class='lines'></div>";
-					else if(txt[i]=="#")$txt.innerHTML+="<div class='line'></div>";
+					else if(txt[i]=="%")$txt.innerHTML+="<div class='Lines'></div>";
+					else if(txt[i]=="#")$txt.innerHTML+="<div class='Line'></div>";
 					else $txt.innerHTML+=txt[i];
 					i++;
 				}
@@ -290,7 +312,6 @@
 				if(if$mobile)
 				{
 					let char=event;
-					Log("Input char: "+char);
 					if(char=='CL')
 					{
 						HideElement("B_vk_q");ShowElement("B_vk_Q",1);
@@ -357,9 +378,9 @@
 						if(len==0)
 						{
 							$form.dataset.value="/";
-							$focus.innerHTML="<h3>&nbsp;</h3>";
+							$focus.innerHTML="<>&nbsp;</b>";
 						}
-						else $focus.innerHTML="<h3>"+$form.dataset.value+"</h3>";
+						else $focus.innerHTML="<b class='Text'>"+$form.dataset.value+"</b>";
 					}
 					else if(char=="UL")char="_";
 					else if(char=="OK")EndInput();
@@ -367,7 +388,7 @@
 					{
 						if(len++==0)$form.dataset.value=char;
 						else $form.dataset.value+=char;
-						$focus.innerHTML="<h3>"+$form.dataset.value+"</h3>";
+						$focus.innerHTML="<b class='Text'>"+$form.dataset.value+"</b>";
 					}
 					$form.dataset.len=len;
 				}
@@ -380,15 +401,15 @@
 						if(len==0)
 						{
 							$form.dataset.value="/";
-							$focus.innerHTML="<h3>&nbsp;</h3>";
+							$focus.innerHTML="<b class='Text'>&nbsp;</b>";
 						}
-						else $focus.innerHTML="<h3>"+$form.dataset.value+"</h3>";
+						else $focus.innerHTML="<b class='Text'>"+$form.dataset.value+"</b>";
 					}
 					else if(event.key.length==1&&(event.key>="a"&&event.key<="z"||event.key>="A"&&event.key<="Z"||event.key=="_")&&len<len_)
 					{
 						if(len++==0)$form.dataset.value=event.key;
 						else $form.dataset.value+=event.key;
-						$focus.innerHTML="<h3>"+$form.dataset.value+"</h3>";
+						$focus.innerHTML="<b class='Text'>"+$form.dataset.value+"</b>";
 					}
 					$form.dataset.len=len;
 				}
@@ -419,26 +440,26 @@
 					StartInput();
 				}
 			}
-			function SubmitInput(form,id,f_submit)
+			function SubmitInput(form,id,f_Submit)
 			{
 				let $input=Element(id);
 				$input.dataset.form=form;
-				Element(form).dataset.submit=f_submit;
+				Element(form).dataset.Submit=f_Submit;
 				Element(id).onclick=function()
 				{
-					eval(Element(this.dataset.form).dataset.submit);
-					submit(Element(this.dataset.form).dataset.value);
+					eval(Element(this.dataset.form).dataset.Submit);
+					Submit(Element(this.dataset.form).dataset.value);
 				}
 			}
-			function FormSelbox(form)
+			function FormRadio(form)
 			{
 				Element(form).dataset.sel="/";
 			}
-			function AddSelbox(form,id)
+			function AddRadio(form,id)
 			{
-				let $selbox=Element(id);
-				$selbox.dataset.form=form;
-				$selbox.onclick=function()
+				let $Radio=Element(id);
+				$Radio.dataset.form=form;
+				$Radio.onclick=function()
 				{
 					let $form_=Element(this.dataset.form);
 					if($form_.dataset.sel!="/")Element($form_.dataset.sel).firstElementChild.style.display="none";
@@ -446,16 +467,16 @@
 					this.firstElementChild.style.display="block";
 				}
 			}
-			function SubmitSelbox(form,id,f_submit)
+			function SubmitRadio(form,id,f_Submit)
 			{
 				$input=Element(id);
 				$input.dataset.form=form;
 				$input.onclick=function()
 				{
-					eval(Element(this.dataset.form).dataset.submit);
-					submit(Element(this.dataset.form).dataset.sel);
+					eval(Element(this.dataset.form).dataset.Submit);
+					Submit(Element(this.dataset.form).dataset.sel);
 				}
-				Element(form).dataset.submit=f_submit;
+				Element(form).dataset.Submit=f_Submit;
 			}
 			function ShowDialog(html)
 			{
@@ -470,417 +491,57 @@
 			}
 			var BitmapValue=
 			{
-				"test":[
-				[0,0,1,0,0],
-				[0,1,0,1,0],
-				[1,0,1,0,1],
-				[0,1,0,1,0],
-				[0,0,1,0,0]]
+				"test":[[0,0,1,0,0],
+						[0,1,0,1,0],
+						[1,0,1,0,1],
+						[0,1,0,1,0],
+						[0,0,1,0,0]]
 			}
 			function PaintBitmap(id,name)
 			{
 				let $i=Element(id);
-				$i.className="bm";
+				$i.className="Bitmap";
 				let s="",v=BitmapValue[name];
 				Log("BitmapValue of \""+name+"\": "+v);
 				for(let i=0;i<5;i++)
 				{
 					for(let j=0;j<5;j++)
 					{
-						s+=((i+1)*20).toString()+"px "+((j+1)*20).toString()+"px "+(v[i][j]?"green":"#d0e4fe")+(i==4&&j==4?";":", ");
+						s+=((i+1)*20).toString()+"px "+((j+1)*20).toString()+"px "+(v[i][j]?"green":"#d0e4fe")+(i==4&&j==4?"":", ");
 					}
 				}
 				Log("s1: "+s);
 				$i.style.boxShadow=s;
 				Log("s2: "+$i.style.boxShadow);
 			}
-//游戏内容
-			var 百科全书=
-			{
-				//武器
-				拳头: {介绍: "百度翻译：手指向内弯曲合拢的手", 重量: 0, 制作: "tan90°", 蓄力: 1, 攻击: [1]},
-				木弓: {介绍: "可以说是最常见的弓，垃圾玩意。", 重量: 2, 制作: "手工", 制作职业: "弓箭手", 材料: {树枝: 5, 藤条: 1}, 蓄力: 3, 攻击: [0,2,4]},
-				石杖: {介绍: "一个套了破壳子的魔法单元而已。", 重量: 3, 制作: "手工", 制作职业: "魔法师", 材料: {石头: 5, 魔法单元: 1}, 蓄力: 3, 攻击: [0,1,5]},
-				钝剑: {介绍: "又细又轻，没啥威力，小心散架。", 重量: 3, 制作: "手工", 制作职业: "重战士", 材料: {树枝: 2, 石头: 4}, 蓄力: 2, 攻击: [1,2]},
-				//衣着
-				毛衣: {介绍: "神秘物品，没有人知道它的来历。", 重量: 0, 制作: "tan90°", 护甲: 1},
-				盾牌: {介绍: "再也不怕被弓箭射死了，大概吧。", 重量: 2, 制作: "制器桌", 制作职业: "重战士", 格挡: 1},
-				//食物
-				萝卜干: {介绍: "无味且涩，旅途中勉强填饱肚子。", 重量: 0.2, 制作: "火炉", 健康值: 0, 饱食值: 2, 精力值: 0, 保质期: 25},
-				//材料
-				树枝: {介绍: "这是一根普通的树枝，随处可见。", 重量: 0.2},
-				石头: {介绍: "一种和拳头差不多大的常见硬物。", 重量: 0.2},
-				魔法单元: {介绍: "令人着魔的小东西，你不觉得吗？", 重量: 0.5},
-				箭: {介绍: "光秃秃的，但谁也不愿意被它扎。", 重量: 0.1},
-				//道具
-				战五渣证书: {介绍: "训练木偶：你战斗力的真实写照。", 重量: 0.1},
-				//角色
-				弓箭手:
-				{
-					健康值: 150,
-					健康值_: 200,
-					饱食值: 100,
-					饱食值_: 200,
-					精力值: 20,
-					精力值_: 30,
-					物品:
-					{
-						木弓: {数量: 1, 耐久: 30, 耐久_: 30},
-						毛衣: {数量: 1, 耐久: Infinity, 耐久_: Infinity},
-						萝卜干: {数量: 10, 新鲜度: 25},
-						箭: {数量: 10}
-					},
-					物品_: 25,
-					装备: {拳头: {位置: "tan90°"}}
-				},
-				魔法师:
-				{
-					健康值: 150,
-					健康值_: 180,
-					饱食值: 100,
-					饱食值_: 180,
-					精力值: 25,
-					精力值_: 45,
-					物品:
-					{
-						石杖: {数量: 1, 耐久: 30, 耐久_: 30},
-						萝卜干: {数量: 10, 新鲜度: 25},
-						毛衣: {数量: 1, 耐久: Infinity, 耐久_: Infinity},
-						魔法单元: {数量: 2}
-					},
-					物品_: 25,
-					装备: {拳头: {位置: "tan90°"}}
-				},
-				重战士:
-				{
-					健康值: 150,
-					健康值_: 175,
-					饱食值: 120,
-					饱食值_: 220,
-					精力值: 20,
-					精力值_: 25,
-					物品:
-					{
-						钝剑: {数量: 1, 耐久: 40, 耐久_: 40},
-						盾牌: {数量: 1, 耐久: 25, 耐久_: 25},
-						萝卜干: {数量: 10, 新鲜度: 25},
-						毛衣: {数量: 1, 耐久: Infinity, 耐久_: Infinity}
-					},
-					物品_: 25,
-					装备: {拳头: {位置: "tan90°"}}
-				},
-				训练木偶:
-				{
-					健康值: 20,
-					健康值_: 20,
-					物品:
-					{
-						战五渣证书: {掉落概率: 100, 数量: 1}
-					}
-				}
-			}
-			var 角色信息=[],玩家=0,敌人一=101;
-			var 时间=0;
-			var 天数=0;
-			function 信息(cbf$)
-			{
-				ShowElement("Kc_角色信息");
-				Element("Kt_角色信息").innerHTML="【域牌】";
-				Type("K_角色信息",cbf$,true,"【"+角色信息[玩家].名字+"】: 【健康值: "+角色信息[玩家].健康值+"/ "+角色信息[玩家].健康值_+"】* 【饱食值: "+角色信息[玩家].饱食值+"/ "+角色信息[玩家].饱食值_+"】* 【精力值: "+角色信息[玩家].精力值+"/ "+角色信息[玩家].精力值_+"】");
-			}
-			function 走起()
-			{
-				HideElement("M_操作");
-				if(天数==1) //操作教程，硬码
-				{
-					if(时间==0)
-					{
-						Element("Kt_描述").innerHTML="【域】* 【传送点】<div class='lines'></div>";
-						Type("K_描述",function(){ShowElement("M_操作");ShowElement("B_背包");ShowElement("B_走起");},true,"你眼前闪过一道刺眼的灰光，于是你眯起了眼睛，几秒过后，眼前的世界完全变了……%眼前空空荡荡，仿佛连墙壁都看不到。你好一会才从这小说里才会出现的场景里回过神来。$“这就是【域】吗？”%【域灵】:$“没错。现在请跟我来【储物间】，这里有一些我从【蛮荒大陆】搜集来的必需品。$你可以带上这个背包，随后跟我来。”$%【域灵】指向的地方躺着一只不知由什么材料做成的军绿色背包，于是你走过去把它背在了身上。");
-					}
-					else if(时间==1)
-					{
-						Element("Kt_描述").innerHTML="【域】* 【储物间】<div class='lines'></div>";
-						Type("K_描述",function(){ShowElement("K_选项");ShowElement("B_选项一");let $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>好嘞~</h3>";$B_选项一.onclick=function(){HideElement("K_选项");ShowElement("B_选项一");信息(function(){ShowElement("M_操作");});};},true,"【域灵】掏出一块银白色的牌子: “"+角色信息[玩家].名字+"，还有这个，叫做【域牌】，目前它的功能就是显示你的【信息】，我劝你不要弄丢……”%“诶，这TM不就是把我带到这个什么【域】里面的牌子嘛！”%【域灵】: “……闭嘴！那啥，把它系在手上吧，方便看。”");
-					}
-					else if(时间==2)
-					{
-						Type("K_描述",function(){信息(function(){ShowElement("K_选项");ShowElement("B_选项一");let $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>来吧！</h3>";$B_选项一.onclick=function(){Element("Kt_描述").innerHTML="【域】* 【训练室】<div class='lines'></div>";敌人一=百科全书["训练木偶"];战斗(2,[玩家,敌人一],"【训练木偶】: “你算老几？滚一边去！”%“我靠，拽了是吧？打死你个龟孙儿~~”");};});},true,"你小心地系好了【域牌】，暗自对眼前这个新奇的世界增添了几丝佩服：“这高科技，怕不是领先我大中华几万年……”%【域灵】:$“这不算什么，等你看到魔法玄学一类，emmm……$不过现在请先随我来【训练室】，这里会模拟与你【信息】相似的虚拟对手，来和这个【训练木偶】‘切磋切磋’吧！”")
-					}
-					if(时间<3)时间++;
-					else ShowDialog("<h2>【咕咕咕】</h2> <br> <h3>作者正在努力码后续的剧情，敬请期待！ <br> 【注意】：不是咕咕咕！ </h3>")
-				}
-			}
-			function 称重()
-			{
-				let w=0;
-				for(let i in 角色信息[玩家].物品)w+=角色信息[玩家].物品[i].数量*百科全书[i].重量;
-				return w;
-			}
-			function 背包()
-			{
-				ShowElement("M_背包");
-				HideElement("M_操作");
-				Log(角色信息[玩家]);
-				let $M_背包=Element("M_背包");
-				let $Br_背包=Element("Br_背包");
-				let $K_物品=NewElement("K_物品","div");
-				$M_背包.insertBefore($K_物品,$Br_背包);
-				let $K_重量=NewElement("K_重量","h3");
-				$K_重量.innerHTML="【重量: "+称重()+"/ "+角色信息[玩家].物品_+"】<div class='lines'></div>";
-				$K_物品.appendChild($K_重量);
-				for(let i in 角色信息[玩家].物品)
-				{
-					let $i=NewElement("","h3");
-					$i.innerHTML="<br>【"+i+"* "+角色信息[玩家].物品[i].数量+"】: "+百科全书[i].介绍+"<div class='lines'></div>";
-					$K_物品.appendChild($i);
-				}
-			}
-			function 战斗(参战人数,参战人员,str$开始)
-			{
-				// ShowDialog("<h2>【咕咕咕】</h2> <br> <h3>战斗函数尚未完成，敬请期待！</h3>");
-				let 回合=1;
-				function 怼()
-				{
-					HideElement("B_选项一");
-					Type("K_战斗",function()
-					{
-						Type("K_战斗",function()
-						{
-							ShowElement("B_选项一");
-						},0,"$");
-						Log(参战人员);
-					},0,"%现在是【第 "+回合+" 回合】。$");
-					回合++;
-				}
-				Type("K_描述",function(){let $B_选项一=Element("B_选项一");$B_选项一.innerHTML="<h3>怼他！</h3>";$B_选项一.onclick=怼;},1,str$开始);
-			}
+//运行内容
 			function 准备工作()
 			{
 				if(event&&event.preventDefault)event.preventDefault();
 				else window.event.returnValue=false;
 				
-				SetFocus("/");
-
-				ShowDialog("<h2>【健康游戏忠告】</h2><h3>抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。</h3><h3>适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</h3>\
-							<span class='sel' onclick='HideDialog();'><h3>确定</h3></span>");
-				
-				FormSelbox("SbF_适配");
-				AddSelbox("SbF_适配","Sb_适配_PC端");
-				AddSelbox("SbF_适配","Sb_适配_移动端");
-				SubmitSelbox("SbF_适配","SbS_适配",
-				function submit(sel)
-				{
-					if(sel=="/")ShowDialog("<h2>【有些问题】</h2> <br> <h3>未选择设备类型！</h3> <span class='sel' onclick='HideDialog();'><h3>确定</h3></span>")
-					else
-					{
-						HideElement("SbF_适配");
-						sel=sel.substring(6)
-						if(sel=="移动端")if$mobile=true;
-						ShowDialog("<h2>【嘿！消息】</h2> <br> <h3>已将设备类型适配为【"+sel+"】。 <br> 如要再改变请刷新页面！</h3> <span class='sel' onclick='HideDialog();'><h3>确定</h3></span>")
-					}
-				});
-
-				FormSelbox("SbF_选择职业");
-				AddSelbox("SbF_选择职业","Sb_选择职业_弓箭手");
-				AddSelbox("SbF_选择职业","Sb_选择职业_魔法师");
-				AddSelbox("SbF_选择职业","Sb_选择职业_重战士");
-				SubmitSelbox("SbF_选择职业","SbS_选择职业",
-				function submit(sel)
-				{
-					if(sel=="/")ShowDialog("<h2>【有些问题】</h2><h3>请先选择职业再提交！</h3><span class='sel' onclick='HideDialog();'><h3>确定</h3></span>");
-					else
-					{
-						sel=sel.substring(8);
-						ShowDialog("<h2>【嘿！消息】</h2><h3>你选择了【"+sel+"】作为你的职业！</h3>\
-									<span class='sel' onclick='HideDialog();'><h3>确定</h3></span>");
-						角色信息[玩家]=百科全书[sel];
-						HideElement("SbF_选择职业");
-						ShowElement("TF_名字");
-					}
-				});
-
-				FormInput("TF_名字");
-				AddInput("TF_名字","T_名字",12);
-				SubmitInput("TF_名字","TS_名字",
-				function submit(value)
-				{
-					if(value=="/")ShowDialog("<h2>【有些问题】</h2><h3>名字不得为空哦~</h3>\
-											  <span class='sel' onclick='HideDialog();'><h3>确定</h3></span>");
-					else
-					{
-						角色信息[玩家].名字=value;
-						ShowDialog("<h2>【嘿！消息】</h2><h3>尊敬的冒险者【"+角色信息[0].名字+"】，<br>欢迎来到【蛮荒大陆】！<br>我是您的【域灵】，接下来我将为您讲述【蛮荒大陆】的故事……</h3>\
-								 <span class='sel' onclick=' ~function(){HideDialog();HideElement(\"M_创建角色\");ShowElement(\"M_看板\");Element(\"Kt_描述\").innerHTML=\"【宇宙】* 【小区】* 【家】<div class=&apos;lines&apos;></div>\";Type(\"K_描述\",\
-								 function(){let $i=Element(\"B_选项一\");ShowElement(\"K_选项\");ShowElement(\"B_选项一\");$i.innerHTML=\"<h3>确定</h3>\";$i.onclick=function(){HideElement(\"K_选项\");HideElement(\"B_选项一\");天数=1;走起();};},true,\
-								 \"【域灵】:$“……【蛮荒大陆】可说是另一个世界，$我们【域灵】就是沟通【宇宙】和【蛮荒大陆】的唯一方法……$每个【域灵】都有一个称为【域】的小空间，由于两个世界的【规则】不同，$所以一个世界的物品不能存在于另一个里，而【域】就相当于中转站，不受【规则】的限制。$接下来您将进入我的【域】，准备好了吗？”\");}()\
-								 '><h3>确定</h3></span>");
-					}
-				});
+				ShowDialog("<b class='Title'>【消息】</b> <br> <b class='Text'>欢迎来到【Fork Ψ Killet】的【Mushouse】！</b>\
+					   <span class='Select' onclick='HideDialog();'><b class='Text'>确定</b></span>");
 			}
 		</script>
 	</head>
 	<body onload="准备工作()">
 		<div id='focus' style='display: none;'></div>
-		<div id='cover' class='cover'></div>
-		<div id='dialog' class='dialog'></div>
+		<div id='cover' class='Cover'></div>
+		<div id='dialog' class='Dialog'></div>
 		<div id='P_页头'>
-			<h1>【Barren Land 蛮荒大陆】 【Version】 0.3.0 【新年快落~~】</h1> <br>
-			<div id='bm_test'></div>
-			<div id='SbF_适配'>
-				<div class='lines'></div>
-				<h3>为了更好地游戏，请选择你正在使用的设备。</h3> <br>
-				<span id='Sb_适配_PC端' class='selbox'><span style='display: none;'></span></span>
-				<h3 style='margin-left: 20px;'>【PC&emsp;端】</h3> <br>
-				<span id='Sb_适配_移动端' class='selbox'><span style='display: none;'></span></span>
-				<h3 style='margin-left: 20px;'>【移动端】</h3> <br>
-				<span id='SbS_适配' class='sel'><h3>适配设备</h3></span>
-			</div>
-			<div class='line'></div>
+			<b class='SuperTitle'>【Mushouse 蘑菇小屋】 【Version】 0.0.0 【新年快落~~】</b> <br>
+			<div class='Line'></div>
 		</div>
 		<div id='P_主体'>
-			<div id='M_开始'>
-				<span class='sel' onclick='~function(){HideElement("M_开始");ShowElement("M_看板");Element("Kt_描述").innerHTML="* 【小区】* 【家】<div class=&apos;lines&apos;></div>";Type("K_描述",function(){ShowElement("K_选项");ShowElement("B_选项一");let $i=Element("B_选项一");$i.innerHTML="<h3>看看写了啥</h3>";$i.onclick=function(){HideElement("K_选项");ShowElement("B_选项一");HideElement("M_看板");ShowElement("M_创建角色");}},0,"作为一只21岁的御宅族，你对收集东西hin有兴趣，家里成堆的手办、印章、电子产品和叉子【划去】……%“当！”椅子后面传来不明的声音。“什么鬼，难道那个绿蓝的挂件又掉了？”扭头一看，居然是一块奇怪的银白色牌子。$你把它捡了起来，看到牌子竟像手机一样，显示着一些文字……");}()'><h3>开始</h3></span>
-				<span class='sel' onclick='~function(){~function(){ShowDialog("<h2>【咕咕咕】</h2> <br> <h3>非常抱歉！读档功能未开放，敬请期待！</h3>\
-										   <span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()}()'><h3>读档</h3></span>
-				<div class='line'></div>
-			</div>
-			<div id='M_创建角色' style='display: none;'>
-				<h2>【创建角色】</h2>
-				<div class='lines'></div>
-				<div id='SbF_选择职业'>
-					<h3>请选择您的职业。</h3> <br>
-					<span id='Sb_选择职业_弓箭手' class='selbox'><span style='display: none;'></span></span>
-					<h3 style='margin-left: 20px;'>【弓箭手】 身材不算强壮也不算羸弱，食量平均。用敏捷的优势击败少数敌人，擅长出其不意地刺杀，逃跑速度也是一流；不适合长时间地战斗。</h3> <br>
-					<span id='Sb_选择职业_魔法师' class='selbox'><span style='display: none;'></span></span>
-					<h3 style='margin-left: 20px;'>【魔法师】 似乎一阵风都能将其刮走，可能是因为不常吃东西的缘故。运用神秘的力量重创大量敌人；虽说脆皮但精神力极强，可以几天不睡觉。</h3> <br>
-					<span id='Sb_选择职业_重战士' class='selbox'><span style='display: none;'></span></span>
-					<h3 style='margin-left: 20px;'>【重战士】 吨位较突出，对食物的要求极大。熟练使用各式冷兵器，单打独斗没问题；就算遇到人群，也能杀开一条血路。战斗时变得十分兴奋。</h3> <br>
-					<span id='SbS_选择职业' class='sel'><h3>确定</h3></span>
-				</div>
-				<div id='TF_名字' style='display: none;'>
-					<h3>请输入您的名字。</h3> <br>
-					<span id='T_名字' class='input'><h3>&nbsp;</h3></span>
-					<span id='TS_名字' class='sel'><h3>提交</h3></span>
-				</div>
-				<div class='line'></div>
-			</div>
-			<div id='M_看板' style='display: none;'>
-				<div id='Kc_角色信息' style='display: none; background-color: white; border: 2px solid #ffc166; border-radius: 10px;'>
-					<h2 id='Kt_角色信息'></h2>
-					<h3 id='K_角色信息'></h3>
-				</div>
-				<div>
-					<h2 id='Kt_描述'></h2>
-					<h3 id='K_描述'></h3>
-				</div>
-				<div>
-					<h3 id='K_战斗'></h3>
-				</div>
-				<div id='K_选项'>
-					<div class='lines'></div>
-					<h2 id='Kt_选项'></h2>
-					<span id='B_选项一' class='sel' style='display: none;'></span>
-					<span id='B_选项二' class='sel' style='display: none;'></span>
-					<span id='B_选项三' class='sel' style='display: none;'></span>
-					<span id='B_选项四' class='sel' style='display: none;'></span>
-				</div>
-				<div class='line'></div>
-			</div>
-			<div id='M_操作' style='display: none;'>
-				<span id='B_背包' class='sel' onclick='~function(){ShowElement("M_背包");背包();}()' style='display: none;'><h3>背包</h3></span>
-				<span id='B_走起' class='sel' onclick='走起();' style='display: none;'><h3>走起</h3></span>
-				<div class='line'></div>
-			</div>
-			<div id='M_背包' style='display: none;'>
-				<h2 id='Kt_背包'>【背包】</h2>
-				<div class='lines'></div>
-				<span id='Br_背包' class='sel' onclick='~function(){ShowElement("M_操作");HideElement("M_背包");DelElement("K_物品");}()'><h3>返回</h3></span>
-				<div class='line'></div>
-			</div>
-		</div>
-		<div id='P_跑酷' style='display: none;'>
-			<h2>【蛮荒跑酷】</h2>
-			<div class='lines'></div>
-			<h3>作者菌更新太慢？玩玩这个吧！【蛮荒跑酷】，你值得拥有。 <br> 诶，真不巧，这个也没更新，回去吧~ awa</h3>
-			<div class='lines'></div>
-			<span id='Br_跑酷' class='sel' onclick='~function(){HideElement("P_跑酷");ShowElement("P_主体");}()'><h3>返回</h3></span>
-			<div class='line'></div>
+			<b class='Title'>【传送门】</b>
+			<div class='Lines'></div>
+			<a href='http://ForkFG.Github.io/-Word-Box-' target="_blank"><span class='Select'><b class='Text'>【Word Box 积累本】</b></span></a>
+			<a href='http://ForkFG.Github.io/-Barren-Land-' target="_blank"><span class='Select'><b class='Text'>【Barreen Land 蛮荒大陆】</b></span></a>
 		</div>
 		<div id='P_页尾'>
-			<h2>【Ice--Lava~~ 冰の岩浆】* 【Fork Ψ Killet】 最后一次升级于 【2019-01-02】</h2> <br>
-			<span class='sel' onclick='~function(){ShowDialog("<h2>【嘿！消息】</h2> <br> <h3>谢谢！游戏内容正在疯狂敲代码中，敬请期待！</h3>\
-									   <span class=&apos;sel&apos; onclick=&apos;HideDialog()&apos;><h3>确定</h3></span>");}()'><h3>点赞</h3></span>
-			<a href='https://github.com/ForkFG/ForkFG.github.io' target="_blank"><span class='sel'><h3>跳转至 Github</h3></span></a>
-			<!--<span class='sel' onclick='HideElement("P_主体");ShowElement("P_跑酷");'><h3>蛮荒跑酷</h3></span>-->
-		</div>
-		<div id='P_虚拟键盘' style='position: fixed; bottom: 0; width: 100%; display: none;'>
-			<div class='line'></div>
-				<div id='M_AU' class='vk'>
-				<h2>我是【虚拟键盘】！</h2>
-				<div class='lines'></div>
-				<span id='B_vk_Q' class='vkkey' onclick='~function(){NowInput("Q");}()'><h3>Q</h3></span>
-				<span id='B_vk_q' class='vkkey' onclick='~function(){NowInput("q");}()' style='display: none;'><h3>q</h3></span>
-				<span id='B_vk_W' class='vkkey' onclick='~function(){NowInput("W");}()'><h3>W</h3></span>
-				<span id='B_vk_w' class='vkkey' onclick='~function(){NowInput("w");}()' style='display: none;'><h3>w</h3></span>
-				<span id='B_vk_E' class='vkkey' onclick='~function(){NowInput("E");}()'><h3>E</h3></span>
-				<span id='B_vk_e' class='vkkey' onclick='~function(){NowInput("e");}()' style='display: none;'><h3>e</h3></span>
-				<span id='B_vk_R' class='vkkey' onclick='~function(){NowInput("R");}()'><h3>R</h3></span>
-				<span id='B_vk_r' class='vkkey' onclick='~function(){NowInput("r");}()' style='display: none;'><h3>r</h3></span>
-				<span id='B_vk_T' class='vkkey' onclick='~function(){NowInput("T");}()'><h3>T</h3></span>
-				<span id='B_vk_t' class='vkkey' onclick='~function(){NowInput("t");}()' style='display: none;'><h3>t</h3></span>
-				<span id='B_vk_Y' class='vkkey' onclick='~function(){NowInput("Y");}()'><h3>Y</h3></span>
-				<span id='B_vk_y' class='vkkey' onclick='~function(){NowInput("y");}()' style='display: none;'><h3>y</h3></span>
-				<span id='B_vk_U' class='vkkey' onclick='~function(){NowInput("U");}()'><h3>U</h3></span>
-				<span id='B_vk_u' class='vkkey' onclick='~function(){NowInput("u");}()' style='display: none;'><h3>u</h3></span>
-				<span id='B_vk_I' class='vkkey' onclick='~function(){NowInput("I");}()'><h3>I</h3></span>
-				<span id='B_vk_i' class='vkkey' onclick='~function(){NowInput("i");}()' style='display: none;'><h3>i</h3></span>
-				<span id='B_vk_O' class='vkkey' onclick='~function(){NowInput("O");}()'><h3>O</h3></span>
-				<span id='B_vk_o' class='vkkey' onclick='~function(){NowInput("o");}()' style='display: none;'><h3>o</h3></span>
-				<span id='B_vk_P' class='vkkey' onclick='~function(){NowInput("P");}()'><h3>P</h3></span>
-				<span id='B_vk_p' class='vkkey' onclick='~function(){NowInput("p");}()' style='display: none;'><h3>p</h3></span>
-				<span id='B_vk_DL' class='vkkey' onclick='~function(){NowInput("DL");}()'><h3>×</h3></span> <br>
-				<span id='B_vk_CL' class='vkkey' onclick='~function(){NowInput("CL");}()' style='display: none;'><h3>▲</h3></span>
-				<span id='B_vk_CU' class='vkkey' onclick='~function(){NowInput("CU");}()'><h3>▼</h3></span>
-				<span id='B_vk_A' class='vkkey' onclick='~function(){NowInput("A");}()'><h3>A</h3></span>
-				<span id='B_vk_a' class='vkkey' onclick='~function(){NowInput("a");}()' style='display: none;'><h3>a</h3></span>
-				<span id='B_vk_S' class='vkkey' onclick='~function(){NowInput("S");}()'><h3>S</h3></span>
-				<span id='B_vk_s' class='vkkey' onclick='~function(){NowInput("s");}()' style='display: none;'><h3>s</h3></span>
-				<span id='B_vk_D' class='vkkey' onclick='~function(){NowInput("D");}()'><h3>D</h3></span>
-				<span id='B_vk_d' class='vkkey' onclick='~function(){NowInput("d");}()' style='display: none;'><h3>d</h3></span>
-				<span id='B_vk_F' class='vkkey' onclick='~function(){NowInput("F");}()'><h3>F</h3></span>
-				<span id='B_vk_f' class='vkkey' onclick='~function(){NowInput("f");}()' style='display: none;'><h3>f</h3></span>
-				<span id='B_vk_G' class='vkkey' onclick='~function(){NowInput("G");}()'><h3>G</h3></span>
-				<span id='B_vk_g' class='vkkey' onclick='~function(){NowInput("g");}()' style='display: none;'><h3>g</h3></span>
-				<span id='B_vk_H' class='vkkey' onclick='~function(){NowInput("H");}()'><h3>H</h3></span>
-				<span id='B_vk_h' class='vkkey' onclick='~function(){NowInput("h");}()' style='display: none;'><h3>h</h3></span>
-				<span id='B_vk_J' class='vkkey' onclick='~function(){NowInput("J");}()'><h3>J</h3></span>
-				<span id='B_vk_j' class='vkkey' onclick='~function(){NowInput("j");}()' style='display: none;'><h3>j</h3></span>
-				<span id='B_vk_K' class='vkkey' onclick='~function(){NowInput("K");}()'><h3>K</h3></span>
-				<span id='B_vk_k' class='vkkey' onclick='~function(){NowInput("k");}()' style='display: none;'><h3>k</h3></span>
-				<span id='B_vk_L' class='vkkey' onclick='~function(){NowInput("L");}()'><h3>L</h3></span>
-				<span id='B_vk_l' class='vkkey' onclick='~function(){NowInput("l");}()' style='display: none;'><h3>l</h3></span>
-				<span id='B_vk_UL' class='vkkey' onclick='~function(){NowInput("UL");}()'><h3>_</h3></span> <br>
-				<span id='B_vk_Z' class='vkkey' onclick='~function(){NowInput("Z");}()'><h3>Z</h3></span>
-				<span id='B_vk_z' class='vkkey' onclick='~function(){NowInput("z");}()' style='display: none;'><h3>z</h3></span>
-				<span id='B_vk_X' class='vkkey' onclick='~function(){NowInput("X");}()'><h3>X</h3></span>
-				<span id='B_vk_x' class='vkkey' onclick='~function(){NowInput("x");}()' style='display: none;'><h3>x</h3></span>
-				<span id='B_vk_C' class='vkkey' onclick='~function(){NowInput("C");}()'><h3>C</h3></span>
-				<span id='B_vk_c' class='vkkey' onclick='~function(){NowInput("c");}()' style='display: none;'><h3>c</h3></span>
-				<span id='B_vk_V' class='vkkey' onclick='~function(){NowInput("V");}()'><h3>V</h3></span>
-				<span id='B_vk_v' class='vkkey' onclick='~function(){NowInput("v");}()' style='display: none;'><h3>v</h3></span>
-				<span id='B_vk_B' class='vkkey' onclick='~function(){NowInput("B");}()'><h3>B</h3></span>
-				<span id='B_vk_b' class='vkkey' onclick='~function(){NowInput("b");}()' style='display: none;'><h3>b</h3></span>
-				<span id='B_vk_N' class='vkkey' onclick='~function(){NowInput("N");}()'><h3>N</h3></span>
-				<span id='B_vk_n' class='vkkey' onclick='~function(){NowInput("n");}()' style='display: none;'><h3>n</h3></span>
-				<span id='B_vk_M' class='vkkey' onclick='~function(){NowInput("M");}()'><h3>M</h3></span>
-				<span id='B_vk_m' class='vkkey' onclick='~function(){NowInput("m");}()' style='display: none;'><h3>m</h3></span>
-				<span id='B_vk_UD' class='vkkey' onclick='~function(){NowInput("UD");}()'><h3>◀</h3></span>
-				<span id='B_vk_RD' class='vkkey' onclick='~function(){NowInput("RD");}()'><h3>▶</h3></span>
-				<span id='B_vk_OK' class='vkkey' onclick='~function(){NowInput("OK");}()'><h3>√</h3></span>
-				<div class='vkcover'></div>
-			</div>
-		</div>
+			<div class='Line'></div>
+			<b class='Title'>* 【Fork Ψ Killet 刘怀轩】 最后一次升级于 【2019-01-06】</b> <br>
 		</div>
 	</body>
 </html>
