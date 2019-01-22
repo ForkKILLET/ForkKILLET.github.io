@@ -1,0 +1,10 @@
+#ifndef WARMSNOWTOOL_H_
+#define WARMSNOWTOOL_H_
+#include <iostream>
+#include <stdlib.h>
+#include <conio.h>
+int Ch_num(char *ch)
+{
+    return atoi(ch);
+}
+#endif
