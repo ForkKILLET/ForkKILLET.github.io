@@ -1,34 +1,62 @@
-.title
+.title,#pos,#home,h1
 {
+	padding-top: 30px;
+	padding-bottom: 20px;
+	line-height: 40px;
 	font-size: 32px;
 	font-weight: bold;
-	margin-top: 45px;
+	text-align: center;
 }
-.text
+.text,.md p,.md li
 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	line-height: 35px;
 	font-size: 24px;
-	margin-top: 30px;
-	line-height: 50px;
 }
-@keyframes init
+.md li:not(:first-child)
 {
-	0%{ transform: rotateY(180deg); }
-	100%{ transform: none; }
+	padding-top: 5px;
+}
+.md li:not(:last-child)
+{
+	padding-bottom: 5px;
 }
 #main
 {
 	display: inline-block;
-	width: 1100px;
-	height: auto;
-	position: fixed;
-	left: calc((100% - 1100px) / 2);
+	width: calc(100% - 250px - 50px * 2 - 30px);
+	height: calc(100% - 200px);
+	position: absolute;
+	left: calc(250px + 50px);
 	top: 100px;
 	padding-bottom: 40px;
+	padding-left: 30px;
 	background-color: #FFFFFF;
 	box-shadow: 0 3px 10px #0000004D;
-	animation-name: init;
-	animation-duration: 3s;
-	animation-iteration-count: 1;
+	overflow-y: scroll;
+}
+#guide
+{
+	display: inline-block;
+	width: 250px;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #FFFFFF;
+	box-shadow: 0 3px 10px #0000004D;
+}
+#pos
+{
+	position: absolute;
+	left: calc(250px + 50px);
+}
+#home
+{
+	padding-bottom: 30px;
+	background-color: black;
+	color: white;
 }
 *
 {
@@ -39,13 +67,18 @@ body
 	background-color: #EFEFEF;
 	color: #333333;
 	font-family: Segoe UI;
-	text-align: center;
 }
-hr
+hr,.md hr
 {
 	display: inline-block;
-	width: 100%;
-	height: 4px;
+	width: calc(100% - 30px);
+	height: 3.5px;
 	border: none;
-	background-color: #EFEFEF;
+	background-color: #FFFFFF;
+	box-shadow: 0 3px 10px #0000004D;
+}
+a,.md a
+{
+	text-decoration: none;
+	color: #3498DB;
 }

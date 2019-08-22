@@ -4,17 +4,18 @@
 		<meta http-equiv='Content-Type' content='text/html' charset='UTF-8'/>
 		<title>Mushouse</title>
 		<link rel='stylesheet' type='text/css' href='./style.css'>
-		<script type='text/javascript' data-main="./main.js" src='./require.min.js'></script>
-		<script type='module' src='./remarkable.js'></script>
-		<script type='module' src='./main.js'></script>
+		<link rel='stylesheet' type='text/css' href='./fa/css/font-awesome.min.css'>
+		<base target='_blank'>
+		<script type='text/javascript' src='./main.js'></script>
+		<script type='text/javascript' src='./marked.min.js'></script>
 	</head>
-	<body>
-		<p class='title'>Mushouse</p>
+	<body onload='init();'>
+		<div id='guide'>
+			<a href='https://icelava.ga/'><p id='home'>Home</p></a>
+		</div>
+		<p id='pos'>Mushouse</p>
 		<div id='main'>
-			<p class='title'>欢迎来访我们的蘑菇树屋~</p>
-			<p class='text'>
-				<span style='color: red;'>Ice--</span><span style='color: blue;'>Lava~~</span> 工作室欢迎您！
-			</p>
+			<div class='md' data-name='home'></div>
 		</div>
 	</body>
 </html>
