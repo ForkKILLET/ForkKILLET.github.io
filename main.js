@@ -99,6 +99,11 @@ IceLava 团队在这里也要感谢 freenom，我们敢说这是唯一一个有�
 
 ---
 
+本网站中各种图标都来自于 $fa fa-flag fa$ [Font Awesome](https://fontawesome.dashgame.com/)，这些图标都非常可爱，并且免费！  
+IceLava 团队再此感谢 Font Awesome，那里真的是一个有爱的地方 :)
+
+---
+
 如果您愿意加入 IceLava 团队，或者希望与我们互换友链（见 [Friends 页面](https://icelava.ga/friends)），或者愿意在本站发表博客……  
 你可以用以下的方式联系我们：
 
