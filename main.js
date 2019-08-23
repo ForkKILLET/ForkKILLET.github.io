@@ -54,6 +54,8 @@ $fali fa-home fa$ [主页：Mushouse 蘑菇树屋](https://icelava.ga/)
   - $fali fa-check fa$ [本页：站点地图 Site map](#)
   - $fali fa-check fa$ [特殊：友链 Friends](https://icelava.ga/frineds)
   - $fali fa-check fa$ [特殊：关于我们 About us](https://icelava.ga/about_us)
+  - $fali fa-rss-square fa$ [博客：ForkΨKILLET's](https://icelava.ga/blog_forkkillet/)
+    - $fali fa-warning fa$ _博客内容还未搬迁完毕，目前不予展示！_
 - $fali fa-gamepad fa$ [游戏：OI Nazo](https://icelava.ga/OI-Nazo/index.html)
   - $fali fa-warning fa$ _因为本子站点是网址解密游戏，故其中页面不予展示 QAQ_
 - $fali fa-gamepad fa$ [游戏：Barren Land 蛮荒大陆](https://icelava.ga/-Barren-Land-/index.html)
@@ -100,7 +102,7 @@ IceLava 团队在这里也要感谢 freenom，我们敢说这是唯一一个有�
 ---
 
 本网站中各种图标都来自于 $fa fa-flag fa$ [Font Awesome](https://fontawesome.dashgame.com/)，这些图标都非常可爱，并且免费！  
-IceLava 团队再此感谢 Font Awesome，那里真的是一个有爱的地方 :)
+IceLava 团队在此感谢 Font Awesome，那里真的是一个有爱的地方 :)
 
 ---
 
