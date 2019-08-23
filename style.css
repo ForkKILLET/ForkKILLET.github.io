@@ -1,27 +1,3 @@
-.title,#pos,#home,h1
-{
-	padding-top: 30px;
-	padding-bottom: 20px;
-	line-height: 40px;
-	font-size: 32px;
-	font-weight: bold;
-	text-align: center;
-}
-.text,.md p,.md li
-{
-	padding-top: 10px;
-	padding-bottom: 10px;
-	line-height: 35px;
-	font-size: 24px;
-}
-.md li:not(:first-child)
-{
-	padding-top: 5px;
-}
-.md li:not(:last-child)
-{
-	padding-bottom: 5px;
-}
 #main
 {
 	display: inline-block;
@@ -47,6 +23,33 @@
 	background-color: #FFFFFF;
 	box-shadow: 0 3px 10px #0000004D;
 }
+#guide .text
+{
+	padding-left: 30px;
+	line-height: 25px;
+}
+#guide a
+{
+	color: black;
+}
+#guide a>.text:not(#home):hover
+{
+	background-color: #EFEFEF;
+}
+#guide hr
+{
+	margin-left: 30px;
+	width: calc(250px - 30px * 2);
+}
+#logo
+{
+	margin: 20px;
+	border-radius: 10px;
+}
+#counter
+{
+	margin-top: 15px;
+}
 #pos
 {
 	position: absolute;
@@ -58,9 +61,38 @@
 	background-color: black;
 	color: white;
 }
-*
+.title,#pos,#home,h1
 {
-	margin: 0;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	line-height: 40px;
+	font-size: 32px;
+	font-weight: bold;
+	text-align: center;
+}
+.text,p,li
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	line-height: 35px;
+	font-size: 24px;
+}
+li:not(:first-child)
+{
+	padding-top: 5px;
+}
+li:not(:last-child)
+{
+	padding-bottom: 5px;
+}
+li
+{
+	list-style-type: none;
+}
+.li-icon
+{
+	margin-left: -20px;
+	margin-right: 15px;
 }
 body
 {
@@ -68,7 +100,7 @@ body
 	color: #333333;
 	font-family: Segoe UI;
 }
-hr,.md hr
+hr
 {
 	display: inline-block;
 	width: calc(100% - 30px);
@@ -77,8 +109,12 @@ hr,.md hr
 	background-color: #FFFFFF;
 	box-shadow: 0 3px 10px #0000004D;
 }
-a,.md a
+a
 {
 	text-decoration: none;
 	color: #3498DB;
+}
+*
+{
+	margin: 0;
 }

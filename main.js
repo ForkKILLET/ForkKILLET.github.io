@@ -1,8 +1,8 @@
 let md_values =
 {
-	"home":
+	home:
 `
-# 这里是 IceLava 团队的站点。  
+# $fa fa-flag fa$ 这里是 IceLava 团队的站点。  
 蛤，你问 IceLava 是什么？  
 就是一个开发东西的团队啦！  
 我们目前刚刚搬家到这里（换域名），有些东西还没安置完毕……  
@@ -10,9 +10,9 @@ let md_values =
 ---
 
 不过我们的一些项目还是可以使用的呢！
-- $fa fa-li fa-check-square fa$ [游戏：OI Nazo](OI-Nazo/index.html)  
-- [游戏：蛮荒大陆](-Barren-Land-/index.html)  
-- [工具：N $^ 2 ^$ ](N-2/index.html)  
+- $fali fa-gamepad fa$ [游戏：OI Nazo](OI-Nazo/index.html)  
+- $fali fa-gamepad fa$ [游戏：蛮荒大陆](-Barren-Land-/index.html)  
+- $fali fa-tag fa$ [工具：N $^ 2 ^$ ](N-2/index.html)  
 
 ---
 
@@ -44,7 +44,7 @@ _2019-08-22_
 `
 }
 
-let log = console.log;
+const log = console.log;
 
 function init()
 {
@@ -61,13 +61,33 @@ function init()
 		smartypants: false
 	});
 	
-	let origin_marked = marked;
+	const md_$_labels =
+	[
+		{ from: /\$\^/g, to: "<sup>" },
+		{ from: /\^\$/g, to: "</sup>" },
+
+		{ from: /\$_/g, to: "<sub>" },
+		{ from: /_\$/g, to: "</sub>" },
+
+		{ from: /\$center/g, to: "<span style='text-align: center;'>" },
+		{ from: /center\$/g, to: "</span>" },
+
+		{ from: /\$style/g, to: "<span style='" },
+		{ from: /style\$/g, to: "</span>" },
+
+		{ from: / x\$/g, to: "'>" },
+		{ from: / X\$/g, to: "</span>" },
+
+		{ from: /\$fali/g, to: "<i class='li-icon fa fa-fw" },
+		{ from: /\$fa/g, to: "<i class='fa " },
+		{ from: /fa\$/g, to: "'></i>" }
+	]
+
+	const origin_marked = marked;
 	marked = function(str)
 	{
-		str = str.replace(/ \$\^ /g, "<sup>");
-		str = str.replace(/ \^\$ /g, "</sup>");
-		str = str.replace(/\$fa /g, "<i class='fa ");
-		str = str.replace(/ fa\$ /g, "'></i>")
+		for (let i = 0; i < md_$_labels.length; i++)
+			str = str.replace(md_$_labels[i].from, md_$_labels[i].to);
 		str = origin_marked(str);
 		return str;
 	}
