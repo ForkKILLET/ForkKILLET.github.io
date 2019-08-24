@@ -126,6 +126,10 @@ _2019-08-23_
 数学公式测试：$math ax^2 + bx + c = \\text{qwq} math$  
 
 【正在施工】
+`,
+	sign_up:
+`
+# $fa fa-sign-in fa$ 您可以在这里注册 Mushouse 账户！
 `
 }
 
