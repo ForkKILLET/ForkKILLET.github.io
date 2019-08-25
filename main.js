@@ -127,9 +127,16 @@ _2019-08-23_
 
 【正在施工】
 `,
-	sign_up:
+	sign_in:
 `
-# $fa fa-sign-in fa$ 您可以在这里注册 Mushouse 账户！
+# $fa fa-sign-in fa$ 在这里登录您的 Mushouse 账户！
+<form method='post' action='https://loli.icelava.ga/sign_in.php'>
+	<p class='text' style='text-align: center;'>
+		$fali fa-user-circle fa$ <input type='text' name='un' placeholder='Username'> <br>
+		$fali fa-lock fa$ <input type='password' name='pw' placeholder='Password'> <br>
+		<input type='submit' value='Submit'>
+	</p>
+</form>
 `
 }
 
@@ -198,15 +205,6 @@ function init()
 
 		{ from: /\$_/g, to: "<sub>" },
 		{ from: /_\$/g, to: "</sub>" },
-
-		{ from: /\$center/g, to: "<span style='text-align: center;'>" },
-		{ from: /center\$/g, to: "</span>" },
-
-		{ from: /\$style/g, to: "<span style='" },
-		{ from: /style\$/g, to: "</span>" },
-
-		{ from: / x\$/g, to: "'>" },
-		{ from: / X\$/g, to: "</span>" },
 
 		{ from: /\$fali/g, to: "<i class='li-icon fa fa-fw" },
 		{ from: /\$fa/g, to: "<i class='fa " },
