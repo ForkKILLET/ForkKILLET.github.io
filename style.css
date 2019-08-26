@@ -75,7 +75,7 @@
 	margin-top: 0;
 	padding-top: 30px;
 }
-.text,p,li,input[type=text],input[type=password],input[type=submit]
+.text,p,li,input[type=text],input[type=password],input[type=submit],.button
 {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -168,7 +168,6 @@ input[type=text]:focus,input[type=password]:focus
 	border-radius: 10px 0 10px 0;
 	outline: none;
 	background-color: #EFEFEF;
-	margin-top:;
 }
 .button:hover,input[type=submit]:hover
 {

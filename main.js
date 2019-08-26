@@ -132,8 +132,8 @@ _2019-08-23_
 # $fa fa-sign-in fa$ 在这里登录您的 Mushouse 账户！
 <form method='post' action='http://loli.icelava.ga/sign_in.php'>
 	<p class='text' style='text-align: center;'>
-		$fali fa-user-circle fa$ <input type='text' name='un' placeholder='Username'> <br>
-		$fali fa-lock fa$ <input type='password' name='pw' placeholder='Password'> <br>
+		$fali fa-user-circle fa$ <input type='text' name='un' placeholder='Username' autocomplete='off'> <br>
+		$fali fa-lock fa$ <input type='password' name='pw' placeholder='Password' autocomplete='off'> <br>
 		<input type='submit' value='Submit'>
 	</p>
 </form>
