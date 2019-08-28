@@ -110,7 +110,7 @@ function init()
 	{
 		$i = md_areas[i];
 
-		AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + $i.dataset.name, "application/x-www-form- urlencoded", null, 
+		AJAX("GET", "https://loli.icelava.ga/load_md.php?name=" + $i.dataset.name, "application/x-www-form- urlencoded", null, 
 		function(XHR)
 		{
 			$i.innerHTML = marked(XHR.responseText);
