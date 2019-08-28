@@ -114,8 +114,9 @@ function init()
 		function(XHR)
 		{
 			let $script = document.createElement("script");
+			$script.innerHTML = XHR.responseText;
+			$script.type = "text/javascript";
 			document.body.appendChild($script);
-			$script.outerHTML = XHR.responseText;
 			$i.innerHTML = marked(md_values[$i.dataset.name].replace(/\t/g, ""));
 		});
 
