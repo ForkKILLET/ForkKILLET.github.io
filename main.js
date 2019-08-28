@@ -113,11 +113,7 @@ function init()
 		AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + $i.dataset.name, "application/x-www-form- urlencoded", null, 
 		function(XHR)
 		{
-			let $script = document.createElement("script");
-			$script.innerHTML = XHR.responseText;
-			$script.type = "text/javascript";
-			document.body.appendChild($script);
-			$i.innerHTML = marked(md_values[$i.dataset.name].replace(/\t/g, ""));
+			$i.innerHTML = marked(XHR.responseText);
 		});
 
 		MathJax.Hub.Queue(["Typeset", MathJax.Hub, $i]);
