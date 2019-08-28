@@ -104,7 +104,6 @@ function init()
 		return str;
 	}
 
-	let md_values = [];
 	let md_areas = document.getElementsByClassName("md");
 	let $i;
 	for (let i = 0; i < md_areas.length; i++)
