@@ -137,7 +137,7 @@ a
 		background-color: #FFFFFF;
 	}
 }
-input[type=text],input[type=password]
+input[type=text],input[type=password],input[type=email]
 {
 	padding: 5px 15px 5px 15px;
 	margin-left: 15px;
@@ -152,7 +152,7 @@ input[type=text],input[type=password]
 	outline: none;
 	background-color: #EFEFEF;
 }
-input[type=text]:focus,input[type=password]:focus
+input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
 {
 	-webkit-animation: input-focus 1s 1 forwards;
 }
