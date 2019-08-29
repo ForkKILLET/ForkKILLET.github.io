@@ -25,25 +25,25 @@ function init()
 {
 	E("guide").innerHTML =
 	`
-	<a href='https://icelava.ga/'><p id='home'>
+	<a href='http://icelava.ga/'><p id='home'>
 		<i class='fa fa-home'></i> Home
 	</p></a>
-	<a href='https://icelava.ga/site_map'><p class='text'>
+	<a href='http://icelava.ga/site_map'><p class='text'>
 		<i class='li-icon fa-fw fa fa-sitemap'></i> Site Map
 	</p></a>
-	<a href='https://icelava.ga/friends'><p class='text'>
+	<a href='http://icelava.ga/friends'><p class='text'>
 		<i class='li-icon fa-fw fa fa-heart'></i> Friends
 	</p></a>
-	<a href='https://icelava.ga/about_us'><p class='text'>
+	<a href='http://icelava.ga/about_us'><p class='text'>
 		<i class='li-icon fa-fw fa fa-info-circle'></i> About us
 	</p></a> <hr>
 
 	<p class='text'><i class='li-icon fa-fw fa fa-rss-square'></i> Blogs</p>
-	<a href='https://icelava.ga/blog_forkkillet'><p class='text'>
+	<a href='http://icelava.ga/blog_forkkillet'><p class='text'>
 		<i class='li-icon fa-fw fa fa-check'></i> ForkΨKILLET's
 	</p></a> <hr>
 
-	<img id='logo' src='https://icelava.ga/icelava.jpg' width='210px'>
+	<img id='logo' src='http://icelava.ga/icelava.jpg' width='210px'>
 	<p class='text'>
 		<span style='color: #ff5b5a'>RED</span> ICE - WE<br>
 		<span style='color: #0e61e1'>blue</span> lava - world
@@ -51,7 +51,7 @@ function init()
 
 	<p class='text'>
 		<i class='li-icon fa-fw fa fa-mouse-pointer'></i> Hits
-		<img id='counter' src='https://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72'> 
+		<img id='counter' src='http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72'> 
 	</p>
 	`
 
@@ -110,7 +110,7 @@ function init()
 	{
 		$i = md_areas[i];
 
-		AJAX("GET", "https://loli.icelava.ga/load_md.php?name=" + $i.dataset.name, "application/x-www-form- urlencoded", null, 
+		AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + $i.dataset.name, "application/x-www-form- urlencoded", null, 
 		function(XHR)
 		{
 			$i.innerHTML = marked(XHR.responseText);
