@@ -1,3 +1,5 @@
+function NF(){}
+
 function log(info)
 {
 	console.log(finfo);
