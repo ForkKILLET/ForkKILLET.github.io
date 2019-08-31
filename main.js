@@ -2,7 +2,7 @@ function NF(){}
 
 function log(info)
 {
-	console.log(finfo);
+	console.log(info);
 }
 
 function E(id)
