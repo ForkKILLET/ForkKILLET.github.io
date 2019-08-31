@@ -21,7 +21,11 @@
 					function req_send_ve()
 					{
 						AJAX("POST", "http://loli.icelava.ga/sign_up.php?op=send_ve", "application/x-www-form- urlencoded",
-						     "email=" + document.getElementById("email"), NF);
+						     "email=" + document.getElementById("email"),
+						     function(XHR)
+						     {
+						     	log(XHR.responseText);
+						     });
 					}
 				</script>
 				<form method='post' action='http://loli.icelava.ga/sign_up.php?op=submit'>
