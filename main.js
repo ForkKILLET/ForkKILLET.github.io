@@ -19,7 +19,7 @@ function AJAX(type, url, MIME, value, fn_cb)
 	function()
 	{
 		if (XHR.readyState == 4 && XHR.status == 200)fn_cb(XHR);
-	}
+	};
 	XHR.send(value);
 }
 

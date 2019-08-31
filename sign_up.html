@@ -20,8 +20,10 @@
 				<script type='text/javascript'>
 					function req_send_ve()
 					{
-						AJAX("POST", "http://loli.icelava.ga/sign_up.php?op=send_ve", "application/x-www-form- urlencoded",
-						     "email=" + document.getElementById("email").value,
+						var data = new FormData();
+						data.append("email", document.getElementById("email").value)
+						AJAX("POST", "http://loli.icelava.ga/sign_up.php?op=send_ve",
+							"application/x-www-form-urlencoded", data,
 						     function(XHR)
 						     {
 						     	log(XHR.responseText);
