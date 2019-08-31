@@ -21,7 +21,7 @@
 					function req_send_ve()
 					{
 						AJAX("POST", "http://loli.icelava.ga/sign_up.php?op=send_ve", "application/x-www-form- urlencoded",
-						     "email=" + document.getElementById("email"),
+						     "email=" + document.getElementById("email").value,
 						     function(XHR)
 						     {
 						     	log(XHR.responseText);
