@@ -30,7 +30,7 @@ function init()
 	<a href='http://icelava.ga/'><p id='home'>
 		<i class='fa fa-home'></i> Home
 	</p></a>
-	<p class='text' style='margin-left: -5px;'>
+	<p class='text' style='margin-left: -5px; margin-top: 5px;'>
 		<a href='http://icelava.ga/sign_up'>Sign up </a>
 		<i class='fa fa-fw fa-sign-in'></i>
 		<a href='http://icelava.ga/sign_in'>Sign in</a>
