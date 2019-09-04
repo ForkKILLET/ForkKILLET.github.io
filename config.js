@@ -1,3 +1,3 @@
 // options
 
-var debug = false;
+var debug =git  true;

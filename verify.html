@@ -34,12 +34,12 @@
 		</div>
 	</body>							
 	<script type='text/javascript'>
-		let debug = true;
+		log(debug);
 		function req_send_ve()
 		{
 			E("btn_req").innerHTML = "正在发送中 <i class='fa fa-spinner fa-spin'></i>";
 
-			AJAX("GET", debug ? "localhost:8080/verify.php?op=send" : "http://loli.icelava.ga/verify.php?op=send",
+			AJAX("GET", debug ? "http://localhost:8080/verify.php?op=send" : "http://loli.icelava.ga/verify.php?op=send",
 			     "application/x-www-form-urlencoded", null,
 			     function(XHR)
 			     {
@@ -48,9 +48,9 @@
 			     	$btn.innerHTML = "验证码已发送";
 			     	$btn.onclick = NF;
 			     	let $t_msg = document.createElement("p");
-			     	$t_msg.className = "text";
+			     	git $t_msg.className = "text";
 			     	$t_msg.innerHTML = XHR.responseText.substr(5);
-			     	document.getElementsByClassName("md")[0].appendChild($t_msg)
+			     	document.getElementsByClassName("md")[0].appendChild($t_git msg)
 					$t_msg.appendChild(document.createElement("hr"));
 			     });
 		}
