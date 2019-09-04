@@ -35,11 +35,13 @@
 	<script type='text/javascript'>
 		function req_send_ve()
 		{
-			AJAX("POST", "http://loli.icelava.ga/verify.php?op=send",
-			     "application/x-www-form-urlencoded",
+			E("btn_req").innerHTMl = "正在发送中 <i class='fa fa-spinner fa-spin'></i>";
+
+			AJAX("GET", "http://loli.icelava.ga/verify.php?op=send",
+			     "application/x-www-form-urlencoded", null,
 			     function(XHR)
 			     {
-			     	log(XHR.responseText);
+			     	// Debug: log(XHR.responseText);
 			     	let $btn = E("btn_req");
 			     	$btn.innerHTML = "验证码已发送";
 			     	$btn.onclick = NF;
