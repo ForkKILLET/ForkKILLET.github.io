@@ -1,3 +1,3 @@
 // options
 
-var debug = true;
+var debug = false;
