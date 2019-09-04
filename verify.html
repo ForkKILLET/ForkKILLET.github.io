@@ -8,6 +8,7 @@
 		<script type='text/javascript' src='https://icelava.ga/main.js'></script>
 		<script type='text/javascript' src='https://icelava.ga/marked.min.js'></script>
 		<script type='text/javascript' async src='https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+		<script type='text/javascript' src='./config.js'></script>
 	</head>
 	<body onload='init();'>
 		<div id='guide'></div>
@@ -33,11 +34,12 @@
 		</div>
 	</body>							
 	<script type='text/javascript'>
+		let debug = true;
 		function req_send_ve()
 		{
 			E("btn_req").innerHTML = "正在发送中 <i class='fa fa-spinner fa-spin'></i>";
 
-			AJAX("GET", "http://loli.icelava.ga/verify.php?op=send",
+			AJAX("GET", debug ? "localhost:8080/verify.php?op=send" : "http://loli.icelava.ga/verify.php?op=send",
 			     "application/x-www-form-urlencoded", null,
 			     function(XHR)
 			     {

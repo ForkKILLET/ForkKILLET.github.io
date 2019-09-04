@@ -1,0 +1,3 @@
+// options
+
+var debug = false;
