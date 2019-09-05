@@ -44,6 +44,9 @@ function init()
 	</p></a>
 	<a href='http://icelava.ga/about_us'><p class='text'>
 		<i class='li-icon fa-fw fa fa-info-circle'></i> About us
+	</p></a>
+	<a href='http://icelava.ga/log'><p class='text'>
+		<i class='li-icon fa-fw fa fa-file-text'></i> Log
 	</p></a> <hr>
 
 	<p class='text'><i class='li-icon fa-fw fa fa-rss-square'></i> Blogs</p>
