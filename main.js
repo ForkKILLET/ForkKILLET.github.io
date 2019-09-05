@@ -15,7 +15,6 @@ function AJAX(type, url, MIME, value, fn_cb)
 	let XHR = new XMLHttpRequest();
 	XHR.open(type, url);
 	XHR.setRequestHeader("Content-Type", MIME);
-	XHR.setRequestHeader("Access-Control-Allow-Credentials", "true");
 	XHR.withCredentials = true;
 	XHR.onreadystatechange = 
 	function()
