@@ -51,6 +51,14 @@
 	margin-left: 30px;
 	width: calc(250px - 30px * 2);
 }
+#user
+{
+	margin-top: 5px;
+}
+#user[data-tourist="true"]
+{
+	margin-left: -5px;
+}
 #logo
 {
 	margin: 20px;

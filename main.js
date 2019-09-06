@@ -31,7 +31,7 @@ function init()
 	<a href='http://icelava.ga/'><p id='home'>
 		<i class='fa fa-home'></i> Home
 	</p></a>
-	<p class='text' style='margin-left: -5px; margin-top: 5px;'>
+	<p class='text' id='user' data-tourist='true'>
 		<a href='http://icelava.ga/sign_up'>Sign up </a>
 		<i class='fa fa-fw fa-sign-in'></i>
 		<a href='http://icelava.ga/sign_in'>Sign in</a>
@@ -65,6 +65,17 @@ function init()
 		<img id='counter' src='http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72'> 
 	</p>
 	`
+
+	AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form- urlencoded", null,
+		 (XHR) =>
+		 {
+		 	let token = XHR.responseText;
+			let un = JSON.parse(token)["un"];
+			let $user = E("user");
+			$user.dataset.tourist = false;
+			$user.innerHTML = "<i class='li-icon fa-fw fa fa-user'></i> " + un;
+		 });
+
 
 	MathJax.Hub.Config(
 	{
@@ -122,11 +133,9 @@ function init()
 		$i = md_areas[i];
 
 		AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + $i.dataset.name, "application/x-www-form- urlencoded", null, 
-		function(XHR)
-		{
-			$i.innerHTML = marked(XHR.responseText);
-		});
+			 (XHR) => $i.innerHTML = marked(XHR.responseText));
 
 		MathJax.Hub.Queue(["Typeset", MathJax.Hub, $i]);
+		// Todo: 修好 Tex。
 	}
 }
