@@ -50,7 +50,7 @@ function init()
 	</p></a> <hr>
 
 	<p class='text'><i class='li-icon fa-fw fa fa-rss-square'></i> Blogs</p>
-	<a href='http://icelava.ga/blog_forkkillet'><p class='text'>
+	<a href='http://icelava.ga/blogs/ForkKILLET'><p class='text'>
 		<i class='li-icon fa-fw fa fa-check'></i> ForkΨKILLET's
 	</p></a> <hr>
 
