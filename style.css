@@ -27,7 +27,7 @@
 	display: inline-block;
 	width: 250px;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	left: 0;
 	top: 0;
 	background-color: #FFFFFF;
