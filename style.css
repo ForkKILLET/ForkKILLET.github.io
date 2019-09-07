@@ -32,6 +32,11 @@
 	top: 0;
 	background-color: #FFFFFF;
 	box-shadow: 0 3px 10px #0000004D;
+	overflow-y: auto;
+	/* IE */
+	-ms-overflow-style: none;
+	/* Fx */
+	overflow: -moz-scrollbars-none;
 }
 #guide .text
 {
@@ -41,6 +46,10 @@
 #guide a
 {
 	color: black;
+}
+#guide::-webkit-scrollbar
+{
+	display: none;
 }
 #guide a>.text:not(#home):hover
 {
@@ -147,6 +156,7 @@ a
 		border-bottom: 3px solid black;
 	}
 }
+
 @-webkit-keyframes button-hover
 {
 	from {}
