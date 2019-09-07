@@ -133,9 +133,11 @@ function init()
 		$i = md_areas[i];
 
 		AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + $i.dataset.name, "application/x-www-form- urlencoded", null, 
-			 (XHR) => $i.innerHTML = marked(XHR.responseText));
-
-		MathJax.Hub.Queue(["Typeset", MathJax.Hub, $i]);
+			 (XHR) =>
+			 {
+			 	$i.innerHTML = marked(XHR.responseText);
+				MathJax.Hub.Queue(["Typeset", MathJax.Hub, $i]);
+			 });
 		// Todo: 修好 Tex。
 	}
 }
