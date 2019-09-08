@@ -69,7 +69,7 @@ $(document).ready(function()
     $("#user_op").hide();
     $("#user").click(function()
     {
-        $("$user_op").show();
+        $("#user_op").show();
     });
 
     AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form- urlencoded", null,
