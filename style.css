@@ -66,10 +66,12 @@
 }
 #user_op
 {
-	width: 200px;
+	width: 170px;
 	height: 90px;
 	position: fixed;
+	padding-left: 30px;
 	background-color: black;
+	box-shadow: 0 3px 10px #0000004D;
 	z-index: 1;
 	left: 275px;
 	top: 90px;
@@ -107,8 +109,9 @@
 	font-weight: bold;
 	text-align: center;
 }
-.text,p,li,input[type=text],input[type=password],input[type=submit],input[type=email],.button
+.text,p,a,li,input[type=text],input[type=password],input[type=submit],input[type=email],.button
 {
+	display: inline-block;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	line-height: 35px;

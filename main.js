@@ -66,10 +66,18 @@ $(document).ready(function()
     $guide.data("tourist", true);
 
     $("body").prepend("<div id='user_op'></div>");
-    $("#user_op").hide();
+    $("#user_op").hide().html("<p class='text'><i class='fa fa-sign-out'></i> 注销</p>");
+    $("#user_op>p").click(function()
+    {
+        AJAX("GET", "http://loli.icelava.ga/sign_out.php", "application/x-www-form- urlencoded", null,
+            function()
+            {
+                location.reload();
+            });
+    });
     $("#user").click(function()
     {
-        $("#user_op").show();
+        $("#user_op").toggle();
     });
 
     AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form- urlencoded", null,
