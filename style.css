@@ -96,6 +96,7 @@
 }
 #home
 {
+	display: block;
 	padding-bottom: 30px;
 	background-color: black;
 	color: white;
