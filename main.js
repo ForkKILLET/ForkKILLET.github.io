@@ -69,7 +69,7 @@ $(document).ready(function()
     $("#user_op").hide().html("<p class='text'><i class='fa fa-sign-out'></i> 注销</p>");
     $("#user_op>p").click(function()
     {
-        AJAX("GET", "http://loli.icelava.ga/sign_out.php", "application/x-www-form- urlencoded", null,
+        AJAX("GET", "http://loli.icelava.ga/sign_out.php", "application/x-www-form-urlencoded", null,
             function()
             {
                 location.reload();
@@ -80,7 +80,7 @@ $(document).ready(function()
         $("#user_op").toggle();
     });
 
-    AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form- urlencoded", null,
+    AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form-urlencoded", null,
          function(XHR)
          {
              let token = XHR.responseText;
