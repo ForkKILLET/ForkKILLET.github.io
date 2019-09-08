@@ -55,7 +55,7 @@ $(document).ready(function()
         <img id='logo' alt='logo' src='http://icelava.ga/icelava.jpg' width='210px'>
         <p class='text'>
             <span style='color: #ff5b5a'>RED</span> ICE - WE<br>
-            <span style='color: #0e61e1'>blue</span> lava - world
+            <span style='color: #0e61e1'>blue</span> lava~world
         </p> <hr>
     
         <p class='text'>
