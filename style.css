@@ -125,7 +125,7 @@ body
 	font-weight: bold;
 	text-align: center;
 }
-.text,.md p:not(.title),.md a,.md li,input.button
+.text,.md p:not(.title),.md a,.md li,input,.button
 {
 	display: block;
 	padding-top: 10px;
@@ -186,7 +186,7 @@ a
 	text-decoration: none;
 	color: #3498DB;
 }
-p>a
+p a
 {
 	display: inline;
 }
