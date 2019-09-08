@@ -157,6 +157,10 @@ ul>li
 {
 	list-style-type: none;
 }
+ol>li
+{
+	display: list-item!important;
+}
 .li-icon
 {
 	margin-left: -20px;
