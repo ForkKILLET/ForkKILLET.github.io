@@ -5,7 +5,6 @@
 		<title>Mushouse - Verify</title>
 		<link rel='stylesheet' type='text/css' href='https://icelava.ga/style.css'>
 		<link rel='stylesheet' type='text/css' href='https://icelava.ga/fa/css/font-awesome.min.css'>
-		<script type='text/javascript' src='https://icelava.ga/main.js'></script>
 		<script type='text/javascript' src='https://icelava.ga/marked.min.js'></script>
 		<script type='text/javascript' src='https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 		<script type='text/javascript' src='https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js'></script>
@@ -24,34 +23,29 @@
 						<input type='text' name='ve' placeholder='验证码' spellcheck='false'>
 						<br>
 
-						<span id='btn_req' class='button' onclick='req_send_ve()'>获取验证码</span>
+						<span id='btn_req' class='button'>获取验证码</span>
 						<br>
 
 						<input type='submit' value='Submit'>
 					</p>
 			</form>
 		</div>
-	</body>							
+	</body>
+	<script type='text/javascript' src='https://icelava.ga/main.js'></script>
 	<script type='text/javascript'>
-		log(debug);
-		function req_send_ve()
+		$("#btn_req").click(function req_send_ve()
 		{
-			E("btn_req").innerHTML = "正在发送中 <i class='fa fa-spinner fa-spin'></i>";
+			$("#btn_req").html("正在发送中 <i class='fa fa-spinner fa-spin'></i>");
 
 			AJAX("GET", "http://loli.icelava.ga/verify.php?op=send",
-			     "application/x-www-form-urlencoded", null,
-			     function(XHR)
-			     {
-			     	// Debug: log(XHR.responseText);
-			     	let $btn = E("btn_req");
-			     	$btn.innerHTML = "验证码已发送";
-			     	$btn.onclick = NF;
-			     	let $t_msg = document.createElement("p");
-			     	$t_msg.className = "text";
-			     	$t_msg.innerHTML = XHR.responseText.split("<!-- PHP echo begin -->")[1].split("<!-- PHP echo end -->")[0];
-			     	document.getElementsByClassName("md")[0].appendChild($t_msg)
-					$t_msg.appendChild(document.createElement("hr"));
-			     });
-		}
+					"application/x-www-form-urlencoded", null,
+					function(XHR)
+					{
+						let $btn = $("#btn_req");
+						$btn.html("验证码已发送");
+						$btn.click(NF);
+						$(".md:first").after("<p class='text'>" + XHR.responseText.split("<!-- PHP echo begin -->")[1].split("<!-- PHP echo end -->")[0] + "</p> <hr>");
+					});
+		});
 	</script>
 </html>
