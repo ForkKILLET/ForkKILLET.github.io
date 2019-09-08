@@ -140,11 +140,16 @@ body
 
 /* ----列表 */
 
-li:not(:first-child)>p,li:not(:first-child)>a
+li>p,li>a
+{
+	margin-top: 0!important;
+	margin-bottom: 0!important;
+}
+li:not(:first-child)
 {
 	padding-top: 5px;
 }
-li:not(:last-child)>p,li:not(:last-child)>a
+li:not(:last-child)
 {
 	padding-bottom: 5px;
 }
