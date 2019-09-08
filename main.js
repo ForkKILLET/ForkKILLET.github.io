@@ -77,7 +77,8 @@ $(document).ready(function()
     });
     $("#user").click(function()
     {
-        $("#user_op").toggle();
+        if ($guide.data("tourist") === false)
+            $("#user_op").toggle();
     });
 
     AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form-urlencoded", null,
