@@ -26,14 +26,14 @@ $(document).ready(function()
     let $guide = $("#guide");
     $guide.html(
     `
-        <a href='http://icelava.ga/'><p id='home'>
+        <a href='http://icelava.ga/' class='title' id='home'>
             <i class='fa fa-home'></i> Home
-        </p></a>
-        <p class='text' id='user'>
+        </a>
+        <div id='user' class='text'>
             <a href='http://icelava.ga/sign_up'>Sign up </a>
             <i class='fa fa-fw fa-sign-in'></i>
             <a href='http://icelava.ga/sign_in'>Sign in</a>
-        </p></a> <hr>
+        </div> <hr>
         <a href='http://icelava.ga/site_map'><p class='text'>
             <i class='li-icon fa-fw fa fa-sitemap'></i> Site Map
         </p></a>
@@ -63,8 +63,6 @@ $(document).ready(function()
             <img id='counter' alt='counter' src='http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72'> 
         </p>
     `);
-    $guide.data("tourist", true);
-
     $("body").prepend("<div id='user_op'></div>");
     $("#user_op").hide().html("<p class='text'><i class='fa fa-sign-out'></i> 注销</p>");
     $("#user_op>p").click(function()
@@ -75,22 +73,26 @@ $(document).ready(function()
                 location.reload();
             });
     });
-    $("#user").click(function()
+
+    let $user = $("#user");
+    $user.data("tourist", true);
+    $user.click(function()
     {
-        if ($("#guide").data("tourist") === false)
+        if ($("#user").data("tourist") === false)
             $("#user_op").toggle();
     });
 
-    AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form-urlencoded", null,
-         function(XHR)
-         {
-             let token = XHR.responseText;
-             if (!token)return;
-             let un = JSON.parse(token)["un"];
-             let $user = $("#user");
-             $user.data("tourist", false);
-             $user.html("<i class='li-icon fa-fw fa fa-user'></i> " + un);
-         });
+    if (location.href[0] === "h")
+        AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form-urlencoded", null,
+        function(XHR)
+        {
+            let token = XHR.responseText;
+            if (!token)return;
+            let un = JSON.parse(token)["un"];
+            let $user = $("#user");
+            $user.data("tourist", false);
+            $user.html("<i class='li-icon fa-fw fa fa-user'></i> " + un);
+        });
 
     MathJax.Hub.Config(
     {

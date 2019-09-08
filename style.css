@@ -1,3 +1,9 @@
+/* 状态类 */
+
+*
+{
+	margin: 0;
+}
 .no-gap
 {
 	padding-top: 0!important;
@@ -8,6 +14,14 @@
 	text-align: center;
 }
 
+/* 特殊元素 */
+
+body
+{
+	background-color: #EFEFEF;
+	color: #333333;
+	font-family: Segoe UI;
+}
 #main
 {
 	display: inline-block;
@@ -32,11 +46,14 @@
 	top: 0;
 	background-color: #FFFFFF;
 	box-shadow: 0 3px 10px #0000004D;
+
 	overflow-y: auto;
-	/* IE */
 	-ms-overflow-style: none;
-	/* Fx */
 	overflow: -moz-scrollbars-none;
+}
+#guide::-webkit-scrollbar
+{
+	display: none;
 }
 #guide .text
 {
@@ -47,22 +64,25 @@
 {
 	color: black;
 }
-#guide::-webkit-scrollbar
-{
-	display: none;
-}
-#guide a>.text:not(#home):hover
-{
-	background-color: #EFEFEF;
-}
 #guide hr
 {
 	margin-left: 30px;
 	width: calc(250px - 30px * 2);
 }
+#home
+{
+	display: block;
+	padding-bottom: 30px;
+	background-color: black;
+	color: white!important;
+}
 #user
 {
 	margin-top: 5px;
+}
+#user[data-tourist="true"]
+{
+	margin-left: -5px;
 }
 #user_op
 {
@@ -76,10 +96,6 @@
 	z-index: 1;
 	left: 275px;
 	top: 90px;
-}
-#user[data-tourist="true"]
-{
-	margin-left: -5px;
 }
 #logo
 {
@@ -95,14 +111,12 @@
 	position: absolute;
 	left: calc(250px + 50px);
 }
-#home
-{
-	display: block;
-	padding-bottom: 30px;
-	background-color: black;
-	color: white;
-}
-.title,#pos,#home,h1
+
+/* 分工类 */
+
+/* ----字体*/
+
+.title
 {
 	padding-top: 30px;
 	padding-bottom: 20px;
@@ -111,7 +125,7 @@
 	font-weight: bold;
 	text-align: center;
 }
-.text,p,li,input[type=text],input[type=password],input[type=submit],input[type=email],.button
+.text,input.button
 {
 	display: block;
 	padding-top: 10px;
@@ -119,6 +133,9 @@
 	line-height: 35px;
 	font-size: 24px;
 }
+
+/* ----列表 */
+
 li:not(:first-child)
 {
 	padding-top: 5px;
@@ -127,9 +144,8 @@ li:not(:last-child)
 {
 	padding-bottom: 5px;
 }
-li
+ul>li
 {
-	display: block;
 	list-style-type: none;
 }
 .li-icon
@@ -137,12 +153,9 @@ li
 	margin-left: -20px;
 	margin-right: 15px;
 }
-body
-{
-	background-color: #EFEFEF;
-	color: #333333;
-	font-family: Segoe UI;
-}
+
+/* ----分割线 */
+
 hr
 {
 	display: inline-block;
@@ -152,15 +165,17 @@ hr
 	background-color: #FFFFFF;
 	box-shadow: 0 3px 10px #0000004D;
 }
+
+/* ----链接 */
+
 a
 {
 	text-decoration: none;
 	color: #3498DB;
 }
-*
-{
-	margin: 0;
-}
+
+/* 表单 */
+
 @-webkit-keyframes input-focus
 {
 	from {}
@@ -172,7 +187,6 @@ a
 		border-bottom: 3px solid black;
 	}
 }
-
 @-webkit-keyframes button-hover
 {
 	from {}
