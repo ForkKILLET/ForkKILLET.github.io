@@ -65,11 +65,11 @@ $(document).ready(function()
     `);
     $guide.data("tourist", true);
 
-    $("body").prepend("<div id='user-op'></div>");
-    $("#user-op").hide();
+    $("body").prepend("<div id='user_op'></div>");
+    $("#user_op").hide();
     $("#user").click(function()
     {
-        $("$user-op").show();
+        $("$user_op").show();
     });
 
     AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form- urlencoded", null,
