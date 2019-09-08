@@ -20,7 +20,7 @@ function AJAX(type, url, MIME, value, fn_cb)
     XHR.send(value);
 }
 
-$(document).onload(function()
+$(document).load(function()
 {
     $("body").prepend("<div id='guide'></div>");
     let $guide = $("#guide");
