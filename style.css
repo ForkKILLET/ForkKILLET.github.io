@@ -64,6 +64,16 @@
 {
 	margin-top: 5px;
 }
+#user-op
+{
+	width: 200px;
+	height: 90px;
+	position: fixed;
+	background-color: black;
+	z-index: 1;
+	left: 275px;
+	top: 90px;
+}
 #user[data-tourist="true"]
 {
 	margin-left: -5px;
