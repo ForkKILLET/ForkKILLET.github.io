@@ -109,7 +109,7 @@
 	font-weight: bold;
 	text-align: center;
 }
-.text,p,a,li,input[type=text],input[type=password],input[type=submit],input[type=email],.button
+.text,p,li,input[type=text],input[type=password],input[type=submit],input[type=email],.button
 {
 	display: inline-block;
 	padding-top: 10px;
