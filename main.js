@@ -1,3 +1,5 @@
+// Note: 功能函数的定义
+
 function NF(){}
 
 function log(info)
@@ -20,8 +22,10 @@ function AJAX(type, url, MIME, value, fn_cb)
     XHR.send(value);
 }
 
+// Note: 开始 JQuery 搞事。
 $(document).ready(function()
 {
+    // Note: 插入导航栏（侧边栏）
     $("body").prepend("<div id='guide'></div>");
     let $guide = $("#guide");
     $guide.html(
@@ -64,6 +68,8 @@ $(document).ready(function()
         </p>
     `);
     $("body").prepend("<div id='user_op'></div>");
+
+    // Note: 用户面板（目前只有注销功能）
     $("#user_op").hide().html("<p class='text'><i class='fa fa-sign-out'></i> 注销</p>");
     $("#user_op>p").click(function()
     {
@@ -82,6 +88,12 @@ $(document).ready(function()
             $("#user_op").toggle();
     });
 
+    // Note: 亮闪闪的 5 毛钱特效。
+    let $links = $("#guide a:not(#home),#user");
+    $links.mouseenter(function(){ $(this).animate({"backgroundColor": "#C5C5C5"}, 300); });
+    $links.mouseleave(function(){ $(this).animate({"backgroundColor": "#FFFFFF"}, 300); });
+
+    // Note: 如果不是本地，token 登录。
     if (location.href[0] === "h")
         AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form-urlencoded", null,
         function(XHR)
@@ -94,6 +106,7 @@ $(document).ready(function()
             $user.html("<i class='li-icon fa-fw fa fa-user'></i> " + un);
         });
 
+    // Note: Tex 公式配置
     MathJax.Hub.Config(
     {
         tex2jax:
@@ -104,6 +117,7 @@ $(document).ready(function()
         }
     });
 
+    // Note: Markdown 配置
     let MD = new marked.Renderer();
     marked.setOptions(
     {
@@ -149,13 +163,16 @@ $(document).ready(function()
         return function (XHR)
         {
             md_areas[i].innerHTML = marked(XHR.responseText);
+            // Note: 渲染 Tex 公式。
+            // Done: 修好 Tex。
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, md_areas[i]]);
         };
     }
+
+    // Note: 获取 Markdown 并解析显示。
     for (let i = 0; i < md_areas.length; i++)
     {
         AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + md_areas[i].dataset.name, "application/x-www-form- urlencoded", null,
              make_fn(i));
-        // Todo: 修好 Tex。
     }
 });
