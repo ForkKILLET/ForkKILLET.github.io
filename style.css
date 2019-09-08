@@ -113,7 +113,7 @@
 }
 .text,p,li,input[type=text],input[type=password],input[type=submit],input[type=email],.button
 {
-	display: inline-block;
+	display: block;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	line-height: 35px;

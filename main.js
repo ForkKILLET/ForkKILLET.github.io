@@ -77,7 +77,7 @@ $(document).ready(function()
     });
     $("#user").click(function()
     {
-        if ($guide.data("tourist") === false)
+        if ($("#guide").data("tourist") === false)
             $("#user_op").toggle();
     });
 
