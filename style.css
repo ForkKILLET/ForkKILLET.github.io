@@ -125,7 +125,7 @@ body
 	font-weight: bold;
 	text-align: center;
 }
-.text,.md p,.md a.md li,input.button
+.text,.md p,.md a,.md li,input.button
 {
 	display: block;
 	padding-top: 10px;
