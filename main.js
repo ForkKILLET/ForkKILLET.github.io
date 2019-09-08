@@ -32,7 +32,7 @@ $(document).ready(function()
         <div id='user' class='text'>
             <a href='http://icelava.ga/sign_up'>Sign up </a>
             <i class='fa fa-fw fa-sign-in'></i>
-            <a href='http://icelava.ga/sign_in'>Sign in</a>
+            <a href='http://icelava.ga/sign_in'>in</a>
         </div> <hr>
         <a href='http://icelava.ga/site_map' class='text'>
             <i class='li-icon fa-fw fa fa-sitemap'></i> Site Map
