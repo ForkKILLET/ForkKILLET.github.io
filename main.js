@@ -20,7 +20,7 @@ function AJAX(type, url, MIME, value, fn_cb)
     XHR.send(value);
 }
 
-$(function()
+$(document).onload(function()
 {
     $("body").prepend("<div id='guide'></div>");
     let $guide = $("#guide");
@@ -82,7 +82,6 @@ $(function()
              $user.data("tourist", false);
              $user.html("<i class='li-icon fa-fw fa fa-user'></i> " + un);
          });
-
 
     MathJax.Hub.Config(
     {
