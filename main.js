@@ -34,23 +34,23 @@ $(document).ready(function()
             <i class='fa fa-fw fa-sign-in'></i>
             <a href='http://icelava.ga/sign_in'>Sign in</a>
         </div> <hr>
-        <a href='http://icelava.ga/site_map'><p class='text'>
+        <a href='http://icelava.ga/site_map' class='text'>
             <i class='li-icon fa-fw fa fa-sitemap'></i> Site Map
-        </p></a>
-        <a href='http://icelava.ga/friends'><p class='text'>
+        </a>
+        <a href='http://icelava.ga/friends' class='text'>
             <i class='li-icon fa-fw fa fa-heart'></i> Friends
-        </p></a>
-        <a href='http://icelava.ga/about_us'><p class='text'>
+        </a>
+        <a href='http://icelava.ga/about_us' class='text'>
             <i class='li-icon fa-fw fa fa-info-circle'></i> About us
-        </p></a>
-        <a href='http://icelava.ga/log'><p class='text'>
+        </a>
+        <a href='http://icelava.ga/log' class='text'>
             <i class='li-icon fa-fw fa fa-file-text'></i> Log
-        </p></a> <hr>
+        </a> <hr>
     
         <p class='text'><i class='li-icon fa-fw fa fa-rss-square'></i> Blogs</p>
-        <a href='http://icelava.ga/blogs/ForkKILLET'><p class='text'>
+        <a href='http://icelava.ga/blogs/ForkKILLET' class='text'>
             <i class='li-icon fa-fw fa fa-check'></i> ForkΨKILLET's
-        </p></a> <hr>
+        </a> <hr>
     
         <img id='logo' alt='logo' src='http://icelava.ga/icelava.jpg' width='210px'>
         <p class='text'>

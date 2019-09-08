@@ -116,7 +116,7 @@ body
 
 /* ----字体*/
 
-.title
+.title,.md h1
 {
 	padding-top: 30px;
 	padding-bottom: 20px;
@@ -125,7 +125,7 @@ body
 	font-weight: bold;
 	text-align: center;
 }
-.text,input.button
+.text,.md p,input.button
 {
 	display: block;
 	padding-top: 10px;
