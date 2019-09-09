@@ -220,54 +220,54 @@ p a
 
 /* 表单 */
 
-@-webkit-keyframes input-focus
-{
-	from {}
-	to
-	{
-		border-left: 3px solid #EFEFEF;
-		border-top: 3px solid #EFEFEF;
-		border-right: 3px solid black;
-		border-bottom: 3px solid black;
-	}
-}
-@-webkit-keyframes button-hover
-{
-	from {}
-	to
-	{
-		background-color: #FFFFFF;
-	}
-}
 input[type=text],input[type=password],input[type=email]
 {
 	display: inline-block;
 	width: 300px;
 	padding: 5px 15px 5px 15px;
 	margin: 10px 15px;
+
 	border-left: 3px solid black;
 	border-top: 3px solid black;
 	border-right: 3px solid #EFEFEF;
 	border-bottom: 3px solid #EFEFEF;
 	border-radius: 10px 0 10px 0;
+
 	outline: none;
 	background-color: #EFEFEF;
+
+	/* 特效 */
+	transition: border 500ms;
 }
 input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
 {
-	-webkit-animation: input-focus 1s 1 forwards;
+	border-left: 3px solid #EFEFEF;
+	border-top: 3px solid #EFEFEF;
+	border-right: 3px solid black;
+	border-bottom: 3px solid black;
 }
 .button,input[type=submit]
 {
 	display: inline-block;
 	padding: 5px 15px 5px 15px;
 	margin: 10px 15px;
-	border: 3px solid black;
+
+	border-left: 3px solid black;
+	border-top: 3px solid black;
+	border-right: 3px solid #EFEFEF;
+	border-bottom: 3px solid #EFEFEF;
 	border-radius: 10px 0 10px 0;
+
 	outline: none;
 	background-color: #EFEFEF;
+
+	/*特效 */
+	transition: border 500ms;
 }
 .button:hover,input[type=submit]:hover
 {
-	-webkit-animation: button-hover 1s 1 forwards;
+	border-left: 3px solid #EFEFEF;
+	border-top: 3px solid #EFEFEF;
+	border-right: 3px solid black;
+	border-bottom: 3px solid black;
 }
