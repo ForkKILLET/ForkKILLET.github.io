@@ -118,6 +118,7 @@ $(document).ready(function()
     // Note: Tex 公式配置
     MathJax.Hub.Config(
     {
+        messageStyle: "none",
         tex2jax:
         {
             inlineMath: [["$math ", " math$"]],
