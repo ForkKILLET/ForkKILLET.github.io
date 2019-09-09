@@ -78,11 +78,27 @@ body
 }
 #user
 {
-	margin-top: 5px;
+	margin-top: 0;
 }
 #user[data-tourist="true"]
 {
 	margin-left: -5px;
+}
+#user>*:nth-child(1)
+{
+	display: inline-block;
+	padding-right: 10px;
+}
+#user>*:nth-child(2)
+{
+	display: inline-block;
+	padding-left: 0;
+}
+#user>*:nth-child(3)
+{
+	padding-left: 10px;
+	display: inline-block;
+	padding-right: 32px; /* Note: 魔性暴力数据，请勿乱动 */
 }
 #user_op
 {

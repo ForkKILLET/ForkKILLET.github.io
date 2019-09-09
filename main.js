@@ -33,20 +33,25 @@ $(document).ready(function()
         <a href='http://icelava.ga/' class='title' id='home'>
             <i class='fa fa-home'></i> Home
         </a>
-        <div id='user' class='text'>
-            <a href='http://icelava.ga/sign_up'>Sign up </a>
-            <i class='fa fa-fw fa-sign-in'></i>
-            <a href='http://icelava.ga/sign_in'>in</a>
+        
+        <div id='user'>
+            <a class='text' href='http://icelava.ga/sign_up'>Sign up </a>
+            <p class='text'><i class='fa fa-fw fa-sign-in'></i></p>
+            <a class='text' href='http://icelava.ga/sign_in'>in</a>
         </div> <hr>
+        
         <a href='http://icelava.ga/site_map' class='text'>
             <i class='li-icon fa-fw fa fa-sitemap'></i> Site Map
         </a>
+        
         <a href='http://icelava.ga/friends' class='text'>
             <i class='li-icon fa-fw fa fa-heart'></i> Friends
         </a>
+        
         <a href='http://icelava.ga/about_us' class='text'>
             <i class='li-icon fa-fw fa fa-info-circle'></i> About us
         </a>
+        
         <a href='http://icelava.ga/log' class='text'>
             <i class='li-icon fa-fw fa fa-file-text'></i> Log
         </a> <hr>
@@ -89,7 +94,7 @@ $(document).ready(function()
     });
 
     // Note: 亮闪闪的 5 毛钱特效。
-    let $links = $("#guide a:not(#home),#user");
+    let $links = $("#guide a:not(#home)");
     $links.mouseenter(function(){ $(this).animate({"backgroundColor": "#C5C5C5"}, 300); });
     $links.mouseleave(function(){ $(this).animate({"backgroundColor": "#FFFFFF"}, 300); });
 
