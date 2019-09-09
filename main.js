@@ -26,7 +26,8 @@ function AJAX(type, url, MIME, value, fn_cb)
 $(document).ready(function()
 {
     // Note: 插入导航栏（侧边栏）
-    $("body").prepend("<div id='guide'></div>");
+    let $body = $("body");
+    $body.prepend("<div id='guide'></div>");
     let $guide = $("#guide");
     $guide.html(
     `
@@ -72,7 +73,7 @@ $(document).ready(function()
             <img id='counter' alt='counter' src='http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72'> 
         </p>
     `);
-    $("body").prepend("<div id='user_op'></div>");
+    $body.prepend("<div id='user_op'></div>");
 
     // Note: 用户面板（目前只有注销功能）
     $("#user_op").hide().html("<p class='text'><i class='fa fa-sign-out'></i> 注销</p>");
@@ -97,6 +98,9 @@ $(document).ready(function()
     let $pos = $("#pos");
     $pos.css("left", "calc(100% - 50px - " + $pos.width() + "px)");
     $pos.animate({"left": "300px"}, 1000, "swing");
+
+    // Todo: 在 #main 下面写版权信息。
+    $body.append("<p id='copyright' class='text'>Copyright© 2019 IceLava Dev Team. All Rights Reserved</p>");
 
     // Note: 如果不是本地，token 登录。
     if (location.href[0] === "h")

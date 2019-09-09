@@ -127,6 +127,12 @@ body
 	position: absolute;
 	left: calc(250px + 50px);
 }
+#copyright
+{
+	position: absolute;
+	left: calc(250px + 50px);
+	bottom: 5px;
+}
 
 /* 特效专区 */
 
