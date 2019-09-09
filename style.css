@@ -80,11 +80,7 @@ body
 {
 	margin-top: 0;
 }
-#user[data-tourist="true"]
-{
-	margin-left: -5px;
-}
-#user>*:nth-child(1)
+#user>*:nth-child(1):not(#btn_user)
 {
 	display: inline-block;
 	padding-right: 10px;
@@ -136,11 +132,11 @@ body
 
 /* 特效专区 */
 
-#guide a:not(#home)
+#guide a:not(#home),#btn_user
 {
 	transition: background-color 500ms;
 }
-#guide a:not(#home):hover
+#guide a:not(#home):hover,#btn_user:hover
 {
 	background-color: #C5C5C5;
 }
