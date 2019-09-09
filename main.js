@@ -108,7 +108,7 @@ $(document).ready(function()
             let un = JSON.parse(token)["un"];
             let $user = $("#user");
             $user.data("tourist", false);
-            $user.html("<i class='li-icon fa-fw fa fa-user'></i> " + un);
+            $user.html("<p class='text'></p><i class='li-icon fa-fw fa fa-user'></i> " + un + "</p>");
         });
 
     // Note: Tex 公式配置
