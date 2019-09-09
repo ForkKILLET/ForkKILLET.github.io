@@ -5,27 +5,35 @@
         <title>ForkKΨILLET's Blog</title>
         <link rel='stylesheet' type='text/css' href='https://icelava.ga/style.css'>
         <link rel='stylesheet' type='text/css' href='https://icelava.ga/fa/css/font-awesome.min.css'>
-        <script type='text/javascript' src='https://icelava.ga/main.js'></script>
         <script type='text/javascript' src='https://icelava.ga/marked.min.js'></script>
-        <script type='text/javascript' async src='https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
-        <script src="../../main.js"></script>
+        <script type='text/javascript' src='https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+        <script type='text/javascript' src='https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js'></script>
+        <script type='text/javascript' src='https://icelava.ga/jquery.color.js'></script>
     </head>
-    <body onload='init();'>
-        <div id='guide'></div>
+    <body>
         <p id='pos' class='title'>ForkKILLET's Blog / Reader</p>
         <div id='main'>
-            <div>
+            <div class='md' data-name='blogs/ForkKILLET/reader'>
                 <p class='title'>
                     <i class='fa fa-list'></i> ForkKILLET 的文章列表
                 </p>
-                <form method='get'>
-                    <p class='text'>筛选文章：</p> <br>
+            </div> <br>
+            <form method='get'>
+                <p class='text no-gap center'>
+                    <b>文章筛选器 <i class="fa fa-search"></i></b> <br><br>
 
-                    <i class='fa fa-fw fa-user-circle'></i>
-                    <input type='text' name='un' placeholder='用户名' spellcheck='false' autocomplete='off'>
+                    <i class='fa fa-fw fa-header'></i>
+                    <input type='text' name='title' placeholder='搜索文章标题' spellcheck='false' autocomplete='off'>
                     <br>
-                </form>
-            </div>
+
+                    <i class='fa fa-fw fa-tag'></i>
+                    <input type='text' name='title' placeholder='搜索文章标签' spellcheck='false' autocomplete='off'>
+                    <br>
+
+                    <!-- Todo: Screen btn -->
+                </p>
+            </form>
         </div>
+        <script type='text/javascript' src='https://icelava.ga/main.js'></script>
     </body>
 </html>
