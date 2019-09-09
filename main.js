@@ -94,18 +94,9 @@ $(document).ready(function()
     });
 
     // Note: 亮闪闪的 5 毛钱特效。
-    // Disable: 使用 CSS 的 transition 属性代替了。
-    // let $links = $("#guide a:not(#home)");
-    // $links.mouseenter(function()
-    // {
-    //     if (!$(this).is(":animated"))
-    //         $(this).animate({ "backgroundColor": "#C5C5C5" }, 300);
-    // });
-    // $links.mouseleave(function()
-    // {
-    //     if (!$(this).is(":animated"))
-    //         $(this).animate({ "backgroundColor": "#FFFFFF" }, 300);
-    // });
+    let $pos = $("#pos");
+    $pos.css("left", "calc(100% - 50px - " + $pos.width() + "px)");
+    $pos.animate({"left": "300px"}, 1000, "swing");
 
     // Note: 如果不是本地，token 登录。
     if (location.href[0] === "h")
