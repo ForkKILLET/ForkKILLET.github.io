@@ -128,6 +128,17 @@ body
 	left: calc(250px + 50px);
 }
 
+/* 特效专区 */
+
+#guide a:not(#home)
+{
+	transition: background-color 500ms;
+}
+#guide a:not(#home):hover
+{
+	background-color: #C5C5C5;
+}
+
 /* 分工类 */
 
 /* ----字体*/
