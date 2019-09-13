@@ -99,7 +99,7 @@ $(document).ready(function()
     $pos.css("left", "calc(100% - 50px - " + $pos.width() + "px)");
     $pos.animate({"left": "300px"}, 1000, "swing");
 
-    // Todo: 在 #main 下面写版权信息。
+    // Done: 在 #main 下面写版权信息。
     $body.append("<p id='copyright' class='text'>Copyright© 2019 IceLava Dev Team. All Rights Reserved</p>");
 
     // Note: 如果不是本地，token 登录。
