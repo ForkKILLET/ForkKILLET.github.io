@@ -132,7 +132,7 @@
 						function(XHR)
 						{
 							$m_article.html(`<div class="button ">返回目录</div>`
-									+ XHR.responseText);
+									+ marked(XHR.responseText));
 							$("#m_article>.button").click(function()
 							{
 								$("#m_search").show();
