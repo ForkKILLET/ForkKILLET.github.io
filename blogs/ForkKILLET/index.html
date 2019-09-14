@@ -14,6 +14,11 @@
 			{
 				z-index: -3;
 			}
+			#m_search
+			{
+				position: relative;
+				z-index: -3;
+			}
 			#search
 			{
 				transition: margin-top 1s;
@@ -35,33 +40,37 @@
 	<body>
 		<p id="pos" class="title">ForkKILLET's Blog</p>
 		<div id="main">
-			<div>
-				<p class="title">
-					<i class="fa fa-list"></i> ForkKILLET 的文章列表
+			<div id="m_search">
+				<div>
+					<p class="title">
+						<i class="fa fa-list"></i> ForkKILLET 的文章列表
+					</p>
+				</div> <br>
+				<p class="text no-gap center" id="search_title">
+					<b>文章筛选器
+					<i id="btn_hide_search" class="fa fa-angle-up"></i>
+					<i id="btn_show_search" class="fa fa-angle-down"></i> </b> <br><br>
 				</p>
-			</div> <br>
-			<p class="text no-gap center" id="search_title">
-				<b>文章筛选器
-				<i id="btn_hide_search" class="fa fa-angle-up"></i>
-				<i id="btn_show_search" class="fa fa-angle-down"></i> </b> <br><br>
-			</p>
 
-			<div id="search_cover"></div>
+				<div id="search_cover"></div>
 
-			<div id="search" class="center">
-				<p class="text no-gap">
-					<i class="fa fa-fw fa-header"></i>
-					<input id="input_title" type="text" name="title" placeholder="搜索文章标题" spellcheck="false" autocomplete="off">
-					<br>
+				<div id="search" class="center">
+					<p class="text no-gap">
+						<i class="fa fa-fw fa-header"></i>
+						<input id="input_title" type="text" name="title" placeholder="搜索文章标题" spellcheck="false" autocomplete="off">
+						<br>
 
-					<i class="fa fa-fw fa-tag"></i>
-					<input id="input_tag" type="text" name="title" placeholder="搜索文章标签" spellcheck="false" autocomplete="off">
-					<br>
-				</p>
-				<div id="search_submit" class="button">搜索</div>
-			</div> <hr>
+						<i class="fa fa-fw fa-tag"></i>
+						<input id="input_tag" type="text" name="title" placeholder="搜索文章标签" spellcheck="false" autocomplete="off">
+						<br>
+					</p>
+					<div id="search_submit" class="button">搜索</div>
+				</div> <hr>
 
-			<div id="contents"></div>
+				<div id="contents"></div>
+			</div>
+
+			<div id="m_article"></div>
 		</div>
 		<script type="text/javascript" src="https://icelava.ga/main.js"></script>
 		<script type="text/javascript">
@@ -111,6 +120,26 @@
 				{
 					$("#search_submit").html("搜索");
 					$("#contents").html(XHR.responseText);
+
+					$("#contents>a").click(function()
+					{
+						$("#m_search").hide();
+						let $m_article = $("#m_article");
+						$m_article.html(`<p class='title'><i class='fa fa-spinner fa-spin'></i> 页面内容正在加载中，请稍等</p>`);
+						$m_article.show();
+
+						AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + $(this).data(), "application/x-www-form- urlencoded", null,
+						function(XHR)
+						{
+							$m_article.html(`<div class="button ">返回目录</div>`
+									+ XHR.responseText);
+							$("#m_article>.button").click(function()
+							{
+								$("#m_search").show();
+								$("#m_article").hide();
+							});
+						});
+					});
 				});
 			}
 			$search_submit.click(upd_contents);
