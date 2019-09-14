@@ -51,16 +51,18 @@
 			<div id="search">
 				<p class="text no-gap center">
 					<i class="fa fa-fw fa-header"></i>
-					<input type="text" name="title" placeholder="搜索文章标题" spellcheck="false" autocomplete="off">
+					<input id="input_title" type="text" name="title" placeholder="搜索文章标题" spellcheck="false" autocomplete="off">
 					<br>
 
 					<i class="fa fa-fw fa-tag"></i>
-					<input type="text" name="title" placeholder="搜索文章标签" spellcheck="false" autocomplete="off">
+					<input id="input_tag" type="text" name="title" placeholder="搜索文章标签" spellcheck="false" autocomplete="off">
 					<br>
 
-					<input id="search_submit" type="submit" value="搜索">
+					<div id="search_submit" class="button">搜索</div>
 				</p>
 			</div><hr>
+
+			<div id="contents"></div>
 		</div>
 		<script type="text/javascript" src="https://icelava.ga/main.js"></script>
 		<script type="text/javascript">
@@ -85,7 +87,31 @@
 			});
 
 			// Note: 重要：AJAX 请求返回目录摘要。
-			$("#se")
+			$("#search_submit").click(function()
+			{
+				$("#search_submit").html(`搜索中 <i class="fa fa-spinner fa-spin">`);
+
+				let s = "",
+				title = $("#input_title").val(),
+				tag = $("#input_tag").val();
+				if (title || tag)
+				{
+					s += "?";
+					if (title)
+					{
+						s += "title=" + title;
+						if (tag)s += "&";
+					}
+					if (tag)s += "tag=" + tag;
+				}
+
+				AJAX("GET", "http://loli.icelava.ga/reader.php" + s, "application/x-www-form-urlencoded", null,
+				function(XHR)
+				{
+					$("#search_submit").html("搜索");
+					$("#contents").html(XHR.responseText);
+				});
+			});
 		</script>
 	</body>
 </html>

@@ -59,7 +59,7 @@ $(document).ready(function()
     
         <p class="text"><i class="li-icon fa-fw fa fa-rss-square"></i> Blogs</p>
         <a href="http://icelava.ga/blogs/ForkKILLET" class="text">
-            <i class="li-icon fa-fw fa fa-check"></i> ForkΨKILLET"s
+            <i class="li-icon fa-fw fa fa-check"></i> ForkΨKILLET's
         </a> <hr>
     
         <img id="logo" alt="logo" src="http://icelava.ga/icelava.jpg" width="210px">
