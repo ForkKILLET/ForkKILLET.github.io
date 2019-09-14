@@ -76,7 +76,7 @@ $(document).ready(function()
     $body.prepend(`<div id="user_op"></div>`);
 
     // Note: 用户面板（目前只有注销功能）
-    $("#user_op").hide().html(`<p class="text"><i class="fa fa-sign-out"></i> 注销</p>`);
+    $("#user_op").hide().html(`<p class="text"><i class="fa fa-sign-out"></i> Sign out</p>`);
     $("#user_op>p").click(function()
     {
         AJAX("GET", "http://loli.icelava.ga/sign_out.php", "application/x-www-form-urlencoded", null,

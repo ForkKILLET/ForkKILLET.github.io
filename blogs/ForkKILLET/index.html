@@ -40,8 +40,8 @@
 					<i class="fa fa-list"></i> ForkKILLET 的文章列表
 				</p>
 			</div> <br>
-			<p class="text no-gap center">
-				<b id="search_title">文章筛选器
+			<p class="text no-gap center" id="search_title">
+				<b>文章筛选器
 				<i id="btn_hide_search" class="fa fa-angle-up"></i>
 				<i id="btn_show_search" class="fa fa-angle-down"></i> </b> <br><br>
 			</p>
@@ -58,12 +58,13 @@
 					<input type="text" name="title" placeholder="搜索文章标签" spellcheck="false" autocomplete="off">
 					<br>
 
-					<input type="submit" value="搜索">
+					<input id="search_submit" type="submit" value="搜索">
 				</p>
 			</div><hr>
 		</div>
 		<script type="text/javascript" src="https://icelava.ga/main.js"></script>
 		<script type="text/javascript">
+			// Note: 筛选器的隐藏、显示特效。
 			let $search = $("#search");
 			$search.data("show", true);
 			$("#btn_show_search").hide();
@@ -82,6 +83,9 @@
 					$search.css("marginTop", "0");
 				}
 			});
+
+			// Note: 重要：AJAX 请求返回目录摘要。
+			$("#se")
 		</script>
 	</body>
 </html>

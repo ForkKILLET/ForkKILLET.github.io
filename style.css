@@ -94,20 +94,22 @@ body
 {
 	padding-left: 10px;
 	display: inline-block;
-	padding-right: 32px; /* Note: 魔性暴力数据，请勿乱动 */
 }
 #user_op
 {
 	width: 170px;
 	height: auto;
 	position: fixed;
-	padding-left: 30px;
 	color: white;
 	background-color: black;
 	box-shadow: 0 3px 10px #0000004D;
 	z-index: 1;
 	left: 275px;
 	top: 90px;
+}
+#user_op>p
+{
+	padding-left: 30px;
 }
 #logo
 {
@@ -136,7 +138,7 @@ body
 {
 	transition: background-color 500ms;
 }
-#guide a:not(#home):hover,#btn_user:hover
+#guide a:not(#home):hover,#btn_user:hover,#user_op>p:hover
 {
 	background-color: #C5C5C5;
 }
