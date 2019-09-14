@@ -108,7 +108,7 @@ $(document).ready(function()
     // Todo: 解决页面过窄时 Copyright 显示不当的问题。
 
     // Note: 如果不是本地，token 登录。
-    if (location.href.indexOf("localhost") !== -1)
+    if (location.href.indexOf("localhost") === -1)
         AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form-urlencoded", null,
         function(XHR)
         {
