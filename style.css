@@ -3,6 +3,8 @@
 *
 {
 	margin: 0;
+	/* 对付 Safari 那个丑的要死的蓝色框框 */
+	outline: none;
 }
 .no-gap
 {
