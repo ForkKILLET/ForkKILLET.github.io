@@ -37,7 +37,11 @@
 			}
 			#btn_back
 			{
-				margin-top: 20px;
+				position: absolute;
+				right: 35px;
+				top: 15px;
+				background-color: white;
+				box-shadow: 0 3px 10px #0000004D;
 			}
 		</style>
 	</head>
@@ -128,6 +132,7 @@
 					$("#contents>a").click(function()
 					{
 						$("#m_search").hide();
+						$("#btn_back").show();
 						let $m_article = $("#m_article");
 						$m_article.html(`<p class='title'><i class='fa fa-spinner fa-spin'></i> 页面内容正在加载中，请稍等</p>`);
 						$m_article.show();
@@ -135,11 +140,12 @@
 						AJAX("GET", "http://loli.icelava.ga/load_md.php?name=blogs/ForkKILLET/" + $(this).data("name"), "application/x-www-form- urlencoded", null,
 						function(XHR)
 						{
-							$m_article.html(`<div id="btn_back" class="button">返回目录</div> <br>` + marked(XHR.responseText));
+							$m_article.html(marked(XHR.responseText));
 							$("#btn_back").click(function()
 							{
 								$("#m_search").show();
 								$("#m_article").hide();
+								$("#btn_back").hide();
 							});
 						});
 					});
@@ -147,6 +153,10 @@
 			}
 			$search_submit.click(upd_contents);
 			upd_contents();
+
+			// Note: 插入 返回目录 按钮
+			$("#pos").after(`<div id="btn_back" class="button">返回目录</div>`);
+			$("#btn_back").hide();
 		</script>
 	</body>
 </html>
