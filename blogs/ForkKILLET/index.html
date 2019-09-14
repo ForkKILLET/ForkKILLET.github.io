@@ -128,7 +128,7 @@
 						$m_article.html(`<p class='title'><i class='fa fa-spinner fa-spin'></i> 页面内容正在加载中，请稍等</p>`);
 						$m_article.show();
 
-						AJAX("GET", "http://loli.icelava.ga/load_md.php?name=blogs/ForkKILLET/" + $(this).data(), "application/x-www-form- urlencoded", null,
+						AJAX("GET", "http://loli.icelava.ga/load_md.php?name=blogs/ForkKILLET/" + $(this).data("name"), "application/x-www-form- urlencoded", null,
 						function(XHR)
 						{
 							$m_article.html(`<div class="button ">返回目录</div>`
