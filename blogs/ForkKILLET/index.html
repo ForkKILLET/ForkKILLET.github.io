@@ -35,6 +35,10 @@
 				height: 150px;
 				background-color: #ffffff;
 			}
+			#btn_back
+			{
+				margin-top: 20px;
+			}
 		</style>
 	</head>
 	<body>
@@ -131,9 +135,8 @@
 						AJAX("GET", "http://loli.icelava.ga/load_md.php?name=blogs/ForkKILLET/" + $(this).data("name"), "application/x-www-form- urlencoded", null,
 						function(XHR)
 						{
-							$m_article.html(`<div class="button ">返回目录</div>`
-									+ marked(XHR.responseText));
-							$("#m_article>.button").click(function()
+							$m_article.html(`<div id="btn_back" class="button">返回目录</div> <br>` + marked(XHR.responseText));
+							$("#btn_back").click(function()
 							{
 								$("#m_search").show();
 								$("#m_article").hide();
