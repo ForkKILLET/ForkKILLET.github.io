@@ -134,7 +134,7 @@ body
 
 /* 特效专区 */
 
-#guide a:not(#home),#btn_user
+#guide a:not(#home),#btn_user,#user_op>p
 {
 	transition: background-color 500ms;
 }
