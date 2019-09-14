@@ -48,8 +48,8 @@
 
 			<div id="search_cover"></div>
 
-			<div id="search">
-				<p class="text no-gap center">
+			<div id="search" class="center">
+				<p class="text no-gap">
 					<i class="fa fa-fw fa-header"></i>
 					<input id="input_title" type="text" name="title" placeholder="搜索文章标题" spellcheck="false" autocomplete="off">
 					<br>
@@ -57,10 +57,9 @@
 					<i class="fa fa-fw fa-tag"></i>
 					<input id="input_tag" type="text" name="title" placeholder="搜索文章标签" spellcheck="false" autocomplete="off">
 					<br>
-
-					<div id="search_submit" class="button">搜索</div>
 				</p>
-			</div><hr>
+				<div id="search_submit" class="button">搜索</div>
+			</div> <hr>
 
 			<div id="contents"></div>
 		</div>
@@ -87,9 +86,11 @@
 			});
 
 			// Note: 重要：AJAX 请求返回目录摘要。
-			$("#search_submit").click(function()
+
+			let $search_submit = $("#search_submit");
+			function upd_contents()
 			{
-				$("#search_submit").html(`搜索中 <i class="fa fa-spinner fa-spin">`);
+				$search_submit.html(`搜索中 <i class="fa fa-spinner fa-spin">`);
 
 				let s = "",
 				title = $("#input_title").val(),
@@ -111,7 +112,8 @@
 					$("#search_submit").html("搜索");
 					$("#contents").html(XHR.responseText);
 				});
-			});
+			}
+			$search_submit.click(upd_contents);
 		</script>
 	</body>
 </html>

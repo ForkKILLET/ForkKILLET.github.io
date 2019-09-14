@@ -186,8 +186,5 @@ $(document).ready(function()
 
     // Note: 获取 Markdown 并解析显示。
     for (let i = 0; i < md_areas.length; i++)
-    {
-        AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + md_areas[i].dataset.name, "application/x-www-form- urlencoded", null,
-             make_fn(i));
-    }
+        AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + md_areas[i].dataset.name, "application/x-www-form- urlencoded", null, make_fn(i));
 });
