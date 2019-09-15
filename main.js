@@ -105,7 +105,7 @@ $(document).ready(function()
 
     // Note: 在 #main 下面写版权信息。
     $body.append(`<p id="copyright" class="text">Copyright© 2019 IceLava Dev Team. All Rights Reserved</p>`);
-    // Todo: 解决页面过窄时 Copyright 显示不当的问题。
+    // Done: 解决页面过窄时 Copyright 显示不当的问题。
 
     // Note: 如果不是本地，token 登录。
     if (location.href.indexOf("localhost") === -1)
@@ -174,7 +174,6 @@ $(document).ready(function()
         for (let i = 0; i < md_$_labels.length; i++)
             str = str.replace(md_$_labels[i].from, md_$_labels[i].to);
         str = origin_marked(str);
-        // Todo: 渲染代码。
         return str;
     };
 

@@ -132,6 +132,7 @@ body
 	position: absolute;
 	left: calc(250px + 50px);
 	bottom: 5px;
+	font-size: 15px;
 }
 
 /* 特效专区 */
