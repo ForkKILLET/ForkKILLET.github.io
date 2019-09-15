@@ -169,6 +169,7 @@ $(document).ready(function()
         for (let i = 0; i < md_$_labels.length; i++)
             str = str.replace(md_$_labels[i].from, md_$_labels[i].to);
         str = origin_marked(str);
+        // Todo: 渲染代码。
         return str;
     };
 
