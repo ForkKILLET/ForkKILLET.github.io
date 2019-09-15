@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="https://icelava.ga/jquery.color.js"></script>
 
+
 		<!-- Note: 代码高亮 -->
 		<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
@@ -148,10 +149,6 @@
 						function(XHR)
 						{
 							$m_article.html(marked(XHR.responseText));
-
-							// Note: 代码高亮。
-							hljs.initHighlightingOnLoad();
-							hljs.highlightBlock($m_article[0]);
 
 							$("#btn_back").click(function()
 							{
