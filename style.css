@@ -144,7 +144,11 @@ body
 {
 	background-color: #C5C5C5;
 }
-/* Todo: 普通链接特效 */
+a:hover
+{
+	text-decoration-style: dashed;
+	color: #55bbff;
+}
 
 /* 分工类 */
 
@@ -159,7 +163,7 @@ body
 	font-weight: bold;
 	text-align: center;
 }
-.text,.md p:not(.title),.md a,.md li,input,.button
+.text,.md p:not(.title),.md h1,.md a,.md li,input,.button
 {
 	display: block;
 	padding-top: 10px;
@@ -215,12 +219,16 @@ hr
 
 /* ----链接 */
 
+#guide a
+{
+	text-decoration: none!important;
+}
 a
 {
-	text-decoration: none;
 	color: #3498DB;
+	text-decoration: underline;
 }
-p a
+p a,h2 a
 {
 	display: inline!important;
 }
