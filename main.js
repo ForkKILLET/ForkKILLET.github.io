@@ -126,8 +126,8 @@ $(document).ready(function()
         messageStyle: "none",
         tex2jax:
         {
-            inlineMath: [["$math ", " math$"]],
-            displayMath: [["$Math ", " Math$"]],
+            inlineMath: [["$m ", " m$"]],
+            displayMath: [["$M ", " M$"]],
             skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"]
         }
     });
