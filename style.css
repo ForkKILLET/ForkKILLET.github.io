@@ -247,7 +247,9 @@ table
 }
 td,th
 {
-	display: table-cell;
+	display: table-cell!important;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 table, tr, td, th
 {
