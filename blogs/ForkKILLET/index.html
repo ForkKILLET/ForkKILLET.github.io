@@ -89,9 +89,6 @@
 		</div>
 		<script type="text/javascript" src="https://icelava.ga/main.js"></script>
 		<script type="text/javascript">
-			// Note: 代码高亮。
-			hljs.initHighlightingOnLoad();
-
 			// Note: 筛选器的隐藏、显示特效。
 			let $search = $("#search");
 			$search.data("show", true);
@@ -151,6 +148,11 @@
 						function(XHR)
 						{
 							$m_article.html(marked(XHR.responseText));
+
+							// Note: 代码高亮。
+							hljs.initHighlightingOnLoad();
+							hljs.highlightBlock($m_article[0]);
+
 							$("#btn_back").click(function()
 							{
 								$("#m_search").show();
