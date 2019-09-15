@@ -163,7 +163,7 @@ a:hover
 	font-weight: bold;
 	text-align: center;
 }
-.text,.md p:not(.title),.md h1,.md a,.md li,input,.button
+.text,.md p:not(.title),.md h2,.md a,.md li,.md td,.md th,input,.button
 {
 	display: block;
 	padding-top: 10px;
@@ -237,6 +237,21 @@ p a,h2 a
 img
 {
 	max-height: 640px;
+}
+
+/* ----表格 */
+
+table
+{
+	border-collapse: collapse;
+}
+td,th
+{
+	display: table-cell;
+}
+table, tr, td, th
+{
+	border: solid 2px #333333;
 }
 
 /* 表单 */
