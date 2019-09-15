@@ -225,6 +225,12 @@ p a
 	display: inline!important;
 }
 
+/* ----图片 */
+img
+{
+	max-height: 640px;
+}
+
 /* 表单 */
 
 input[type=text],input[type=password],input[type=email]
