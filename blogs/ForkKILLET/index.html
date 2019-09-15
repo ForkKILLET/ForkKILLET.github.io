@@ -14,6 +14,7 @@
 		<!-- Note: 代码高亮 -->
 		<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+		<script src="https://icelava.ga/highlight/highlight.pack.js"></script>
 
 		<style>
 			#main
@@ -88,6 +89,9 @@
 		</div>
 		<script type="text/javascript" src="https://icelava.ga/main.js"></script>
 		<script type="text/javascript">
+			// Note: 代码高亮。
+			hljs.initHighlightingOnLoad();
+
 			// Note: 筛选器的隐藏、显示特效。
 			let $search = $("#search");
 			$search.data("show", true);
