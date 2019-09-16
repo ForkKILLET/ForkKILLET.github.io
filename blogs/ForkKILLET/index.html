@@ -195,9 +195,14 @@
 					$t2.html(e_tag("None"));
 					for (let t in tags)
 					{
-						if (tags[t].match(RegExp($(this).val())))
+						let v = $(this).val();
+						if (v !== "" && tags[t].match(RegExp(v)))
 						{
 							$t2.append(e_tag(tags[t]));
+							let $i = $("#tags_2>.tag:first-child");
+							if ($i[0].innerHTML === "None")
+								$i.remove();
+
 							$("#tags_2>.tag:last-child").click(function()
 							{
 								if ($(this)[0].innerHTML === "None")return;
@@ -207,6 +212,9 @@
 									{
 										window.chosen_tags += "#" + $(this)[0].innerHTML;
 										$(this).appendTo($t1);
+										let $i = $("#tags_1>.tag:first-child");
+										if ($i[0].innerHTML === "None")
+											$i.remove();
 									}
 								}
 								else
