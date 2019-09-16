@@ -252,7 +252,7 @@ td,th
 	padding-left: 5px;
 	padding-right: 5px;
 }
-table, tr, td, th
+table,tr,td,th
 {
 	border: solid 2px #333333;
 }
@@ -315,4 +315,23 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
 	border-top: 3px solid #EFEFEF;
 	border-right: 3px solid black;
 	border-bottom: 3px solid black;
+}
+
+/* 标签 */
+
+.tag
+{
+	margin-right: 10px;
+	padding-left: 8px;
+	padding-right: 8px;
+	font-size: 22px;
+	border-radius: 5px 0;
+	background-color: #ffe37c;
+
+	transition: background-color 500ms,color 500ms;
+}
+.tag:hover
+{
+	background-color: #ffc900;
+	color: #FFFFFF;
 }
