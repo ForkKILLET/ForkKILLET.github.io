@@ -81,7 +81,7 @@
 						<input id="input_tag" type="text" name="title" placeholder="搜索文章标签" spellcheck="false" autocomplete="off">
 						<br>
 						已选择的标签：<span id="tags_1"></span><br>
-						搜索到到标签：<span id="tags_2"></span><br>
+						搜索到的标签：<span id="tags_2"></span><br>
 					</p>
 					<div id="search_submit" class="button">搜索</div>
 				</div> <hr>
@@ -174,38 +174,49 @@
 			// Note: 标签系统
 
 			function e_tag(text)
-			{
+			{			let $t1 = $("#tags_1");
+				let $t2 = $("#tags_2");
 				return `<span class="tag">` + text + `</span>`;
 			}
 
 			window.chosen_tags = "";
 
-			$("#tags_2").html(e_tag("None"));
+			let $t1 = $("#tags_1");
+			let $t2 = $("#tags_2");
+			$t1.html(e_tag("None"));
+			$t2.html(e_tag("None"));
+
 			AJAX("GET", "http://loli.icelava.ga/get_tags.php", "application/x-www-form- urlencoded", null,
 			function(XHR)
 			{
 				window.tags = JSON.parse(XHR.responseText);
 				$("#input_tag").on("input propertychange", function()
 				{
+					$t2.html(e_tag("None"));
 					for (let t in tags)
 					{
-						if (tags[i].match(RegExp($(this).val())))
+						if (tags[t].match(RegExp($(this).val())))
 						{
-							$("#tags_2").append(e_tag(tags[i]));
+							$t2.append(e_tag(tags[i]));
 							$("#tags_2>.tag:last-child").click(function()
 							{
+								if ($(this)[0].innerHTML === "None")return;
 								if ($(this).parent()[0].id === "tags_2")
 								{
 									if (!window.chosen_tags.match("#" + $(this)[0].innerHTML))
 									{
 										window.chosen_tags += "#" + $(this)[0].innerHTML;
-										$(this).appendTo($("#tags_1"));
+										$(this).appendTo($t1);
 									}
 								}
 								else
 								{
 									window.chosen_tags.replace("#" + $(this)[0].innerHTML, "");
 									$(this).remove();
+									if ($t1.children().length === 0)
+									{
+										$t1.html(e_tag("None"));
+									}
 								}
 							});
 						}
