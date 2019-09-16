@@ -258,7 +258,7 @@ table, tr, td, th
 }
 
 /* ----代码块 */
-code
+pre>code
 {
 	font-size: 17px;
 }
