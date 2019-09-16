@@ -257,6 +257,12 @@ table, tr, td, th
 	border: solid 2px #333333;
 }
 
+/* ----代码块 */
+code
+{
+	font-size: 17px;
+}
+
 /* 表单 */
 
 input[type=text],input[type=password],input[type=email]
