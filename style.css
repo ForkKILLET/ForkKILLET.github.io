@@ -99,8 +99,6 @@ body
 }
 #user_op
 {
-	width: 170px;
-	height: auto;
 	position: fixed;
 	color: white;
 	background-color: black;
@@ -109,9 +107,10 @@ body
 	left: 275px;
 	top: 90px;
 }
-#user_op>p
+#user_op>.text
 {
 	padding-left: 30px;
+	padding-right: 30px;
 }
 #logo
 {
