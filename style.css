@@ -105,7 +105,7 @@ body
 	box-shadow: 0 3px 10px #0000004D;
 	z-index: 1;
 	left: 275px;
-	top: 90px;
+	top: 100px;
 }
 #user_op>.text
 {
@@ -140,7 +140,7 @@ body
 {
 	transition: background-color 500ms;
 }
-#guide a:not(#home):hover,#btn_user:hover,#user_op>p:hover
+#guide a:not(#home):hover,#btn_user:hover,#user_op>.text:hover
 {
 	background-color: #C5C5C5;
 }
@@ -148,6 +148,20 @@ a:hover
 {
 	text-decoration-style: dashed;
 	color: #55bbff;
+}
+input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
+{
+	border-left: 3px solid #EFEFEF;
+	border-top: 3px solid #EFEFEF;
+	border-right: 3px solid black;
+	border-bottom: 3px solid black;
+}
+.button:hover,input[type=submit]:hover
+{
+	border-left: 3px solid #EFEFEF;
+	border-top: 3px solid #EFEFEF;
+	border-right: 3px solid black;
+	border-bottom: 3px solid black;
 }
 
 /* 分工类 */
@@ -219,7 +233,7 @@ hr
 
 /* ----链接 */
 
-#guide a
+#guide a,#user_op a
 {
 	text-decoration: none!important;
 }
@@ -283,13 +297,6 @@ input[type=text],input[type=password],input[type=email]
 	/* 特效 */
 	transition: border 500ms;
 }
-input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
-{
-	border-left: 3px solid #EFEFEF;
-	border-top: 3px solid #EFEFEF;
-	border-right: 3px solid black;
-	border-bottom: 3px solid black;
-}
 .button,input[type=submit]
 {
 	display: inline-block;
@@ -307,13 +314,6 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
 
 	/*特效 */
 	transition: border 500ms;
-}
-.button:hover,input[type=submit]:hover
-{
-	border-left: 3px solid #EFEFEF;
-	border-top: 3px solid #EFEFEF;
-	border-right: 3px solid black;
-	border-bottom: 3px solid black;
 }
 
 /* 标签 */
