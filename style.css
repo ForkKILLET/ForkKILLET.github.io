@@ -62,7 +62,7 @@ body
 	padding-left: 30px;
 	line-height: 25px;
 }
-#guide a
+#guide a,#user_op a
 {
 	color: black;
 }
