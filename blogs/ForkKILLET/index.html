@@ -122,7 +122,8 @@
 
 				let s = "",
 				title = $("#input_title").val(),
-				tag = $("#input_tag").val();
+				tag = window.chosen_tags;
+
 				if (title || tag)
 				{
 					s += "?";
@@ -131,7 +132,7 @@
 						s += "title=" + title;
 						if (tag)s += "&";
 					}
-					if (tag)s += "tag=" + window.chosen_tags.substr(1);
+					if (tag)s += "tag=" + tag;
 				}
 
 				AJAX("GET", "http://loli.icelava.ga/reader.php" + s, "application/x-www-form-urlencoded", null,
@@ -195,7 +196,7 @@
 					$t2.html(e_tag("None"));
 					for (let t in tags)
 					{
-						
+
 
 						let v = $(this).val();
 						if (v !== "" && tags[t].match(RegExp(v)))
@@ -210,14 +211,14 @@
 								if ($(this)[0].innerHTML === "None")return;
 								if ($(this).parent()[0].id === "tags_2")
 								{
-									if (!window.chosen_tags.match("#" + $(this)[0].innerHTML))
+									if (!window.chosen_tags.match("@" + $(this)[0].innerHTML))
 									{
 										$(this).appendTo($t1);
 										let $i = $("#tags_1>.tag:first-child");
 										if ($i[0].innerHTML === "None")
 											$i.remove();
 
-										window.chosen_tags += "#" + $(this)[0].innerHTML;
+										window.chosen_tags += "@" + $(this)[0].innerHTML;
 									}
 									$t2.html(e_tag("None"));
 									$("#input_tag").val("");
@@ -227,7 +228,7 @@
 									$(this).remove();
 									if ($t1.children().length === 0)
 										$t1.html(e_tag("None"));
-									window.chosen_tags.replace("#" + $(this)[0].innerHTML, "");
+									window.chosen_tags.replace("@" + $(this)[0].innerHTML, "");
 								}
 							});
 						}
