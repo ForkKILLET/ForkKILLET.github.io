@@ -228,7 +228,7 @@
 									$(this).remove();
 									if ($t1.children().length === 0)
 										$t1.html(e_tag("None"));
-									window.chosen_tags.replace("@" + $(this)[0].innerHTML, "");
+									window.chosen_tags = window.chosen_tags.replace("@" + $(this)[0].innerHTML, "");
 								}
 							});
 						}
