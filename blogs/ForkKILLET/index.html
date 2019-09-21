@@ -104,7 +104,7 @@
 				if ($search.data("show") === true)
 				{
 					$search.data("show", false);
-					$search.css("marginTop", "-320px");
+					$search.css("marginTop", "-400px");
 				}
 				else
 				{
@@ -175,8 +175,7 @@
 			// Note: 标签系统
 
 			function e_tag(text)
-			{			let $t1 = $("#tags_1");
-				let $t2 = $("#tags_2");
+			{
 				return `<span class="tag">` + text + `</span>`;
 			}
 
@@ -196,8 +195,6 @@
 					$t2.html(e_tag("None"));
 					for (let t in tags)
 					{
-
-
 						let v = $(this).val();
 						if (v !== "" && tags[t].match(RegExp(v)))
 						{
