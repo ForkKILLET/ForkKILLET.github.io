@@ -123,10 +123,11 @@ body
 	left: 275px;
 	top: 100px;
 }
-#user_op>.text
+#user_op .text
 {
 	padding-left: 30px;
 	padding-right: 30px;
+	line-height: 25px;
 }
 #logo
 {
