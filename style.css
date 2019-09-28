@@ -230,7 +230,7 @@ ol>li
 {
 	display: list-item!important;
 }
-.li-icon
+.fa-fw
 {
 	margin-left: -20px;
 	margin-right: 15px;
@@ -293,7 +293,7 @@ pre>code
 	font-size: 17px;
 }
 
-/* 表单 */
+/* ----表单 */
 
 input[type=text],input[type=password],input[type=email]
 {
@@ -333,7 +333,7 @@ input[type=text],input[type=password],input[type=email]
 	transition: border 500ms;
 }
 
-/* 标签 */
+/* ----标签 */
 
 .tag
 {
@@ -349,5 +349,18 @@ input[type=text],input[type=password],input[type=email]
 .tag:hover
 {
 	background-color: #ffc900;
+	color: white;
+}
+
+/* ----刮刮乐 */
+.lottery
+{
+	color: black;
+	background-color: black;
+
+	transition: color 500ms;
+}
+.lottery:hover
+{
 	color: white;
 }

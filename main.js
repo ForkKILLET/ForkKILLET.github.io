@@ -22,6 +22,22 @@ function AJAX(type, url, MIME, value, fn_cb)
 	XHR.send(value);
 }
 
+function RegExp_escape(str)
+{
+	if (str)
+	{
+		let chars = ["\\\\", "\\/" , "\\(", "\\)", "\\[", "\\]", "\\{", "\\}", "\\*", "\\+", "\\?", "\\$",  "\\^", "\\."];
+		for (let c in chars)
+			str = str.replace(RegExp(chars[c], "g"), chars[c]);
+	}
+	return str;
+}
+
+function is_local()
+{
+	return location.href.indexOf("localhost") !== -1 || location.href.indexOf("file:///") !== -1;
+}
+
 // Note: 开始 JQuery 搞事。
 $(document).ready(function()
 {
@@ -37,7 +53,7 @@ $(document).ready(function()
         
         <div id="user">
             <a class="text" href="http://icelava.ga/sign_up">Sign up </a>
-            <p class="text"><i class="fa fa-fw fa-sign-in"></i></p>
+            <p class="text"><i class="fa fa-sign-in"></i></p>
             <a class="text" target="_blank" href="http://icelava.ga/sign_in">in</a>
         </div> <hr>
         
@@ -105,10 +121,9 @@ $(document).ready(function()
 
 	// Note: 在 #main 下面写版权信息。
 	$body.append(`<p id="copyright" class="text">Copyright© 2019 IceLava Dev Team. All Rights Reserved</p>`);
-	// Done: 解决页面过窄时 Copyright 显示不当的问题。
 
 	// Note: 如果不是本地，token 登录。
-	if (location.href.indexOf("localhost") === -1)
+	if (!is_local())
 		AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form-urlencoded", null,
 		function(XHR)
 		{
@@ -120,22 +135,21 @@ $(document).ready(function()
 			$user.html(`<p id="btn_user" class="text"><i class="li-icon fa-fw fa fa-user"></i> ` + un + `</p>`);
 		});
 
-	// Note: Tex 公式配置
+	// Note: MathJax 配置
 	MathJax.Hub.Config(
 	{
 		messageStyle: "none",
 		tex2jax:
-			{
-				inlineMath: [["$m ", " m$"]],
-				displayMath: [["$M ", " M$"]],
-				skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"]
-			}
+		{
+			inlineMath: [["$m ", " m$"]],
+			displayMath: [["$M ", " M$"]],
+			skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"]
+		}
 	});
-
-	// Note: Markdown 配置
+	// Note: Marked 配置
 	let MD = new marked.Renderer();
-	marked.setOptions(
-	{
+	marked.setOptions
+	({
 		renderer: MD,
 		gfm: true,
 		tables: true,
@@ -150,51 +164,160 @@ $(document).ready(function()
 				return hljs.highlightAuto(code).value;
 			}
 	});
-
-	const md_$_labels =
+	const ExMD_escape =
 	[
-		{ from: /\$\$/g, to: "$dollar"},
-
-		{ from: /\$\^/g, to: "<sup>" },
-		{ from: /\^\$/g, to: "</sup>" },
-
-		{ from: /\$_/g, to: "<sub>" },
-		{ from: /_\$/g, to: "</sub>" },
-
-		{ from: /\$fali/g, to: `<i class="li-icon fa fa-fw` },
-		{ from: /\$fa/g, to: `<i class="fa ` },
-		{ from: /fa\$/g, to: `"></i>` },
-
-		{ from: /\$dollar/g, to: "$" }
+		{ origin: '$$', temp: '$dol' },
+		{ origin: '??', temp: '$que' },
+		{ origin: ';;', temp: '$sem' }
+	];
+	const ExMD_labels =
+	[
+		{ // Note: 上标 e.g. $^awa^$
+			name: ['^'],
+			space: false,
+			begin: `<sup>`,
+			end: `</sup>`
+		},
+		{ // Note: 下标 e.g. $_awa_$
+			name: ['_'],
+			space: false,
+			begin: `<sub>`,
+			end: `</sub>`
+		},
+		{ // Note: 图标 e.g. $fa font-awesome fa$ $i spin;fw;cogs i$
+			name: ['fa', 'i'],
+			space: true,
+			begin: `<span class="fa`,
+			end: `"></span>`,
+			param:
+			[
+				{
+					begin: ' fa-',
+					end: '',
+					time: Infinity
+				}
+			]
+		},
+		{ // Note: 颜色 e.g. $color red;text here color$ $c #D0E4FE;Barren Land c$
+			name: ['color', 'c'],
+			space: true,
+			begin: `<span`,
+			end: `</span>`,
+			param:
+			[
+				{
+					begin: ' style="color: ',
+					end: '">',
+					time: 1
+				}
+			]
+		},
+		{ // Note: 刮刮乐 e.g. $?hover on me!?$
+			name: ['?'],
+			space: false,
+			begin: `<span class="lottery">`,
+			end: `</span>`
+		}
 	];
 
 	const origin_marked = marked;
 	marked = function(str)
 	{
-		for (let i = 0; i < md_$_labels.length; i++)
-			str = str.replace(md_$_labels[i].from, md_$_labels[i].to);
+		if (!str)return undefined;
+
+		// Note: 执行转义
+		for (let i in ExMD_escape)
+			str = str.replace(RegExp(RegExp_escape(ExMD_escape[i].origin), "g"), ExMD_escape[i].temp);
+
+		// Note: ExMD
+		function calc_label(rule, str) // Note: 传入标签规则和标签内的内容，返回解析后的字符串。
+		{
+			let arr_param = str.split(";");
+			if (rule.param) for
+			(
+				let param_i = 0, param_type = 0, param_time = 0;
+				param_i < arr_param.length;
+				param_i++, param_time++
+			)
+			{
+				if (param_time === rule.param[param_type].time)
+				{
+					param_time = 0;
+					param_type++;
+					if (!rule.param[param_type])break;
+				}
+				arr_param[param_i] = rule.param[param_type].begin + arr_param[param_i] + rule.param[param_type].end;
+			}
+			return rule.begin + arr_param.join("") + rule.end;
+		}
+		
+		for (let i in ExMD_labels) // Note: 遍历标签规则。
+		{
+			let v = ExMD_labels[i];
+
+			for (let j in v.name) // Note: 遍历该标签的每个名称。
+			{
+				// Note: 获取标签的开关标记内容。
+				let str_begin = "$" + v.name[j] + (v.space ? " " : "");
+				let str_end = (v.space ? " " : "") + v.name[j] + "$";
+
+				let k = str.length;
+				while (1)
+				{
+					// Note:
+					// 寻找标签。此处注意需要利用 "倒数第一个开标签" 来定位子串。
+					// 因为对于形如 $label [A] $label [B] label$ label$ 的 ExMD 字符串，
+					// 我们需要先解析 $label [B] label$ 的部分。若是直接正序匹配，我们会得到一个错误的字串
+					// $label [A] $label [B] label$。
+					let pos_begin = str.substring(0, k).lastIndexOf(str_begin);
+					if (pos_begin === -1)break;
+					let pos_end = str.substring(pos_begin).indexOf(str_end);
+					if (pos_end === -1)break;
+					pos_end += pos_begin;
+					pos_begin += str_begin.length;
+					k = pos_begin - 1;
+					
+					let inner_str = str.substring(pos_begin, pos_end);
+					let outer_str = str_begin + inner_str + str_end;
+					
+					// Note: 将原标签替换解析后的内容。
+					str = str.replace(outer_str, calc_label(v, inner_str));
+				}
+			}
+		}
+
+		// Note: 还原转义
+		for (let i in ExMD_escape)
+			str = str.replace(RegExp(RegExp_escape(ExMD_escape[i].temp), "g"), ExMD_escape[i].origin);
+
+		// Note: 普通 MD 处理
 		str = origin_marked(str);
 		return str;
 	};
 
-	let md_areas = document.getElementsByClassName("md");
-	function make_fn(i)    // Note: 闭包
+	if (!is_local())
 	{
-		return function (XHR)
+		let md_areas = document.getElementsByClassName("md");
+		
+		function mf_show_md(i)
 		{
-			md_areas[i].innerHTML = marked(XHR.responseText);
-			// Note: 渲染 Tex 公式。
-			// Done: 修好 Tex。
-			MathJax.Hub.Queue(["Typeset", MathJax.Hub, md_areas[i]]);
-		};
+			return function (XHR)
+			{
+				md_areas[i].innerHTML = marked(XHR.responseText);
+				MathJax.Hub.Queue(["Typeset", MathJax.Hub, md_areas[i]]);
+			};
+		}
+		
+		// Note: 获取 Markdown 并解析显示。
+		for (let i = 0; i < md_areas.length; i++)
+		{
+			if (md_areas[i].dataset.name == null) continue;
+			AJAX
+			(
+				"GET", "http://loli.icelava.ga/load_md.php?name=" + md_areas[i].dataset.name,
+				"application/x-www-form- urlencoded", null,
+				mf_show_md(i)
+			);
+		}
 	}
-
-	// Note: 获取 Markdown 并解析显示。
-	for (let i = 0; i < md_areas.length; i++)
-	{
-		if (md_areas[i].dataset.name == null)continue;
-		AJAX("GET", "http://loli.icelava.ga/load_md.php?name=" + md_areas[i].dataset.name, "application/x-www-form- urlencoded", null, make_fn(i));
-	}
-
-
 });
