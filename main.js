@@ -281,7 +281,7 @@ $(document).ready(function()
 					let outer_str = str_begin + inner_str + str_end;
 					
 					// Note: 将原标签替换解析后的内容。
-					str = str.replace(outer_str, calc_label(v, inner_str));
+					str = str.replace(RegExp(RegExp_escape(outer_str), "g"), calc_label(v, inner_str));
 				}
 			}
 		}
