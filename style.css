@@ -368,3 +368,23 @@ input[type=text],input[type=password],input[type=email]
 {
 	color: white;
 }
+
+/* ----词汇盒子 */
+.wordbox
+{
+	display: inline-block;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #EFEFEF;
+	box-shadow: 0 3px 10px #0000004D;
+}
+.wordbox .text
+{
+	font-size: 18px!important;
+	padding-top: 5px!important;
+	padding-bottom: 5px!important;
+}
+.wordbox-stc-btn
+{
+	text-decoration: none!important;
+}

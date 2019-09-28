@@ -44,9 +44,7 @@ $(document).ready(function()
 	// Note: 插入导航栏（侧边栏）
 	let $body = $("body");
 	$body.prepend(`<div id="guide"></div>`);
-	let $guide = $("#guide");
-	$guide.html(
-		`
+	$("#guide").html([`
         <a href="http://icelava.ga/" class="title" id="home">
             <i class="fa fa-home"></i> Home
         </a>
@@ -88,7 +86,7 @@ $(document).ready(function()
             <i class="li-icon fa-fw fa fa-mouse-pointer"></i> Hits
             <img id="counter" alt="counter" src="http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72"> 
         </p>
-    `);
+    `][0]);
 	$body.prepend(`<div id="user_op"></div>`);
 
 	// Note: 用户面板（目前只有注销功能）
@@ -106,9 +104,9 @@ $(document).ready(function()
 		location.reload();
 	});
 
-	let $user = $("#user");
-	$user.data("tourist", true);
-	$user.click(function()
+	$("#user")
+	.data("tourist", true)
+	.click(function()
 	{
 		if ($("#user").data("tourist") === false)
 			$("#user_op").toggle();
@@ -116,8 +114,8 @@ $(document).ready(function()
 
 	// Note: 亮闪闪的 5 毛钱特效。
 	let $pos = $("#pos");
-	$pos.css("left", "calc(100% - 50px - " + $pos.width() + "px)");
-	$pos.animate({"left": "300px"}, 1000, "swing");
+	$pos.css("left", "calc(100% - 50px - " + $pos.width() + "px)")
+	    .animate({"left": "300px"}, 1000, "swing");
 
 	// Note: 在 #main 下面写版权信息。
 	$body.append(`<p id="copyright" class="text">Copyright© 2019 IceLava Dev Team. All Rights Reserved</p>`);
@@ -158,19 +156,18 @@ $(document).ready(function()
 		sanitize: false,
 		smartLists: true,
 		smartypants: false,
-		highlight:
-			function(code)
-			{
-				return hljs.highlightAuto(code).value;
-			}
+		highlight: function(code)
+		{
+			return hljs.highlightAuto(code).value;
+		}
 	});
-	const ExMD_escape =
+	window.ExMD_escape =
 	[
 		{ origin: '$$', temp: '$dol' },
 		{ origin: '??', temp: '$que' },
 		{ origin: ';;', temp: '$sem' }
 	];
-	const ExMD_labels =
+	window.ExMD_labels =
 	[
 		{ // Note: 上标 e.g. $^awa^$
 			name: ['^'],
@@ -217,11 +214,56 @@ $(document).ready(function()
 			space: false,
 			begin: `<span class="lottery">`,
 			end: `</span>`
+		},
+		{ // Note: 词汇盒子
+			name: ['wordbox', 'w'],
+			space: true,
+			begin: `<div class="wordbox">`,
+			end: `</div>`,
+			param:
+			[
+				{ // Note: 英文
+					begin: `<b class="text">`,
+					end: `</b> `,
+					time: 1
+				},
+				{ // Note: 音标
+					begin: `<p class="text">/`,
+					end: `/</p> `,
+					time: 1
+				},
+				{ // Note: 词性
+					begin: `<i class="text">`,
+					end: `</i> `,
+					time: 1
+				},
+				{ // Note: 中文
+					begin: `<p class="text">`,
+					end: `</p> `,
+					time: 1
+				},
+				{ // Note: 例句
+					begin: `<a class="text wordbox-stc-btn">@</a> <p class="text">`,
+					end: `</p>`,
+					time: 1
+				}
+			]
 		}
 	];
-
-	const origin_marked = marked;
-	marked = function(str)
+	window.ExMD_callbacks =
+	[
+		function wordbox()
+		{
+			$(".wordbox>.wordbox-stc-btn:not(.ready)")
+			.click(function()
+			{
+				$(this).parent().children(".text:last-child").toggle();
+			})
+			.addClass("ready")
+			.parent().children(".text:last-child").hide();
+		}
+	];
+	window.calc_ExMD = function(str)
 	{
 		if (!str)return undefined;
 
@@ -291,20 +333,25 @@ $(document).ready(function()
 			str = str.replace(RegExp(RegExp_escape(ExMD_escape[i].temp)), ExMD_escape[i].origin);
 
 		// Note: 普通 MD 处理
-		str = origin_marked(str);
+		str = marked(str);
 		return str;
+	};
+	window.render_ExMD = function(e, str)
+	{
+		e.innerHTML = calc_ExMD(str);
+		for (let i in ExMD_callbacks)ExMD_callbacks[i]();
 	};
 
 	if (!is_local())
 	{
-		let md_areas = document.getElementsByClassName("md");
+		let $md_areas = $(".md");
 		
 		function mf_show_md(i)
 		{
 			return function (XHR)
 			{
-				md_areas[i].innerHTML = marked(XHR.responseText);
-				MathJax.Hub.Queue(["Typeset", MathJax.Hub, md_areas[i]]);
+				render_ExMD($md_areas[i], XHR.responseText);
+				MathJax.Hub.Queue(["Typeset", MathJax.Hub, $md_areas[i]]); // Note: 渲染 MathJax
 			};
 		}
 		
