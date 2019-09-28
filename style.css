@@ -255,6 +255,7 @@ hr
 
 #guide a,#user_op a
 {
+	width: 100%;
 	text-decoration: none!important;
 }
 a
