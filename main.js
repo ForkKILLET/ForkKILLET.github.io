@@ -271,24 +271,24 @@ $(document).ready(function()
 					// $label [A] $label [B] label$。
 					let pos_begin = str.substring(0, k).lastIndexOf(str_begin);
 					if (pos_begin === -1)break;
-					let pos_end = str.substring(pos_begin).indexOf(str_end);
-					if (pos_end === -1)break;
-					pos_end += pos_begin;
-					pos_begin += str_begin.length;
+					let pos_label_end = str.substring(pos_begin).indexOf(str_end);
+					if (pos_label_end === -1)break;
+					pos_label_end += pos_begin;
+					let pos_label_begin = pos_begin + str_begin.length;
+					let pos_end = pos_label_end + str_end.length;
 					k = pos_begin - 1;
 					
-					let inner_str = str.substring(pos_begin, pos_end);
-					let outer_str = str_begin + inner_str + str_end;
+					let label_str = str.substring(pos_label_begin, pos_label_end);
 					
 					// Note: 将原标签替换解析后的内容。
-					str = str.replace(RegExp(RegExp_escape(outer_str), "g"), calc_label(v, inner_str));
+					str = str.substring(0, pos_begin) + calc_label(v, label_str) + str.substring(pos_end);
 				}
 			}
 		}
 
 		// Note: 还原转义
 		for (let i in ExMD_escape)
-			str = str.replace(RegExp(RegExp_escape(ExMD_escape[i].temp), "g"), ExMD_escape[i].origin);
+			str = str.replace(RegExp(RegExp_escape(ExMD_escape[i].temp)), ExMD_escape[i].origin);
 
 		// Note: 普通 MD 处理
 		str = origin_marked(str);
