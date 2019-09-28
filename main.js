@@ -356,7 +356,7 @@ $(document).ready(function()
 		}
 		
 		// Note: 获取 Markdown 并解析显示。
-		for (let i = 0; i < md_areas.length; i++)
+		for (let i = 0; i < $md_areas.length; i++)
 		{
 			if (md_areas[i].dataset.name == null) continue;
 			AJAX

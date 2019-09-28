@@ -150,13 +150,13 @@
 						$("#m_search").hide();
 						$("#btn_back").show();
 						let $m_article = $("#m_article");
-						$m_article.html(`<p class='title'><i class='fa fa-spinner fa-spin'></i> 页面内容正在加载中，请稍等</p>`);
-						$m_article.show();
+						$m_article.html(`<p class='title'><i class='fa fa-spinner fa-spin'></i> 页面内容正在加载中，请稍等</p>`)
+								  .show();
 
 						AJAX("GET", "http://loli.icelava.ga/load_md.php?name=blogs/ForkKILLET/" + $(this).data("name"), "application/x-www-form- urlencoded", null,
 						function(XHR)
 						{
-							$m_article.html(marked(XHR.responseText));
+							render_ExMD($m_article[0], XHR.responseText);
 							MathJax.Hub.Queue(["Typeset", MathJax.Hub, $m_article[0]]);
 
 							$("#btn_back").click(function()
