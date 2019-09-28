@@ -1,46 +1,46 @@
 <!DOCTYPE html>
-<html lang='zh-cn'>
+<html lang="zh-cn">
 	<head>
-		<meta http-equiv='Content-Type' content='text/html' charset='UTF-8'/>
+		<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
 		<title>Mushouse - Verify</title>
-		<link rel='stylesheet' type='text/css' href='https://icelava.ga/style.css'>
-		<link rel='stylesheet' type='text/css' href='https://icelava.ga/fa/css/font-awesome.min.css'>
-		<script type='text/javascript' src='https://icelava.ga/marked.min.js'></script>
-		<script type='text/javascript' src='https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
-		<script type='text/javascript' src='https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js'></script>
-		<script type='text/javascript' src='https://icelava.ga/jquery.color.js'></script>
+		<link rel="stylesheet" type="text/css" href="https://icelava.ga/style.css">
+		<link rel="stylesheet" type="text/css" href="https://icelava.ga/fa/css/font-awesome.min.css">
+		<script type="text/javascript" src="https://icelava.ga/marked.min.js"></script>
+		<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://icelava.ga/jquery.color.js"></script>
 		<!-- Note: 代码高亮 -->
 		<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 		<script src="https://icelava.ga/highlight/highlight.pack.js"></script>
 	</head>
 	<body>
-		<p id='pos' class='title'>Verify your e-mail</p>
-		<div id='main'>
-			<div class='md' data-name='verify'>
-				<p class='title'>
-					<i class='fa fa-spinner fa-spin'></i> 页面内容正在加载中，请稍等！
+		<p id="pos" class="title">Verify your e-mail</p>
+		<div id="main">
+			<div class="md" data-name="verify">
+				<p class="title">
+					<i class="fa fa-spinner fa-spin"></i> 页面内容正在加载中，请稍等！
 				</p>
 			</div> <br>
-			<form method='post' action='http://loli.icelava.ga/verify.php?op=check'>
-				<p class='text no-gap center'>
-					<i class='fa fa-fw fa-shield'></i>
-					<input type='text' name='ve' placeholder='验证码' spellcheck='false'>
+			<form method="post" action="http://loli.icelava.ga/verify.php?op=check" class="center">
+				<p class="text no-gap">
+					<i class="fa fa-fw fa-shield"></i>
+					<input type="text" name="ve" placeholder="验证码" spellcheck="false">
 					<br>
 
-					<span id='btn_req' class='button'>获取验证码</span>
+					<span id="btn_req" class="button">获取验证码</span>
 					<br>
 
-					<input type='submit' value='提交'>
+					<input type="submit" value="提交">
 				</p>
 			</form>
 		</div>
 	</body>
-	<script type='text/javascript' src='https://icelava.ga/main.js'></script>
-	<script type='text/javascript'>
+	<script type="text/javascript" src="https://icelava.ga/main.js"></script>
+	<script type="text/javascript">
 		$("#btn_req").click(function req_send_ve()
 		{
-			$("#btn_req").html("正在发送中 <i class='fa fa-spinner fa-spin'></i>");
+			$("#btn_req").html("正在发送中 <i class="fa fa-spinner fa-spin"></i>");
 
 			AJAX("GET", "http://loli.icelava.ga/verify.php?op=send",
 					"application/x-www-form-urlencoded", null,
@@ -49,7 +49,7 @@
 						let $btn = $("#btn_req");
 						$btn.html("验证码已发送");
 						$btn.click(NF);
-						$(".md:first").after("<p class='text'>" + XHR.responseText.split("<!-- PHP echo begin -->")[1].split("<!-- PHP echo end -->")[0] + "</p> <hr>");
+						$(".md:first").after("<p class="text">" + XHR.responseText.split("<!-- PHP echo begin -->")[1].split("<!-- PHP echo end -->")[0] + "</p> <hr>");
 					});
 		});
 	</script>
