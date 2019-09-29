@@ -114,7 +114,7 @@ $(document).ready(function()
 
 	// Note: 亮闪闪的 5 毛钱特效。
 	let $pos = $("#pos");
-	$pos.css("left", "calc(100% - 50px - " + $pos.width() + "px)")
+	$pos.css("left", "parse(100% - 50px - " + $pos.width() + "px)")
 	    .animate({"left": "300px"}, 1000, "swing");
 
 	// Note: 在 #main 下面写版权信息。
@@ -133,7 +133,202 @@ $(document).ready(function()
 			$user.html(`<p id="btn_user" class="text"><i class="li-icon fa-fw fa fa-user"></i> ` + un + `</p>`);
 		});
 
-	// Note: MathJax 配置
+	// Note: MD 渲染的一系列操作。
+	class ExtendedMarkdownParser
+	{
+		constructor()
+		{
+			this.escape =
+			[
+				{ origin: '$$', temp: '$dol' },
+				{ origin: '??', temp: '$que' },
+				{ origin: ';;', temp: '$sem' }
+			];
+			this.labels =
+			[
+				{ // Note: 上标 e.g. $^awa^$
+					name: ['^'],
+					space: false,
+					begin: `<sup>`,
+					end: `</sup>`
+				},
+				{ // Note: 下标 e.g. $_awa_$
+					name: ['_'],
+					space: false,
+					begin: `<sub>`,
+					end: `</sub>`
+				},
+				{ // Note: 图标 e.g. $fa font-awesome fa$ $i spin;fw;cogs i$
+					name: ['fa', 'i'],
+					space: true,
+					begin: `<span class="fa`,
+					end: `"></span>`,
+					param:
+						[
+							{
+								begin: ' fa-',
+								end: '',
+								time: Infinity
+							}
+						]
+				},
+				{ // Note: 颜色 e.g. $color red;text here color$ $c #D0E4FE;Barren Land c$
+					name: ['color', 'c'],
+					space: true,
+					begin: `<span`,
+					end: `</span>`,
+					param:
+						[
+							{
+								begin: ' style="color: ',
+								end: '">',
+								time: 1
+							}
+						]
+				},
+				{ // Note: 刮刮乐 e.g. $?hover on me!?$
+					name: ['?'],
+					space: false,
+					begin: `<span class="lottery">`,
+					end: `</span>`
+				},
+				{ // Note: 词汇盒子
+					name: ['wordbox', 'w'],
+					space: true,
+					begin: `<div class="wordbox">`,
+					end: `</div>`,
+					param:
+						[
+							{ // Note: 英文
+								begin: `<b class="text">`,
+								end: `&nbsp;</b>`,
+								time: 1
+							},
+							{ // Note: 音标
+								begin: `<p class="text">/`,
+								end: `/&nbsp;</p>`,
+								time: 1
+							},
+							{ // Note: 词性
+								begin: `<i class="text">`,
+								end: `&nbsp;</i>`,
+								time: 1
+							},
+							{ // Note: 中文
+								begin: `<p class="text">`,
+								end: `&nbsp;</p>`,
+								time: 1
+							},
+							{ // Note: 例句
+								begin: `<a class="text wordbox-stc-btn">@</a> <br> <p class="text">`,
+								end: `</p>`,
+								time: 1
+							}
+						]
+				}
+			];
+			this.callbacks =
+			[
+				function wordbox(e)
+				{
+					$(e).children(".wordbox>.wordbox-stc-btn:not(.ready)")
+						.click(function ()
+						{
+							$(this).parent().children(".text:last-child").fadeToggle(500);
+						})
+						.addClass("ready")
+						.parent().children(".text:last-child").hide();
+				}
+			];
+		}
+		parse(str)
+		{
+			if (!str) return undefined;
+			
+			// Note: 执行转义
+			for (let i in this.escape)
+				str = str.replace(RegExp(RegExp_escape(this.escape[i].origin), "g"), this.escape[i].temp);
+			
+			// Note: ExMD
+			function calc_label(rule, str) // Note: 传入标签规则和标签内的内容，返回解析后的字符串。
+			{
+				let arr_param = str.split(";");
+				if (rule.param) for
+				(
+					let param_i = 0, param_type = 0, param_time = 0;
+					param_i < arr_param.length;
+					param_i++, param_time++
+				)
+				{
+					if (param_time === rule.param[param_type].time)
+					{
+						param_time = 0;
+						param_type++;
+						if (!rule.param[param_type]) break;
+					}
+					arr_param[param_i] = rule.param[param_type].begin + arr_param[param_i] + rule.param[param_type].end;
+				}
+				return rule.begin + arr_param.join("") + rule.end;
+			}
+			
+			for (let i in this.labels) // Note: 遍历标签规则。
+			{
+				let v = this.labels[i];
+				
+				for (let j in v.name) // Note: 遍历该标签的每个名称。
+				{
+					// Note: 获取标签的开关标记内容。
+					let str_begin = "$" + v.name[j] + (v.space ? " " : "");
+					let str_end = (v.space ? " " : "") + v.name[j] + "$";
+					
+					let k = str.length;
+					while (1)
+					{
+						// Note:
+						// 寻找标签。此处注意需要利用 "倒数第一个开标签" 来定位子串。
+						// 因为对于形如 $label [A] $label [B] label$ label$ 的 ExMD 字符串，
+						// 我们需要先解析 $label [B] label$ 的部分。若是直接正序匹配，我们会得到一个错误的字串
+						// $label [A] $label [B] label$。
+						let pos_begin = str.substring(0, k).lastIndexOf(str_begin);
+						if (pos_begin === -1) break;
+						let pos_label_end = str.substring(pos_begin).indexOf(str_end);
+						if (pos_label_end === -1) break;
+						pos_label_end += pos_begin;
+						let pos_label_begin = pos_begin + str_begin.length;
+						let pos_end = pos_label_end + str_end.length;
+						k = pos_begin - 1;
+						
+						let label_str = str.substring(pos_label_begin, pos_label_end);
+						
+						// Note: 将原标签替换解析后的内容。
+						str = str.substring(0, pos_begin) + calc_label(v, label_str) + str.substring(pos_end);
+					}
+				}
+			}
+			
+			// Note: 还原转义
+			for (let i in this.escape)
+				str = str.replace(RegExp(RegExp_escape(this.escape[i].temp)), this.escape[i].origin);
+			
+			// Note: 普通 MD 处理
+			if (typeof this.nMD !== "function")console.warn("ExMD: Didn't bind a normal Markdown parse function.");
+			else str = this.nMD(str);
+			return str;
+		}
+		render(e, str)
+		{
+			e.innerHTML = this.parse(str);
+			for (let i in this.callbacks) this.callbacks[i](e);
+			if (typeof this.Maths === "function")this.Maths(e);
+		}
+		settings(s)
+		{
+			let names = ["nMD", "Maths"];
+			for (let i in s)
+				if (names.indexOf(i) !== -1)this[i] = s[i];
+		}
+	}
+	
 	MathJax.Hub.Config(
 	{
 		messageStyle: "none",
@@ -144,11 +339,9 @@ $(document).ready(function()
 			skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"]
 		}
 	});
-	// Note: Marked 配置
-	let MD = new marked.Renderer();
-	marked.setOptions
-	({
-		renderer: MD,
+	marked.setOptions(
+	{
+		renderer: new marked.Renderer(),
 		gfm: true,
 		tables: true,
 		breaks: false,
@@ -161,207 +354,35 @@ $(document).ready(function()
 			return hljs.highlightAuto(code).value;
 		}
 	});
-	window.ExMD_escape =
-	[
-		{ origin: '$$', temp: '$dol' },
-		{ origin: '??', temp: '$que' },
-		{ origin: ';;', temp: '$sem' }
-	];
-	window.ExMD_labels =
-	[
-		{ // Note: 上标 e.g. $^awa^$
-			name: ['^'],
-			space: false,
-			begin: `<sup>`,
-			end: `</sup>`
-		},
-		{ // Note: 下标 e.g. $_awa_$
-			name: ['_'],
-			space: false,
-			begin: `<sub>`,
-			end: `</sub>`
-		},
-		{ // Note: 图标 e.g. $fa font-awesome fa$ $i spin;fw;cogs i$
-			name: ['fa', 'i'],
-			space: true,
-			begin: `<span class="fa`,
-			end: `"></span>`,
-			param:
-			[
-				{
-					begin: ' fa-',
-					end: '',
-					time: Infinity
-				}
-			]
-		},
-		{ // Note: 颜色 e.g. $color red;text here color$ $c #D0E4FE;Barren Land c$
-			name: ['color', 'c'],
-			space: true,
-			begin: `<span`,
-			end: `</span>`,
-			param:
-			[
-				{
-					begin: ' style="color: ',
-					end: '">',
-					time: 1
-				}
-			]
-		},
-		{ // Note: 刮刮乐 e.g. $?hover on me!?$
-			name: ['?'],
-			space: false,
-			begin: `<span class="lottery">`,
-			end: `</span>`
-		},
-		{ // Note: 词汇盒子
-			name: ['wordbox', 'w'],
-			space: true,
-			begin: `<div class="wordbox">`,
-			end: `</div>`,
-			param:
-			[
-				{ // Note: 英文
-					begin: `<b class="text">`,
-					end: `</b> `,
-					time: 1
-				},
-				{ // Note: 音标
-					begin: `<p class="text">/`,
-					end: `/</p> `,
-					time: 1
-				},
-				{ // Note: 词性
-					begin: `<i class="text">`,
-					end: `</i> `,
-					time: 1
-				},
-				{ // Note: 中文
-					begin: `<p class="text">`,
-					end: `</p> `,
-					time: 1
-				},
-				{ // Note: 例句
-					begin: `<a class="text wordbox-stc-btn">@</a> <p class="text">`,
-					end: `</p>`,
-					time: 1
-				}
-			]
-		}
-	];
-	window.ExMD_callbacks =
-	[
-		function wordbox()
-		{
-			$(".wordbox>.wordbox-stc-btn:not(.ready)")
-			.click(function()
-			{
-				$(this).parent().children(".text:last-child").toggle();
-			})
-			.addClass("ready")
-			.parent().children(".text:last-child").hide();
-		}
-	];
-	window.calc_ExMD = function(str)
+	window.ExMD = new ExtendedMarkdownParser();
+	ExMD.settings(
 	{
-		if (!str)return undefined;
-
-		// Note: 执行转义
-		for (let i in ExMD_escape)
-			str = str.replace(RegExp(RegExp_escape(ExMD_escape[i].origin), "g"), ExMD_escape[i].temp);
-
-		// Note: ExMD
-		function calc_label(rule, str) // Note: 传入标签规则和标签内的内容，返回解析后的字符串。
+		nMD: marked,
+		Maths: function(e)
 		{
-			let arr_param = str.split(";");
-			if (rule.param) for
-			(
-				let param_i = 0, param_type = 0, param_time = 0;
-				param_i < arr_param.length;
-				param_i++, param_time++
-			)
-			{
-				if (param_time === rule.param[param_type].time)
-				{
-					param_time = 0;
-					param_type++;
-					if (!rule.param[param_type])break;
-				}
-				arr_param[param_i] = rule.param[param_type].begin + arr_param[param_i] + rule.param[param_type].end;
-			}
-			return rule.begin + arr_param.join("") + rule.end;
+			MathJax.Hub.Queue(["Typeset", MathJax.Hub, e]);
 		}
-		
-		for (let i in ExMD_labels) // Note: 遍历标签规则。
-		{
-			let v = ExMD_labels[i];
-
-			for (let j in v.name) // Note: 遍历该标签的每个名称。
-			{
-				// Note: 获取标签的开关标记内容。
-				let str_begin = "$" + v.name[j] + (v.space ? " " : "");
-				let str_end = (v.space ? " " : "") + v.name[j] + "$";
-
-				let k = str.length;
-				while (1)
-				{
-					// Note:
-					// 寻找标签。此处注意需要利用 "倒数第一个开标签" 来定位子串。
-					// 因为对于形如 $label [A] $label [B] label$ label$ 的 ExMD 字符串，
-					// 我们需要先解析 $label [B] label$ 的部分。若是直接正序匹配，我们会得到一个错误的字串
-					// $label [A] $label [B] label$。
-					let pos_begin = str.substring(0, k).lastIndexOf(str_begin);
-					if (pos_begin === -1)break;
-					let pos_label_end = str.substring(pos_begin).indexOf(str_end);
-					if (pos_label_end === -1)break;
-					pos_label_end += pos_begin;
-					let pos_label_begin = pos_begin + str_begin.length;
-					let pos_end = pos_label_end + str_end.length;
-					k = pos_begin - 1;
-					
-					let label_str = str.substring(pos_label_begin, pos_label_end);
-					
-					// Note: 将原标签替换解析后的内容。
-					str = str.substring(0, pos_begin) + calc_label(v, label_str) + str.substring(pos_end);
-				}
-			}
-		}
-
-		// Note: 还原转义
-		for (let i in ExMD_escape)
-			str = str.replace(RegExp(RegExp_escape(ExMD_escape[i].temp)), ExMD_escape[i].origin);
-
-		// Note: 普通 MD 处理
-		str = marked(str);
-		return str;
-	};
-	window.render_ExMD = function(e, str)
-	{
-		e.innerHTML = calc_ExMD(str);
-		for (let i in ExMD_callbacks)ExMD_callbacks[i]();
-	};
-
+	});
+	
 	if (!is_local())
 	{
 		let $md_areas = $(".md");
 		
 		function mf_show_md(i)
 		{
-			return function (XHR)
+			return function(XHR)
 			{
-				render_ExMD($md_areas[i], XHR.responseText);
-				MathJax.Hub.Queue(["Typeset", MathJax.Hub, $md_areas[i]]); // Note: 渲染 MathJax
+				em.render($md_areas[i], XHR.responseText);
 			};
 		}
 		
 		// Note: 获取 Markdown 并解析显示。
 		for (let i = 0; i < $md_areas.length; i++)
 		{
-			if ($md_areas[i].dataset.name == null) continue;
+			if ($($md_areas[i]).data("name") == null) continue;
 			AJAX
 			(
-				"GET", "http://loli.icelava.ga/load_md.php?name=" + $md_areas[i].dataset.name,
+				"GET", "http://loli.icelava.ga/load_md.php?name=" + $($md_areas[i]).data("name"),
 				"application/x-www-form- urlencoded", null,
 				mf_show_md(i)
 			);

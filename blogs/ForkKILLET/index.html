@@ -156,8 +156,7 @@
 						AJAX("GET", "http://loli.icelava.ga/load_md.php?name=blogs/ForkKILLET/" + $(this).data("name"), "application/x-www-form- urlencoded", null,
 						function(XHR)
 						{
-							render_ExMD($m_article[0], XHR.responseText);
-							MathJax.Hub.Queue(["Typeset", MathJax.Hub, $m_article[0]]);
+							ExMD.render($m_article[0], XHR.responseText);
 
 							$("#btn_back").click(function()
 							{

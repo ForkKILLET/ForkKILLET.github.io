@@ -245,7 +245,7 @@ hr
 {
 	display: inline-block;
 	width: calc(100% - 30px);
-	height: 3.5px;
+	height: 3px;
 	border: none;
 	background-color: white;
 	box-shadow: 0 3px 10px #0000004D;
@@ -373,6 +373,7 @@ input[type=text],input[type=password],input[type=email]
 .wordbox
 {
 	display: inline-block;
+	position: relative;
 	padding-left: 10px;
 	padding-right: 10px;
 	background-color: #EFEFEF;
