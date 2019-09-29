@@ -232,7 +232,7 @@ $(document).ready(function()
 				function wordbox(e)
 				{
 					$(e).find(".wordbox .wordbox-stc-btn:not(.ready)")
-						.click(function ()
+						.click(function()
 						{
 							$(this).parent().children(".text:last-child").fadeToggle(500);
 						})
