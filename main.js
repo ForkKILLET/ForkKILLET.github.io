@@ -140,9 +140,8 @@ $(document).ready(function()
 		{
 			this.escape =
 			[
-				{ origin: '$$', temp: '$dol' },
-				{ origin: '??', temp: '$que' },
-				{ origin: ';;', temp: '$sem' }
+				{ origin: '\\$', temp: '$dol' },
+				{ origin: '\\\\', temp: '$sla' }
 			];
 			this.labels =
 			[
