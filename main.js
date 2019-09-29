@@ -164,13 +164,13 @@ $(document).ready(function()
 					begin: `<i class="fa`,
 					end: `"></i>`,
 					param:
-						[
-							{
-								begin: ' fa-',
-								end: '',
-								time: Infinity
-							}
-						]
+					[
+						{
+							begin: ' fa-',
+							end: '',
+							time: Infinity
+						}
+					]
 				},
 				{ // Note: 颜色 e.g. $color red;text here color$ $c #D0E4FE;Barren Land c$
 					name: ['color', 'c'],
@@ -178,13 +178,13 @@ $(document).ready(function()
 					begin: `<span`,
 					end: `</span>`,
 					param:
-						[
-							{
-								begin: ' style="color: ',
-								end: '">',
-								time: 1
-							}
-						]
+					[
+						{
+							begin: ' style="color: ',
+							end: '">',
+							time: 1
+						}
+					]
 				},
 				{ // Note: 刮刮乐 e.g. $?hover on me!?$
 					name: ['?'],
@@ -198,40 +198,40 @@ $(document).ready(function()
 					begin: `<div class="wordbox">`,
 					end: `</div>`,
 					param:
-						[
-							{ // Note: 英文
-								begin: `<b class="text">`,
-								end: `&nbsp;</b>`,
-								time: 1
-							},
-							{ // Note: 音标
-								begin: `<p class="text">/`,
-								end: `/&nbsp;</p>`,
-								time: 1
-							},
-							{ // Note: 词性
-								begin: `<i class="text">`,
-								end: `&nbsp;</i>`,
-								time: 1
-							},
-							{ // Note: 中文
-								begin: `<p class="text">`,
-								end: `&nbsp;</p>`,
-								time: 1
-							},
-							{ // Note: 例句
-								begin: `<a class="text wordbox-stc-btn">@</a> <br> <p class="text">`,
-								end: `</p>`,
-								time: 1
-							}
-						]
+					[
+						{ // Note: 英文
+							begin: `<b class="text">`,
+							end: `&nbsp;</b>`,
+							time: 1
+						},
+						{ // Note: 音标
+							begin: `<p class="text">/`,
+							end: `/&nbsp;</p>`,
+							time: 1
+						},
+						{ // Note: 词性
+							begin: `<i class="text">`,
+							end: `&nbsp;</i>`,
+							time: 1
+						},
+						{ // Note: 中文
+							begin: `<p class="text">`,
+							end: `&nbsp;</p>`,
+							time: 1
+						},
+						{ // Note: 例句
+							begin: `<a class="text wordbox-stc-btn">@</a> <br> <p class="text">`,
+							end: `</p>`,
+							time: 1
+						}
+					]
 				}
 			];
 			this.callbacks =
 			[
 				function wordbox(e)
 				{
-					$(e).children(".wordbox>.wordbox-stc-btn:not(.ready)")
+					$(e).children(".wordbox .wordbox-stc-btn:not(.ready)")
 						.click(function ()
 						{
 							$(this).parent().children(".text:last-child").fadeToggle(500);
@@ -326,6 +326,7 @@ $(document).ready(function()
 			let names = ["nMD", "Maths"];
 			for (let i in s)
 				if (names.indexOf(i) !== -1)this[i] = s[i];
+				else console.warn("ExMD: '" + i + "' is not an available setting.");
 		}
 	}
 	

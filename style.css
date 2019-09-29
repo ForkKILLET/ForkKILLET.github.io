@@ -388,6 +388,7 @@ input[type=text],input[type=password],input[type=email]
 }
 .wordbox .text
 {
+	display: inline-block!important;
 	font-size: 18px!important;
 	padding-top: 5px!important;
 	padding-bottom: 5px!important;
