@@ -372,7 +372,7 @@ $(document).ready(function()
 		{
 			return function(XHR)
 			{
-				em.render($md_areas[i], XHR.responseText);
+				ExMD.render($md_areas[i], XHR.responseText);
 			};
 		}
 		
