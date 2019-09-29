@@ -225,7 +225,7 @@ $(document).ready(function()
 							time: 1
 						},
 						{ // Note: 例句
-							begin: `<a class="text wordbox-stc-btn">@</a> <br> <p class="text">`,
+							begin: `<a class="text wordbox-stc-btn">@</a> <br> <p class="text wordbox-stc">`,
 							end: `</p>`,
 							time: 1
 						}

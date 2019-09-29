@@ -397,7 +397,7 @@ input[type=text],input[type=password],input[type=email]
 	padding-top: 5px!important;
 	padding-bottom: 5px!important;
 }
-.wordbox .text:not(:last-child)
+.wordbox .text:not(.wordbox-stc)
 {
 	display: inline-block!important;
 }
