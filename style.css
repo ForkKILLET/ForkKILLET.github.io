@@ -213,6 +213,11 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
 {
 	display: inline-block;
 }
+.important
+{
+	color: #ffc900;
+	text-decoration: underline double;
+}
 
 /* ----列表 */
 li
@@ -353,7 +358,7 @@ input[type=text],input[type=password],input[type=email]
 	padding-right: 8px;
 	font-size: 22px;
 	border-radius: 5px 0;
-	background-color: #ffe37c;
+	background-color: #FFE37C;
 
 	transition: background-color 500ms,color 500ms;
 }
@@ -400,3 +405,5 @@ input[type=text],input[type=password],input[type=email]
 {
 	text-decoration: none!important;
 }
+
+/* Todo: 处理一下这一大堆 !important */

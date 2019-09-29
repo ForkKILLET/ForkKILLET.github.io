@@ -147,20 +147,20 @@ $(document).ready(function()
 			this.labels =
 			[
 				{ // Note: 上标 e.g. $^awa^$
-					name: ['^'],
-					space: false,
+					name: ['sup', '^'],
+					space: [true, false],
 					begin: `<sup>`,
 					end: `</sup>`
 				},
 				{ // Note: 下标 e.g. $_awa_$
-					name: ['_'],
+					name: [true, false],
 					space: false,
 					begin: `<sub>`,
 					end: `</sub>`
 				},
 				{ // Note: 图标 e.g. $fa font-awesome fa$ $i spin;fw;cogs i$
-					name: ['fa', 'i'],
-					space: true,
+					name: ['font-awesome', 'fa', 'i'],
+					space: [true, true, true],
 					begin: `<i class="fa`,
 					end: `"></i>`,
 					param:
@@ -174,7 +174,7 @@ $(document).ready(function()
 				},
 				{ // Note: 颜色 e.g. $color red;text here color$ $c #D0E4FE;Barren Land c$
 					name: ['color', 'c'],
-					space: true,
+					space: [true, true],
 					begin: `<span`,
 					end: `</span>`,
 					param:
@@ -186,22 +186,28 @@ $(document).ready(function()
 						}
 					]
 				},
+				{ // Note: 强调 e.g. $!text here!$
+					name: ['important', 'im',  '!'],
+					space: [true, true, false],
+					begin: `<span class="important">`,
+					end: `</span>`
+				},
 				{ // Note: 刮刮乐 e.g. $?hover on me!?$
-					name: ['?'],
-					space: false,
+					name: ['lottery', '?'],
+					space: [true, false],
 					begin: `<span class="lottery">`,
 					end: `</span>`
 				},
 				{ // Note: 词汇盒子
 					name: ['wordbox', 'w'],
-					space: true,
+					space: [true, true],
 					begin: `<div class="wordbox">`,
 					end: `</div>`,
 					param:
 					[
 						{ // Note: 英文
-							begin: `<b class="text">`,
-							end: `&nbsp;</b>`,
+							begin: `<strong class="text">`,
+							end: `&nbsp;</strong>`,
 							time: 1
 						},
 						{ // Note: 音标
@@ -210,8 +216,8 @@ $(document).ready(function()
 							time: 1
 						},
 						{ // Note: 词性
-							begin: `<i class="text">`,
-							end: `&nbsp;</i>`,
+							begin: `<em class="text">`,
+							end: `&nbsp;</em>`,
 							time: 1
 						},
 						{ // Note: 中文
@@ -278,8 +284,8 @@ $(document).ready(function()
 				for (let j in v.name) // Note: 遍历该标签的每个名称。
 				{
 					// Note: 获取标签的开关标记内容。
-					let str_begin = "$" + v.name[j] + (v.space ? " " : "");
-					let str_end = (v.space ? " " : "") + v.name[j] + "$";
+					let str_begin = "$" + v.name[j] + (v.space[j] ? " " : "");
+					let str_end = (v.space[j] ? " " : "") + v.name[j] + "$";
 					
 					let k = str.length;
 					while (1)
