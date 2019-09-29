@@ -231,7 +231,7 @@ $(document).ready(function()
 			[
 				function wordbox(e)
 				{
-					$(e).children(".wordbox .wordbox-stc-btn:not(.ready)")
+					$(e).find(".wordbox .wordbox-stc-btn:not(.ready)")
 						.click(function ()
 						{
 							$(this).parent().children(".text:last-child").fadeToggle(500);
