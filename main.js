@@ -161,8 +161,8 @@ $(document).ready(function()
 				{ // Note: 图标 e.g. $fa font-awesome fa$ $i spin;fw;cogs i$
 					name: ['fa', 'i'],
 					space: true,
-					begin: `<span class="fa`,
-					end: `"></span>`,
+					begin: `<i class="fa`,
+					end: `"></i>`,
 					param:
 						[
 							{

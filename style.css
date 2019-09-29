@@ -203,7 +203,7 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
 }
 .text,.md p:not(.title),.md a,.md li,.md td,.md th,input,.button
 {
-	display: inline-block;
+	display: block;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	line-height: 35px;
