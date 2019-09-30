@@ -22,17 +22,6 @@ function AJAX(type, url, MIME, value, fn_cb)
 	XHR.send(value);
 }
 
-function RegExp_escape(str)
-{
-	if (str)
-	{
-		let chars = ["\\\\", "\\/" , "\\(", "\\)", "\\[", "\\]", "\\{", "\\}", "\\*", "\\+", "\\?", "\\$",  "\\^", "\\."];
-		for (let c in chars)
-			str = str.replace(RegExp(chars[c], "g"), chars[c]);
-	}
-	return str;
-}
-
 function is_local()
 {
 	return location.href.indexOf("localhost") !== -1 || location.href.indexOf("file:///") !== -1;
@@ -140,8 +129,9 @@ $(document).ready(function()
 		{
 			this.escape =
 			[
-				{ origin: '\\$', temp: '$dol' },
-				{ origin: '\\\\', temp: '$sla' }
+				{ from: '\\$', temp: '$dol', to: '$'},
+				{ from: '\\\\', temp: '$sla', to: '\\' },
+				{ from: '\\;', temp: '$sem', to: ';' }
 			];
 			this.labels =
 			[
@@ -206,22 +196,22 @@ $(document).ready(function()
 					[
 						{ // Note: 英文
 							begin: `<strong class="text">`,
-							end: `&nbsp;</strong>`,
+							end: `&nbsp$sem</strong>`,
 							time: 1
 						},
 						{ // Note: 音标
 							begin: `<p class="text">/`,
-							end: `/&nbsp;</p>`,
+							end: `/&nbsp$sem</p>`,
 							time: 1
 						},
 						{ // Note: 词性
 							begin: `<em class="text">`,
-							end: `&nbsp;</em>`,
+							end: `&nbsp$sem</em>`,
 							time: 1
 						},
 						{ // Note: 中文
 							begin: `<p class="text">`,
-							end: `&nbsp;</p>`,
+							end: `&nbsp$sem</p>`,
 							time: 1
 						},
 						{ // Note: 例句
@@ -248,11 +238,22 @@ $(document).ready(function()
 		}
 		parse(str)
 		{
+			function RegExp_escape(str)
+			{
+				if (str)
+				{
+					let chars = ["\\\\", "\\/" , "\\(", "\\)", "\\[", "\\]", "\\{", "\\}", "\\*", "\\+", "\\?", "\\$",  "\\^", "\\."];
+					for (let c in chars)
+						str = str.replace(RegExp(chars[c], "g"), chars[c]);
+				}
+				return str;
+			}
+			
 			if (!str) return undefined;
 			
 			// Note: 执行转义
 			for (let i in this.escape)
-				str = str.replace(RegExp(RegExp_escape(this.escape[i].origin), "g"), this.escape[i].temp);
+				str = str.replace(RegExp(RegExp_escape(this.escape[i].from), "g"), this.escape[i].temp);
 			
 			// Note: ExMD
 			function calc_label(rule, str) // Note: 传入标签规则和标签内的内容，返回解析后的字符串。
@@ -313,7 +314,7 @@ $(document).ready(function()
 			
 			// Note: 还原转义
 			for (let i in this.escape)
-				str = str.replace(RegExp(RegExp_escape(this.escape[i].temp)), this.escape[i].origin);
+				str = str.replace(RegExp(RegExp_escape(this.escape[i].temp), "g"), this.escape[i].to);
 			
 			// Note: 普通 MD 处理
 			if (typeof this.nMD !== "function")console.warn("ExMD: Didn't bind a normal Markdown parse function.");
