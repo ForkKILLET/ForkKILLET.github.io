@@ -78,17 +78,17 @@ $(document).ready(function()
     `][0]); // Note: 便于折叠代码。
 	$body.prepend(`<div id="user_op"></div>`);
 
-	// Note: 用户面板（目前只有注销功能）
+	// Note: 用户功能
 	$("#user_op").hide().html(`<p class="text"><i class="fa fa-sign-out"></i> Sign out</p>`);
-	$("#user_op>p").click(function()
+	$("#user_op>.text:first-child").click(function()
 	{
 		AJAX("GET", "http://loli.icelava.ga/sign_out.php", "application/x-www-form-urlencoded", null,
-			function()
-			{
-				location.reload();
-			});
+		function()
+		{
+			location.reload();
+		});
 	});
-	$("#user:nth-child(3)").click(function()
+	$("#user>.text:first-child,#user>.text:last-child").click(function()
 	{
 		location.reload();
 	});
