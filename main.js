@@ -65,7 +65,7 @@ $(document).ready(function()
             <i class="li-icon fa-fw fa fa-check"></i> ForkΨKILLET's
         </a> <hr>
     
-        <img id="logo" alt="logo" src="http://icelava.ga/icelava.jpg" width="210px">
+        <img id="logo" alt="logo" src="https://s2.ax1x.com/2019/10/01/uNUSHg.md.jpg" width="210px">
         <p class="text">
             <span style="color: #ff5b5a">RED</span> ICE - WE<br>
             <span style="color: #0e61e1">blue</span> lava~world
