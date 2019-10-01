@@ -251,6 +251,10 @@ $(document).ready(function()
 			
 			if (!str) return undefined;
 			
+			// Note: 普通 MD 处理
+			if (typeof this.nMD !== "function")console.warn("ExMD: Didn't bind a normal Markdown parse function.");
+			else str = this.nMD(str);
+			
 			// Note: 执行转义
 			for (let i in this.escape)
 				str = str.replace(RegExp(RegExp_escape(this.escape[i].from), "g"), this.escape[i].temp);
@@ -316,9 +320,6 @@ $(document).ready(function()
 			for (let i in this.escape)
 				str = str.replace(RegExp(RegExp_escape(this.escape[i].temp), "g"), this.escape[i].to);
 			
-			// Note: 普通 MD 处理
-			if (typeof this.nMD !== "function")console.warn("ExMD: Didn't bind a normal Markdown parse function.");
-			else str = this.nMD(str);
 			return str;
 		}
 		render(e, str)
