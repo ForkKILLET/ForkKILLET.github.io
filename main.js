@@ -129,14 +129,15 @@ $(document).ready(function()
 		{
 			this.escape =
 			[
-				{ from: '\\$', temp: '$dol', to: '$'},
-				{ from: '\\\\', temp: '$sla', to: '\\' },
-				{ from: '\\;', temp: '$sem', to: ';' },
+				{ from: '\\$', temp: '$dlr', to: '$'},
+				{ from: '\\\\', temp: '$sls', to: '\\' },
+				{ from: '\\;', temp: '$smc', to: ';' },
 				
-				{ from: '&nbsp;', temp: '&nbsp$sem', to: '&nbsp;' },
-				{ from: '&amp;', temp: '&amp$sem', to: '&amp;' },
-				{ from: '&lt;', temp: '&lt$sem', to: '&lt;' },
-				{ from: '&gt;', temp: '&gt$sem', to: '&gt;' }
+				{ from: '&nbsp;', temp: '$nbsp', to: '&nbsp;' },
+				{ from: '&amp;', temp: '$amp', to: '&amp;' },
+				{ from: '&lt;', temp: '$lt', to: '&lt;' },
+				{ from: '&gt;', temp: '$gt', to: '&gt;' },
+				{ from: '&#39;', temp: '$sq', to: '&#39;' }
 			];
 			this.labels =
 			[
@@ -201,22 +202,22 @@ $(document).ready(function()
 					[
 						{ // Note: 英文
 							begin: `<strong class="text">`,
-							end: `&nbsp$sem</strong>`,
+							end: `$nbsp</strong>`,
 							time: 1
 						},
 						{ // Note: 音标
 							begin: `<p class="text">/`,
-							end: `/&nbsp$sem</p>`,
+							end: `/$nbsp</p>`,
 							time: 1
 						},
 						{ // Note: 词性
 							begin: `<em class="text">`,
-							end: `&nbsp$sem</em>`,
+							end: `$nbsp</em>`,
 							time: 1
 						},
 						{ // Note: 中文
 							begin: `<p class="text">`,
-							end: `&nbsp$sem</p>`,
+							end: `$nbsp</p>`,
 							time: 1
 						},
 						{ // Note: 例句
