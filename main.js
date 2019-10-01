@@ -75,7 +75,7 @@ $(document).ready(function()
             <i class="li-icon fa-fw fa fa-mouse-pointer"></i> Hits
             <img id="counter" alt="counter" src="http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72"> 
         </p>
-    `][0]);
+    `][0]); // Note: 便于折叠代码。
 	$body.prepend(`<div id="user_op"></div>`);
 
 	// Note: 用户面板（目前只有注销功能）
@@ -103,7 +103,7 @@ $(document).ready(function()
 
 	// Note: 亮闪闪的 5 毛钱特效。
 	let $pos = $("#pos");
-	$pos.css("left", "parse(100% - 50px - " + $pos.width() + "px)")
+	$pos.css("left", "calc(100% - 50px - " + $pos.width() + "px)")
 	    .animate({"left": "300px"}, 1000, "swing");
 
 	// Note: 在 #main 下面写版权信息。
@@ -131,7 +131,12 @@ $(document).ready(function()
 			[
 				{ from: '\\$', temp: '$dol', to: '$'},
 				{ from: '\\\\', temp: '$sla', to: '\\' },
-				{ from: '\\;', temp: '$sem', to: ';' }
+				{ from: '\\;', temp: '$sem', to: ';' },
+				
+				{ from: '&nbsp;', temp: '&nbsp$sem', to: '&nbsp;' },
+				{ from: '&amp;', temp: '&nbsp$sem', to: '&amp;' },
+				{ from: '&lt;', temp: '&nbsp$sem', to: '&lt;' },
+				{ from: '&gt;', temp: '&nbsp$sem', to: '&gt;' }
 			];
 			this.labels =
 			[
@@ -260,7 +265,7 @@ $(document).ready(function()
 				str = str.replace(RegExp(RegExp_escape(this.escape[i].from), "g"), this.escape[i].temp);
 			
 			// Note: ExMD
-			function calc_label(rule, str) // Note: 传入标签规则和标签内的内容，返回解析后的字符串。
+			function parse_label(rule, str) // Note: 传入标签规则和标签内的内容，返回解析后的字符串。
 			{
 				let arr_param = str.split(";");
 				if (rule.param) for
@@ -311,7 +316,7 @@ $(document).ready(function()
 						let label_str = str.substring(pos_label_begin, pos_label_end);
 						
 						// Note: 将原标签替换解析后的内容。
-						str = str.substring(0, pos_begin) + calc_label(v, label_str) + str.substring(pos_end);
+						str = str.substring(0, pos_begin) + parse_label(v, label_str) + str.substring(pos_end);
 					}
 				}
 			}
