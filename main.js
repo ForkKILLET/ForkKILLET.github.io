@@ -134,9 +134,9 @@ $(document).ready(function()
 				{ from: '\\;', temp: '$sem', to: ';' },
 				
 				{ from: '&nbsp;', temp: '&nbsp$sem', to: '&nbsp;' },
-				{ from: '&amp;', temp: '&nbsp$sem', to: '&amp;' },
-				{ from: '&lt;', temp: '&nbsp$sem', to: '&lt;' },
-				{ from: '&gt;', temp: '&nbsp$sem', to: '&gt;' }
+				{ from: '&amp;', temp: '&amp$sem', to: '&amp;' },
+				{ from: '&lt;', temp: '&lt$sem', to: '&lt;' },
+				{ from: '&gt;', temp: '&gt$sem', to: '&gt;' }
 			];
 			this.labels =
 			[
