@@ -229,8 +229,8 @@ $(document).ready(function()
 				}
 			];
 			this.callbacks =
-			[
-				function wordbox(e)
+			{
+				wordbox: function(e)
 				{
 					$(e).find(".wordbox .wordbox-stc-btn:not(.ready)")
 						.click(function()
@@ -239,8 +239,14 @@ $(document).ready(function()
 						})
 						.addClass("ready")
 						.parent().children(".text:last-child").hide();
+					let $p = $(e).find(".wordbox>.text:nth-child(2)");
+					for (let i = 0; i < $p.length; i++)
+					{
+						let $i = $($p[i]);
+						if ($i.html() === "//&nbsp;")$i.remove();
+					}
 				}
-			];
+			};
 		}
 		parse(str)
 		{
