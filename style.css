@@ -199,7 +199,7 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
 	padding-top: 10px;
 	padding-bottom: 10px;
 	line-height: 37px;
-	font-size: 28px;
+	font-size: 26px;
 }
 .text,.md p:not(.title),.md a,.md li,.md td,.md th,input,.button
 {
