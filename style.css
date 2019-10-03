@@ -59,7 +59,7 @@ body
 {
 	display: none;
 }
-#guide>a, #guide>p, #user_op>a
+#guide>a, #guide>p, #user_op>a, #btn_user
 {
 	padding-left: 30px;
 	line-height: 25px;
@@ -316,6 +316,7 @@ pre>code
 	padding-top: 3px;
 	padding-bottom: 3px;
 	font-size: 17px;
+	background-color: #EFEFEF;
 }
 
 /* ----表单 */
@@ -382,6 +383,7 @@ input[type=text], input[type=password], input[type=email]
 {
 	padding-left: 5px;
 	padding-right: 5px;
+	border-radius: 5px;
 	color: black;
 	background-color: black;
 
