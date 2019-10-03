@@ -33,34 +33,34 @@ $(document).ready(function()
 	// Note: 插入导航栏（侧边栏）
 	let $body = $("body");
 	$body.prepend(`<div id="guide"></div>`);
-	$("#guide").html([`
+	$("#guide").html(`
         <h1 id="home"><a href="http://icelava.ga/"><i class="fa fa-home"></i> Home</a></h1>
         <div id="user">
             <a href="http://icelava.ga/sign_up">Sign up </a>
             <p><i class="fa fa-sign-in"></i></p>
             <a target="_blank" href="http://icelava.ga/sign_in">in</a>
         </div> <hr>
-        <a href="http://icelava.ga/site_map"><i class="li-icon fa-fw fa fa-sitemap"></i> Site Map</a>
-        <a href="http://icelava.ga/friends"><i class="li-icon fa-fw fa fa-heart"></i> Friends</a>
-        <a href="http://icelava.ga/about_us"><i class="li-icon fa-fw fa fa-info-circle"></i> About us</a>
-        <a href="http://icelava.ga/log"><i class="li-icon fa-fw fa fa-file-text"></i> Log</a> <hr>
-        <p><i class="li-icon fa-fw fa fa-rss-square"></i> Blogs</p>
-        <a href="http://icelava.ga/blogs/ForkKILLET"><i class="li-icon fa-fw fa fa-check"></i> ForkΨKILLET's</a> <hr>
-        <img id="logo" alt="logo" src="https://s2.ax1x.com/2019/10/01/uNUSHg.md.jpg" width="210px">
+        <a href="http://icelava.ga/site_map"><i class="fa-fw fa fa-sitemap"></i> Site Map</a>
+        <a href="http://icelava.ga/friends"><i class="fa-fw fa fa-heart"></i> Friends</a>
+        <a href="http://icelava.ga/about_us"><i class="fa-fw fa fa-info-circle"></i> About us</a>
+        <a href="http://icelava.ga/log"><i class="fa-fw fa fa-file-text"></i> Log</a> <hr>
+        <p><i class="fa-fw fa fa-rss-square"></i> Blogs</p>
+        <a href="http://icelava.ga/blogs/ForkKILLET"><i class="fa-fw fa fa-check"></i> ForkΨKILLET's</a> <hr>
+        <img id="logo" alt="logo" src="https://s2.ax1x.com/2019/10/01/uNUSHg.md.jpg">
         <p>
             <span style="color: #ff5b5a">RED</span> ICE - WE<br>
             <span style="color: #0e61e1">blue</span> lava~world
         </p> <hr>
         <p>
-            <i class="li-icon fa-fw fa fa-mouse-pointer"></i> Hits
+            <i class="fa-fw fa fa-mouse-pointer"></i> Hits
             <img id="counter" alt="counter" src="http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72"> 
         </p>
-    `][0]); // Note: 便于折叠代码。
-	$body.prepend(`<div id="user_op"></div>`);
+    `);
 
 	// Note: 用户功能
-	$("#user_op").hide().html(`<p><i class="fa fa-sign-out"></i> Sign out</p>`);
-	$("#user_op>.text:first-child").click(function()
+	$body.prepend(`<div id="user_op"></div>`);
+	$("#user_op").hide().html(`<a><i class="fa fa-sign-out"></i> Sign out</a>`);
+	$("#user_op>a:first-child").click(function()
 	{
 		AJAX("GET", "http://loli.icelava.ga/sign_out.php", "application/x-www-form-urlencoded", null,
 		function()
@@ -68,7 +68,7 @@ $(document).ready(function()
 			location.reload();
 		});
 	});
-	$("#user>.text:first-child,#user>.text:last-child").click(function()
+	$("#user>a:first-child, #user>a:last-child").click(function()
 	{
 		location.reload();
 	});
@@ -78,7 +78,7 @@ $(document).ready(function()
 	.click(function()
 	{
 		if ($("#user").data("tourist") === false)
-			$("#user_op").toggle();
+			$("#user_op").fadeToggle();
 	});
 
 	// Note: 亮闪闪的 5 毛钱特效。
@@ -99,7 +99,7 @@ $(document).ready(function()
 			let un = JSON.parse(token)["un"];
 			let $user = $("#user");
 			$user.data("tourist", false);
-			$user.html(`<p id="btn_user"><i class="li-icon fa-fw fa fa-user"></i> ` + un + `</p>`);
+			$user.html(`<p><i class="fa-fw fa fa-user"></i> ` + un + `</p>`);
 		});
 
 	// Note: MD 渲染的一系列操作。
