@@ -230,7 +230,7 @@ h1>a, h2>a, p>a
 {
 	font-size: inherit;
 }
-i+p, i+a
+i+p, i+a, i+em, i+strong
 {
 	display: inline-block;
 }
