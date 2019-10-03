@@ -298,7 +298,7 @@ a *
 	color: inherit;
 	text-decoration: inherit;
 }
-p>a, h1>a, h2>a
+p>a, strong>a, em>a, h1>a, h2>a
 {
 	display: inline;
 }
