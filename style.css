@@ -188,6 +188,10 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus
 {
 	color: white;
 }
+code:hover
+{
+	background-color: #EFEFEF;
+}
 
 /* 分工类 */
 
@@ -327,10 +331,14 @@ table, tr, td, th
 /* ----代码 */
 code
 {
+	display: inline-block;
+	line-height: 120%;
 	padding-left: 3px;
 	padding-right: 3px;
 	border-radius: 5px;
 	background-color: #C5C5C5;
+
+	transition: background-color 500ms;
 }
 pre>code
 {
