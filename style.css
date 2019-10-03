@@ -429,11 +429,16 @@ input[type=text], input[type=password], input[type=email]
 	background-color: #EFEFEF;
 	box-shadow: 0 3px 10px #0000004D;
 }
-.wordbox p,.wordbox strong,.wordbox em
+.wordbox p,.wordbox strong,.wordbox em,.wordbox a
 {
 	font-size: 18px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+.wordbox img
+{
+	margin-top: 0;
+	margin-bottom: 0;
 }
 .wordbox>*:not(div)
 {

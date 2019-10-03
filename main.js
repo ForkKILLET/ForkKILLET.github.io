@@ -201,8 +201,8 @@ $(document).ready(function()
 							time: 1
 						},
 						{ // Note: 例句
-							begin: `<a>@</a> <br> <div><p>`,
-							end: `</p></div>`,
+							begin: `<a>@</a> <br> <p><span>`,
+							end: `</span></p>`,
 							time: 1
 						}
 					]
