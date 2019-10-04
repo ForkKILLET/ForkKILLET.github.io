@@ -531,13 +531,14 @@ input[type=text], input[type=password], input[type=email]
 {
 	display: none;
 }
-.contents a
+.contents a, .contents a *
 {
 	color: white;
 	text-decoration: none;
 }
-.contents a:hover
+.contents a:hover, .contents a:hover *
 {
+	color: white;
 	text-decoration: underline solid white;
 }
 .contents a:hover::after
