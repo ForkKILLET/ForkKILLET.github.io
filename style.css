@@ -273,6 +273,30 @@ ul>li
 {
 	list-style-type: none;
 }
+input[type="checkbox"][disabled]
+{
+	display: inline-block;
+	margin-left: -30px;
+	margin-right: 10px;
+}
+
+/* ----分割线 */
+
+blockquote
+{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-left: 5px;
+	border-style: solid;
+	border-width: 2px 2px 2px 7px;
+	border-color: #C5C5C5 #C5C5C5 #C5C5C5 #55bbff;
+	background: #EFEFEF;
+	box-shadow: 0 3px 10px #0000004D;
+}
+blockquote blockquote
+{
+	border-right-width: 0;
+}
 
 /* ----分割线 */
 
@@ -449,7 +473,8 @@ input[type=text], input[type=password], input[type=email]
 	text-decoration: none;
 }
 
-/* ----调教 Font-awesome */
+/* 调教专区*/
+/* Font awesome */
 .fa
 {
 	padding-top: 0;
@@ -459,4 +484,12 @@ input[type=text], input[type=password], input[type=email]
 {
 	margin-left: -20px;
 	margin-right: 15px;
+}
+
+/* Highlight */
+pre>code.language-text *
+{
+	color: black;
+	font-weight: normal;
+	font-style: normal;
 }
