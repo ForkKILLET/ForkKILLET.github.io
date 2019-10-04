@@ -123,6 +123,10 @@ $(document).ready(function()
 	{
 		constructor()
 		{
+			this.nMD = null;
+			this.Maths = null;
+			this.show_contents = false;
+			
 			this.escape =
 			[
 				{ from: '\\$', temp: '$dlr', to: '$'},
@@ -256,8 +260,10 @@ $(document).ready(function()
 						if ($i.html() === "//&nbsp;")$i.remove();
 					}
 				},
-				contents: function(e)
+				contents: function(e, ExMD)
 				{
+					if (!ExMD.show_contents)return;
+					
 					let $titles = $(e).find("h1, h2");
 					let HTML = `<div class="contents"><h1>Contents <i class="fa fa-angle-right"></i></h1>`;
 					for (let i = 1; i < $titles.length; i++)
@@ -391,7 +397,7 @@ $(document).ready(function()
 		}
 		settings(s)
 		{
-			let names = ["nMD", "Maths"];
+			let names = ["nMD", "Maths", "show_contents"];
 			for (let i in s)
 				if (names.indexOf(i) !== -1)this[i] = s[i];
 				else console.warn("ExMD: '" + i + "' is not an available setting.");
