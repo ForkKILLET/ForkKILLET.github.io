@@ -296,6 +296,10 @@ $(document).ready(function()
 						$(this).parent().fadeOut();
 						$(e).find(".btn_contents").fadeIn();
 					});
+				},
+				Maths: function(e, ExMD)
+				{
+					if (typeof ExMD.Maths === "function")ExMD.Maths(e);
 				}
 			};
 		}
@@ -389,7 +393,6 @@ $(document).ready(function()
 		{
 			e.innerHTML = this.parse(str);
 			for (let i in this.modules) this.modules[i](e, this);
-			if (typeof this.Maths === "function")this.Maths(e);
 		}
 		settings(s)
 		{
@@ -407,7 +410,7 @@ $(document).ready(function()
 		{
 			inlineMath: [["$m ", " m$"]],
 			displayMath: [["$M ", " M$"]],
-			skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"]
+			skipTags: ["script", "noscript", "style", "textarea", "pre", "code"]
 		}
 	});
 	marked.setOptions(
