@@ -172,7 +172,7 @@ $(document).ready(function()
 					[
 						{
 							begin: ' style="color: ',
-							end: '">',
+							end: ';">',
 							time: 1
 						}
 					]
@@ -185,8 +185,8 @@ $(document).ready(function()
 					param:
 					[
 						{
-							begin: ' style="back-ground: ',
-							end: '">',
+							begin: ' style="background-color: ',
+							end: ';">',
 							time: 1
 						}
 					]
