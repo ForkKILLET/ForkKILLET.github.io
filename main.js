@@ -84,10 +84,6 @@ $(document).ready(function()
 			location.reload();
 		});
 	});
-	$("#user>a:first-child, #user>a:last-child").click(function()
-	{
-		location.reload();
-	});
 
 	$("#user")
 	.data("tourist", true)
@@ -115,7 +111,7 @@ $(document).ready(function()
 			let un = JSON.parse(token)["un"];
 			let $user = $("#user");
 			$user.data("tourist", false);
-			$user.html(`<p><i class="fa-fw fa fa-user"></i> ` + un + `</p>`);
+			$user.html(`<p><i class="fa-fw fa fa-user"></i>${un}</p>`);
 		});
 
 	// Note: MD 渲染的一系列操作。
@@ -392,7 +388,7 @@ $(document).ready(function()
 		render(e, str)
 		{
 			e.innerHTML = this.parse(str);
-			for (let i in this.callbacks) this.callbacks[i](e);
+			for (let i in this.callbacks) this.callbacks[i](e, this);
 			if (typeof this.Maths === "function")this.Maths(e);
 		}
 		settings(s)
