@@ -138,7 +138,6 @@ body
 {
 	width: 210px;
 	margin: 20px;
-	border-radius: 10px;
 }
 #counter
 {
@@ -333,6 +332,11 @@ img
 	margin-top: 20px;
 	margin-bottom: 20px;
 	max-height: 640px;
+	border-radius: 10px;
+}
+img:not(#logo)
+{
+	border: 2px solid black;
 }
 
 /* ----表格 */
