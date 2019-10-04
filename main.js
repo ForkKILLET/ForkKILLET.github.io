@@ -27,6 +27,22 @@ function is_local()
 	return location.href.indexOf("localhost") !== -1 || location.href.indexOf("file:///") !== -1;
 }
 
+function get_URL_params()
+{
+	let i = document.URL.indexOf("?");
+	if (i === -1)return null;
+	let p = document.URL.substring(i + 1).split("&");
+	let r = {};
+	for (let i in p)
+	{
+		let v = p[i];
+		let j = v.indexOf("=");
+		if (j === -1)r[v] = true;
+		else r[v.split("=")[0]] = v.split("=")[1];
+	}
+	return r;
+}
+
 // Note: 开始 JQuery 搞事。
 $(document).ready(function()
 {
@@ -156,6 +172,20 @@ $(document).ready(function()
 					[
 						{
 							begin: ' style="color: ',
+							end: '">',
+							time: 1
+						}
+					]
+				},
+				{ // Note: 背景颜色 e.g. $background #C5C5C5;text here background$ $bc #FFE37C;Orange! bc$
+					name: ['background', 'bc'],
+					space: [true, true],
+					begin: `<span`,
+					end: `</span>`,
+					param:
+					[
+						{
+							begin: ' style="back-ground: ',
 							end: '">',
 							time: 1
 						}
