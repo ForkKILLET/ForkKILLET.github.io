@@ -108,11 +108,15 @@
 					$search.css("marginTop", "0");
 				}
 			});
-			$("#btn_back").click(function()
+			// Note: 插入 返回目录 按钮
+			$("#pos").after(`<div id="btn_back" class="button">返回目录</div>`);
+			$("#btn_back")
+			.hide()
+			.click(function()
 			{
 				$("#m_search").show();
 				$("#m_article").hide();
-				$("#btn_back").hide();
+				$(this).hide();
 			});
 
 			// Note: 如果 URL 中有参数，直接显示文章。
@@ -164,17 +168,12 @@
 
 					$("#contents>a").click(function()
 					{
-
 						show_article($(this)[0].id);
 					});
 				});
 			}
 			$search_submit.click(upd_contents);
 			upd_contents();
-
-			// Note: 插入 返回目录 按钮
-			$("#pos").after(`<div id="btn_back" class="button">返回目录</div>`);
-			$("#btn_back").hide();
 
 			// Note: 标签系统
 
