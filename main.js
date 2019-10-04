@@ -238,7 +238,7 @@ $(document).ready(function()
 					]
 				}
 			];
-			this.callbacks =
+			this.modules =
 			{
 				wordbox: function(e)
 				{
@@ -388,7 +388,7 @@ $(document).ready(function()
 		render(e, str)
 		{
 			e.innerHTML = this.parse(str);
-			for (let i in this.callbacks) this.callbacks[i](e, this);
+			for (let i in this.modules) this.modules[i](e, this);
 			if (typeof this.Maths === "function")this.Maths(e);
 		}
 		settings(s)

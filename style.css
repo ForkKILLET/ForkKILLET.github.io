@@ -234,7 +234,8 @@ p:empty, b:empty, u:empty, strong:empty, em:empty, a:empty, li:empty
 {
 	display: none;
 }
-p>strong, p>em, strong>em, em>strong, span>em, span>strong, a>em, a>strong
+p>strong, p>em, strong>em, em>strong, span>em, span>strong, a>em, a>strong, li>em, li>strong,
+p>a, strong>a, em>a, h1>a, h2>a, li>a
 {
 	display: inline-block;
 }
@@ -322,10 +323,6 @@ a *
 {
 	color: inherit;
 	text-decoration: inherit;
-}
-p>a, strong>a, em>a, h1>a, h2>a, li>a
-{
-	display: inline;
 }
 
 /* ----图片 */
