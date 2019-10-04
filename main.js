@@ -263,14 +263,17 @@ $(document).ready(function()
 					for (let i = 1; i < $titles.length; i++)
 					{
 						let e = $titles[i];
+						let s = e.innerHTML;
+						s = s.replace(/<a.+?>/g, "")
+							 .replace(/<\/a>/g, "");
 						if (e.tagName === "H1")
 						{
 							if (i > 1)HTML += `</ul>`;
-							HTML += `<a href="#${e.id}">${e.innerHTML}</a> <ul>`;
+							HTML += `<a href="#${e.id}">${s}</a> <ul>`;
 						}
 						else
 						{
-							HTML += `<li><a href="#${e.id}">${e.innerHTML}</a></li>`
+							HTML += `<li><a href="#${e.id}">${s}</a></li>`
 						}
 					}
 					HTML += `</div>`;
