@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /* 请注意语义！ */
 
 /* 状态类 */
@@ -345,7 +347,8 @@ table
 {
 	margin-top: 20px;
 	margin-bottom: 20px;
-	border-collapse: collapse;
+	border-collapse: separate;
+	border-spacing: 0;
 }
 table td, table th
 {
@@ -353,9 +356,41 @@ table td, table th
 	padding-left: 5px;
 	padding-right: 5px;
 }
-table, tr, td, th
+td, th
 {
-	border: solid 2px black;
+	border: solid 1px black;
+}
+th:first-child,td:first-child
+{
+	border-left-width: 2px;
+}
+th:last-child,td:last-child
+{
+	border-right-width: 2px;
+}
+tr:first-child>th
+{
+	border-top-width: 2px;
+}
+tr:last-child>td
+{
+	border-bottom-width: 2px;
+}
+th:first-child
+{
+	border-top-left-radius: 10px;
+}
+th:last-child
+{
+	border-top-right-radius: 10px;
+}
+tr:last-child>td:first-child
+{
+	border-bottom-left-radius: 10px;
+}
+tr:last-child>td:last-child
+{
+	border-bottom-right-radius: 10px;
 }
 
 /* ----代码 */
@@ -403,7 +438,7 @@ input[type=text], input[type=password], input[type=email]
 .button, input[type=submit]
 {
 	display: inline-block;
-	padding: 5px 15px 5px 15px;
+	padding: 5px 15px;
 	margin: 10px 15px;
 
 	border-left: 3px solid black;
