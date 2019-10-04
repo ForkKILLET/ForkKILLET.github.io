@@ -255,6 +255,42 @@ $(document).ready(function()
 						let $i = $($p[i]);
 						if ($i.html() === "//&nbsp;")$i.remove();
 					}
+				},
+				contents: function(e)
+				{
+					let $titles = $(e).find("h1, h2");
+					let HTML = `<div class="contents"><h1>Contents <i class="fa fa-angle-right"></i></h1>`;
+					for (let i = 1; i < $titles.length; i++)
+					{
+						let e = $titles[i];
+						if (e.tagName === "H1")
+						{
+							if (i > 1)HTML += `</ul>`;
+							HTML += `<a href="#${e.id}">${e.innerHTML}</a> <ul>`;
+						}
+						else
+						{
+							HTML += `<li><a href="#${e.id}">${e.innerHTML}</a></li>`
+						}
+					}
+					HTML += `</div>`;
+					$(e).append($(HTML));
+					
+					HTML = `<div class="btn_contents"><i class="fa fa-angle-left"></div>`;
+					$(HTML)
+					.appendTo($(e))
+			       .hide()
+			       .click(function()
+			       {
+				       $(this).fadeOut();
+				       $(e).find(".contents").fadeIn();
+			       });
+					
+					$(e).find(".contents>h1").click(function()
+					{
+						$(this).parent().fadeOut();
+						$(e).find(".btn_contents").fadeIn();
+					});
 				}
 			};
 		}
