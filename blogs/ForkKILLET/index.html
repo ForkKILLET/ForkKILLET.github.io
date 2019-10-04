@@ -174,7 +174,7 @@
 
 						$("#contents>a").click(function ()
 						{
-							show_article($(this)[0].id);
+							location.search = "?name=" + this.id;
 						});
 					});
 				}
