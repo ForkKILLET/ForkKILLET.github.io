@@ -144,8 +144,8 @@ $(document).ready(function()
 					end: `</sup>`
 				},
 				{ // Note: 下标 e.g. $_awa_$
-					name: ["sub", "_"],
-					space: [true, false],
+					name: ["sub", "_", "-"],
+					space: [true, false, false],
 					begin: `<sub>`,
 					end: `</sub>`
 				},
