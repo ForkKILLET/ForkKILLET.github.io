@@ -269,7 +269,7 @@ $(document).ready(function()
 					
 					let $titles = $m.parent().find("~ h1, ~ h2");
 					let HTML = `<div class="contents"><h1>Contents <i class="fa fa-angle-right"></i></h1>`;
-					for (let i = 1; i < $titles.length; i++)
+					for (let i = 0; i < $titles.length; i++)
 					{
 						let e = $titles[i];
 						let s = e.innerHTML;
