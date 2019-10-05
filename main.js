@@ -137,6 +137,12 @@ $(document).ready(function()
 			];
 			this.labels =
 			[
+				{ // Note: 目录生成标志 e.g. $contents$ $toc$
+					name: ['contents', 'toc'],
+					space: [false, false],
+					begin: `<span class="contents_mark">`,
+					end: `</span>`
+				},
 				{ // Note: 上标 e.g. $^awa^$
 					name: ['sup', '^'],
 					space: [true, false],
@@ -258,9 +264,10 @@ $(document).ready(function()
 				},
 				contents: function(e, ExMD)
 				{
-					if (!ExMD.show_contents)return;
+					let $m = $(e).find(".contents_mark");
+					if ($m.length !== 1)return;
 					
-					let $titles = $(e).find("h1, h2");
+					let $titles = $m.parent().find("~ h1, ~ h2");
 					let HTML = `<div class="contents"><h1>Contents <i class="fa fa-angle-right"></i></h1>`;
 					for (let i = 1; i < $titles.length; i++)
 					{
@@ -396,7 +403,7 @@ $(document).ready(function()
 		}
 		settings(s)
 		{
-			let names = ["nMD", "Maths", "show_contents"];
+			let names = ["nMD", "Maths"];
 			for (let i in s)
 				if (names.indexOf(i) !== -1)this[i] = s[i];
 				else console.warn("ExMD: '" + i + "' is not an available setting.");

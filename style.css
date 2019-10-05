@@ -581,6 +581,10 @@ input[type=text], input[type=password], input[type=email]
 	color: white;
 	box-shadow: 0 3px 10px #0000004D;
 }
+.contents_mark
+{
+	display: none;
+}
 
 /* 调教专区*/
 
