@@ -330,7 +330,7 @@ img
 {
 	margin-top: 20px;
 	margin-bottom: 20px;
-	max-height: 640px;
+	max-height: 500px;
 	border-radius: 10px;
 }
 img:not(#logo)
@@ -588,7 +588,7 @@ input[type=text], input[type=password], input[type=email]
 
 /* 调教专区*/
 
-/* Font awesome */
+/* ----Font awesome */
 .fa
 {
 	padding-top: 0;
@@ -600,7 +600,7 @@ input[type=text], input[type=password], input[type=email]
 	margin-right: 15px;
 }
 
-/* Highlight */
+/* ----Highlight */
 pre>code.language-text *
 {
 	color: black;

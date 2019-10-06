@@ -121,7 +121,6 @@ $(document).ready(function()
 		{
 			this.nMD = null;
 			this.Maths = null;
-			this.show_contents = false;
 			
 			this.escape =
 			[
