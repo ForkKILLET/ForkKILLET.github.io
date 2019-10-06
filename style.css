@@ -607,3 +607,7 @@ pre>code.language-text *
 	font-weight: normal;
 	font-style: normal;
 }
+pre>code .hljs-comment
+{
+	font-style: normal;
+}

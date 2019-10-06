@@ -276,7 +276,7 @@ $(document).ready(function()
 							 .replace(/<\/a>/g, "");
 						if (e.tagName === "H1")
 						{
-							if (i > 1)HTML += `</ul>`;
+							if (i > 0)HTML += `</ul>`;
 							HTML += `<a href="#${e.id}">${s}</a> <ul>`;
 						}
 						else
