@@ -489,7 +489,14 @@ input[type=text], input[type=password], input[type=email]
 	background-color: #EFEFEF;
 	box-shadow: 0 3px 10px #0000004D;
 }
-.wordbox p,.wordbox strong,.wordbox em,.wordbox a
+.wordbox p, .wordbox strong, .wordbox em, .wordbox a
+{
+	display: inline-block;
+	font-size: 18px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.wordbox-div:last-child
 {
 	font-size: 18px;
 	padding-top: 5px;
@@ -499,10 +506,6 @@ input[type=text], input[type=password], input[type=email]
 {
 	margin-top: 0;
 	margin-bottom: 0;
-}
-.wordbox>*:not(div)
-{
-	display: inline-block;
 }
 .wordbox>a
 {
