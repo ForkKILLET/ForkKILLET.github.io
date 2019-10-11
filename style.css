@@ -496,7 +496,7 @@ input[type=text], input[type=password], input[type=email]
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
-.wordbox-div:last-child
+.wordbox div:last-child
 {
 	font-size: 18px;
 	padding-top: 5px;
