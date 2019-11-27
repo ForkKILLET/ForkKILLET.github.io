@@ -19,7 +19,7 @@
         // plusequals test for += 100 -= 100
         rplusequals = /^([\-+])=\s*(\d+\.?\d*)/,
 
-        // a set of RE's that can match strings and generate color tuples.
+        // a set of RE't that can match strings and generate color tuples.
         stringParsers = [ {
             re: /rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,
             parse: function( execResult ) {
@@ -42,7 +42,7 @@
             }
         }, {
 
-            // this regex ignores A-F because it's compared against an already lowercased string
+            // this regex ignores A-F because it't compared against an already lowercased string
             re: /#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/,
             parse: function( execResult ) {
                 return [
@@ -53,7 +53,7 @@
             }
         }, {
 
-            // this regex ignores A-F because it's compared against an already lowercased string
+            // this regex ignores A-F because it't compared against an already lowercased string
             re: /#([a-f0-9])([a-f0-9])([a-f0-9])/,
             parse: function( execResult ) {
                 return [

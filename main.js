@@ -344,18 +344,18 @@ $(document).ready(function()
 	let $body = $("body");
 	$body.prepend(`<div id="guide"></div>`);
 	$("#guide").html(`
-        <h1 id="home"><a href="http://icelava.ga/"><i class="fa fa-home"></i> Home</a></h1>
+        <h1 id="home"><a href="http://icelava.top/"><i class="fa fa-home"></i> Home</a></h1>
         <div id="user">
-            <a href="http://icelava.ga/sign_up">Sign up </a>
+            <a href="http://icelava.top/sign_up">Sign up </a>
             <p><i class="fa fa-sign-in"></i></p>
-            <a target="_blank" href="http://icelava.ga/sign_in">in</a>
+            <a target="_blank" href="http://icelava.top/sign_in">in</a>
         </div> <hr>
-        <a href="http://icelava.ga/site_map"><i class="fa-fw fa fa-sitemap"></i> Site Map</a>
-        <a href="http://icelava.ga/friends"><i class="fa-fw fa fa-heart"></i> Friends</a>
-        <a href="http://icelava.ga/about_us"><i class="fa-fw fa fa-info-circle"></i> About us</a>
-        <a href="http://icelava.ga/log"><i class="fa-fw fa fa-file-text"></i> Log</a> <hr>
+        <a href="http://icelava.top/site_map"><i class="fa-fw fa fa-sitemap"></i> Site Map</a>
+        <a href="http://icelava.top/friends"><i class="fa-fw fa fa-heart"></i> Friends</a>
+        <a href="http://icelava.top/about_us"><i class="fa-fw fa fa-info-circle"></i> About us</a>
+        <a href="http://icelava.top/log"><i class="fa-fw fa fa-file-text"></i> Log</a> <hr>
         <p><i class="fa-fw fa fa-rss-square"></i> Blogs</p>
-        <a href="http://icelava.ga/blogs/ForkKILLET"><i class="fa-fw fa fa-check"></i> ForkΨKILLET's</a> <hr>
+        <a href="http://icelava.top/blogs/ForkKILLET"><i class="fa-fw fa fa-check"></i> ForkΨKILLET's</a> <hr>
         <img id="logo" alt="logo" src="https://s2.ax1x.com/2019/10/01/uNUSHg.md.jpg">
         <p>
             <span style="color: #ff5b5a">RED</span> ICE - WE<br>
@@ -372,7 +372,7 @@ $(document).ready(function()
 	$("#user_op").hide().html(`<a><i class="fa fa-sign-out"></i> Sign out</a>`);
 	$("#user_op>a:first-child").click(function()
 	{
-		AJAX("GET", "http://loli.icelava.ga/sign_out.php", "application/x-www-form-urlencoded", null,
+		AJAX("GET", "http://loli.icelava.top/sign_out.php", "application/x-www-form-urlencoded", null,
 		function()
 		{
 			location.reload();
@@ -397,7 +397,7 @@ $(document).ready(function()
 
 	// Note: 如果不是本地，token 登录。
 	if (!is_local())
-		AJAX("GET", "http://loli.icelava.ga/get_token.php", "application/x-www-form-urlencoded", null,
+		AJAX("GET", "http://loli.icelava.top/get_token.php", "application/x-www-form-urlencoded", null,
 		function(XHR)
 		{
 			let token = XHR.responseText;
@@ -462,7 +462,7 @@ $(document).ready(function()
 			if ($($md_areas[i]).data("name") == null) continue;
 			AJAX
 			(
-				"GET", "http://loli.icelava.ga/load_md.php?name=" + $($md_areas[i]).data("name"),
+				"GET", "http://loli.icelava.top/load_md.php?name=" + $($md_areas[i]).data("name"),
 				"application/x-www-form- urlencoded", null,
 				mf_show_md(i)
 			);

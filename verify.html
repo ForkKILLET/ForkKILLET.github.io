@@ -3,16 +3,16 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
 		<title>Mushouse - Verify</title>
-		<link rel="stylesheet" type="text/css" href="https://icelava.ga/style.css">
-		<link rel="stylesheet" type="text/css" href="https://icelava.ga/fa/css/font-awesome.min.css">
-		<script type="text/javascript" src="https://icelava.ga/marked.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://icelava.top/style.css">
+		<link rel="stylesheet" type="text/css" href="https://icelava.top/fa/css/font-awesome.min.css">
+		<script type="text/javascript" src="https://icelava.top/marked.min.js"></script>
 		<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 		<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="https://icelava.ga/jquery.color.js"></script>
+		<script type="text/javascript" src="https://icelava.top/jquery.color.js"></script>
 		<!-- Note: 代码高亮 -->
-		<link rel="stylesheet"  href="https://icelava.ga/highlight.css">
+		<link rel="stylesheet"  href="https://icelava.top/highlight.css">
 		<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
-		<script src="https://icelava.ga/highlight/highlight.pack.js"></script>
+		<script src="https://icelava.top/highlight/highlight.pack.js"></script>
 	</head>
 	<body>
 		<h1 id="pos">Verify your e-mail</h1>
@@ -20,7 +20,7 @@
 			<div class="md" data-name="verify">
 				<h1><i class="fa fa-spinner fa-spin"></i> 页面内容正在加载中，请稍等！</h1>
 			</div> <br>
-			<form method="post" action="http://loli.icelava.ga/verify.php?op=check" class="center">
+			<form method="post" action="http://loli.icelava.top/verify.php?op=check" class="center">
 				<p class="no-gap">
 					<i class="fa fa-fw fa-shield"></i>
 					<input type="text" name="ve" placeholder="验证码" spellcheck="false">
@@ -34,13 +34,13 @@
 			</form>
 		</div>
 	</body>
-	<script type="text/javascript" src="https://icelava.ga/main.js"></script>
+	<script type="text/javascript" src="https://icelava.top/main.js"></script>
 	<script type="text/javascript">
 		$("#btn_req").click(function req_send_ve()
 		{
 			$("#btn_req").html(`正在发送中 <i class="fa fa-spinner fa-spin"></i>`);
 
-			AJAX("GET", "http://loli.icelava.ga/verify.php?op=send",
+			AJAX("GET", "http://loli.icelava.top/verify.php?op=send",
 					"application/x-www-form-urlencoded", null,
 					function(XHR)
 					{
