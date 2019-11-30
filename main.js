@@ -372,7 +372,7 @@ $(document).ready(function()
 	$("#user_op").hide().html(`<a><i class="fa fa-sign-out"></i> Sign out</a>`);
 	$("#user_op>a:first-child").click(function()
 	{
-		AJAX("GET", "http://loli.icelava.top/sign_out.php", "application/x-www-form-urlencoded", null,
+		AJAX("GET", "http://qwq.icelava.top/sign_out.php", "application/x-www-form-urlencoded", null,
 		function()
 		{
 			location.reload();
@@ -397,7 +397,7 @@ $(document).ready(function()
 
 	// Note: 如果不是本地，token 登录。
 	if (!is_local())
-		AJAX("GET", "http://loli.icelava.top/get_token.php", "application/x-www-form-urlencoded", null,
+		AJAX("GET", "http://qwq.icelava.top/get_token.php", "application/x-www-form-urlencoded", null,
 		function(XHR)
 		{
 			let token = XHR.responseText;
@@ -462,7 +462,7 @@ $(document).ready(function()
 			if ($($md_areas[i]).data("name") == null) continue;
 			AJAX
 			(
-				"GET", "http://loli.icelava.top/load_md.php?name=" + $($md_areas[i]).data("name"),
+				"GET", "http://qwq.icelava.top/load_md.php?name=" + $($md_areas[i]).data("name"),
 				"application/x-www-form- urlencoded", null,
 				mf_show_md(i)
 			);

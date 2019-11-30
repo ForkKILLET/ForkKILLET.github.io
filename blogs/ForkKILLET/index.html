@@ -130,7 +130,7 @@
 					let $m_article = $("#m_article");
 					$m_article.html(`<h1><i class="fa fa-spinner fa-spin"></i> 页面内容正在加载中，请稍等</h1>`)
 					          .show();
-					AJAX("GET", "http://loli.icelava.top/load_md.php?name=blogs/ForkKILLET/" + name, "application/x-www-form- urlencoded", null,
+					AJAX("GET", "http://qwq.icelava.top/load_md.php?name=blogs/ForkKILLET/" + name, "application/x-www-form- urlencoded", null,
 					function (XHR)
 					{
 						ExMD.render($m_article[0], XHR.responseText);
@@ -163,7 +163,7 @@
 						if (tag) s += "tag=" + tag;
 					}
 
-					AJAX("GET", "http://loli.icelava.top/reader.php" + s, "application/x-www-form-urlencoded", null,
+					AJAX("GET", "http://qwq.icelava.top/reader.php" + s, "application/x-www-form-urlencoded", null,
 					function (XHR)
 					{
 						$("#search_submit").html("搜索");
@@ -194,7 +194,7 @@
 				$t1.html(e_tag("None"));
 				$t2.html(e_tag("None"));
 
-				AJAX("GET", "http://loli.icelava.top/get_tags.php", "application/x-www-form- urlencoded", null,
+				AJAX("GET", "http://qwq.icelava.top/get_tags.php", "application/x-www-form- urlencoded", null,
 				function (XHR)
 				{
 					window.tags = JSON.parse(XHR.responseText);
