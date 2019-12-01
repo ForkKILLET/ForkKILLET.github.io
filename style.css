@@ -455,9 +455,9 @@ input[type=text], input[type=password], input[type=email]
 
 .tag
 {
+	display: inline-block;
 	margin-right: 10px;
-	padding-left: 8px;
-	padding-right: 8px;
+	padding: 3px 8px 0 8px;
 	line-height: 30px;
 	font-size: 22px;
 	border-radius: 5px 0;
