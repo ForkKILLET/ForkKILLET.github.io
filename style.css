@@ -32,10 +32,10 @@ body
 #main
 {
 	display: inline-block;
-	width: calc(100% - 250px - 50px * 2 - 30px);
+	width: calc(100% - 260px - 50px * 2 - 30px);
 	height: calc(100% - 200px);
 	position: absolute;
-	left: calc(250px + 50px);
+	left: calc(260px + 50px);
 	top: 100px;
 	padding-bottom: 40px;
 	padding-left: 30px;
@@ -47,7 +47,7 @@ body
 #guide
 {
 	display: inline-block;
-	width: 250px;
+	width: 260px;
 	height: 100%;
 	position: fixed;
 	left: 0;
@@ -66,7 +66,7 @@ body
 #home
 {
 	display: block;
-	padding-bottom: 30px;
+	padding-bottom: 20px;
 	background-color: black;
 }
 #home>a, #home>a *
@@ -106,7 +106,7 @@ body
 #guide>hr
 {
 	margin-left: 30px;
-	width: calc(250px - 30px * 2);
+	width: calc(260px - 30px * 2);
 }
 #user
 {
@@ -148,12 +148,12 @@ body
 #pos
 {
 	position: absolute;
-	left: calc(250px + 50px);
+	left: calc(260px + 50px);
 }
 #copyright
 {
 	position: absolute;
-	left: calc(250px + 50px);
+	left: calc(260px + 50px);
 	bottom: 5px;
 	font-size: 15px;
 }
@@ -458,6 +458,7 @@ input[type=text], input[type=password], input[type=email]
 	margin-right: 10px;
 	padding-left: 8px;
 	padding-right: 8px;
+	line-height: 30px;
 	font-size: 22px;
 	border-radius: 5px 0;
 	background-color: #FFE37C;
