@@ -14,7 +14,7 @@ class ForkKILLET_shape
 		               : 90);
 
 		$(`#${pa}`).append($(`<div id='line_${id}' class='line'></div>`));
-		let $i = $(`#${id}`);
+		let $i = $(`#line_${id}`);
 		$i.css('top', `${top}px`);
 		$i.css('left', `${left}px`);
 		$i.width(len);
@@ -26,7 +26,7 @@ class ForkKILLET_shape
 	circle(pa, id, s_size, x, y, r, s_color, i_color)
 	{
 		$(`#${pa}`).append($(`<div id='circle_${id}' class='circle'></div>`));
-		let $i = $(`#${id}`);
+		let $i = $(`#circle_${id}`);
 		$i.css('top', `${y - r}px`);
 		$i.css('left', `${x - r}px`);
 		$i.width(r * 2);
