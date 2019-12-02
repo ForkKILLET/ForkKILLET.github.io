@@ -1,0 +1,25 @@
+.line
+{
+    position: absolute;
+    transform-origin: right;
+
+    /* 默认颜色 */
+    background-color: black;
+}
+.circle
+{
+    position: absolute;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    text-decoration: none!important;
+
+    /* 特效 */
+    transition: color 500ms, background-color 500ms;
+}
+.circle>.text
+{
+    font-size: 17px;
+    text-align: center;
+    margin-top: -2px;
+}
