@@ -8,7 +8,10 @@ class ForkKILLET_shape
 		let len = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 		let top = c ? Math.max(y1, y2) : Math.min(y1, y2);
 		let left = Math.max(x1, x2) - len + 2;
-		let theta = (c ? 1 : -1) * (Math.abs(x2 - x1) ? (Math.atan(Math.abs(y2 - y1) / Math.abs(x2 - x1)) * 180 / pi()) : 90);
+		let theta = (c ? 1 : -1)
+		            * (Math.abs(x2 - x1)
+		               ? (Math.atan(Math.abs(y2 - y1) / Math.abs(x2 - x1)) * 180 / Math.PI)
+		               : 90);
 
 		$(`#${pa}`).appendChild($(`<div id='line_${id}' class='line'></div>`));
 		let $i = $(`#${id}`);
