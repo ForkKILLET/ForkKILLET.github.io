@@ -13,7 +13,7 @@ class ForkKILLET_shape
 		               ? (Math.atan(Math.abs(y2 - y1) / Math.abs(x2 - x1)) * 180 / Math.PI)
 		               : 90);
 
-		$(`#${pa}`).appendChild($(`<div id='line_${id}' class='line'></div>`));
+		$(`#${pa}`).append($(`<div id='line_${id}' class='line'></div>`));
 		let $i = $(`#${id}`);
 		$i.css('top', `${top}px`);
 		$i.css('left', `${left}px`);
@@ -25,7 +25,7 @@ class ForkKILLET_shape
 
 	circle(pa, id, s_size, x, y, r, s_color, i_color)
 	{
-		$(`#${pa}`).appendChild($(`<div id='circle_${id}' class='circle'></div>`));
+		$(`#${pa}`).append($(`<div id='circle_${id}' class='circle'></div>`));
 		let $i = $(`#${id}`);
 		$i.css('top', `${y - r}px`);
 		$i.css('left', `${x - r}px`);
@@ -49,7 +49,7 @@ class ForkKILLET_shape
 
 	link(pa, id, URL)
 	{
-		$(`#${pa}`).appendChild($(`<a id='link_${id}' href='${URL}'></a>`));
+		$(`#${pa}`).append($(`<a id='link_${id}' href='${URL}'></a>`));
 	}
 
 	layer(id, layer)
