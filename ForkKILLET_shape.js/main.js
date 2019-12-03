@@ -1,11 +1,21 @@
 // Note: need JQuery
 
-class ForkKILLET_shape
+class ForkKILLETShape
 {
 	constructor()
 	{
-		Math.deg_rad = deg => deg * Math.PI / 180;
-		Math.rad_deg = rad => rad / Math.PI * 180;
+		Math.deg_to_rad = (deg) => deg * Math.PI / 180;
+		Math.rad_to_deg = (rad) => rad / Math.PI * 180;
+		Math.random_in_range = (min, max) => Math.random() * (max - min + 1) + min;
+		Math.random_in_100 = () => Math.round(Math.random_in_range(0, 100));
+		console.error_and_throw = (code, msg) =>
+		{
+			let e = Error(`[${code}] ForkKILLET_shape.js\n${msg}`);
+			console.error(e);
+			throw e;
+		};
+
+		if (!$ || typeof($) !== "function") console.error_and_throw("R001", "Need JQuery but not found the correct $ function.");
 	}
 	line(pa, id, size, x1, y1, x2, y2, color)
 	{
@@ -19,7 +29,7 @@ class ForkKILLET_shape
 		let left = x1;
 		let theta = 0;
 		if (y1 !== y2) // Note: tan(theta) = a / b, theta = atan(a / b).
-			theta = Math.rad_deg(Math.atan((x2 - x1) / (y2 - y1)));
+			theta = Math.rad_to_deg(Math.atan((x2 - x1) / (y2 - y1)));
 
 		$(`#${pa}`).append($(`<div id="line_${id}" class="line"></div>`));
 		let $i = $(`#line_${id}`);
@@ -45,20 +55,44 @@ class ForkKILLET_shape
 		$i.css("backgroundColor", i_color);
 
 		// Note: 悬停动画
-		$i.hover(function ()
+		$i.hover(() =>
 		{
 			$i.css("borderColor", i_color);
 			$i.css("backgroundColor", s_color);
-		}, function ()
+		}, () =>
 		{
 			$i.css("borderColor", s_color);
 			$i.css("backgroundColor", i_color);
 		});
 	}
 
-	link(pa, id, URL)
+	link(id, URL)
 	{
-		$(`#${pa}`).append($(`<a id="link_${id}" href="${URL}"></a>`));
+		let $i = $(`#${id}`);
+		$i.before($(`<a id="link_${id}" href="${URL}"></a>`));
+		$i.appendTo($(`#link_${id}`));
+	}
+
+	text_in_circle(circle, id, text, size, o_color, c_color, use_ExMD, ExMD)
+	{
+		let $c = $(`#circle_${circle}`);
+		$c.append($(`<p id="${id}" class="text">${text}</p>`));
+		let $i = $(`#${id}`);
+		$i.css("fontSize", `${size}px`);
+		$i.css("color", o_color);
+		// $i.css("lineHeight", `${$c.height()}px`);
+		$i.parent().hover(() =>
+		{
+			$i.css("color", c_color);
+		}, () =>
+		{
+			$i.css("color", o_color);
+		});
+		if (use_ExMD)
+		{
+			if (typeof(ExMD.render) !== "function") console.error_and_throw("R002", "Need ExMD but got a wrong ExMD object.");
+			ExMD.render($i[0], $i.html());
+		}
 	}
 
 	layer(id, layer)
