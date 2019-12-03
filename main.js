@@ -189,7 +189,7 @@ class ExtendedMarkdownParser
 					if ($i.html() === "//&nbsp;")$i.remove();
 				}
 			},
-			contents: function(e, ExMD)
+			contents: function(e)
 			{
 				let $m = $(e).find(".contents_mark");
 				if ($m.length !== 1)return;
@@ -340,6 +340,8 @@ class ExtendedMarkdownParser
 // Note: 开始 JQuery 搞事。
 $(document).ready(function()
 {
+	log("[LOAD]: icelava.top/main.js");
+
 	// Note: 插入导航栏（侧边栏）
 	let $body = $("body");
 	$body.prepend(`<div id="guide"></div>`);
@@ -468,4 +470,6 @@ $(document).ready(function()
 			);
 		}
 	}
+
+	window.FS = new ForkKILLETShape();
 });
