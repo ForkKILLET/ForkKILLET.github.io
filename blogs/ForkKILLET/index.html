@@ -131,10 +131,7 @@
 					$m_article.html(`<h1><i class="fa fa-spinner fa-spin"></i> 页面内容正在加载中，请稍等</h1>`)
 					          .show();
 					AJAX("GET", "http://qwq.icelava.top/load_md.php?name=blogs/ForkKILLET/" + name, "application/x-www-form- urlencoded", null,
-					function (XHR)
-					{
-						ExMD.render($m_article[0], XHR.responseText);
-					});
+					(XHR) => ExMD.render($m_article[0], XHR.responseText));
 				}
 
 				let p = get_URL_params();
@@ -164,7 +161,7 @@
 					}
 
 					AJAX("GET", "http://qwq.icelava.top/reader.php" + s, "application/x-www-form-urlencoded", null,
-					function (XHR)
+					(XHR) =>
 					{
 						$("#search_submit").html("搜索");
 						$("#contents").html(XHR.responseText);
@@ -195,7 +192,7 @@
 				$t2.html(e_tag("None"));
 
 				AJAX("GET", "http://qwq.icelava.top/get_tags.php", "application/x-www-form- urlencoded", null,
-				function (XHR)
+				(XHR) =>
 				{
 					window.tags = JSON.parse(XHR.responseText);
 					$("#input_tag").on("input propertychange", function ()

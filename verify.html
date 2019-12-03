@@ -42,7 +42,7 @@
 
 			AJAX("GET", "http://qwq.icelava.top/verify.php?op=send",
 					"application/x-www-form-urlencoded", null,
-					function(XHR)
+					(XHR) =>
 					{
 						let $btn = $("#btn_req");
 						$btn.html("验证码已发送");

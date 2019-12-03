@@ -13,12 +13,7 @@ function AJAX(type, url, MIME, value, fn_cb)
 	XHR.open(type, url);
 	XHR.setRequestHeader("Content-Type", MIME);
 	XHR.withCredentials = true;
-	XHR.onreadystatechange =
-		function()
-		{
-			if (XHR.readyState === 4 && XHR.status === 200)
-				fn_cb(XHR);
-		};
+	XHR.onreadystatechange = () => { if (XHR.readyState === 4 && XHR.status === 200) fn_cb(XHR); }
 	XHR.send(value);
 }
 
@@ -173,13 +168,10 @@ class ExtendedMarkdownParser
 		];
 		this.modules =
 		{
-			wordbox: function(e)
+			wordbox: (e) =>
 			{
 				$(e).find(".wordbox>a:not(.ready)")
-				    .click(function()
-				    {
-					    $(this).parent().children("a.ready~*").fadeToggle(500);
-				    })
+				    .click(() => $(this).parent().children("a.ready~*").fadeToggle(500))
 				    .addClass("ready")
 				    .parent().children("a.ready~*").hide();
 				let $p = $(e).find(".wordbox>p:nth-child(2)");
@@ -189,7 +181,7 @@ class ExtendedMarkdownParser
 					if ($i.html() === "//&nbsp;")$i.remove();
 				}
 			},
-			contents: function(e)
+			contents: (e) =>
 			{
 				let $m = $(e).find(".contents_mark");
 				if ($m.length !== 1)return;
@@ -219,13 +211,13 @@ class ExtendedMarkdownParser
 				$(HTML)
 					.appendTo($(e))
 					.hide()
-					.click(function()
+					.click(() =>
 					{
 						$(this).fadeOut();
 						$(e).find(".contents").fadeIn();
 					});
 				
-				$(e).find(".contents>h1").click(function()
+				$(e).find(".contents>h1").click(() =>
 				{
 					$(this).parent().fadeOut();
 					$(e).find(".btn_contents").fadeIn();
@@ -338,7 +330,7 @@ class ExtendedMarkdownParser
 }
 
 // Note: 开始 JQuery 搞事。
-$(document).ready(function()
+$(document).ready(() =>
 {
 	log("[LOAD]: icelava.top/main.js");
 
@@ -372,18 +364,15 @@ $(document).ready(function()
 	// Note: 用户功能
 	$body.prepend(`<div id="user_op"></div>`);
 	$("#user_op").hide().html(`<a><i class="fa fa-sign-out"></i> Sign out</a>`);
-	$("#user_op>a:first-child").click(function()
+	$("#user_op>a:first-child").click(() =>
 	{
 		AJAX("GET", "http://qwq.icelava.top/sign_out.php", "application/x-www-form-urlencoded", null,
-		function()
-		{
-			location.reload();
-		});
+		() => location.reload());
 	});
 
 	$("#user")
 	.data("tourist", true)
-	.click(function()
+	.click(() =>
 	{
 		if ($("#user").data("tourist") === false)
 			$("#user_op").fadeToggle();
@@ -400,7 +389,7 @@ $(document).ready(function()
 	// Note: 如果不是本地，token 登录。
 	if (!is_local())
 		AJAX("GET", "http://qwq.icelava.top/get_token.php", "application/x-www-form-urlencoded", null,
-		function(XHR)
+		(XHR) =>
 		{
 			let token = XHR.responseText;
 			if (!token)return;
