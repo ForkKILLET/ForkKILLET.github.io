@@ -27,8 +27,9 @@ class ForkKILLETShape
 		let len = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 		let top = y1;
 		let left = x1;
-		let theta = 90;
-		if (x1 !== x2) // Note: tan(theta) = y / x, theta = atan(y / x).
+		let theta = 0;
+		if (x1 === x2) theta = y1 < y2 ? -90 : 90;
+		else if (y1 !== y2) // Note: tan(theta) = y / x, theta = atan(y / x).
 			theta = Math.rad_to_deg(Math.atan((y2 - y1) / (x2 - x1)));
 
 		$(`#${pa}`).append($(`<div id="line_${id}" class="line"></div>`));
