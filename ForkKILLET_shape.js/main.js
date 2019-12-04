@@ -1,5 +1,7 @@
 // Note: need JQuery
 
+console.log("[LOAD]: icelava.top/ForkKILLET_shape.js/main.js");
+
 class ForkKILLETShape
 {
 	constructor()
@@ -17,7 +19,6 @@ class ForkKILLETShape
 		};
 
 		if (!$ || typeof($) !== "function") error_and_throw("R001", "Need JQuery but not found the correct $ function.");
-		log("[LOAD]: icelava.top/ForkKILLET_shape.js/main.js");
 	}
 	line(pa, id, size, x1, y1, x2, y2, color)
 	{
