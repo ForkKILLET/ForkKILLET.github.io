@@ -8,14 +8,16 @@ class ForkKILLETShape
 		Math.rad_to_deg = (rad) => rad / Math.PI * 180;
 		Math.random_in_range = (min, max) => Math.random() * (max - min + 1) + min;
 		Math.random_in_100 = () => Math.round(Math.random_in_range(0, 100));
-		console.error_and_throw = (code, msg) =>
+		window.log = (msg) => console.log(msg);
+		window.error_and_throw = (code, msg) =>
 		{
 			let e = Error(`[${code}] ForkKILLET_shape.js\n${msg}`);
 			console.error(e);
 			throw e;
 		};
 
-		if (!$ || typeof($) !== "function") console.error_and_throw("R001", "Need JQuery but not found the correct $ function.");
+		if (!$ || typeof($) !== "function") error_and_throw("R001", "Need JQuery but not found the correct $ function.");
+		log("[LOAD]: icelava.top/ForkKILLET_shape.js/main.js");
 	}
 	line(pa, id, size, x1, y1, x2, y2, color)
 	{
@@ -28,7 +30,7 @@ class ForkKILLETShape
 		let top = y1;
 		let left = x1;
 		let theta = 0;
-		if (x1 === x2) theta = y1 < y2 ? -90 : 90;
+		if (x1 === x2) theta = y1 < y2 ? 90 : -90;
 		else if (y1 !== y2) // Note: tan(theta) = y / x, theta = atan(y / x).
 			theta = Math.rad_to_deg(Math.atan((y2 - y1) / (x2 - x1)));
 
