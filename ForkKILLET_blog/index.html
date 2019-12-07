@@ -206,33 +206,35 @@
 						$t2.html(e_tag("None"));
 						for (let t in tags)
 						{
-							let v = $(this).val();
+							let v = $("#input_tag").val();
 							if (v !== "" && tags[t].match(RegExp(v)))
 							{
 								$t2.append(e_tag(tags[t]));
 								let $i = $("#tags_2>.tag:first-child");
 								if ($i[0].innerHTML === "None") $i.remove();
 
-								$("#tags_2>.tag:last-child").click(() =>
+								$("#tags_2>.tag:last-child").click((e) =>
 								{
-									if ($(this)[0].innerHTML === "None") return;
-									if ($(this).parent()[0].id === "tags_2")
+									let self = e.currentTarget;
+									let tag_name = self.innerHTML;
+									if (tag_name === "None") return;
+									if ($(self).parent()[0].id === "tags_2")
 									{
-										if (!window.chosen_tags.match("@" + $(this)[0].innerHTML))
+										if (!window.chosen_tags.match("@" + tag_name))
 										{
-											$(this).appendTo($t1);
+											$(self).appendTo($t1);
 											let $i = $("#tags_1>.tag:first-child");
 											if ($i[0].innerHTML === "None") $i.remove();
-											window.chosen_tags += "@" + $(this)[0].innerHTML;
+											window.chosen_tags += "@" + tag_name;
 										}
 										$t2.html(e_tag("None"));
 										$("#input_tag").val("");
 									}
 									else
 									{
-										$(this).remove();
+										$(self).remove();
 										if ($t1.children().length === 0) $t1.html(e_tag("None"));
-										window.chosen_tags = window.chosen_tags.replace("@" + $(this)[0].innerHTML, "");
+										window.chosen_tags = window.chosen_tags.replace("@" + tag_name, "");
 									}
 								});
 							}
