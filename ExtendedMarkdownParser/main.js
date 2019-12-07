@@ -144,7 +144,7 @@ class ExtendedMarkdownParser
 			wordbox: (e) =>
 			{
 				$(e).find(".wordbox>a:not(.ready)")
-					.click(() => $(this).parent().children("a.ready~*").fadeToggle(500))
+					.click((event) => $(event.currentTarget).parent().children("a.ready~*").fadeToggle(500))
 					.addClass("ready")
 					.parent().children("a.ready~*").hide();
 				let $p = $(e).find(".wordbox>p:nth-child(2)");
@@ -165,36 +165,29 @@ class ExtendedMarkdownParser
 				{
 					let e = $titles[i];
 					let s = e.innerHTML;
-					s = s.replace(/<a.+?>/g, "")
-						.replace(/<\/a>/g, "");
+					s = s.replace(/<a.+?>/g, "").replace(/<\/a>/g, "");
 					if (e.tagName === "H1")
 					{
 						if (i > 0)HTML += `</ul>`;
 						HTML += `<a href="#${e.id}">${s}</a> <ul>`;
 					}
-					else
-					{
-						HTML += `<li><a href="#${e.id}">${s}</a></li>`
-					}
+					else HTML += `<li><a href="#${e.id}">${s}</a></li>`;
 				}
 				HTML += `</div>`;
 				$(e).append($(HTML));
 
 				HTML = `<div class="btn_contents"><i class="fa fa-angle-left"></div>`;
-				$(HTML)
-					.appendTo($(e))
-					.hide()
-					.click(() =>
-						   {
-							   $(this).fadeOut();
-							   $(e).find(".contents").fadeIn();
-						   });
+				$(HTML).appendTo($(e)).hide().click((event) =>
+			    {
+					$(event.currentTarget).fadeOut();
+					$(e).find(".contents").fadeIn();
+			    });
 
-				$(e).find(".contents>h1").click(() =>
-												{
-													$(this).parent().fadeOut();
-													$(e).find(".btn_contents").fadeIn();
-												});
+				$(e).find(".contents>h1").click((event) =>
+				{
+					$(event.currentTarget).parent().fadeOut();
+					$(e).find(".btn_contents").fadeIn();
+				});
 			},
 			Maths: function(e, ExMD)
 			{
