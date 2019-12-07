@@ -1,7 +1,3 @@
-// Note: need JQuery
-
-console.log("[LOAD]: icelava.top/ForkKILLET_shape.js/main.js");
-
 class ForkKILLETShape
 {
 	constructor()
@@ -11,14 +7,17 @@ class ForkKILLETShape
 		Math.random_in_range = (min, max) => Math.random() * (max - min + 1) + min;
 		Math.random_in_100 = () => Math.round(Math.random_in_range(0, 100));
 		window.log = (msg) => console.log(msg);
-		window.error_and_throw = (code, msg) =>
+		this.error_and_throw = (code, msg) =>
 		{
-			let e = Error(`[${code}] ForkKILLET_shape.js\n${msg}`);
+			let e = Error(`[ERROR: ${code}]: ForkKILLET_shape.js\n${msg}`);
 			console.error(e);
 			throw e;
 		};
 
-		if (!$ || typeof($) !== "function") error_and_throw("R001", "Need JQuery but not found the correct $ function.");
+		if (!$ || typeof($) !== "function") this.error_and_throw("R001", "Need JQuery but not found the correct $ function.");
+		if (!window.script) window.script = {};
+		window.script.ForkKILLET_shape = true;
+		log("[LOAD]: icelava.top/ForkKILLET_shape.js/main.js");
 	}
 	line(pa, id, size, x1, y1, x2, y2, color)
 	{
@@ -93,7 +92,7 @@ class ForkKILLETShape
 		});
 		if (use_ExMD)
 		{
-			if (typeof(ExMD.render) !== "function") console.error_and_throw("R002", "Need ExMD but got a wrong ExMD object.");
+			if (typeof(ExMD.render) !== "function") this.error_and_throw("R002", "Need ExtendedMarkdownParser but didn't get a correct ExtendedMarkdownParser object.");
 			ExMD.render($i[0], $i.html());
 		}
 	}
