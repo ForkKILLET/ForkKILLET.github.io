@@ -41,7 +41,11 @@ body
 	padding-left: 30px;
 	padding-right: 30px;
 	background-color: white;
+
 	box-shadow: 0 3px 10px #0000004D;
+
+	transition: left 1s, width 1s;
+
 	overflow-y: scroll;
 }
 #guide
@@ -159,13 +163,19 @@ body
 {
 	position: absolute;
 	left: calc(260px + 50px);
+	margin-left: 100%;
+
+	transition: left 1s, margin-left 1s;
 }
 #copyright
 {
 	position: absolute;
 	left: calc(260px + 50px);
 	bottom: 5px;
+
 	font-size: 15px;
+
+	transition: left 1s;
 }
 
 #btn_toggle_guide
@@ -395,11 +405,11 @@ td, th
 {
 	border: solid 1px black;
 }
-th:first-child,td:first-child
+th:first-child, td:first-child
 {
 	border-left-width: 2px;
 }
-th:last-child,td:last-child
+th:last-child, td:last-child
 {
 	border-right-width: 2px;
 }

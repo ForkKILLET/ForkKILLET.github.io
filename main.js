@@ -63,22 +63,29 @@ $(document).ready(() =>
             <img id="counter" alt="counter" src="http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72"> 
         </p>
     `);
+	$body.append(`<p id="copyright">Copyright© 2019 IceLava Dev Team. All Rights Reserved</p>`);
 	$body.prepend(`<div id="btn_toggle_guide"></div>`);
 	let $btn_toggle_guide = $("#btn_toggle_guide");
 	$btn_toggle_guide.append(`<i class="fa fa-angle-left"></i>`).data("show", true);
-	let $btn_and_guide = $("#guide,#btn_toggle_guide");
-	let $arrow = $("#btn_toggle_guide>i");
-	$("#btn_toggle_guide").click(() =>
+	let $btn_and_guide = $("#guide,#btn_toggle_guide"),
+	    $arrow = $("#btn_toggle_guide>i"),
+	    $core = $("#main,#pos,#copyright"),
+	    $main = $("#main");
+	$btn_toggle_guide.click(() =>
 	{
 		if ($btn_toggle_guide.data("show"))
 		{
 			$btn_and_guide.css("marginLeft", "-260px");
 			$btn_toggle_guide.data("show", false);
+			$core.css("left", "35px");
+			$main.css("width", "calc(100% - 35px - 50px - 30px)");
 		}
 		else
 		{
 			$btn_and_guide.css("marginLeft", "0");
 			$btn_toggle_guide.data("show", true);
+			$core.css("left", "calc(260px + 50px)");
+			$main.css("width", "calc(100% - 260px - 50px * 2 - 30px)");
 		}
 		$arrow.toggleClass("fa-angle-left").toggleClass("fa-angle-right");
 	});
@@ -99,12 +106,7 @@ $(document).ready(() =>
 	});
 
 	// Note: 亮闪闪的 5 毛钱特效。
-	let $pos = $("#pos");
-	$pos.css("left", "calc(100% - 50px - " + $pos.width() + "px)")
-	    .animate({"left": "300px"}, 1000, "swing");
-
-	// Note: 在 #main 下面写版权信息。
-	$body.append(`<p id="copyright">Copyright© 2019 IceLava Dev Team. All Rights Reserved</p>`);
+	$("#pos").css("marginLeft", "0");
 
 	// Note: 如果不是本地，token 登录。
 	if (!is_local())
