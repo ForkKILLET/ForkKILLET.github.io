@@ -50,9 +50,8 @@ $(document).ready(() =>
 		<a href="http://icelava.top/site_map"><i class="fa-fw fa fa-sitemap"></i> Site Map</a>
 		<a href="http://icelava.top/friends"><i class="fa-fw fa fa-heart"></i> Friends</a>
 		<a href="http://icelava.top/about_us"><i class="fa-fw fa fa-info-circle"></i> About us</a>
-		<a href="http://icelava.top/log"><i class="fa-fw fa fa-file-text"></i> Log</a> <hr>
-		<p><i class="fa-fw fa fa-rss-square"></i> Blogs</p>
-		<a href="http://icelava.top/ForkKILLET_blog"><i class="fa-fw fa fa-check"></i> ForkΨKILLET's</a> <hr>
+		<a href="http://icelava.top/log"><i class="fa-fw fa fa-file-text"></i> Log</a>
+		<a href="http://icelava.top/ForkKILLET_blog"><i class="fa-fw fa fa-rss-square"></i> ForkKILLET</a> <hr>
 	    <img id="logo" alt="logo" src="https://s2.ax1x.com/2019/10/01/uNUSHg.md.jpg">
         <p>
             <span style="color: #ff5b5a">RED</span> ICE - WE<br>
