@@ -12,6 +12,9 @@ class ExtendedMarkdownParser
 			throw e;
 		};
 		if (!$ || typeof($) !== "function") this.error_and_throw("R001", `Need JQuery but "$" function isn't correct.`);
+		if (!window.script) window.script = {};
+		window.script.ExtendedMarkdownParser = true;
+		log("[LOAD]: icelava.top/ExtendedMarkdownParser/main.js");
 
 		this.nMD = null;
 		this.Maths = null;
