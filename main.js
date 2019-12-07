@@ -39,20 +39,21 @@ $(document).ready(() =>
 	// Note: 插入导航栏（侧边栏）
 	let $body = $("body");
 	$body.prepend(`<div id="guide"></div>`);
-	$("#guide").html(`
-        <h1 id="home"><a href="http://icelava.top/"><i class="fa fa-home"></i> Home</a></h1>
-        <div id="user">
-            <a href="http://icelava.top/sign_up">Sign up </a>
-            <p><i class="fa fa-sign-in"></i></p>
-            <a target="_blank" href="http://icelava.top/sign_in">in</a>
-        </div> <hr>
-        <a href="http://icelava.top/site_map"><i class="fa-fw fa fa-sitemap"></i> Site Map</a>
-        <a href="http://icelava.top/friends"><i class="fa-fw fa fa-heart"></i> Friends</a>
-        <a href="http://icelava.top/about_us"><i class="fa-fw fa fa-info-circle"></i> About us</a>
-        <a href="http://icelava.top/log"><i class="fa-fw fa fa-file-text"></i> Log</a> <hr>
-        <p><i class="fa-fw fa fa-rss-square"></i> Blogs</p>
-        <a href="http://icelava.top/blogs/ForkKILLET"><i class="fa-fw fa fa-check"></i> ForkΨKILLET's</a> <hr>
-        <img id="logo" alt="logo" src="https://s2.ax1x.com/2019/10/01/uNUSHg.md.jpg">
+	let $guide = $("#guide");
+	$guide.html(`
+		<h1 id="home"><a href="http://icelava.top/"><i class="fa fa-home"></i> Home</a></h1>
+		<div id="user">
+			<a href="http://icelava.top/sign_up">Sign up </a>
+			<p><i class="fa fa-sign-in"></i></p>
+			<a target="_blank" href="http://icelava.top/sign_in">in</a>
+		</div> <hr>
+		<a href="http://icelava.top/site_map"><i class="fa-fw fa fa-sitemap"></i> Site Map</a>
+		<a href="http://icelava.top/friends"><i class="fa-fw fa fa-heart"></i> Friends</a>
+		<a href="http://icelava.top/about_us"><i class="fa-fw fa fa-info-circle"></i> About us</a>
+		<a href="http://icelava.top/log"><i class="fa-fw fa fa-file-text"></i> Log</a> <hr>
+		<p><i class="fa-fw fa fa-rss-square"></i> Blogs</p>
+		<a href="http://icelava.top/ForkKILLET_blog"><i class="fa-fw fa fa-check"></i> ForkΨKILLET's</a> <hr>
+	    <img id="logo" alt="logo" src="https://s2.ax1x.com/2019/10/01/uNUSHg.md.jpg">
         <p>
             <span style="color: #ff5b5a">RED</span> ICE - WE<br>
             <span style="color: #0e61e1">blue</span> lava~world
@@ -62,6 +63,25 @@ $(document).ready(() =>
             <img id="counter" alt="counter" src="http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72"> 
         </p>
     `);
+	$body.prepend(`<div id="btn_toggle_guide"></div>`);
+	let $btn_toggle_guide = $("#btn_toggle_guide");
+	$btn_toggle_guide.append(`<i class="fa fa-angle-left"></i>`).data("show", true);
+	let $btn_and_guide = $("#guide,#btn_toggle_guide");
+	let $arrow = $("#btn_toggle_guide>i");
+	$("#btn_toggle_guide").click(() =>
+	{
+		if ($btn_toggle_guide.data("show"))
+		{
+			$btn_and_guide.css("marginLeft", "-260px");
+			$btn_toggle_guide.data("show", false);
+		}
+		else
+		{
+			$btn_and_guide.css("marginLeft", "0");
+			$btn_toggle_guide.data("show", true);
+		}
+		$arrow.toggleClass("fa-angle-left").toggleClass("fa-angle-right");
+	});
 
 	// Note: 用户功能
 	$body.prepend(`<div id="user_op"></div>`);
@@ -72,9 +92,7 @@ $(document).ready(() =>
 		() => location.reload());
 	});
 
-	$("#user")
-	.data("tourist", true)
-	.click(() =>
+	$("#user").data("tourist", true).click(() =>
 	{
 		if ($("#user").data("tourist") === false)
 			$("#user_op").fadeToggle();

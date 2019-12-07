@@ -1,30 +1,30 @@
 .line
 {
-    position: absolute;
-    transform-origin: right;
+	position: absolute;
+	transform-origin: right;
 
-    /* 默认颜色 */
-    background-color: black;
+	/* 默认颜色 */
+	background-color: black;
 }
 .circle
 {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    border-radius: 50%;
-    border-style: solid;
-    text-decoration: none!important;
+	border-radius: 50%;
+	border-style: solid;
+	text-decoration: none!important;
 
-    transition: border 500ms, background-color 500ms;
+	transition: border 500ms, background-color 500ms;
 }
 .circle>.text
 {
-    transition: color 500ms, background-color 500ms;
+	transition: color 500ms, background-color 500ms;
 }
 .circle>.text *
 {
-    font-size: inherit;
-    color: inherit;
+	font-size: inherit;
+	color: inherit;
 }

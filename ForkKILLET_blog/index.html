@@ -1,7 +1,8 @@
 <!doctype html>
-<html>
+<html lang="zh-cn">
 	<head>
-				<meta http-equiv='Content-Type' content='text/html' charset='UTF-8'>
+		<meta http-equiv='Content-Type' content='text/html' charset='UTF-8'>
+		<title>ForkKILLET - blog</title>
 		<!-- Note: Font Awesome -->
 		<link rel="stylesheet" type="text/css" href="http://icelava.top/fa/css/font-awesome.min.css">
 		<!-- Note: Markdown and MathJax -->
@@ -21,6 +22,44 @@
 		<script src="http://icelava.top/ForkKILLET_shape.js/main.js"></script>
 		<!-- Note: IceLava -->
 		<link rel="stylesheet" type="text/css" href="http://icelava.top/style.css">
+		<style>
+			#main
+			{
+				z-index: -3;
+			}
+			#m_search
+			{
+				position: relative;
+				z-index: -3;
+			}
+			#search
+			{
+				position: relative;
+				z-index: -2;
+
+				transition: margin-top 1s;
+			}
+			#search_cover
+			{
+				position: absolute;
+				display: block;
+				z-index: -1;
+				top: 0;
+				width: 100%;
+				height: 150px;
+
+				background-color: #ffffff;
+			}
+			#btn_back
+			{
+				position: absolute;
+				right: 35px;
+				top: 15px;
+
+				background-color: white;
+				box-shadow: 0 3px 10px #0000004D;
+			}
+		</style>
 	</head>
 	<body>
 		<h1 id="pos">ForkΨKILLET's Blog</h1>
@@ -64,7 +103,7 @@
 				let $search = $("#search");
 				$search.data("show", true);
 				$("#btn_show_search").hide();
-				$("#search_title").click(function ()
+				$("#search_title").click(() =>
 				{
 					$("#btn_hide_search").toggle();
 					$("#btn_show_search").toggle();
@@ -83,7 +122,7 @@
 				$("#pos").after(`<div id="btn_back" class="button">返回目录</div>`);
 				$("#btn_back")
 				.hide()
-				.click(function ()
+				.click(() =>
 				{
 					$("#m_search").show();
 					$("#m_article").hide();
@@ -98,8 +137,8 @@
 					$("#btn_back").show();
 					let $m_article = $("#m_article");
 					$m_article.html(`<h1><i class="fa fa-spinner fa-spin"></i> 页面内容正在加载中，请稍等</h1>`)
-					          .show();
-					AJAX("GET", "http://qwq.icelava.top/load_md.php?name=blogs/ForkKILLET/" + name, "application/x-www-form- urlencoded", null,
+							  .show();
+					AJAX("GET", "http://qwq.icelava.top/load_md.php?name=ForkKILLET_blog/" + name, "application/x-www-form- urlencoded", null,
 					(XHR) => ExMD.render($m_article[0], XHR.responseText));
 				}
 
@@ -129,13 +168,12 @@
 						if (tag) s += "tag=" + tag;
 					}
 
-					AJAX("GET", "http://qwq.icelava.top/reader.php" + s, "application/x-www-form-urlencoded", null,
-					(XHR) =>
+					AJAX("GET", "http://qwq.icelava.top/reader.php" + s, "application/x-www-form-urlencoded", null, (XHR) =>
 					{
 						$("#search_submit").html("搜索");
 						$("#contents").html(XHR.responseText);
 
-						$("#contents>a").click(function ()
+						$("#contents>a").click(() =>
 						{
 							location.hash = "";
 							location.search = "?name=" + this.id;
@@ -164,7 +202,7 @@
 				(XHR) =>
 				{
 					window.tags = JSON.parse(XHR.responseText);
-					$("#input_tag").on("input propertychange", function ()
+					$("#input_tag").on("input propertychange", () =>
 					{
 						$t2.html(e_tag("None"));
 						for (let t in tags)
@@ -174,10 +212,9 @@
 							{
 								$t2.append(e_tag(tags[t]));
 								let $i = $("#tags_2>.tag:first-child");
-								if ($i[0].innerHTML === "None")
-									$i.remove();
+								if ($i[0].innerHTML === "None") $i.remove();
 
-								$("#tags_2>.tag:last-child").click(function ()
+								$("#tags_2>.tag:last-child").click(() =>
 								{
 									if ($(this)[0].innerHTML === "None") return;
 									if ($(this).parent()[0].id === "tags_2")
@@ -186,9 +223,7 @@
 										{
 											$(this).appendTo($t1);
 											let $i = $("#tags_1>.tag:first-child");
-											if ($i[0].innerHTML === "None")
-												$i.remove();
-
+											if ($i[0].innerHTML === "None") $i.remove();
 											window.chosen_tags += "@" + $(this)[0].innerHTML;
 										}
 										$t2.html(e_tag("None"));
@@ -197,8 +232,7 @@
 									else
 									{
 										$(this).remove();
-										if ($t1.children().length === 0)
-											$t1.html(e_tag("None"));
+										if ($t1.children().length === 0) $t1.html(e_tag("None"));
 										window.chosen_tags = window.chosen_tags.replace("@" + $(this)[0].innerHTML, "");
 									}
 								});

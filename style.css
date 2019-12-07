@@ -55,9 +55,19 @@ body
 	background-color: white;
 	box-shadow: 0 3px 10px #0000004D;
 
+	transition: margin-left 1s;
+
 	overflow-y: auto;
 	-ms-overflow-style: none;
 	overflow: -moz-scrollbars-none;
+}
+#btn_toggle_guide
+{
+	transition: margin-left 1s, background-color 500ms;
+}
+#btn_toggle_guide:hover
+{
+	background-color: #C5C5C5;
 }
 #guide::-webkit-scrollbar
 {
@@ -156,6 +166,30 @@ body
 	left: calc(260px + 50px);
 	bottom: 5px;
 	font-size: 15px;
+}
+
+#btn_toggle_guide
+{
+	position: absolute;
+	display: flex;
+	width: 20px;
+	height: 80px;
+	left: 260px;
+	top: calc(100% / 2 - 40px);
+
+	border-radius: 0 10px 10px 0;
+	box-shadow: 0 3px 10px #0000004D;
+	background-color: white;
+}
+
+#btn_toggle_guide>i
+{
+	display: inline-flex;
+	align-items: center;
+	margin-left: 4px;
+
+	color: black;
+	font-size: 25px;
 }
 
 /* 特效专区 */

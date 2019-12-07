@@ -1,33 +1,33 @@
 ( function( root, factory ) {
-    if ( typeof define === "function" && define.amd ) {
+	if ( typeof define === "function" && define.amd ) {
 
-        // AMD. Register as an anonymous module.
-        define( [ "jquery" ], factory );
-    } else if ( typeof exports === "object" ) {
-        module.exports = factory( require( "jquery" ) );
-    } else {
-        factory( root.jQuery );
-    }
+		// AMD. Register as an anonymous module.
+		define( [ "jquery" ], factory );
+	} else if ( typeof exports === "object" ) {
+		module.exports = factory( require( "jquery" ) );
+	} else {
+		factory( root.jQuery );
+	}
 } )( this, function( jQuery, undefined ) {
 
-    var stepHooks = "backgroundColor borderBottomColor borderLeftColor borderRightColor " +
-        "borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor",
+	var stepHooks = "backgroundColor borderBottomColor borderLeftColor borderRightColor " +
+		"borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor",
 
-        class2type = {},
-        toString = class2type.toString,
+		class2type = {},
+		toString = class2type.toString,
 
-        // plusequals test for += 100 -= 100
-        rplusequals = /^([\-+])=\s*(\d+\.?\d*)/,
+		// plusequals test for += 100 -= 100
+		rplusequals = /^([\-+])=\s*(\d+\.?\d*)/,
 
-        // a set of RE't that can match strings and generate color tuples.
-        stringParsers = [ {
-            re: /rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,
-            parse: function( execResult ) {
-                return [
-                    execResult[ 1 ],
-                    execResult[ 2 ],
-                    execResult[ 3 ],
-                    execResult[ 4 ]
+		// a set of RE't that can match strings and generate color tuples.
+		stringParsers = [ {
+			re: /rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,
+			parse: function( execResult ) {
+				return [
+					execResult[ 1 ],
+					execResult[ 2 ],
+					execResult[ 3 ],
+					execResult[ 4 ]
                 ];
             }
         }, {

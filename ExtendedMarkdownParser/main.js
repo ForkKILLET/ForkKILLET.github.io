@@ -185,16 +185,16 @@ class ExtendedMarkdownParser
 					.appendTo($(e))
 					.hide()
 					.click(() =>
-					       {
-						       $(this).fadeOut();
-						       $(e).find(".contents").fadeIn();
-					       });
+						   {
+							   $(this).fadeOut();
+							   $(e).find(".contents").fadeIn();
+						   });
 
 				$(e).find(".contents>h1").click(() =>
-				                                {
-					                                $(this).parent().fadeOut();
-					                                $(e).find(".btn_contents").fadeIn();
-				                                });
+												{
+													$(this).parent().fadeOut();
+													$(e).find(".btn_contents").fadeIn();
+												});
 			},
 			Maths: function(e, ExMD)
 			{
