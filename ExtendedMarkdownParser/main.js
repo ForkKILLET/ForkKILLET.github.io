@@ -53,7 +53,7 @@ class ExtendedMarkdownParser
 			{ // Note: 图标 e.g. $fas font-awesome fa$ $i spin;fw;cogs i$
 				name: ['font-awesome-solid', 'fas', 'i'],
 				space: [true, true, true],
-				begin: `<i class="far`,
+				begin: `<i class="fas`,
 				end: `"></i>`,
 				param:
 				[
