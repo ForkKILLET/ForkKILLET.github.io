@@ -41,31 +41,31 @@ $(document).ready(() =>
 	$body.prepend(`<div id="guide"></div>`);
 	let $guide = $("#guide");
 	$guide.html(`
-		<h1 id="home"><a href="http://icelava.top/"><i class="fa fa-home"></i> Home</a></h1>
+		<h1 id="home"><a href="http://icelava.top/"><i class="fas fa-home"></i> Home</a></h1>
 		<div id="user">
 			<a href="http://icelava.top/sign_up">Sign up </a>
-			<p><i class="fa fa-sign-in"></i></p>
+			<p><i class="fas fa-sign-in-alt"></i></p>
 			<a target="_blank" href="http://icelava.top/sign_in">in</a>
 		</div> <hr>
-		<a href="http://icelava.top/site_map"><i class="fa-fw fa fa-sitemap"></i> Site Map</a>
-		<a href="http://icelava.top/friends"><i class="fa-fw fa fa-heart"></i> Friends</a>
-		<a href="http://icelava.top/about_us"><i class="fa-fw fa fa-info-circle"></i> About us</a>
-		<a href="http://icelava.top/log"><i class="fa-fw fa fa-file-text"></i> Log</a>
-		<a href="http://icelava.top/ForkKILLET_blog"><i class="fa-fw fa fa-rss-square"></i> ForkKILLET</a> <hr>
+		<a href="http://icelava.top/site_map"><i class="fa-fw fas fa-sitemap"></i> Site Map</a>
+		<a href="http://icelava.top/friends"><i class="fa-fw fas fa-heart"></i> Friends</a>
+		<a href="http://icelava.top/about_us"><i class="fa-fw fas fa-info-circle"></i> About us</a>
+		<a href="http://icelava.top/log"><i class="fa-fw fas fa-file-alt"></i> Log</a>
+		<a href="http://icelava.top/ForkKILLET_blog"><i class="fa-fw fas fa-rss-square"></i> ForkKILLET</a> <hr>
 	    <img id="logo" alt="logo" src="https://s2.ax1x.com/2019/10/01/uNUSHg.md.jpg">
         <p>
             <span style="color: #ff5b5a">RED</span> ICE - WE<br>
             <span style="color: #0e61e1">blue</span> lava~world
         </p> <hr>
         <p>
-            <i class="fa-fw fa fa-mouse-pointer"></i> Hits
+            <i class="fa-fw fas fa-mouse-pointer"></i> Hits
             <img id="counter" alt="counter" src="http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72"> 
         </p>
     `);
 	$body.append(`<p id="copyright">Copyright© 2019 IceLava Dev Team. All Rights Reserved</p>`);
 	$body.prepend(`<div id="btn_toggle_guide"></div>`);
 	let $btn_toggle_guide = $("#btn_toggle_guide");
-	$btn_toggle_guide.append(`<i class="fa fa-angle-left"></i>`).data("show", true);
+	$btn_toggle_guide.append(`<i class="fas fa-angle-left"></i>`).data("show", true);
 	let $btn_and_guide = $("#guide,#btn_toggle_guide"),
 	    $arrow = $("#btn_toggle_guide>i"),
 	    $core = $("#main,#pos,#copyright"),
@@ -91,7 +91,9 @@ $(document).ready(() =>
 
 	// Note: 用户功能
 	$body.prepend(`<div id="user_op"></div>`);
-	$("#user_op").hide().html(`<a><i class="fa fa-sign-out"></i> Sign out</a>`);
+	$("#user_op").hide().html(`
+<a><i class="fas fa-sign-out-alt"></i> Sign out</a>
+	`);
 	$("#user_op>a:first-child").click(() =>
 	{
 		AJAX("GET", "http://qwq.icelava.top/sign_out.php", "application/x-www-form-urlencoded", null,
@@ -117,7 +119,7 @@ $(document).ready(() =>
 			let un = JSON.parse(token)["un"];
 			let $user = $("#user");
 			$user.data("tourist", false);
-			$user.html(`<p><i class="fa-fw fa fa-user"></i>${un}</p>`);
+			$user.html(`<p><i class="fa-fw fas fa-user"></i>${un}</p>`);
 		});
 
 	// Note: MD 渲染的一系列操作。

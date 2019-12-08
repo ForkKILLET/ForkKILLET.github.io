@@ -50,10 +50,24 @@ class ExtendedMarkdownParser
 				begin: `<sub>`,
 				end: `</sub>`
 			},
-			{ // Note: 图标 e.g. $fa font-awesome fa$ $i spin;fw;cogs i$
-				name: ['font-awesome', 'fa', 'i'],
+			{ // Note: 图标 e.g. $fas font-awesome fa$ $i spin;fw;cogs i$
+				name: ['font-awesome-solid', 'fas', 'i'],
 				space: [true, true, true],
-				begin: `<i class="fa`,
+				begin: `<i class="far`,
+				end: `"></i>`,
+				param:
+				[
+					{
+						begin: ' fa-',
+						end: '',
+						time: Infinity
+					}
+				]
+			},
+			{ // Note: 图标（商标）
+				name: ['font-awesome-brand', 'fab', 'ib'],
+				space: [true, true, true],
+				begin: `<i class="far`,
 				end: `"></i>`,
 				param:
 				[
@@ -160,7 +174,7 @@ class ExtendedMarkdownParser
 				if ($m.length !== 1)return;
 
 				let $titles = $m.parent().find("~ h1, ~ h2");
-				let HTML = `<div class="contents"><h1>Contents <i class="fa fa-angle-right"></i></h1>`;
+				let HTML = `<div class="contents"><h1>Contents <i class="fas fa-angle-right"></i></h1>`;
 				for (let i = 0; i < $titles.length; i++)
 				{
 					let e = $titles[i];
@@ -176,7 +190,7 @@ class ExtendedMarkdownParser
 				HTML += `</div>`;
 				$(e).append($(HTML));
 
-				HTML = `<div class="btn_contents"><i class="fa fa-angle-left"></div>`;
+				HTML = `<div class="btn_contents"><i class="fas fa-angle-left"></div>`;
 				$(HTML).appendTo($(e)).hide().click((event) =>
 			    {
 					$(event.currentTarget).fadeOut();
