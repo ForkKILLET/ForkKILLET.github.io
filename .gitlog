@@ -1,3 +1,13 @@
+commit d37febb143ac3d9f6c7bb0213b336ffe622a2d20
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Dec 9 22:23:48 2019 -0800
+
+    BarrenLand/ [VER β0.2.0]
+    feat(Units : BtnSquare, BtnInline): 完善了方形按钮的组件，并为其加入了动画；填入了日志行内按钮组件。
+    feat(clear log): 添入了清楚当前标签页日志的按钮。
+    feat(info): 添入了显示游戏信息的功能。
+    feat(wait): 添入了剧情正在策划中的咕咕行为（滑稽）。
+
 commit 80eb04782d56a9f29254f0237728a9fb71817e83
 Author: ForkKILLET <fork_killet@qq.com>
 Date:   Sun Dec 8 08:25:49 2019 -0800
