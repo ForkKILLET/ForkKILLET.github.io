@@ -14,7 +14,7 @@ class ForkKILLETShape
 			throw e;
 		};
 
-		if (!$ || typeof($) !== "function") this.error_and_throw("R001", "Need JQuery but not found the correct $ function.");
+		if (!$ || typeof($) !== "function") this.error_and_throw("R001", "Require JQuery but not found the correct $ function.");
 		if (!window.script) window.script = {};
 		window.script.ForkKILLET_shape = true;
 		log("[LOAD]: icelava.top/ForkKILLET_shape.js/main.js");
@@ -92,7 +92,7 @@ class ForkKILLETShape
 		});
 		if (use_ExMD)
 		{
-			if (typeof(ExMD.render) !== "function") this.error_and_throw("R002", "Need ExtendedMarkdownParser but didn't get a correct ExtendedMarkdownParser object.");
+			if (typeof(ExMD.render) !== "function") this.error_and_throw("R002", "Require ExtendedMarkdownParser but didn't get a correct ExtendedMarkdownParser object.");
 			ExMD.render($i[0], $i.html());
 		}
 	}

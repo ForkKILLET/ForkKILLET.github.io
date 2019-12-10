@@ -3,6 +3,8 @@
 #main
 {
     padding: 0;
+
+    overflow: hidden;
 }
 #main_1, #main_2
 {
@@ -38,51 +40,14 @@
     flex-direction: column-reverse;
     align-self: flex-end;
 }
-.btn_module
-{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 50px;
-    height: 50px;
-
-    font-size: 26px;
-}
-.btn_module>i
-{
-    color: white;
-}
-.btn_module::after
-{
-    content: attr(name);
-
-    position: absolute;
-    visibility: hidden;
-    left: 70px;
-    padding: 1px 6px;
-
-    justify-content: left;
-
-    background-color: inherit;
-    color: white;
-    border-radius: 6px;
-    font-size: 20px;
-    opacity: 0;
-
-    transition: opacity 1s;
-}
-.btn_module:hover::after
-{
-    visibility: visible;
-    opacity: 1;
-}
 
 /* Module: log */
 
 #module_log
 {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     width: calc(100% - 50px);
     height: 100%;
@@ -92,7 +57,7 @@
     display: flex;
 
     height: 50px;
-    width: 100%;
+    width: calc(100% - 50px);
 
     background-color: #4d4d4d;
 }
@@ -104,7 +69,19 @@
     padding: 20px;
 
     background-color: #d0d0d0;
+
+    overflow-y: scroll;
 }
+#btn_log_clear
+{
+    background-color: #f99256;
+}
+#btn_log_clear::after
+{
+    right: 70px;
+    left: unset;
+}
+
 .tab_log
 {
     align-self: flex-end;
@@ -112,28 +89,141 @@
     height: 35px;
     padding: 0 6px 5px 6px;
     margin: 0 5px 0  0;
-    border-radius: 7px 7px 0 0;
+    border-radius: 11px 11px 0 0;
 
     color: white;
     background-color: #8e8e8e;
+    user-select: none;
 
     transition: background-color 500ms;
 }
 .tab_log>i
 {
     color: #4d4d4d;
+    font-size: 24px;
 }
-.tab_log_focus, .tab_log:hover
+.tab_log_focused, .tab_log:hover
 {
     background-color: #d0d0d0;
 }
-.tab_log:not(:last-child)::after
-{
-    content: "|";
-}
 .tav_log>p
+{
+    line-height: 20px;
+    color: #000000;
+    font-size: 18px;
+    opacity: 0;
+
+    transition: opacity 500ms;
+}
+.tav_log p, .tav_log b, .tav_log u, .tav_log strong, .tav_log em, .tav_log li, .tav_log td, .tav_log th
 {
     padding: 0;
 
-    font-size: 18px;
+    color: inherit;
+    font-size: inherit;
+}
+.tav_log a
+{
+    padding: 0;
+
+    font-size: inherit;
+}
+
+/* Level: Unit */
+
+.btn_square
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+
+    font-size: 26px;
+
+    /* Anchor: animation: jelly 500ms; */
+}
+.btn_square>i
+{
+    color: white;
+}
+.btn_square::after
+{
+    content: attr(name);
+
+    position: absolute;
+    visibility: hidden;
+    padding: 1px 6px;
+    left: 70px;
+
+    justify-content: left;
+
+    background-color: inherit;
+    color: white;
+    border-radius: 6px;
+    font-size: 20px;
+    opacity: 0;
+
+    transition: opacity 1s;
+}
+.btn_square:hover
+{
+    cursor: pointer;
+}
+.btn_square:hover::after
+{
+    visibility: visible;
+    opacity: 1;
+}
+@keyframes jelly
+{
+    0%, 100%    { transform: scale(1, 1); }
+    25%, 75%    { transform: scale(0.9, 1.1); }
+    50%         { transform: scale(1.1, 0.9); }
+}
+
+.btn_inline
+{
+    display: inline-block;
+    padding: 0 5px;
+
+    user-select: none;
+    color: black;
+
+    transition: color 100ms;
+}
+.btn_inline::before
+{
+    position: relative;
+    right: 0;
+
+    content: "<[";
+    color: #1eb6ff;
+    font-weight: bold;
+
+    transition: right 500ms;
+}
+.btn_inline::after
+{
+    position: relative;
+    left: 0;
+
+    content: "]>";
+    color: #1eb6ff;
+    font-weight: bold;
+
+    transition: left 500ms;
+}
+.btn_inline:active
+{
+    color: #1eb6ff;
+}
+.btn_inline:hover::before
+{
+    right: 5px;
+}
+.btn_inline:hover::after
+{
+    left: 5px;
 }

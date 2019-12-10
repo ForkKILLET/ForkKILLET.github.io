@@ -1,0 +1,2468 @@
+commit 80eb04782d56a9f29254f0237728a9fb71817e83
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 8 08:25:49 2019 -0800
+
+    ExMD/ fix(FA): 修复了 ExMD 中 FA 图标不显示的问题
+
+commit 3e93637b438c0c1881901c5a986b0898d078e16f
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 8 08:23:33 2019 -0800
+
+    feat: 更改目录
+
+commit 8945e791045062993845a5372115ccfd2e143f18
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 8 08:23:15 2019 -0800
+
+    feat: 更改目录
+
+commit f53a4d4c371bed96615fcddc23fd53b0ed8d691f
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Dec 7 23:11:08 2019 -0800
+
+    BarrenLand/ 补充上次 push
+
+commit b958aa16d6fe88701aabb942a38bb28a3c80d48e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Dec 7 23:04:47 2019 -0800
+
+    feat(require, fontawesome): 将 FA 从 v4 升级到了 v5
+    BarrenLand/ feat: 蛮荒大陆重置第一版本上传
+
+commit ee4a0284ee6a319533eab0a50ac43b8f639d5e9c
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Dec 7 12:54:38 2019 -0800
+
+    feat: 取消导航栏博客列表，因为永远只会有一个……
+
+commit 6d53b979be964227e5791a704515b7d1455c7bec
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Dec 7 12:50:11 2019 -0800
+
+    ForkKILLET_blog/ fix: 修复了一堆箭头函数导致的 bug
+
+commit 813d7b3f4ee1073db23f04a5e4dbcac1aea6294b
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Dec 7 12:47:25 2019 -0800
+
+    ForkKILLET_blog/ fix: 修复了一堆箭头函数导致的 bug
+
+commit 53389dc80c93cbdd679b1ad0450bf3e7d717921a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Dec 7 12:29:06 2019 -0800
+
+    ForkKILLET_blog/ fix: 修复了因使用箭头函数而无法获取文章编号的 bug
+
+commit b2455292b70b73776638e92c148eb1111888c22c
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Dec 7 12:15:17 2019 -0800
+
+    feat(guide): 增加了显示/隐藏导航栏的功能，并优化了标题特效
+
+commit 5e9697bf4b5cbaf3515e3f0d3419b2cdbca74374
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Dec 7 11:26:16 2019 -0800
+
+    refactor: 整改目录结构 \|/
+
+commit c7a369c09a3465e19c9027ccdae835f8ff8baaa4
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Dec 6 22:25:49 2019 -0800
+
+    refactor: 整改目录结构 \|/
+
+commit 2ebb90891040e5b9771b9bb300b9be3f26d80217
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Dec 6 22:21:44 2019 -0800
+
+    refactor: 整改目录结构 \|/
+
+commit c560c44b0a32f6ab372a070e39ad029231cc6c78
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Dec 6 22:16:54 2019 -0800
+
+    refactor: 整改目录结构 \|/
+
+commit c2b3456407e715471def2a351c05c04b82944b68
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Dec 4 04:03:42 2019 -0800
+
+    ForkKILLET_shape.js/ feat(???): ??? 我又不知道我干啥了???
+
+commit 5defa937f6302af50105fc0a64341a59a4d3e107
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Dec 4 03:05:19 2019 -0800
+
+    ForkKILLET_shape.js/ fix(line): 修复了垂直线段永远朝下的 bug
+
+commit d4e4faf448f418cde82225d4e0ab302f68a2b9ab
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Dec 4 02:54:01 2019 -0800
+
+    ForkKILLET_shape.js/ fix(line): 修复了垂直线段永远朝下的 bug
+
+commit d7f96fb432a7b44486a88eada196adfd1c84d70a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Dec 4 02:44:53 2019 -0800
+
+    ForkKILLET_shape.js/ fix(line): 修复了三角函数计算错误导致的线条方向不对的 bug
+
+commit df96284bc9c048b19fa282115a97ce008c4932d9
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Dec 3 18:53:39 2019 -0800
+
+    refactor(need): 删去了重复引入的 JS
+
+commit 44db944d45835a1edc5aeccf22706609ebe572c3
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Dec 2 22:10:57 2019 -0800
+
+    refactor: 采用箭头函数替换 function()
+
+commit c6d5dae0b08c75662659fd737fde0077dfaee8b0
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Dec 2 21:43:53 2019 -0800
+
+    refactor: 加入 ForkKILLETShape 的全局实例
+
+commit d550dbb4978f0da6eb6237ae35be5b9a82d2d3b2
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Dec 2 21:20:01 2019 -0800
+
+    ForkKILLETShape.js/ feat: 填入对 link, text_in_circle 的支持
+                        fix: 修正了链接悬停时变蓝色的 bug
+
+commit 2cfcff15fe6e649f6e0f2592b8909d88c523a721
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Dec 2 19:57:31 2019 -0800
+
+    ForkKILLET_shape.js/ refactor: 优化代码结构
+
+commit 29d81a91f7d17f53592122af6f2400428eb1fdc8
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 1 20:56:28 2019 -0800
+
+    ForkKILLET_shape.js/ fix: 修正 id 错误的 bug
+
+commit 19fcef0aed77865870b26391b83eb09e13a9b2ad
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 1 20:50:09 2019 -0800
+
+    ForkKILLET_shape.js/ fix: 修正 undefined appendChild 的 bug
+
+commit 348469894a82bcfb850c9632b9ff6cef593d7772
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 1 20:46:29 2019 -0800
+
+    ForkKILLET_shape.js/ fix: 修正 undefined pi 的 bug
+
+commit 1e3344f96e745e31ba452820147614edb096e2dd
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 1 20:32:58 2019 -0800
+
+    feat(ForkKILLET_shape.js): 填入我的画图类
+
+commit cdbbaa2beb8c143550138a522c3a706f1731a63d
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 1 18:17:03 2019 -0800
+
+    fix(style, counter): 修正关卡计数器位置不对的 bug
+
+commit dc092f9551379190de9ed57ce433e24dff69221e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 1 11:58:09 2019 -0800
+
+    fix(style, tag): 修正标签样式
+
+commit 92b87c370a99edfad8cd788d976c80cc8fe73d75
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Dec 1 11:54:49 2019 -0800
+
+    fix(style): 修正侧栏样式
+
+commit 51cb9d7b08a449a40eff1cb0a7d5d9b700769e71
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Nov 29 20:51:44 2019 -0800
+
+    config(domain): 修改了主机域名
+
+commit 2ebf119f32d7c342a3f01f8bb9c11a27fe422e44
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Nov 27 21:06:57 2019 -0800
+
+    config(domain): 取消 https
+
+commit aa2250f9056f536d5169ece12515234341ab9fe1
+Merge: bf1b629 e0468dd
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Nov 26 22:11:33 2019 -0800
+
+    config(domain): 更换了 icelava.top 这个域名
+
+commit bf1b629606aba30526412b0ab8a80125bad83f9e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Nov 26 22:03:17 2019 -0800
+
+    config(domain): 更换域名
+
+commit e0468ddf1b8ef176cf759786e0e3082d4ceb5bc3
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Nov 26 04:58:32 2019 -0800
+
+    换域名
+    
+    icelava.top
+
+commit 139ea3175f4430537369b9f079a1809e3b44aa2a
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Nov 9 22:24:20 2019 +0800
+
+    Update CNAME
+
+commit 1692e785572443ee6b6e4cdc3f1b3ed019afa8c1
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Nov 9 21:57:47 2019 +0800
+
+    Update CNAME
+
+commit 838bd581b1a21b6a211fc6b76145f574203b3ebc
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Nov 9 20:33:00 2019 +0800
+
+    config(domain):添加新域名
+    
+    由 0xsf 大佬提供的域名 (www.)icelava.top
+    再也不是免费域名啦
+    感谢！！orz
+
+commit 3868376cbd97370313bfec3a3cf300fa66325b86
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 11 16:27:57 2019 +0800
+
+    ExMD/ fix(wordbox, UI): 修复 wordbox 不能正确隐藏拓展内容的 bug
+
+commit 7a1729fdc9f9f64a1521da93b966bee705fbf79e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 10 21:42:43 2019 +0800
+
+    ExMD/ fix(wordbox, UI): 修复 wordbox 不能正确隐藏拓展内容的 bug
+
+commit ce16940f70f8078141d70db0cbc1a0a457e7a042
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Oct 6 12:57:38 2019 +0800
+
+    ExMD/ fix(UI, contents): 修正第二个标题的样式
+
+commit d5bb4953918ed072c9ec9ff79d09cb9041e2e6e2
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Oct 6 09:24:03 2019 +0800
+
+    feat(UI): 减小图片最大高度，阅读更方便
+
+commit 7fb17329093d0bc6fc5f2acf5e97b26d25de5928
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Oct 5 14:20:46 2019 +0800
+
+    ExMD/ fix: 修复 $ 后的第一个标题不显示的 bug
+
+commit 61288367bcb6d0857ceaf0aa4ce9598403dc23ed
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Oct 5 08:44:19 2019 +0800
+
+    ExMD/ feat(contents): 采用 $ 标签来判定，目录的显示，而非 ExMD settings
+
+commit 82e8ba6df42c11ac489a30fce3285f633e0eee28
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Oct 5 07:33:38 2019 +0800
+
+    blogs/ForkKILLET/ feat: 跳转页面时取消锚点
+
+commit 86af1633c0c85a0aafd257863a7f77606eafe11e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Oct 5 07:31:05 2019 +0800
+
+    ExMD/ fix(Maths, contents): 修复了目录中数学公式不解析的 bug
+
+commit 0a4090c361e2fcbe1706ae7fa655a5204e390f15
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 23:01:58 2019 +0800
+
+    blogs/ForkKILLET/ feat: 修改展示文章的方式：使用 ?name= 直接跳转
+
+commit 0cf9ab96fcfbafb35474d7777f9e043fc464de3a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 22:26:01 2019 +0800
+
+    feat(UI): 再次优化一波行内 / 块级元素的判断
+
+commit c4b08c68a59c1c8cd25f79bbdf58aaed4bff6789
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 19:20:54 2019 +0800
+
+    ExMD/ fix: 某些问题
+
+commit d068636d1e9dfe6da736776d031fc54ff010cb79
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 19:12:48 2019 +0800
+
+    ExMD/ fix: 某些问题
+
+commit 47fc273b0d97b8a126e2b115a70bae8b78b0a87f
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 19:05:26 2019 +0800
+
+    ExMD/ feat(settings): 仅在指定了 show_contents 为 true 时，才显示目录
+
+commit b0ee354bfa931638db4e2627c7af907880190b6e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 18:57:44 2019 +0800
+
+    ExMD/ feat(UI, contents): 优化样式
+
+commit d70256ae13ae7882508f6d9cd6cc3ff0a8b06814
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 18:27:39 2019 +0800
+
+    ExMD/ feat(UI, contents): 优化样式
+
+commit 67e7cb0c34713c930b87b9b8c0fdb3dd2e507529
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 18:15:51 2019 +0800
+
+    ExMD/ feat(UI, contents): 优化样式
+
+commit ca17b23c4d6972dfd71d3ee844de443c7aaecbbc
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 17:07:23 2019 +0800
+
+    ExMD/ feat(contents): 优化显示位置
+
+commit e32ccb76d585792acdf222dad507d7de019dd81b
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 17:05:59 2019 +0800
+
+    ExMD/ feat(contents): 重大更新！加入目录显示函数！
+
+commit 90ef57fc883d1b871ec548094e46207781fd18c9
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 15:46:07 2019 +0800
+
+    feat(UI): 优化表格样式（圆角）
+
+commit 4ef37e13c6c5c0cc9947c2f37d5993be91e9549b
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 15:33:04 2019 +0800
+
+    feat(UI): 优化行内 / 块级元素判定
+
+commit 46722e36412ed520622365dbd8a84749a3dd8515
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 14:02:46 2019 +0800
+
+    ExMD/ fix(sub): 修复背景色故障
+
+commit bf53cc783deec0e785bb7e8a3f0e082bc1e60925
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 13:59:38 2019 +0800
+
+    ExMD/ fix(sub): 修复下标故障
+
+commit 0374909679544a2c90ec0268b85f1e9eb7a068c6
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 13:48:56 2019 +0800
+
+    ExMD/ fix(sub): 修复下标故障
+
+commit 3ef731670e618478ecc60648a205421413371eda
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 11:54:57 2019 +0800
+
+    feat(UI): 优化图片样式
+
+commit 651777ac2090dab9904e423fc0adef88754e2ced
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 09:15:35 2019 +0800
+
+    blogs/ForkKILLET/ feat: 加入了链接直接跳转文章的方式
+
+commit c9ab4fc6418167171db8ccdf9d285bf05e88202c
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 09:07:34 2019 +0800
+
+    blogs/ForkKILLET/ feat: 加入了链接直接跳转文章的方式
+
+commit 6fb3d79d5b4551239855e95ca56d2b2918d80f2f
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 09:01:48 2019 +0800
+
+    ExMD/ feat(UI): 优化样式，加入引用的样式
+
+commit f95f59e6a1b3339f4b4e65fa05b5c5e99f6f98dc
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Oct 4 09:01:10 2019 +0800
+
+    feat: 添加了获取URL中参数的功能
+
+commit f1cd162371fca30dbdb9ffeff1d214bdff1d705a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 15:06:01 2019 +0800
+
+    feat(UI, wordbox): 优化了 wordbox 样式若干
+
+commit 99b3f70cd4148853420442bcdc552db939819e41
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 13:34:55 2019 +0800
+
+    feat(UI, guide): 第 N 次优化侧边栏样式
+
+commit 7bbc380317a7e9ace97244b2b4250ce5432aeead
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 13:31:09 2019 +0800
+
+    feat(UI, guide): 第 N 次优化侧边栏样式
+
+commit 7c55b92c47045035b893d564e01d4c76e2530c65
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 12:07:32 2019 +0800
+
+    feat(UI): 优化行内代码样式
+
+commit dbeae169b713ad9fc68b92ddb60551570419c648
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 11:51:27 2019 +0800
+
+    feat(UI): 样式修正又一个区分行内与块级元素的判断
+
+commit 1117c5e02e1b39a04004609b067beb26be3a3481
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 11:40:25 2019 +0800
+
+    feat(UI): 样式修正大量区分行内与块级元素的判断
+
+commit 5fe3be7b327e782168c1bc3e5f2b2b7eaf2e0bb1
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 11:12:34 2019 +0800
+
+    blogs/ForkKILLET/ fix(UI): 修复了一点小问题
+
+commit b4705aee42493251e6da26a252d581191121cc80
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 10:50:53 2019 +0800
+
+    fix(UI): 修复标题错乱的问题
+
+commit 540bf8ee323816d872db6c94f69961117cff226d
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 09:39:53 2019 +0800
+
+    fix(UI): 标题错乱恢复
+
+commit 9f0b680ab745809c2da8be8fb1c12d44609f00e5
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 09:36:40 2019 +0800
+
+    fix(UI): 用户按钮错位 bug 修复
+
+commit 42f4dc22db5b88b832a20751ac0a67657fa0d148
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 09:25:32 2019 +0800
+
+    feat(highlight): 使用了更好的高亮
+
+commit 1542e73eea7aa201a5e14c39d86b656e165d49f4
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Thu Oct 3 09:20:53 2019 +0800
+
+    refactor(UI): 重构样式！
+
+commit 58ef216461fce5adb39af7157526b3032c7be56e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Oct 2 17:04:39 2019 +0800
+
+    feat(UI): 修改二标题字号
+
+commit ac7592f6f744b4222d70f433dc99cc50dea4ddac
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Oct 2 15:03:44 2019 +0800
+
+    config(highlight): 换了一个还行的主题（default）
+
+commit 23683c3a7af2fc484f402c59e37da06f19e913d4
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Oct 2 14:59:06 2019 +0800
+
+    config(highlight): 换了一个还行的主题（Github）
+
+commit bcdb21692d6202715dba7bec9006457e81bb38f2
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Oct 2 10:56:04 2019 +0800
+
+    ExMD/ feat(wordbox): 当音标参数为空时，将不再展示
+
+commit 4410f5a0ed7bd2f641dc120e45d8e5ebb6cd37d9
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Oct 1 22:33:22 2019 +0800
+
+    config(highlight): 将 cloudflare 的 CDN 换为了 bootcss
+
+commit ed1e439599db29ca68c662cf06e68d01b962acc9
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Oct 1 22:30:09 2019 +0800
+
+    config(highlight): 将 cloudflare 的 CDN 换为了 bootcss
+
+commit 7ff84bf7efa655c325110a10984a6f41d887bca2
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Oct 1 22:15:31 2019 +0800
+
+    feat(user): 注册/登录后会刷新页面了
+
+commit 00ee3f4be743c51b2044f631c9973caa92202a0e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Oct 1 10:57:48 2019 +0800
+
+    ExMD/ fix(escape):  优化转义
+
+commit 750116074a1f5d6f935a6eb2ed6fa1292cd8fb52
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Oct 1 10:33:04 2019 +0800
+
+    ExMD/ feat(UI): 优化了 wordbox 堆叠显示时的样式
+
+commit 090134a16582bc2e8d9c1193bae0c45fd7a9f08b
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Oct 1 09:38:55 2019 +0800
+
+    ExMD/ fix(escape): 修正了 nMD 中所产生 &nbsp; 等转义，被识别成标签参数分隔符的 bug
+
+commit 3c0225acf28ea84dcf8ba8b52b849f5bdfc24dd4
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Oct 1 09:27:44 2019 +0800
+
+    ExMD/ fix(escape): 修正了 nMD 中所产生 &nbsp; 等转义，被识别成标签参数分隔符的 bug
+
+commit 12121fdc1c1733f150fc6e10e845ebac7cda2c09
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Oct 1 09:13:54 2019 +0800
+
+    config(logo): 使用了图床，加载更快了！
+
+commit 536a238b3e32fa9cd0f5aa8b4793529378a3ff31
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Oct 1 09:01:24 2019 +0800
+
+    fix(ExMD): 解决了 ExMD 与 nMD 冲突的问题
+
+commit 9169077760934277bc19b68871f6249b5671040d
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Sep 30 19:54:17 2019 +0800
+
+    fix(ExMD, style): 优化了 wordbox 标签嵌套的样式的 bug
+
+commit 1bb4c87cca03923e157e609dbb5c601ffacfb913
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Sep 30 06:56:27 2019 +0800
+
+    fix(ExMD, style): 优化了 wordbox 标签嵌套时显示/隐藏按钮无用的 bug
+
+commit 4cc2400e8928363c7b5eaa578efb1b9300bfd6b3
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 22:32:17 2019 +0800
+
+    fix(ExMD, style): 修正 wordbox 没有例句参数时，最后一个参数前不必要换行的问题
+
+commit 065bb726773a75e4eb3ba3ab5d66efd9b38ac1ce
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 22:28:48 2019 +0800
+
+    feat(ExMD): 优化 ExMD 转义
+
+commit d2b52977086965855c5be97a61a9bea86993c7b4
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 22:12:45 2019 +0800
+
+    feat(ExMD): 优化 wordbox 的样式
+
+commit 99bde133a15203948ecb51fc711af38aec402ff8
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 21:48:14 2019 +0800
+
+    fix(ExMD): 修复 wordbox 显示的一些 bug
+
+commit 6a6b17bd54e3f278ec9ea4af92f8fc5f1e6e4924
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 20:25:46 2019 +0800
+
+    fix(ExMD): 修复 wordbox 显示的一些 bug
+
+commit f98596cb92aae30f8e1657fc4f294d313d9f127a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 20:16:26 2019 +0800
+
+    fix(ExMD): 修复 wordbox 显示的一些 bug
+
+commit 1baf51d51c3ff20dccb15c0fad990eb01047a53a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 19:54:39 2019 +0800
+
+    fix(UI): 修正换行无效的 bug
+
+commit 46f14371e71ac1394b67881a4c7c8f499d8ba56e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 19:51:06 2019 +0800
+
+    fix(ExMD): 修复部分页面无法显示的问题
+
+commit 3680023fbd306aede6de00ecfe1e0eb117a28c1b
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 19:44:19 2019 +0800
+
+    feat(UI): 优化了小号标题的样式
+
+commit 9f07c560ef7653dc79d4e2c78b91f2a026e180fd
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 19:36:48 2019 +0800
+
+    refactor(ExMD): 进行封装
+
+commit b4b22681368f9992a5d75bef8919b7ec7fc49a0e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 07:02:56 2019 +0800
+
+    fix(ExMD, AJAX): 修正了 ExMD 渲染的一些问题
+
+commit d3499b5d866e1650fb4643271edd76320e5fa84e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 06:58:44 2019 +0800
+
+    fix(ExMD, AJAX): 修正了 ExMD 渲染的一些问题
+
+commit 9fb605a90972b6769b49bc5af9a503037626a341
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 29 06:36:39 2019 +0800
+
+    feat(ExMD, wordbox): 加入了 wordbox 标签
+
+commit 7b0c156e489425ed5f1a13cdf6d249b3b36b29ae
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 28 20:40:39 2019 +0800
+
+    fix(ExMD): 修复 ExMD 解析逻辑的重大 bug
+
+commit 5fe3ef7daca4f823cfd332b5b79e3c4536724935
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 28 18:45:43 2019 +0800
+
+    fix(ExMD, UI): 修复 ExMD 的一些样式问题
+
+commit 06a7d0ab8b64ce34dcb764bf65e04cad0e4f78d3
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 28 18:41:47 2019 +0800
+
+    fix(ExMD, UI): 修复 ExMD 的一些样式问题
+
+commit c9e8d224b6a23925faab96f9b25d1070cd8e4780
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 28 18:33:07 2019 +0800
+
+    fix(ExMD, UI): 修复 ExMD 的一些样式问题
+
+commit e8bfa5715d1b2e851ad8b6513c88594f10448e51
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 28 18:25:49 2019 +0800
+
+    fix(ExMD, UI): 修复 ExMD 的一些样式问题
+
+commit 15b6d7f078c9d3d53c398ce6fb125e72e648f121
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 28 13:58:50 2019 +0800
+
+    fix: 修复 ExMD 的一些 bug
+
+commit 5b7fe4caee63e7f7931341d1c53610d67bf05cef
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 28 13:50:11 2019 +0800
+
+    feat: 添入全新的 ExMD
+
+commit f63b441356ee6bd19f8b59533e2b2102a87f776e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 24 21:16:30 2019 +0800
+
+    feat(???): ??? 我又不知道我干了啥了，，
+
+commit 17fcd179aaa33bbc892bed1af2d0c1f10fe32e2f
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 21 10:04:19 2019 +0800
+
+    fix(UI): 再次优化收起筛选器的方法，并且修正了用户按钮悬停特效的 bug
+
+commit 559c3b246e856d31f37527acb6a980a8b78a9101
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 21 08:11:59 2019 +0800
+
+    fix(UI): 修正了收起文章筛选器而搜索按钮还在外面的 bug
+
+commit 2317d8c66eaab9a88d73665fc6d64347bd8f1d0c
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Sep 20 22:50:23 2019 +0800
+
+    fix(tag): 修复了取消选中标签不起用的 bug
+
+commit 9c98501d91953109099ebb1f22a9cc9c9b3b24e4
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Wed Sep 18 19:27:43 2019 +0800
+
+    feat(UI,user): 优化 Sign up / in 处的样式
+
+commit 86387aad0926baa599ad82a058da3618d597857a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 22:33:53 2019 +0800
+
+    feat(UI): 优化用户菜单样式
+
+commit 004028d0b522960ff0cb00a34c0b757bf4459c81
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 22:28:44 2019 +0800
+
+    feat(UI): 优化用户菜单样式
+
+commit aab63aca26a2125ac3fe12fccb6a04514bf78ad2
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 22:20:52 2019 +0800
+
+    feat(UI): 优化用户菜单样式
+
+commit 16922c2ee84522c6f8791e3280c427122cda5523
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 22:18:00 2019 +0800
+
+    feat(UI): 优化用户菜单样式
+
+commit b38102293b65359fd0f92cfbc7b6132e525dd0a3
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 21:21:02 2019 +0800
+
+    feat(UI): 调整了用户菜单的样式
+
+commit 1ed1ef80028d582513308e5834b918930483a81a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 19:58:52 2019 +0800
+
+    fix(tag): 修复标签搜索无效的 bug
+
+commit 1baa3dbf54ecf2c5f438affdaabde6999dd38592
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 19:07:43 2019 +0800
+
+    feat(tag): 当标签已经选中，再选择时，也将搜索到的标签清空
+
+commit 861b0e64dbfdbe1b996d74d7e6134acb5b2b6b3b
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 18:59:03 2019 +0800
+
+    fix(BOOM): 最后一波 bug 清除
+
+commit 9ea2545f6926cd08b012ff5c01454afba19871f0
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 07:08:26 2019 +0800
+
+    fix(BOOM): 继续冒烟测试
+
+commit 1645327de8c59106e1fe3f3cafb7b50ada25ae07
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 06:52:27 2019 +0800
+
+    fix(BOOM): 继续差错
+
+commit ca955949915b1b17d6462532ddac2501c23b053b
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Tue Sep 17 06:48:31 2019 +0800
+
+    fix(BOOM): 冒烟差错，修复若干 bug
+
+commit 6062cf28fdce63542d82b4b59ce76c937e985c33
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Sep 16 23:04:48 2019 +0800
+
+    test(BOOM): 冒烟测试标签系统，预计有 100+ bug，明天调
+
+commit f5a741f5ad5c06294de8842495ebedb4d5737412
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Sep 16 22:12:39 2019 +0800
+
+    test(UI, tag): 标签样式测试
+
+commit 69dd4207615879178ee9e35475830394baf0deb1
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Sep 16 20:20:10 2019 +0800
+
+    feat(UI): 还原了行内代码的字号
+
+commit 6cf4c7d5433266dadb8e0f61ee0dcb38bdc87cc0
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Mon Sep 16 19:17:59 2019 +0800
+
+    feat(UI): 调大了代码块的字号
+
+commit 939843d4c12085ad4144de7785c1905e18c05826
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 22:53:13 2019 +0800
+
+    fix(math): 修复了博文中数学公式渲染的问题
+
+commit ab9fe19fe00561c95bd0a565f4c675f29810f2dd
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 22:48:17 2019 +0800
+
+    config(math): inlineMath =>  m$, displayMath =>  M$
+
+commit ee79c75b2920c76150e8d5e9140b89a1f9e59291
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 22:29:30 2019 +0800
+
+    blogs/ForkKILLET feat(upd atc): 添加了搜索的提示
+
+commit 91d6b8aed2d807257dbf6350bb091c29e2c9baa9
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 21:29:58 2019 +0800
+
+    feat(UI): 把 Copyright 的字号调小了，避免页面过窄时挤到上面
+
+commit edcb26e84252f14b42ada8c1f6faee509ebea852
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 21:01:12 2019 +0800
+
+    fix(404): 修复了 404 页面的某些 bug
+
+commit 998cf81705c2722a364b1d597aa225a7691c2b39
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 20:12:22 2019 +0800
+
+    feat(UI): 再次优化表格样式
+
+commit d290dee2e39141f2439c807577000b619be4875a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 20:04:00 2019 +0800
+
+    feat(UI): 优化了表格的显示（尤其是字号和边框）
+
+commit 51e88eb28f9193d5406dafd99b041a2ad2471834
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 19:38:03 2019 +0800
+
+    feat(UI): 优化了链接的样式，并且弄了个特效
+
+commit 146e5c09896051e8ace94d4422452ec393e172f7
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 18:51:14 2019 +0800
+
+    feat(UI): 限制了图片的最大高度为 640 像素，避免引起视觉上的不适
+
+commit a983d3fb4e23993b3255d6685ea4506e48b65aeb
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 18:28:04 2019 +0800
+
+    test(MD, highlight): 试图用 marked.js 配合 highlight.js 完成代码的渲染
+
+commit 0d967f9fa6c63af4b319649cd5f9c316797a4fb5
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 17:46:11 2019 +0800
+
+    test(highlight): 再次尝试代码高亮
+
+commit 73adff68fb4d29f4f1b4b225d7cfc6e1c4fb27dd
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 17:41:30 2019 +0800
+
+    test(highlight): 尝试代码高亮
+
+commit 7ce74d2eae725c9a969549814e7bdb08f716f7c5
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sun Sep 15 12:41:16 2019 +0800
+
+    feat(UI): 尝试支持代码高亮
+
+commit c1716baa78016119cc2d207f8524dea2d8b2142e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 22:32:13 2019 +0800
+
+    blogs/ForkKILLET feat(UI, MD): 优化 MD 在文章中的渲染
+
+commit 8104aa49052c47fef0d7b285c384c4931065e4a2
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 22:25:36 2019 +0800
+
+    blogs/ForkKILLET feat(UI): 优化了返回目录按钮的样式
+
+commit 842fb377278bf624cd6ee0b358476901ee14c498
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 22:14:21 2019 +0800
+
+    blogs/ForkKILLET feat(UI): 优化了返回目录按钮的样式
+
+commit a7d41ca1227953a8f50119942591c1ac29d1b6a5
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 22:08:30 2019 +0800
+
+    blogs/ForkKILLET fix(MD): 之前忘记了渲染得到的 MD，现加上
+
+commit 448876e05b67e1384c696cdbf069a1e88f4092e7
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 22:06:45 2019 +0800
+
+    blogs/ForkKILLET fix(MD): 再次修正了获取文章的 MD 路径
+
+commit ed16027fa4515430739fbfd13321c3362e287d62
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 22:03:17 2019 +0800
+
+    blogs/ForkKILLET fix(MD): 修正了获取文章的 MD 路径
+
+commit b935a75a103f9d43642df1ad491deac33fd1b1c0
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 22:00:56 2019 +0800
+
+    feat(UI): 干掉了 Safari 那个丑的要死的蓝色框框
+
+commit 200890fc11c005d9f74df75500bb478d6a67d014
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 21:57:49 2019 +0800
+
+    blogs/ForkKILLET test: 测试文章的显示
+
+commit 83b743b5aaa65a6758828e8a4019ed13ce40a986
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 20:19:36 2019 +0800
+
+    blogs/ForkKILLET feat(contents): 在未搜索之前显示所有文章
+
+commit 5fac9fcad4a4e16a95a9cc1c0bd331dfaf0637c5
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 20:07:55 2019 +0800
+
+    fix(UI): 改正了按钮没有居中的 bug
+
+commit 518a61716df3eb486899a86f98fa1a889827f32e
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 18:46:18 2019 +0800
+
+    blog/ForkKILLET feat(contents): 完成目录显示
+
+commit 94a29a7aa020d405ea08a7bb3939809cceb9426a
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 12:52:04 2019 +0800
+
+    fix(user, UI): 修正 Sign out 没有特效的 bug
+
+commit 6161b70b14abe9389c506b067852f6d766deb0e1
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 11:58:07 2019 +0800
+
+    fix(user): 修正了没有自动获取 token 的 bug
+
+commit c95cbdbaa28cdd9c0fedac1dafc821e5f7a73bc2
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 11:03:35 2019 +0800
+
+    feat(UI): 优化了 Sign out 的 UI
+
+commit a42201cdf615d7c02de5f0e11ef2ac12797d0fd7
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Sat Sep 14 10:05:14 2019 +0800
+
+    feat(blog/ForkKILLET, UI): 搞定了筛选文章的 UI。
+
+commit 0935070c30a6bfbf5dd6d802e8c6b5f9f73f5399
+Author: ForkKILLET <fork_killet@qq.com>
+Date:   Fri Sep 13 22:14:12 2019 +0800
+
+    fix: 将 Submit 按钮的文字改成了提交
+
+commit 5f66346aff26e5e5f5c6df2fd6c7b938eb124127
+Author: administrator <administrator@administratordeMacBook-Pro.local>
+Date:   Fri Sep 13 19:31:51 2019 +0800
+
+    feat:(???) ??? 我也不知道我干了啥
+
+commit aec09036bede967a9a64db720cdc1caef84d8cd6
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 22:44:10 2019 +0800
+
+    feat(UI, user): 再次给登录后的用户名按钮加上了特效 & 优化表单特效（原来那玩意没用）
+
+commit fc1e9db8c04f7b3a9546c90e9dec34690756a4d0
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 22:36:55 2019 +0800
+
+    config(Math): 关闭 MathJax 的加载消息
+
+commit 6adc48c564655d5950b95e455faf34d2ca70c770
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 22:29:06 2019 +0800
+
+    feat: 添入了页面底部的 Copyright 信息
+
+commit 1cf9d977fca95f8fc7c25443243a4ed3f1da62ca
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 22:03:37 2019 +0800
+
+    feat(blog/ForkKILLET): 初步完成筛选文章的界面
+
+commit 6d72deb732a98ceb476c17f406b6e65015f4d5ac
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 21:13:05 2019 +0800
+
+    feat(UI, user): （git 操作失误）给登录后的用户名按钮加上了特效 & 优化表单特效
+
+commit 63b0d4767fae4462eff98a7687f8372a34a3dcd4
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 21:12:08 2019 +0800
+
+    feat(UI, user): 给登录后的用户名按钮加上了特效 & 优化表单特效
+
+commit bd9ab4969061e22fc340c49b8954c8aacc49abfe
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 20:10:21 2019 +0800
+
+    fix(user, UI): 再次修复了登录后用户名显示字号不对的 bug
+
+commit fc229a4b874c63c095a994fb099126590b944c68
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 20:01:03 2019 +0800
+
+    fix(user, UI): 修复了登录后用户名显示字号不对的 bug
+
+commit 1b1d508fba752778117aa11ec5593eabd2309ba9
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 19:17:36 2019 +0800
+
+    feat(UI): 添加了标题特效
+
+commit 263234bd80cfcdd7c30be99a4a87a9f0533bf3e7
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 18:54:38 2019 +0800
+
+    feat(UI): 将导航栏特效改成了 CSS transition
+
+commit c87aa04bcae6cef2df785c1457072a1efb93b0ed
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 18:16:56 2019 +0800
+
+    feat(UI): 将 sign in / up 的悬停动画分开了
+
+commit 4868ac1214528582ad4652c0d8a5d56d5704a89b
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 9 06:59:23 2019 +0800
+
+    feat(UI): 给侧边栏加入了一些亮闪闪的 5 毛钱特效（动画）。
+
+commit bda20496318fd61f9dd34408ab035b5bc45a7beb
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 23:18:12 2019 +0800
+
+    fix(UI): 修正文本中嵌套的链接单行显示的 bug
+
+commit 155ca4d3979d1ed77c748117ce995a6a5ae83ca5
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 23:00:11 2019 +0800
+
+    fix(UI): 修复表单方面的一些样式故障
+
+commit 964e6d0e9df228eeed31bd630a6dd2be8d0bfedb
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 22:58:15 2019 +0800
+
+    config: 添入 jquery.color.js
+
+commit 8a51ed52a62bd5f59b5c13f76adf02bfef3b8371
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 22:53:51 2019 +0800
+
+    feat(UI): 整改一些内容
+
+commit 1c4ebd00dbcdbcf6a45d0ee415f682bbd4844f3e
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 21:57:29 2019 +0800
+
+    feat: 由于换了字体宽度不够的原因，减去了某些字符
+
+commit 83c230d7294724a2ac29fe90e8c21b3ab709d51c
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 20:52:56 2019 +0800
+
+    feat(UI): 修改了字体，Consolas 和默认 sans-serif
+
+commit 4c80810ccb3505aed3d689ba3fd97f683140f097
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 20:15:29 2019 +0800
+
+    fix(UI): 修正了更新日志中有序列表莫得序号的 bug
+
+commit ab2df4e946a0369c258a320f1f0d3d48d3b2c820
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 20:02:21 2019 +0800
+
+    fix(UI): 继续整改 CSS
+
+commit f412aa8bab32aa4b393cefce38d7f994f7e834d7
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 19:51:32 2019 +0800
+
+    fix(UI): 继续整改 CSS
+
+commit 833fb524d067266aee233355513448bb4fbb5646
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 19:43:00 2019 +0800
+
+    fix(UI): 继续整改 CSS
+
+commit 8215c56e373805f47c7ddb741d5c075987b02bfe
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 19:21:08 2019 +0800
+
+    fix(UI): 继续整改 CSS
+
+commit 58d5e702921f572b867111dc963c248189d7c6ac
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 19:15:39 2019 +0800
+
+    fix(UI): 继续整改 CSS
+
+commit e90db4a6246880b62353b61b49d1c61911c32874
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 19:13:34 2019 +0800
+
+    fix(UI): 继续 CSS
+
+commit 8eadf1adfd3f5bc58ced766065dfbc511edce7a9
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 19:09:11 2019 +0800
+
+    fix(UI): 继续 CSS
+
+commit ea9b7e2237f527a7d70a491441ba0022391917a2
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 18:42:19 2019 +0800
+
+    fix(UI): 继续整改 CSS
+
+commit a6b02b89661788ae5cef9ab99e88e3b95b4d5a49
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 18:06:26 2019 +0800
+
+    修复 JQ 以及 CSS 的一些 bug，我说不清楚
+
+commit 45c645a4ce745b3fc9ff9beb3288c7daee66e0b7
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 17:43:41 2019 +0800
+
+    feat(user): 未登录时点击用户区域将不再弹出用户菜单（注销链接）
+
+commit 17fd7bd671ddfe5f88020194b44b776e84345773
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 17:38:41 2019 +0800
+
+    fix(UI): 修改一些界面上的毛病
+
+commit bcc71e5186d35cbc6857cab17f4d6b446569d3da
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 17:19:47 2019 +0800
+
+    fix(UI): 将用户菜单的字体改为白色
+
+commit d8f6671e04da5a0f37cd6208ca418b01ded7661e
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 17:13:36 2019 +0800
+
+    fix(UI): 修了链接的界面
+
+commit aaddc678bba7c96e07a0edf5c59d6a3d5bd50361
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 17:06:56 2019 +0800
+
+    fix(UI): 修了链接的界面
+
+commit b422fcef91039489f7141e6c96a110aaf858851f
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 13:05:37 2019 +0800
+
+    feat: 完善了注销功能
+
+commit d0deee163e8a81ba99caa9f6d9f3268687e4d6ba
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 12:19:40 2019 +0800
+
+    fix(user): 再次用户面板显示的问题
+
+commit f4c4c27ea609692b8e70daa533dcfb10655a8972
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 12:06:48 2019 +0800
+
+    fix(user): 用户面板显示的问题
+
+commit d2b9d6fc175b8f6d63a893ecca6cab5026cbc824
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 12:02:48 2019 +0800
+
+    fix: 修复 JQ 最后一个问题
+
+commit 0bd77b44d33fa44525a14957ce49afb65298e31f
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 12:00:25 2019 +0800
+
+    fix: 再次修复 JQ 与 MathJax 的一些问题，以及优化
+
+commit 3949da24b01567d40001dc1c29e4cdc0b990f1d7
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 11:57:38 2019 +0800
+
+    fix: 修复 JQ 与 MathJax 的许多问题，以及优化
+
+commit 3432646b25418aed4abcb505440a08fdb6eab69e
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 11:32:47 2019 +0800
+
+    fix: 试图修复 MathJax 的 bug
+
+commit c2f89d97c5997a677b5620ed9cf9d4a3eb922332
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 10:46:19 2019 +0800
+
+    fix: JQ 又写错
+
+commit dda2a4da00eef3582f64de233a636ce6316bba46
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 10:39:37 2019 +0800
+
+    fix: JQ 写错
+
+commit 4c53f013cd14bd2ef2bf30f3df4db2355fad173b
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 10:36:17 2019 +0800
+
+    fix: 去掉了已经去掉的 onload
+
+commit 272fe006af192e599c2d19b7239fca016f491f2e
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 8 10:27:25 2019 +0800
+
+    refactor: 改用了 JQ
+
+commit b84daedb25be7081f282a74e09bb9bcde2eedb8e
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Sep 7 11:04:25 2019 +0800
+
+    fix(MD): 修正侧边栏中博客 URL
+
+commit 135bac05855c2a83ef8ddf25264e1ce2ece145d6
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Sep 7 10:59:17 2019 +0800
+
+    [blog/ForkKILLET] fix(MD): 修正路径
+
+commit 3423a0f68c3c8abed434fb1355b8fb2636f6090f
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Sep 7 09:54:19 2019 +0800
+
+    fix(UI): 再次修复页面高度不够时侧边栏显示不正常的 bug
+
+commit 0e7fe9c021f21045bbe5e295542f2cf5cd2121fc
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Sep 7 09:51:23 2019 +0800
+
+    fix(UI): 修复了页面高度不够时侧边栏显示不正常的 bug
+
+commit cdc6925e55c71eca4c3ed9be2fde68d213d61ec4
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Sep 7 09:33:44 2019 +0800
+
+    fix: 修复了 Tex 公式无法显示的 bug
+
+commit b81dd130c390daa5eecb194cb9525149580725fc
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Sep 6 23:09:26 2019 +0800
+
+    feat(user): 增加了记住登录状态的功能
+
+commit 4276f7030c721271a8174542998153fbd88de728
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Sep 6 20:03:38 2019 +0800
+
+    feat(add atc): 添入了一个 404 错误页面
+
+commit 7707eda89b2c4248c80561cfb152e89dde3ac292
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Sep 5 22:22:36 2019 +0800
+
+    feat(log): 上线了站点更新日志
+
+commit 2c5971ae2d64d91e2d17ef0050ccaba29cacd508
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Sep 5 18:35:38 2019 +0800
+
+    feat(user, UI): PHP 输出优化
+
+commit 4a6eb02add54ff917dcbd2cf79473a6fa642fccb
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Sep 5 18:10:48 2019 +0800
+
+    fix: 去掉 AJAX 的跨域字段，应当放在 php
+
+commit 8f820d7ed3bcc40a84e1938c84780d4fff1072dd
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Sep 5 18:01:02 2019 +0800
+
+    feat(user): AJAX 配置
+
+commit 9ee3d132c995e2e5d4ffade2dab4010debba0cdc
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Sep 5 17:38:41 2019 +0800
+
+    fix(user): 又是不小心把 git 打到代码里面了
+
+commit 74cb9682188f0025f7f5a82e033a564f0973694e
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Sep 5 07:17:05 2019 +0800
+
+    fix(user): 解决 AJAX 请求的 session id 和直接访问不同的问题（大概 \|/）
+
+commit 610d14282d5d5ccb67f781bf0b034939af47531a
+Merge: e0ef819 330bb7a
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Sep 5 07:14:20 2019 +0800
+
+    fix(user): git 的一些操作
+
+commit e0ef819aff38baa62c7ac8bd2d0f5f63cd1e4fcf
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Sep 5 07:09:47 2019 +0800
+
+    feat(user): 再次优化 log
+
+commit 330bb7a26727138a6ecbbfd7ced05b694f04145a
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Thu Sep 5 07:00:17 2019 +0800
+
+    fix(user): 再次修正 log
+
+commit 0610d4de82df357ff7b23d75e6dfab2a41132f38
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 22:51:07 2019 +0800
+
+    fix(user): log 再次修正
+
+commit ee38e946de2d1a2e993014ec9d3a6236cb6858f4
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 22:42:05 2019 +0800
+
+    fix(user): log 修正
+
+commit e8586c448a3ac3e2524c0f723e59b36870373f85
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 21:54:26 2019 +0800
+
+    config(ignore)
+
+commit d69d38aa2bd206ad8ccd2d9f3f2ac99c4ef1b831
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 21:52:04 2019 +0800
+
+    config: debug -> off
+
+commit 17dc832a75f46968c8a672776d2f5c3987a23f1d
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 21:43:24 2019 +0800
+
+    fix(user): 艹还不行，我考虑不要用 PHPStorm 内嵌的终端
+
+commit ee749c403f4a1794117e12034d3485d350e88cfe
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 21:40:14 2019 +0800
+
+    fix(user): wzbl 干刚那个提交还有问题
+
+commit 74cf155c2d627c646ebe414e5b7c20074da45ee7
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 21:37:26 2019 +0800
+
+    fix(user): 还是那个沙雕错误，提交又出错了(上香 \|/)
+
+commit 4a2d04f231c6107919045e767a87b5d570237df6
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 21:33:36 2019 +0800
+
+    fix(user): 上次那个沙雕错误提交错误了……
+
+commit eff9f35edf26a2d8d1a06e2c188a185872322f18
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 21:31:33 2019 +0800
+
+    fix(user): 上次那个沙雕错误没提交完整……
+
+commit ed340900658e576925ad28cd0cacd4acb2314e7a
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 21:10:33 2019 +0800
+
+    config: *debug -> off
+
+commit 7b948801f472b103dabeb1d553f3d89bb506c876
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 18:13:15 2019 +0800
+
+    feat(UI): 点击验证按钮后加上了提示
+
+commit f436e702194a54a76e38c57ba0f80f2c4f7a4ff5
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Sep 4 18:00:53 2019 +0800
+
+    fix: 修正了请求发送验证码 AJAX 的参数错误
+
+commit 2440c685fbdcbf345137e35fb2028cf14ebbde07
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Tue Sep 3 22:21:53 2019 +0800
+
+    feat: 更换了网站的 icon
+
+commit 45911efd6f77f14505cd6704e2963d2af89297e6
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Tue Sep 3 21:27:42 2019 +0800
+
+    feat(UI): 在验证信息后面加了一条分割线
+
+commit de1261f37ba00ff8e5c6af32bed8c80b7a906e35
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Tue Sep 3 21:04:09 2019 +0800
+
+    test: 测试完整的验证功能
+
+commit aae32c6afb7cba59777f1bc66c60e084abea83f5
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 2 22:20:43 2019 +0800
+
+    feat(user): 分离注册与验证 (2)
+
+commit ffd9c40770056cdd4bc0abfb93257fe0826e9606
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 2 21:47:24 2019 +0800
+
+    style: 规范了部分代码（如加上了 lang 属性）
+
+commit cd7e61df70b788f216355e3ff6df1552a7279f00
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 2 21:39:35 2019 +0800
+
+    feat(user): 给登录页面添加了一些无关紧要的内容
+
+commit 01d7c8bfc7269e04ced71063002cd2a7262db193
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Sep 2 21:24:37 2019 +0800
+
+    feat(user): 分离注册与验证 (1)
+
+commit dc082fa9e45aaadc32fe51462721d68b22da2a7b
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 1 09:36:36 2019 +0800
+
+    feat(user): 允许邮箱字段自动填充
+
+commit 95a4a8655c76c8e3a615a4d2caf6b8d49f41d373
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 1 09:33:36 2019 +0800
+
+    feat(user): 允许了邮箱字段自动填充
+
+commit e140ad60aec960584af2196f20af7af57a5b8681
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Sep 1 09:25:49 2019 +0800
+
+    feat(user): 改善了 UI
+
+commit b7fd742f314f1162d0cf7e9ce311662cc9e603da
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Aug 31 10:30:20 2019 +0800
+
+    feat(user): 重大更新！验证邮件可以发送了！！！
+
+commit 6532e6a018d31637493ccbd99529a1c20e14827f
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Aug 31 09:44:25 2019 +0800
+
+    fix(user): 修正 AJAX 的一个 bug
+    
+    变动了 POST 的数据格式： String => FormData
+    （否则 PHP 无法从 $_POST 中获取信息）
+
+commit 87262ae45293474348974532fc50b59b3833e5c3
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Aug 31 08:59:09 2019 +0800
+
+    fix(user): 修复沙雕 bug
+
+commit e615840ccedd7e736fed6223aaad179807bf2dc1
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Aug 31 08:50:42 2019 +0800
+
+    fix(debug): 修了有一个因为手滑产生的错误
+
+commit 9c0fc7d9c891320d04684397634e70b6e47ece22
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Aug 31 08:44:47 2019 +0800
+
+    feat(debug): 加了一些调试的内容
+
+commit 85bc6562757b6f7e4a62bbc48164b49ac25aac98
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 30 22:41:10 2019 +0800
+
+    feat(style): 美化 UI 若干处
+
+commit 5e94d9cebf34702fca0456329031b271134add60
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 30 21:54:41 2019 +0800
+
+    fix(style): 修正登录注册页面图标大小不正常的 bug
+
+commit 92f185965cf38b58008e98f0cf648e8249daa063
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 30 21:49:29 2019 +0800
+
+    feat(user): 将注册和登录页面的内容有 md 文件转到了 HTML
+    
+    表单存 md？我之前怕不是石乐志，，
+
+commit b8900cc83246ca2b6e51fd6343748410b81cbd4a
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 30 21:29:55 2019 +0800
+
+    style: 整改了一些无关紧要的码风问题
+
+commit 11a8a34b6948e863d375e46f018b5a2b0f266376
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 30 20:01:02 2019 +0800
+
+    fix(style): 解决按钮宽度过长的 bug
+
+commit 2b14b5cf08055fc041c3fb24751219c5e10c4834
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Aug 29 14:19:51 2019 +0800
+
+    fix(ui): 再次修正 email 样式
+
+commit e3c97e794831a64f968903b75c96334ad0a3c08d
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Aug 29 14:12:38 2019 +0800
+
+    feat(ui): 修正 email 输入框样式
+
+commit 9872c64ee2e275570d78e168c89deee747926828
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Aug 29 14:06:13 2019 +0800
+
+    test(user): 测试注册页面
+
+commit 5c83a5ec34defe721a6d607016eed83c29925c3b
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Aug 29 12:31:54 2019 +0800
+
+    feat: 修改协议：https -> http
+    
+    原因：SSL 证书？最便宜 4000+/年？告辞
+
+commit a29c2bfde025b45599edfe0d14acf5e83f09321c
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Aug 28 21:23:10 2019 +0800
+
+    fix: 再再再次修复 md 获取的 bug！
+    
+    这一定是最后一次了
+
+commit 820889f51cacc648039747a65574759f35ad8552
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Aug 28 21:20:32 2019 +0800
+
+    fix: 再再次试图修复 md 获取的那个 bug
+
+commit 6c71399d4118e7de9f5205e4421cd0d3ba8f60d8
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Aug 28 21:13:46 2019 +0800
+
+    fix: 再次试图修复 md 获取的那个 bug
+
+commit 86cb4905f6f6b6b0272599e1608641eb22614bf9
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Aug 28 21:03:09 2019 +0800
+
+    fix: 试图修复 md 获取的 bug(上香\|/)
+
+commit c3db275c4bbe6031461358f308c42567ce738000
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Aug 28 11:44:43 2019 +0800
+
+    fix: 修正 md_values 的声明
+
+commit fcb763442dea8cd5502eb3c3557c345613c15c95
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Wed Aug 28 11:31:45 2019 +0800
+
+    refactor: 改用 AJAX 从服务器获取 Markdown 内容。
+
+commit 63cc225227f8fea07ce928caa66d74230d81d384
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Aug 26 18:05:04 2019 +0800
+
+    style: 再次修正路径问题。
+    feat(guide): 解决侧边栏上链接 hover 效果不好看的 bug
+
+commit 62b9b8f2b875981e96978b67a05e48445d31b76a
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Aug 26 14:49:49 2019 +0800
+
+    feat: 优化浏览器标题
+    feat(user): 禁止表单自动填充
+
+commit ce0f9b48fa8d878a6784cc833b22045cc039886f
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Aug 26 09:55:18 2019 +0800
+
+    style: 修改一个漏掉的路径
+
+commit 64a07045f820ed0b41e0cdd80064874cd17735d6
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Aug 26 09:41:30 2019 +0800
+
+    style: 修改所有路径：https:// & ./ => //
+
+commit 9074cf6638309a1be2b8087ee7459a6f362f76ef
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Mon Aug 26 09:27:43 2019 +0800
+
+    feat(user): 将登录页面转移到 gp
+
+commit 5ed27bfa98220c772e2b02e94511441d334c78a8
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sun Aug 25 12:57:31 2019 +0800
+
+    feat(user): 测试登录功能初步
+    
+    有了一个表单，并且能用 php 获取提交内容中的用户名。
+    下一步实现注册与检查密码的功能。
+
+commit 5f25fb8918ee2333ca0137a69994c4f0c78cc4da
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Sat Aug 24 11:43:23 2019 +0800
+
+    feat(article:sign_in): 添加注册页面
+
+commit b60aef0d661070a05862baeedb425bfdb9ad7de3
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 23 22:48:11 2019 +0800
+
+    feat(article: site_map): 添加了 ForkΨKILLET's Blog 的链接。
+    fix(article: friends): 修改错别字：“再此” => “在此”
+
+commit 01161cc9fc17c45fa6aa451cfb9b080d91f9078f
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 23 22:36:53 2019 +0800
+
+    fix(math): MathJax 报错的 bug
+
+commit b1e7dc035b5db40100d2836ea9949ae4593d7ee7
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 23 21:57:19 2019 +0800
+
+    feat(math): 支持了数学公式（用 MathJax）
+    feat(arcticle:blog_forkkillet/): 添加了 ForkΨKILLET 的博客（施工中）
+    feat(guide): 侧边栏的内容不再使用 HTML 展示，而是用 JS 写入。
+
+commit e73eb6872e72e425c39dfd119cb2b71d2530645c
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 23 18:15:46 2019 +0800
+
+    fix: 更改链接打开方式为直接打开。（之前为新标签页中打开）
+
+commit b075d1a97523681d40266b20fc22473881f327ed
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 23 18:02:47 2019 +0800
+
+    acticle(about_us): 添加了感谢 Font Awesome 的内容
+
+commit 4d8108e12569aa335ac08a70da19b91d1293c4ea
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 23 17:55:55 2019 +0800
+
+    feat: 给 Markdown 展示区域添加 “加载中” 的内容
+    
+    包括一个可爱的旋转图标和一行标题文字。
+
+commit 940d8805b686c09f71923af17adc120415573470
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 23 17:40:50 2019 +0800
+
+    article(site_map, friends, about_us): 添入 3 篇新文章，其类型：特殊
+    
+    article(site_map):              new
+    article(friends):               new
+    article(about_us):              new
+
+commit 1a3d9bc79f6c660ae8483604ebcbfb890f8dbf47
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Fri Aug 23 13:12:55 2019 +0800
+
+    feat(guide): 添加了一些内容
+    
+    guide:                          添加 Site map, friends 和 About us 链接（内容未完成）
+                                            添加了站点 logo 和宣言（？大概吧）
+                                            添加了一个访问量计数器。
+    article "home":         添加了一些美美哒图标。
+
+commit 0fd0cedd4055bffea2856aef34923bf9a0145eaa
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Aug 22 23:22:17 2019 +0800
+
+    feat: 一大堆内容
+    
+    反正就是整改了啦！
+    支持 Markdown（用一种玄学的方式）
+    导航侧边栏还没弄好
+
+commit f0c44459b8fbe38454518339a8ae4d389cba7121
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Aug 22 15:36:39 2019 +0800
+
+    fix: 继续尝试该死的 require
+
+commit a6d6b7db4fb6fffea165a581d7f1f76e37359332
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Aug 22 15:18:13 2019 +0800
+
+    fix: 换了一下 main.js 和 remarkable.js 的位置
+    
+    别报错了，祖宗……
+
+commit 2f94f6a4fde05425b6e78c6d0f4f21ff06a2e275
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Thu Aug 22 15:03:39 2019 +0800
+
+    test: 尝试运行 Remarkable
+    
+    你要是敢报错我就，，，我就求求你别报错了 T_T
+
+commit ff69db4c9bf14220dd2fa00ee4cdfa3e8b486d09
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Tue Aug 20 21:31:43 2019 +0800
+
+    config: 添加了 .gitignore
+    
+    其中忽略了网站图标与 CNAME
+
+commit ab1ddf391e12b8b54d805b1a0c182ff6e9b696f3
+Author: ForkKILLET <Lx16302@163.com>
+Date:   Tue Aug 20 21:23:57 2019 +0800
+
+    feat: 添加了博客搬迁信息
+    
+    RT
+
+commit 9be34e5bbe62b570c9d558f7e8539613aa64e77b
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Aug 16 12:39:01 2019 +0800
+
+    feat: 在域名搞定之前扔掉旧的东西
+    
+    清清爽爽真好
+
+commit 7d0feda50ed3e69ce0274946cc624bef402abb6e
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Aug 16 12:28:50 2019 +0800
+
+    Update CNAME
+
+commit 4834f1cee55e5a9993e98b5b561d8b093cff09bd
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Aug 16 12:22:28 2019 +0800
+
+    Update CNAME
+
+commit f1312f3089fec026332a64a3cb869707519bcd33
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Aug 16 12:11:50 2019 +0800
+
+    Create CNAME
+
+commit 98ba766ac1dc5ec2b689f43cad8a68fb094798dc
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Jul 30 12:20:54 2019 +0800
+
+    升级
+    
+    添加了 N^2 的链接
+
+commit 7db9920c19fcae7c5f292add707ad959b4b4c767
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Jul 14 16:12:38 2019 +0800
+
+    上传
+    
+     -
+
+commit 0431a5153756abca0ac30024ae48d41cc743fec0
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Jul 14 16:11:56 2019 +0800
+
+    删除
+    
+     -
+
+commit ad64ba4d7077cbe2dba28cc60be5257661f9e569
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Jun 25 20:26:04 2019 +0800
+
+    巨升级：蘑菇树屋又焕然一新啦
+    
+        修改：
+    1. 取消新年，换成原主题了！（#d0e4fe 真好看）
+        添入：
+    1. 关于 ForkΨKILLET
+    2. 传送阵
+    3. 鬼畜的开场白
+
+commit 97f157ef7a598642817af396c47cbbe84de15d2d
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Thu Feb 7 17:58:57 2019 +0800
+
+    Delete Tool
+
+commit 845d09da7b640bc568cd85e9ae71ca6fcce71cc5
+Merge: bb3b44f bf88063
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Jan 22 10:43:42 2019 +0800
+
+    Merge pull request #1 from WarmSnowZ/patch-1
+    
+        添入:
+    1. 神奇物件: This is a new Tool.233333（或许可以在Type中调用？）
+
+commit bf880635507a790e187ab58b785300121df0f403
+Author: WarmSnowZ <46908820+WarmSnowZ@users.noreply.github.com>
+Date:   Tue Jan 22 09:26:44 2019 +0800
+
+    This is a new Tool.
+    
+    This is a new Tool.
+
+commit bb3b44f32008a6b9204ef455bcd15c2a0c107279
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Jan 13 19:52:17 2019 +0800
+
+    新建
+    
+    - 网站图标
+
+commit b0ec8d5b4acb268f9c5570bfc06090d24be3b33a
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Jan 6 21:35:26 2019 +0800
+
+    微升级
+    
+        修改:
+    1. fix 传送门无法访问的 bug
+
+commit 159a698f85ad54fb67c7bbda8a9986f4566d91a2
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Jan 6 21:09:30 2019 +0800
+
+    重置
+    
+    -
+
+commit abc522361c633655f39ce5de65f5c5516442381c
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Jan 6 20:15:39 2019 +0800
+
+    删除
+    
+    -
+
+commit bbfd1fd345f190e6c029af157b9b530be37fa25c
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Jan 6 20:14:17 2019 +0800
+
+    删除
+    
+    -
+
+commit 9714f3968124b8a2a20f1b861b020e3a704463b2
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Jan 2 23:36:58 2019 +0800
+
+    小升级
+    
+        修改：
+    1. 新年快落~~~（主题变了）
+
+commit 50a993ccce154318791f29c831ccd69ceda35395
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Mon Dec 10 22:34:56 2018 +0800
+
+    微升级
+    
+        修正：
+    1. 域牌颜色
+    2. 精力显示为健康的bug
+
+commit 3ea24eb0017a20d0c7be3a9b2d9c8b06e918129f
+Author: ForkΨKillet <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Nov 10 09:50:39 2018 +0800
+
+    调试
+    
+        添入：
+    1. Fundebug
+
+commit 256795bd9d1c7f6cf7bd9b64de76dc4f07ff3111
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Nov 9 17:22:01 2018 +0800
+
+    调试
+    
+        配置:
+    1. 打开调试模式
+
+commit 36899128cafaeb0a33cebbf9086abbf9daeca0e3
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Nov 9 17:17:31 2018 +0800
+
+    微升级
+    
+        改正:
+    1. 精力值显示为“健康值”的问题
+
+commit 26b7ed98ec08b2993fdb29f648d894578d9516ac
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Nov 7 20:59:46 2018 +0800
+
+    简介升级
+
+commit d5262ffa6dd047dd4f8cc2d0169b6c98a98d36d2
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Nov 4 22:01:02 2018 +0800
+
+    简介升级
+    
+    -
+
+commit 5168e1d31160fdf3e5edcd98efd40a9ea3306b25
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Nov 4 10:18:55 2018 +0800
+
+    微升级
+    
+        修正：
+    1. 角色信息[玩家].物品_ =="" 的问题（职业弓箭手时）
+
+commit 8d9d4be3268fdaca86f42b100b0240960d7d8930
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Nov 4 10:01:16 2018 +0800
+
+    微升级
+    
+        配置：
+    1. 版本与更新日期
+    2. 关闭调试模式
+
+commit e320f68812ffa9625023917ffa1e92bfc3f63d06
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Nov 4 09:57:47 2018 +0800
+
+    巨升级
+    
+        添入：
+    1. 虚拟键盘！！！！
+
+commit a71755479df1ba6f81f64da134ed3695a0166c79
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Oct 26 16:18:01 2018 +0800
+
+    微升级
+    
+        修改:
+    1. 一丢丢文字细节。
+
+commit 667404f7d5aff322903af3e1d0bed0c2ec31b609
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Oct 26 16:11:09 2018 +0800
+
+    介绍
+    
+    -
+
+commit 933143cef1c9baed0700c84803a5ccf98bae66a2
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Oct 26 16:10:22 2018 +0800
+
+    介绍
+    
+    -
+
+commit c9afe2eb660d993920f6b055b68174841ac00ca4
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Thu Oct 25 21:55:32 2018 +0800
+
+    微升级
+    
+        配置:
+    1. 版本修正
+    2. 调试模式关
+
+commit 960ed81cdbddd9af0b2a907a4983246bf87518e3
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Thu Oct 25 21:55:12 2018 +0800
+
+    微升级
+    
+        配置:
+    1. 版本修正
+    2. 调试模式关
+
+commit 8868f73e0ca3d313759a3e7de579ae9e366e01c5
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Thu Oct 25 21:51:30 2018 +0800
+
+    大升级
+    
+        剧情:
+    1. 推进【第一天，第三时间，战斗函数尚未完成】
+        修改:
+    1. 分割线和Type函数的小细节
+
+commit 657ac2e3c88f2264422a87d38639b067df892d66
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 23 20:46:13 2018 +0800
+
+    Update README.md
+
+commit 1707b2e4bcab7da719bc437d2f221298a6620959
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 23 20:45:44 2018 +0800
+
+    Update README.md
+
+commit 67611cedbfc4c480e39bd360f9bcb91c6fdc6497
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 23 20:42:29 2018 +0800
+
+    修改
+
+commit 33bc2b5b655c0882bc32a0fbacdaa86dd3895f66
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 23 20:38:26 2018 +0800
+
+    Update README.md
+
+commit 1e44b7831eec72f0615ccf146e898f177fc82901
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 23 20:23:56 2018 +0800
+
+    调试
+    
+        配置：
+    1. 关闭调试模式。（否则打字速度太快）
+
+commit 08746799d082a1a74465a85c8439c8ca5945e604
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 23 20:21:59 2018 +0800
+
+    大修改
+    
+        剧情
+    1. 推进：第一天，时间点一。
+
+commit 4404d0fc6503c485f6541739b3499f6676d8f086
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 17:41:15 2018 +0800
+
+    微修改
+    
+     完善：
+    1. 页脚
+
+commit 60f57d8106d069095c759f5d58da5262a94a2669
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 11:32:20 2018 +0800
+
+    Update README.md
+
+commit 10763acfc9b330fc3bad2a509e27c92cb355a363
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 11:31:35 2018 +0800
+
+    Update README.md
+
+commit 62880058458740a9cdfe49d982cd9ef87784d83a
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 11:18:49 2018 +0800
+
+    Update README.md
+
+commit 9de66f9398a2902801683d482affd940fae84e07
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 11:17:39 2018 +0800
+
+    小修改
+    
+    改正：
+    1. 【域灵】对话打字的位置
+    添入：
+    1. Go 函数
+    2. 第一天剧情【作者の话】弹窗
+
+commit 89834dc04a0d95fb303f54bcd871ac6a2b68b210
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 10:54:25 2018 +0800
+
+    大修改
+    
+     完善
+    1. 【域灵】的对话
+
+commit 76c1efa08a3ba95de4edf221d1f4fbca1c99f40b
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 10:48:31 2018 +0800
+
+    调试代码
+
+commit 5876bca9cb1d98d39cbe5934cdb422b26fb62582
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 10:42:59 2018 +0800
+
+    调试代码
+
+commit a28ac138bdd1ae9aa397ffc9aa4f439e7e1c2745
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 10:40:18 2018 +0800
+
+    调试代码
+
+commit 0306d4004ddf49faab0f457d3700c1ea7f121c55
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Oct 21 10:35:21 2018 +0800
+
+    调试代码
+
+commit 9424058b26c1169360132043759c5af04286ad36
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Oct 20 20:30:08 2018 +0800
+
+    Update README.md
+
+commit cf540c10af46b2c0607634620c63655915675684
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Oct 20 20:29:37 2018 +0800
+
+    Update README.md
+
+commit 695c34b91e98faede349c5635592c9dc655e7812
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Oct 19 21:53:41 2018 +0800
+
+    微修改
+    
+        添入：
+    1. 名字不能为空
+
+commit 20d7d4c1eb7075d52ca7b0cb0fe029bebb5308d2
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Fri Oct 19 21:41:11 2018 +0800
+
+    大修改
+    
+     完善：
+    1. 输入名字
+
+commit 575823cbbc957ca3c1fbbab938503f7e8f41165a
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Thu Oct 18 19:48:31 2018 +0800
+
+    Delete main.workflow
+
+commit 134deeecd6bda5fda0ad48c6098e9023cd3ced5a
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Thu Oct 18 19:47:59 2018 +0800
+
+    Create main.workflow
+
+commit eee0e2c8a9f7ac499d6ca93c28e16fa67ac36752
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Thu Oct 18 19:47:31 2018 +0800
+
+    Delete .github
+
+commit 8fcb9df7c37edf29405cd028328cd21d86bea80f
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Thu Oct 18 19:36:21 2018 +0800
+
+    创建
+    
+      测试
+    1. 看看 .github 是什么鬼
+
+commit 128ef609ca879ab8286c8ab21c814bac2325cdff
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 16 19:36:28 2018 +0800
+
+    Create README.md
+
+commit 0a57a48aa42e9e1432c18b3ca796b60dde78d06e
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 16 19:26:09 2018 +0800
+
+    Delete _config.yml
+
+commit 47863df8413a3c248ff2e48295d09712676eaf6a
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 9 22:12:23 2018 +0800
+
+    Update index.html
+
+commit 277ef4571efe0c892cbeb561d49716634ee3bc6a
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 9 19:09:45 2018 +0800
+
+    Delete README.md
+
+commit 1b68b0ae27bbcfd720ce6249f91d9a31c6a84e58
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Mon Oct 8 21:55:16 2018 +0800
+
+    大修改
+    
+     添入:
+    1.  输入表单正在码！
+
+commit d3ce59a9b005489fb5b1d63f7b2b7357d94c92f3
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Mon Oct 8 20:06:55 2018 +0800
+
+    Update CNAME
+
+commit 2ce431c339283379a1f3aa2594036d5ffae0150e
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Mon Oct 8 20:06:37 2018 +0800
+
+    Update CNAME
+
+commit 2e6132997ad53cc7e59f0eef5b266fdd94747835
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Mon Oct 8 19:45:53 2018 +0800
+
+    Create CNAME
+
+commit fd3faaf874594c639013856b55c93e50c028ce0d
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Oct 3 15:55:34 2018 +0800
+
+    Update README.md
+
+commit 1d651c1e1cb07529444d4de402e8aff913fc861b
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Oct 3 15:54:27 2018 +0800
+
+    Update README.md
+
+commit e3eb5b39ce112030fb325730a657f3b4dd99cc3d
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Oct 3 15:52:51 2018 +0800
+
+    Update README.md
+
+commit 5be41067b2de0942885bd375273bc1d8c01bddab
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Oct 3 15:46:00 2018 +0800
+
+    Update README.md
+
+commit 55eabca1979496148f7906baa389f914c5c92e31
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Oct 3 15:30:43 2018 +0800
+
+    微修改
+
+commit 7c1341f2db5a318d2ff1b91cc148e1f21395e64c
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Oct 3 15:17:35 2018 +0800
+
+    小修改
+    
+     添入：
+    1. 新职业【重战
+    2. 小段文字
+    
+     修改：
+    1. 将漏掉的alert改成对话框
+
+commit e897de4e207a83c24ad7e194c597eae9fbfe1a66
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Oct 3 14:52:29 2018 +0800
+
+    大升级
+    
+     添入
+    1.  【创建角色】 的 【选择职业】 部分
+
+commit 43fc6718e34edb4b6d5429e6175c518f052dda76
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Oct 3 13:38:48 2018 +0800
+
+    微修改
+
+commit 06c5ebdb1c67eebcdacae21e54fb71cd444195d4
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Wed Oct 3 12:42:39 2018 +0800
+
+    小修改
+    
+    -
+
+commit 4a4dd798dc5955b6ea28dcdb2a6bf369f60795d7
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 2 17:54:34 2018 +0800
+
+    小升级
+    
+    修改：
+    1. 部分代码变为中文
+    
+    修正：
+    1. 选择职业根据该实例进行具体化
+    2. 选择框后跟有职业名称
+
+commit c69b8e95911e79dd8a13d8f85876628c7b9b8661
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 2 17:30:54 2018 +0800
+
+    大修改
+    
+    修正：
+    1. “开始”按钮点击后不显示“选择职业模块”的问题
+    2. 调整字号
+    
+    测试：
+    1.  自定义的复选框
+
+commit 4158145fc632e2e80fc4c6ea15fff65669161e4c
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 2 15:18:44 2018 +0800
+
+    小修改
+    
+    加入
+    1.“页头模块” 中的<hr>
+
+commit 762b1b989f414cd1f49b7ea11a338447588fe2a1
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 2 15:16:54 2018 +0800
+
+    小修改
+    
+    修正
+    1. “开始”按钮的bug
+
+commit e2e4092f7a4b34c5102dce9e5d6cae8484b785a3
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Tue Oct 2 08:12:54 2018 +0800
+
+    Create
+    
+      add:
+    1. Tittle & Link
+
+commit 1f6aa4da7b807cea6bda4a37312d0249d9cc0c69
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Sep 30 18:29:55 2018 +0800
+
+    Update
+    
+    fix:
+    1. <div "id"="M_CR" "style"=="none"/>
+
+commit 888e9a7e63027239480673f4dba8a5ba15a64105
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sun Sep 30 18:23:28 2018 +0800
+
+    Update
+    
+    test
+    1.  <div "id"="M_Start"/> & <div "id"="M_CR"/>
+    2.  <js/>: fuc HideElement & fuc ShowElement
+
+commit 67f54fb31818ac6a2ed8ceb838d4bc21815fef85
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Sep 29 22:22:05 2018 +0800
+
+    Update
+    
+    fix:
+    1. " to '
+
+commit ab309292e02ce0f7d385baef4f72673e64179456
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Sep 29 22:19:01 2018 +0800
+
+    Update
+    
+    fix
+    1. <span> "style"="display: block;"
+
+commit 0ce5a06eaaba4bbd2bfc249fe823c7fe02e45749
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Sep 29 22:09:50 2018 +0800
+
+    Update index.html
+
+commit 2378f84172d53489ddbe265ff5882bf2f848a1d6
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Sep 29 22:08:48 2018 +0800
+
+    Update index.html
+    
+    test:
+    1."onclick" & "id" & "class"
+    2.<div/> & <span/>
+
+commit 149d055f695918dbdd46c41b94f138b4b71028cf
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Sep 29 21:54:35 2018 +0800
+
+    Update - test
+    
+    test
+    1.<style>
+
+commit 236c2c0b0bab09ac2d29db1c94b6eeff9af7e3b2
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Sep 29 21:42:57 2018 +0800
+
+    Create
+    
+    Test:
+    1. <title/>
+    2. <h1/>
+
+commit a3e68170282f9272fbf348fbdd22bf842eccf4dc
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Sep 29 21:37:54 2018 +0800
+
+    Update README.md
+
+commit e8b331752068dab581922aa3b51cd9e5f7f1b1a5
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Sep 29 21:37:45 2018 +0800
+
+    Set theme jekyll-theme-merlot
+
+commit 8f0074f852fa66a07588db8cb3a3254413ebda5d
+Author: ForkEnd <35412022+ForkFG@users.noreply.github.com>
+Date:   Sat Sep 29 21:35:58 2018 +0800
+
+    Initial commit

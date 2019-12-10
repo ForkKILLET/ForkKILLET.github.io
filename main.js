@@ -34,7 +34,7 @@ log("[LOAD]: icelava.top/main.js");
 if (!window.script) window.script = {};
 window.script.main = true;
 
-$(document).ready(() =>
+$(() =>
 {
 	// Note: 插入导航栏（侧边栏）
 	let $body = $("body");
@@ -94,33 +94,25 @@ $(document).ready(() =>
 	$("#user_op").hide().html(`
 <a><i class="fas fa-sign-out-alt"></i> Sign out</a>
 	`);
-	$("#user_op>a:first-child").click(() =>
-	{
-		AJAX("GET", "http://qwq.icelava.top/sign_out.php", "application/x-www-form-urlencoded", null,
-		() => location.reload());
-	});
+	$("#user_op>a:first-child").click(() => AJAX("GET", "http://qwq.icelava.top/sign_out.php", "application/x-www-form-urlencoded", null,
+	() => location.reload()));
 
-	$("#user").data("tourist", true).click(() =>
-	{
-		if ($("#user").data("tourist") === false)
-			$("#user_op").fadeToggle();
-	});
+	$("#user").data("tourist", true).click(() => { if ($("#user").data("tourist") === false) $("#user_op").fadeToggle(); });
 
 	// Note: 亮闪闪的 5 毛钱特效。
 	$("#pos").css("marginLeft", "0");
 
 	// Note: 如果不是本地，token 登录。
-	if (!is_local())
-		AJAX("GET", "http://qwq.icelava.top/get_token.php", "application/x-www-form-urlencoded", null,
-		(XHR) =>
-		{
-			let token = XHR.responseText;
-			if (!token)return;
-			let un = JSON.parse(token)["un"];
-			let $user = $("#user");
-			$user.data("tourist", false);
-			$user.html(`<p><i class="fa-fw fas fa-user"></i>${un}</p>`);
-		});
+	if (!is_local()) AJAX("GET", "http://qwq.icelava.top/get_token.php", "application/x-www-form-urlencoded", null,
+	(XHR) =>
+	{
+		let token = XHR.responseText;
+		if (!token)return;
+		let un = JSON.parse(token)["un"];
+		let $user = $("#user");
+		$user.data("tourist", false);
+		$user.html(`<p><i class="fa-fw fas fa-user"></i>${un}</p>`);
+	});
 
 	// Note: MD 渲染的一系列操作。
 	MathJax.Hub.Config(
@@ -183,5 +175,6 @@ $(document).ready(() =>
 		}
 	}
 
+	// Note: 新建全局 ForkKILLETShape 实例
 	window.FS = new ForkKILLETShape();
 });

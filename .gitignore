@@ -7,6 +7,7 @@ CNAME
 
 .jshintrc
 .DS_store
+.gitlog
 
 test_index.html
-
+/BarrenLand/test_index.html
