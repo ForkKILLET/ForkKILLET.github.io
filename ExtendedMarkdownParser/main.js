@@ -68,7 +68,7 @@ class ExtendedMarkdownParser
 			{ // Note: 图标（商标）
 				name: ['font-awesome-brand', 'fab', 'ib'],
 				space: [true, true, true],
-				begin: `<i class="far`,
+				begin: `<i class="fab`,
 				end: `"></i>`,
 				param:
 				[
