@@ -59,7 +59,7 @@ $(() =>
         </p> <hr>
         <p>
             <i class="fa-fw fas fa-mouse-pointer"></i> Hits
-            <img id="counter" alt="counter" src="http://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72"> 
+            <img id="counter" alt="counter" src="https://www.cutercounter.com/hits.php?id=geqpdpp&nd=7&style=72"> 
         </p>
     `);
 	$body.append(`<p id="copyright">Copyright© 2019 IceLava Dev Team. All Rights Reserved</p>`);
