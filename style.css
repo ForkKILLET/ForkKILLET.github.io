@@ -27,7 +27,9 @@ body
 {
 	background-color: #EFEFEF;
 	color: black;
-	font-family: "Consolas",  sans-serif;
+	font-family: "Consolas", "Inconsolata", "Monaco", "Monofur", "Courier", monospace;
+	/* 对付 iOS 那个灰色蒙版 */
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 #main
 {
