@@ -1,12 +1,18 @@
+Math.deg_to_rad = (deg) => deg * Math.PI / 180;
+Math.rad_to_deg = (rad) => rad / Math.PI * 180;
+Math.random_in_range = (min, max, if_int) =>
+{
+	let r = Math.random() * (max - min + 1) + min;
+	if (if_int) r = Math.round(r);
+	return r;
+};
+Math.random_in_100 = () => Math.random_in_range(0, 100, true);
+if (!window.log) window.log = (msg) => console.log(msg);
+
 class ForkKILLETShape
 {
 	constructor()
 	{
-		Math.deg_to_rad = (deg) => deg * Math.PI / 180;
-		Math.rad_to_deg = (rad) => rad / Math.PI * 180;
-		Math.random_in_range = (min, max) => Math.random() * (max - min + 1) + min;
-		Math.random_in_100 = () => Math.round(Math.random_in_range(0, 100));
-		window.log = (msg) => console.log(msg);
 		this.error_and_throw = (code, msg) =>
 		{
 			let e = Error(`[ERROR: ${code}]: ForkKILLET_shape.js\n${msg}`);
