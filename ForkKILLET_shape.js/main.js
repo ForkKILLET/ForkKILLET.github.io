@@ -3,7 +3,7 @@ Math.rad_to_deg = (rad) => rad / Math.PI * 180;
 Math.random_in_range = (min, max, if_int) =>
 {
 	let r = Math.random() * (max - min + 1) + min;
-	if (if_int) r = Math.round(r);
+	if (if_int) r = Math.trunc(r);
 	return r;
 };
 Math.random_in_100 = () => Math.random_in_range(0, 100, true);
