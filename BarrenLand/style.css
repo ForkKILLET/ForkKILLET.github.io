@@ -1,4 +1,4 @@
-/* Level: main */
+/* Section: main */
 
 #main
 {
@@ -13,7 +13,7 @@
     height: 100%;
 }
 
-/* Level: module */
+/* Section: module */
 
 /* Module: change */
 
@@ -87,7 +87,7 @@
     align-self: flex-end;
 
     height: 35px;
-    padding: 0 6px 5px 6px;
+    padding: 0 6px 8px 6px;
     margin: 0 5px 0  0;
     border-radius: 11px 11px 0 0;
 
@@ -99,7 +99,6 @@
 }
 .tab_log>i
 {
-    color: #4d4d4d;
     font-size: 24px;
 }
 .tab_log_focused, .tab_log:hover
@@ -113,7 +112,7 @@
     font-size: 18px;
     opacity: 0;
 
-    transition: opacity 500ms;
+    transition: opacity 1s;
 }
 .tav_log p, .tav_log b, .tav_log u, .tav_log strong, .tav_log em, .tav_log li, .tav_log td, .tav_log th
 {
@@ -129,7 +128,9 @@
     font-size: inherit;
 }
 
-/* Level: Unit */
+/* Section: Unit */
+
+/* Unit: BtnSquare */
 
 .btn_square
 {
@@ -183,6 +184,8 @@
     50%         { transform: scale(1.1, 0.9); }
 }
 
+/* Unit: BtnInline */
+
 .btn_inline
 {
     display: inline-block;
@@ -193,12 +196,16 @@
 
     transition: color 100ms;
 }
+.btn_inline_used::before, .btn_inline_used::after
+{
+    color: #8e8e8e!important;
+}
 .btn_inline::before
 {
     position: relative;
-    right: 0;
+    right: 2px;
 
-    content: "<[";
+    content: "<|";
     color: #1eb6ff;
     font-weight: bold;
 
@@ -207,23 +214,60 @@
 .btn_inline::after
 {
     position: relative;
-    left: 0;
+    left: 2px;
 
-    content: "]>";
+    content: "|>";
     color: #1eb6ff;
     font-weight: bold;
 
     transition: left 500ms;
 }
-.btn_inline:active
+.btn_inline:not(.btn_inline_used):active
 {
     color: #1eb6ff;
 }
 .btn_inline:hover::before
 {
-    right: 5px;
+    right: 11px;
 }
 .btn_inline:hover::after
 {
-    left: 5px;
+    left: 11px;
+}
+
+/* Unit: SplitLine */
+
+hr
+{
+	display: inline-block;
+	width: 100%;
+	height: 0;
+
+	border: 1px dashed #8e8e8e;
+	margin: 10px 0;
+
+	background: none;
+	box-shadow: none;
+}
+hr::before
+{
+	position: absolute;
+
+	margin-top: -10px;
+	padding: 0 5px;
+
+	content: "BarrenLand";
+	color: #8e8e8e;
+	background-color: #d0d0d0;
+	word-break: keep-all;
+
+	animation-name: move;
+	animation-iteration-count: infinite;
+	animation-duration: 12s;
+	animation-timing-function: linear;
+}
+@keyframes move
+{
+	0%, 100% { margin-left: -6px; }
+	50% { margin-left: calc(100% - 200px); }
 }
