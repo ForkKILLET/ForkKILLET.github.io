@@ -180,7 +180,6 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}
 
 		for (let i in this.setting_info)
 		{
-			debugger;
 			$body.append(`<p>${this.setting_info[i].msg} </p>`);
 			if (this.setting_info[i].type === "switch")
 			{
@@ -216,7 +215,7 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}
 		}
 
 		$(".tab_log_focused").removeClass("tab_log_focused");
-		$(".tav_log").hide();
+		$(".tav_log_focused").removeClass("tav_log_focused").hide();
 
 		$(`#tab_log_${name}`).addClass("tab_log_focused").trigger("tab_focus");
 		$(`#tav_log_${name}`).addClass("tav_log_focused").show();
@@ -269,8 +268,7 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}
 
 	clear_log_focused()
 	{
-		$(`.tav_log_focused>p`).css("opacity", 0);
-		setTimeout(() => $(`.tav_log_focused`).html(""), 500);
+		$(`.tav_log_focused`).html("");
 	}
 }
 
