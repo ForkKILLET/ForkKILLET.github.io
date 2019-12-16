@@ -31,12 +31,14 @@
 #module_change_1
 {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-self: flex-start;
 }
 #module_change_2
 {
     display: flex;
+    position: relative;
     flex-direction: column-reverse;
     align-self: flex-end;
 }
@@ -45,8 +47,8 @@
 
 #module_log
 {
+    position: relative;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
 
     width: calc(100% - 50px);
@@ -63,7 +65,6 @@
 }
 #module_log_body
 {
-    /* Note: Minus padding */
     height: calc(100% - 90px);
     width: calc(100% - 40px);
     padding: 20px;
@@ -72,11 +73,11 @@
 
     overflow-y: scroll;
 }
-#btn_log_clear
+#module_log>.btn_square
 {
     background-color: #f99256;
 }
-#btn_log_clear::after
+#module_log>.btn_square::after, #module_setting>.btn_square::after
 {
     right: 70px;
     left: unset;
@@ -112,7 +113,11 @@
     font-size: 18px;
     opacity: 0;
 
-    transition: opacity 1s;
+    transition: opacity 2s;
+}
+.tav_log>p.no_animation
+{
+    opacity: 1;
 }
 .tav_log p, .tav_log b, .tav_log u, .tav_log strong, .tav_log em, .tav_log li, .tav_log td, .tav_log th
 {
@@ -126,6 +131,63 @@
     padding: 0;
 
     font-size: inherit;
+}
+
+/* Module: setting */
+
+#module_setting
+{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+
+    width: calc(100% - 50px);
+    height: 100%;
+}
+#module_setting_head
+{
+    display: flex;
+
+    width: 100%;
+    height: 50px;
+    padding-left: 20px;
+
+    background: #4d4d4d;
+    color: white;
+}
+#module_setting_head
+{
+    width: calc(100% - 70px);
+}
+#module_setting>.btn_square
+{
+    background-color: #ff2222;
+}
+#module_setting_body
+{
+    width: 100%;
+    height: calc(100% - 50px);
+
+    padding: 20px;
+
+    background: #d0d0d0;
+}
+#module_setting_body>p
+{
+    display: inline-block;
+
+    padding: 0;
+
+    font-size: 18px;
+}
+#module_setting_body>p *
+{
+    font-size: inherit;
+}
+#module_setting_body>.switch
+{
+    vertical-align: top;
+    zoom: 0.75;
 }
 
 /* Section: Unit */
@@ -154,11 +216,12 @@
     content: attr(name);
 
     position: absolute;
+    justify-content: left;
+
     visibility: hidden;
+    z-index: 1;
     padding: 1px 6px;
     left: 70px;
-
-    justify-content: left;
 
     background-color: inherit;
     color: white;
@@ -180,8 +243,8 @@
 @keyframes jelly
 {
     0%, 100%    { transform: scale(1, 1); }
-    25%, 75%    { transform: scale(0.9, 1.1); }
-    50%         { transform: scale(1.1, 0.9); }
+    25%, 75%    { transform: scale(0.8, 1.2); }
+    50%         { transform: scale(1.2, 0.8); }
 }
 
 /* Unit: BtnInline */
@@ -189,7 +252,7 @@
 .btn_inline
 {
     display: inline-block;
-    padding: 0 5px;
+    padding: 0 20px;
 
     user-select: none;
     color: black;
@@ -235,28 +298,69 @@
     left: 11px;
 }
 
+/* Unit: Switch */
+
+.switch
+{
+    display: inline-block;
+
+    width: 60px;
+    height: 34px;
+
+    margin: 0 10px;
+    border-radius: 17px;
+
+    background-color: #8e8e8e;
+
+    transition: background-color 500ms;
+}
+.switch::after
+{
+    position: relative;
+    display: block;
+
+    width: 24px;
+    height: 24px;
+    top: 5px;
+    left: 5px;
+
+    content: "";
+    background-color: #ffffff;
+    border-radius: 12px;
+
+    transition: left 500ms;
+}
+.switch_on
+{
+    background-color: #1eb6ff;
+}
+.switch_on::after
+{
+    left: 30px;
+}
+
 /* Unit: SplitLine */
 
-hr
+#module_log_body hr
 {
 	display: inline-block;
+    position: relative;
 	width: 100%;
-	height: 0;
+	height: 20px;
 
-	border: 1px dashed #8e8e8e;
 	margin: 10px 0;
 
 	background: none;
 	box-shadow: none;
 }
-hr::before
+#module_log_body hr::before
 {
 	position: absolute;
 
-	margin-top: -10px;
 	padding: 0 5px;
+    z-index: 1;
 
-	content: "BarrenLand";
+	content: "Barren Land";
 	color: #8e8e8e;
 	background-color: #d0d0d0;
 	word-break: keep-all;
@@ -265,9 +369,25 @@ hr::before
 	animation-iteration-count: infinite;
 	animation-duration: 12s;
 	animation-timing-function: linear;
+    animation-play-state: running;
+}
+#module_log_body hr:hover::before
+{
+    animation-play-state: paused;
+}
+#module_log_body hr::after
+{
+    display: block;
+    position: absolute;
+    width: 100%;
+
+    margin-top: 10px;
+    border: 1px dashed #8e8e8e;
+
+    content: "";
 }
 @keyframes move
 {
 	0%, 100% { margin-left: -6px; }
-	50% { margin-left: calc(100% - 200px); }
+	50% { margin-left: calc(100% - 120px); }
 }

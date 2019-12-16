@@ -55,81 +55,78 @@ class BarrenLandSystem
 			this.error_and_throw("C001", `Got an incorrect "ExMD" object.`);
 		else this.ExMD = ExMD;
 
-		// Note: 默认进入 mode 1
-		this.game_mode = 0;
-		this.change_game_mode();
-
-		// Note: 渲染 module 选择栏
+		// Note: 渲染模块选择模块
 		this.info = function ()
 		{
 			this.name =                 "BarrenLand";
 			this.name_Chinese =         "蛮荒大陆";
 			this.author =               "ForkKILLET";
-			this.brief =                "一款更新缓慢的文字 RPG 游戏，适合放置（手动滑稽）";
+			this.brief =                "一款更新缓慢的文字 RPG 游戏，适合放置 $i smile-wink i$";
 			this.version =              function ()
 			{
 				this.era = "β";
 				this.main = 0;
 				this.sub = 2;
-				this.fix = 1;
+				this.fix = 2;
 				this.toString = () => `[VER ${this.era}${this.main}.${this.sub}.${this.fix}]`
 			};
 			this.first_update_time =    new Date(2019, 12 - 1, 7, 0, 0, 0);
-			this.last_update_time =     new Date(2019, 12 - 1, 14, 0, 0, 0);
+			this.last_update_time =     new Date(2019, 12 - 1, 15, 0, 0, 0);
 			this.github_repo_URL = "https://github.com/ForkFG/ForkFG.github.io";
 			this.github_repo_path = "/BarrenLand";
 			this.toString = () => `
 ---
 
-$c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}。  
+$c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}  
+
 本次重置编号 \`β\`，初次上传于 \`${time(false, this.first_update_time)}\`，  
+
 目前版本：\`${(new this.version()).toString()}\`；  
+
 最近更新时间：\`${time(false, this.last_update_time)}\`。  
+
 可以在 $ib github ib$ [Github repo](${this.github_repo_URL}) 的 \`${this.github_repo_path}\` 目录下看到游戏代码，  
+
 求 star $c #efe942;$i star i$ c$ qwq  
 
 ---
-`;
+			`;
 		};
 		this.module_info =
 		{
-			explore:    { fa_name: "running",       color: "#1eb6ff", available: true, position: 1, rank: 0 },
+			log:        { fa_name: "scroll",        color: "#1eb6ff", available: true, position: 1, rank: 0 },
 			info:       { fa_name: "info-circle",   color: "#ff2890", available: true, position: 2, rank: 1,
 			callback: () =>
 			{
 				this.focus_tab_log("System");
 				this.page_log("System", (new this.info()).toString(), true, ExMD);
 			}},
-			setting:    { fa_name: "cog",           color: "#4d4d4d", available: true, position: 2, rank: 0 }
+			setting:    { fa_name: "cog",           color: "#4d4d4d", available: true, position: 2, rank: 0,
+			callback: () =>
+			{
+				this.toggle_module("setting");
+			}}
 		};
 		this.repaint_module_change();
 
-		// Note: 渲染日志
+		// Note: 渲染日志模块
 		this.log_info =
 		{
-			Diary:      { fa_name: "book",          color: "#3d942d",  rank: 0 },
-			System:     { fa_name: "terminal",      color: "#000000",  rank: 233 },
+			Diary:      { fa_name: "book",          color: "#91e624",  rank: 0 },
+			System:     { fa_name: "terminal",      color: "#2c00af",  rank: 233 },
 		};
 		this.repaint_module_log();
+		this.toggle_module("log");
 		this.focus_tab_log("System");
 
-		this.page_log_with_time("System", "**BarrenLand System** loaded.", true, ExMD);
-	}
+		// Note: 渲染设置模块
+		this.setting_info =
+		[
+			{ msg: "日志渐显特效",    type: "switch",     default: true,      callback: (state) => this.if_log_animation = state }
+		];
+		this.repaint_module_setting();
 
-	change_game_mode()
-	{
-		if (this.game_mode === 1)
-		{
-			$("#main_1").hide();
-			$("#main_2").show();
-			this.game_mode = 2;
-		}
-		else
-		{
-			$("#main_1").show();
-			$("#main_2").hide();
-			this.game_mode = 1;
-		}
+		this.page_log_with_time("System", "**BarrenLand System** loaded.", true, ExMD);
 	}
 
 	repaint_module_change()
@@ -154,6 +151,7 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}。
 
 	repaint_module_log()
 	{
+		$("#module_log").hide();
 		let $head = $("#module_log_head");
 		let $body = $("#module_log_body");
 		$head.html("");
@@ -167,8 +165,46 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}。
 			.children("i").css("color", this.log_info[i].color);
 			$body.append(`<div id="tav_log_${i}" class="tav_log"></div>`);
 		}
-		let $btn = $("#btn_log_clear");
+		let $btn = $("#module_log>.btn_square");
 		if ($btn.html() === "") $btn.addClass("btn_square").html(`<i class="fas fa-trash-alt"></i>`);
+	}
+
+	repaint_module_setting()
+	{
+		$("#module_setting").hide();
+		$("#module_setting_head")
+		.html(`<p>Setting</p>`)
+		.after(`<div class="btn_square no_animation" name="close"><i class="fas fa-times-circle"></i></div>`);
+		$("#module_setting>.btn_square").click(() => this.toggle_module("setting"));
+		let $body = $("#module_setting_body");
+
+		for (let i in this.setting_info)
+		{
+			debugger;
+			$body.append(`<p>${this.setting_info[i].msg} </p>`);
+			if (this.setting_info[i].type === "switch")
+			{
+				let $i = $(`<div class="switch"></div>`);
+				$body.append($i);
+				$i.on("onswitch", (e, state) => this.setting_info[i].callback(state));
+				if (this.setting_info[i].default)
+				{
+					$i.trigger("onswitch", true);
+					$i.addClass("switch_on");
+				}
+			}
+		}
+	}
+
+	toggle_module(name)
+	{
+		if (!this.module_info[name])
+		{
+			this.warn("C004", `"focus_module" method got an unknown module name "${name}"`);
+			return;
+		}
+
+		$(`#module_${name}`).toggle();
 	}
 
 	focus_tab_log(name)
@@ -191,16 +227,18 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}。
 
 	page_log(tav, msg)
 	{
-		msg = msg.replace(/\[\[/g, "<span class='btn_inline'>")
-			     .replace(/]]/g, "</span>");
-		$(`#tav_log_${tav}`).prepend(`<p></p>`);
-		let $msg = $(`#tav_log_${tav}>p:first-child`);
-		setTimeout(() => $msg.css("opacity", 1), 200);
+		msg = msg.replace(/<\|/g, "<span class='btn_inline'>")
+			     .replace(/\|>/g, "</span>");
+		let $msg = $(`<p></p>`);
+		$(`#tav_log_${tav}`).prepend($msg);
+		if (!this.if_log_animation) $msg.addClass("no_animation");
+		else setTimeout(() => $msg.css("opacity", 1), 200);
 
 		if (this.ExMD) this.ExMD.render($msg[0], msg);
 		else this.error_and_throw("C002", `"page_log" method require an "ExMD" object but didn't bind.`);
 
 		let $btn_inline = $msg.find(".btn_inline");
+
 		// Note: Currying!
 		return (arr_callback) =>
 		{
@@ -272,7 +310,9 @@ class BarrenLandUnit
 		$sel.data("registered", true);
 	}
 
-	all() { return $(this.rule); }
+	all() { return $(":not(.registered)" + this.rule); }
+
+	registered() { return $(".registered" + this.rule); }
 
 	register_all() { this.register(this.all()); }
 }
@@ -342,7 +382,11 @@ class BarrenLandPlot
 	{
 		if (typeof(arr_play) !== "object")
 			this.error_and_throw("C001", `"play_in_list" method expect a play array but didn't get a correct object.`);
-		for (let i in arr_play) setTimeout(() => this.play(arr_play[i]), i * 1000);
+		for (let i in arr_play) setTimeout(() =>
+		{
+			let play_btn_currying = this.play(arr_play[i][0]);
+			if (play_btn_currying) play_btn_currying(arr_play[i].slice(1));
+		}, i * 1000);
 	}
 
 	add_milestone(type)
@@ -365,38 +409,80 @@ $(() =>
 	// Note: BarrenLandSystem
 	window.BLS = new BarrenLandSystem(ExMD);
 
-	// Note: BarrenLandUnit
-	window.BLU_BS = new BarrenLandUnit(BLS, "BtnSquare", ".btn_square", ($sel) => $sel.click((e) =>
+	// Note: BarrenLandUnit : BtnSquare
+	window.BLU_BS = new BarrenLandUnit(BLS, "BtnSquare", ".btn_square:not(.no_animation)", ($sel) => $sel.click((e) =>
 	{
 		let $this = $(e.currentTarget);
 		$this.css("animation", "jelly 500ms")
 			 .on("animationend", () => $this.css("animation", ""));
 	}));
+	$("#module_log_head").after(`<div class="btn_square" name="clear"><i class="fas fa-trash-alt"></i></div>`);
+	$("#module_log>.btn_square").click(BLS.clear_log_focused);
 	BLU_BS.register_all();
-	$("#btn_log_clear").attr("name", "clear").click(BLS.clear_log_focused);
 
+	// Note: BarrenLandUnit : BtnInline
 	window.BLU_BI = new BarrenLandUnit(BLS, "BtnInline", ".btn_inline", ($sel) => $sel.click((e) =>
 	{
-		$(e.currentTarget).unbind("click").addClass("btn_inline_used");
+		let $i = $(e.currentTarget).parents(), $msg;
+		for (let i = 0; i < $i.length; i++) if ($($i[i]).hasClass("tav_log"))
+		{
+			$msg = $($i[i - 1]);
+			break;
+		}
+		$msg.find(".btn_inline").unbind("click").addClass("btn_inline_used");
 	}));
+	// Note: Override BarrenLandSystem . "page_log" method
+	BLS.origin_page_log = BLS.page_log;
+	BLS.page_log = (tav, msg) =>
+	{
+		let page_log_currying = BLS.origin_page_log(tav, msg);
+		BLU_BI.register_all();
+		return page_log_currying;
+	};
 
-	// Note: BarrenLandPlot
+	// Note: BarrenLandUnit : Switch
+	window.BLU_SW = new BarrenLandUnit(BLS, "Switch", ".switch", ($sel) => $sel.click((e) =>
+	{
+		let $this = $(e.currentTarget);
+		$this.toggleClass("switch_on").trigger("onswitch", $this.hasClass("switch_on"));
+	}));
+	BLU_SW.register_all();
+
+	// Note: BarrenLandPlot : MainStory
 	window.BLP_MS = new BarrenLandPlot(BLS, "MainStory", "Diary");
-	BLS.page_log("System", "暂未开放 **存/读档** 功能。请直接 [[开始游戏]]") (() => BLS.focus_tab_log("Diary"));
-	BLU_BI.register_all();
+	BLS.page_log("System", "暂未开放 **存/读档** 功能。请直接<|开始游戏|>") (() => BLS.focus_tab_log("Diary"));
 
 	BLP_MS.default_list =
 	[
-		"作为一个租房住的大学生，你结束了一天的**刻苦**学习，走回家，放下书包，熟练地打开你的 Macbook Pro。",
-		"「干什么呢？」你想了想，随后" + random_item(
+		[`作为一个租房住的大学生，你结束了一天的**刻苦**学习，走回家，放下书包，熟练地打开你的 Macbook Pro。`],
+		[`「干什么呢？」你想了想，随后` + random_item(
 		[
-			"玩起了 Minecraft，打算继续做昨天的红石机器人。",
-			"开始看[《诡秘之主》](https://book.qidian.com/info/1010868264)的新章节，乌贼又断章了，难受。",
-			"愉快地刷起了朋友圈。",
-			"瞄了一眼 [slay.one](https://slay.one)，发现还不能玩。"
-		]),
-		"「啪嗒」你听到了什么东西掉落的声音。",
-		"你回头一看，只见地面上躺着一块黑色的纸片"
+			`玩起了 $i cubes i$ Minecraft，打算继续做昨天的红石机器人。`,
+			`开始看[《诡秘之主》](https://book.qidian.com/info/1010868264)的新章节，乌贼又断章了，难受。`,
+			`愉快地刷起了朋友圈。`,
+			`瞄了一眼 [slay.one](https://slay.one)，发现还不能玩。`
+		]
+		)],
+		[`**「啪——嗒」**，你听到了什么东西掉落的声音。`],
+		[`你回头一看，只见地面上躺着一块黑色的纸片。`],
+		[`你疑惑地捡起了它。`],
+		[`看起来很薄的 “纸片”，拎在手里却并不轻，或许比一个鼠标还重。`],
+		[`正当你观察它时，上面亮起了白色的文字：`],
+		[`「世界那么**多**，你不想去看看嘛？」`],
+		[`你心想：「什么叫 “多” 啊……这是同学无聊做的整人道具？我来研究一下——」`],
+		[`“纸片” 上又亮起了文字「研究你 $i horse-head i$ 哦，我问你要不要去**异世界**玩！」`],
+		[`「笑死老子了」你正在思考是哪个沙雕同学做的，突然发现了一个问题：`],
+		[`「这个纸片怎么知道我要研究它？！」`],
+		[`「我是**域牌**当然知道你在想什么，傻X，再问你最后一遍要不要去别的世界！」`],
+		[`「似乎这个什么域牌，在邀请我穿越？它为什么要这么做？是不是要骗我去……」`],
+		[`「谁骗你啊，这么好的机会别人都是抢着要的真搞不懂你——我倒数了啊，3、」`],
+		[`「感觉这玩意很神奇但是……」`],
+		[`「2、」`],
+		[`「就算穿越之后回不来，嗯，不对，这东西似乎是可以双向的吧？是的吧？」`],
+		[`「1、$i angry i$」`],
+		[`你做出了决定<|我要去！|><|算了吧|>`,
+		 () => BLP_MS.play("剧情正在~~咕咕~~策划中，敬请期待！"),
+		 () => BLP_MS.play("剧情正在~~咕咕~~策划中，敬请期待！说起来你的选择很不正常诶！")]
 	];
 	BLP_MS.add_milestone("start") (() =>
 	{
