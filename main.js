@@ -8,7 +8,7 @@ window.AJAX = (type, url, MIME, value, fn_cb) =>
 	XHR.open(type, url);
 	XHR.setRequestHeader("Content-Type", MIME);
 	XHR.withCredentials = true;
-	XHR.onreadystatechange = () => { if (XHR.readyState === 4 && XHR.status === 200) fn_cb(XHR); }
+	XHR.onreadystatechange = () => { if (XHR.readyState === 4 && XHR.status === 200) fn_cb(XHR); };
 	XHR.send(value);
 };
 window.is_local = () => location.href.indexOf("localhost") !== -1 || location.href.indexOf("file:///") !== -1;
@@ -77,7 +77,7 @@ $(() =>
 			$btn_and_guide.css("marginLeft", "-260px");
 			$btn_toggle_guide.data("show", false);
 			$core.css("left", "35px");
-			$main.css("width", "calc(100% - 35px - 50px - 30px)");
+			$main.css("width", "calc(100% - 115px)");
 		}
 		else
 		{

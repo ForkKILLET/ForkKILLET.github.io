@@ -56,41 +56,41 @@ class BarrenLandSystem
 		else this.ExMD = ExMD;
 
 		// Note: 渲染模块选择模块
-		this.info = function ()
+		this.info =
 		{
-			this.name =                 "BarrenLand";
-			this.name_Chinese =         "蛮荒大陆";
-			this.author =               "ForkKILLET";
-			this.brief =                "一款更新缓慢的文字 RPG 游戏，适合放置 $i smile-wink i$";
-			this.version =              function ()
+			name:                 "BarrenLand",
+			name_Chinese:         "蛮荒大陆",
+			author:               "ForkKILLET",
+			brief:                "一款更新缓慢的文字 RPG 游戏，适合放置 $i smile-wink i$",
+			version:
 			{
-				this.era = "β";
-				this.main = 0;
-				this.sub = 2;
-				this.fix = 2;
-				this.toString = () => `[VER ${this.era}${this.main}.${this.sub}.${this.fix}]`
-			};
-			this.first_update_time =    new Date(2019, 12 - 1, 7, 0, 0, 0);
-			this.last_update_time =     new Date(2019, 12 - 1, 15, 0, 0, 0);
-			this.github_repo_URL = "https://github.com/ForkFG/ForkFG.github.io";
-			this.github_repo_path = "/BarrenLand";
-			this.toString = () => `
+				era: "β",
+				main: 0,
+				sub: 2,
+				upd: 3,
+				toString: () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
+			},
+			first_update_time:    new Date(2019, 12 - 1, 7, 0, 0, 0),
+			last_update_time:     new Date(2019, 12 - 1, 22, 0, 0, 0),
+			github_repo_URL: "https://github.com/ForkFG/ForkFG.github.io",
+			github_repo_path: "/BarrenLand",
+			toString: () => `
 ---
 
-$c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}  
+$c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.info.brief}  
 
-本次重置编号 \`β\`，初次上传于 \`${time(false, this.first_update_time)}\`，  
+本次重置编号 \`β\`，初次上传于 \`${time(false, this.info.first_update_time)}\`，  
 
-目前版本：\`${(new this.version()).toString()}\`；  
+目前版本：\`${this.info.version.toString()}\`；  
 
-最近更新时间：\`${time(false, this.last_update_time)}\`。  
+最近更新时间：\`${time(false, this.info.last_update_time)}\`。  
 
-可以在 $ib github ib$ [Github repo](${this.github_repo_URL}) 的 \`${this.github_repo_path}\` 目录下看到游戏代码，  
+可以在 $ib github ib$ [Github repo](${this.info.github_repo_URL}) 的 \`${this.info.github_repo_path}\` 目录下看到游戏代码，  
 
 求 star $c #efe942;$i star i$ c$ qwq  
 
 ---
-			`;
+			`
 		};
 		this.module_info =
 		{
@@ -99,7 +99,7 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}
 			callback: () =>
 			{
 				this.focus_tab_log("System");
-				this.page_log("System", (new this.info()).toString(), true, ExMD);
+				this.page_log("System", this.info.toString(), true, ExMD);
 			}},
 			setting:    { fa_name: "cog",           color: "#4d4d4d", available: true, position: 2, rank: 0,
 			callback: () =>
@@ -112,8 +112,8 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}
 		// Note: 渲染日志模块
 		this.log_info =
 		{
-			Diary:      { fa_name: "book",          color: "#91e624",  rank: 0 },
-			System:     { fa_name: "terminal",      color: "#2c00af",  rank: 233 },
+			Diary:      { fa_name: "book",          color: "#009c0c",  rank: 0 },
+			System:     { fa_name: "terminal",      color: "#4d4d4d",  rank: 233 },
 		};
 		this.repaint_module_log();
 		this.toggle_module("log");
@@ -121,12 +121,15 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}
 
 		// Note: 渲染设置模块
 		this.setting_info =
-		[
-			{ msg: "日志渐显特效",    type: "switch",     default: true,      callback: (state) => this.if_log_animation = state }
-		];
+		{
+			if_log_animation:   { msg: "日志渐显特效",    type: "switch",     default: true,
+			callback: (state) => this.if_log_animation = state },
+			play_break:         { msg: "剧情显示间隔",    type: "num",        hint: "毫秒数",      default: 1000,
+			callback: (value) => this.play_break = value }
+		};
 		this.repaint_module_setting();
 
-		this.page_log_with_time("System", "**BarrenLand System** loaded.", true, ExMD);
+		this.page_log("System", "**BarrenLand System** loaded.", true, ExMD);
 	}
 
 	repaint_module_change()
@@ -180,17 +183,24 @@ $c #3d942d;**${this.name}（${this.name_Chinese}）** c$，是${this.brief}
 
 		for (let i in this.setting_info)
 		{
-			$body.append(`<p>${this.setting_info[i].msg} </p>`);
-			if (this.setting_info[i].type === "switch")
+			let $i = $(`<div></div>`), $j;
+			$i.append(`<p>${this.setting_info[i].msg} </p>`);
+			switch (this.setting_info[i].type)
 			{
-				let $i = $(`<div class="switch"></div>`);
+			case "switch":
+				$j = $(`<div class="switch"></div>`);
+				$i.append($j);
 				$body.append($i);
-				$i.on("onswitch", (e, state) => this.setting_info[i].callback(state));
-				if (this.setting_info[i].default)
-				{
-					$i.trigger("onswitch", true);
-					$i.addClass("switch_on");
-				}
+				$j.on("_switch", (e, state) => this.setting_info[i].callback(state));
+				if (this.setting_info[i].default) $j.trigger("_switch", this.setting_info[i].default).addClass("switch_on");
+				break;
+			case "num":
+				$j = $(`<input type="number" placeholder="${this.setting_info[i].hint}">`);
+				$j.on("_input", (e, value) => this.setting_info[i].callback(value));
+				$i.append($j);
+				$body.append($i);
+				if (this.setting_info[i].default) $j.val(this.setting_info[i].default).trigger("_input", this.setting_info[i].default);
+				break;
 			}
 		}
 	}
@@ -299,7 +309,7 @@ class BarrenLandUnit
 		if (typeof(reg_callback) !== "function") this.error_and_throw("C002", "Got an incorrect register callback.");
 		else this.reg = reg_callback;
 
-		this.BLS.page_log_with_time("System", `**BarrenLand Unit**: \`${name}\` loaded.`, true);
+		this.BLS.page_log("System", `**BarrenLand Unit**: \`${name}\` loaded.`, true);
 	}
 
 	register($sel)
@@ -363,7 +373,7 @@ class BarrenLandPlot
 			}
 		};
 
-		this.BLS.page_log_with_time("System", `**BarrenLand Plot**: \`${name}\` loaded.`, true);
+		this.BLS.page_log("System", `**BarrenLand Plot**: \`${name}\` loaded.`, true);
 	}
 
 	play(msg)
@@ -371,20 +381,24 @@ class BarrenLandPlot
 		let play_info = {};
 		play_info.id = this.play_num++;
 
-		setTimeout(() => $(document).trigger("onplayend", play_info), 500);
+		setTimeout(() => $(document).trigger("_playend", play_info), 500);
 		let page_log_currying = this.BLS.page_log(this.tav, msg);
 		if (page_log_currying) return page_log_currying;
 	}
 
 	play_in_list(arr_play)
 	{
+		// Done: 每次使用不同的延迟
 		if (typeof(arr_play) !== "object")
 			this.error_and_throw("C001", `"play_in_list" method expect a play array but didn't get a correct object.`);
-		for (let i in arr_play) setTimeout(() =>
+		let every_play = (i) =>
 		{
+			if (!arr_play[i]) return;
 			let play_btn_currying = this.play(arr_play[i][0]);
 			if (play_btn_currying) play_btn_currying(arr_play[i].slice(1));
-		}, i * 1000);
+			setTimeout(() => every_play(i + 1), BLS.play_break);
+		};
+		every_play(0);
 	}
 
 	add_milestone(type)
@@ -429,6 +443,7 @@ $(() =>
 		}
 		$msg.find(".btn_inline").unbind("click").addClass("btn_inline_used");
 	}));
+
 	// Note: Override BarrenLandSystem . "page_log" method
 	BLS.origin_page_log = BLS.page_log;
 	BLS.page_log = (tav, msg) =>
@@ -442,9 +457,39 @@ $(() =>
 	window.BLU_SW = new BarrenLandUnit(BLS, "Switch", ".switch", ($sel) => $sel.click((e) =>
 	{
 		let $this = $(e.currentTarget);
-		$this.toggleClass("switch_on").trigger("onswitch", $this.hasClass("switch_on"));
+		$this.toggleClass("switch_on").trigger("_switch", $this.hasClass("switch_on"));
 	}));
 	BLU_SW.register_all();
+
+	// Note: BarrenLandUnit : Input
+	window.BLU_IP = new BarrenLandUnit(BLS, "Input", "input", ($sel) =>
+	{
+		let $btn = $(`<div class="btn_micro btn_micro_for_input"><i class="fas fa-check"></i></div>`);
+		$sel.after($btn);
+		$sel.parent().on("click", ".btn_micro_for_input", (e) =>
+		{
+			let $i = $(e.currentTarget).prev("input");
+			$i.trigger("_input", $i.val());
+		});
+		$sel.keydown((e) =>
+		{
+			if (e.which === 13)
+			{
+				let $i = $(e.currentTarget);
+				$i.next(".btn_micro_for_input").trigger("click");
+			}
+		});
+	});
+	BLU_IP.register_all();
+
+	// Note: BarrenLandUnit : BtnSmall
+	window.BLU_BM = new BarrenLandUnit(BLS, "BtnMicro", ".btn_micro", ($sel) => $sel.click((e) =>
+	{
+		let $this = $(e.currentTarget);
+		$this.css("animation", "jelly 500ms")
+			 .on("animationend", () => $this.css("animation", ""));
+	}));
+	BLU_BM.register_all();
 
 	// Note: BarrenLandPlot : MainStory
 	window.BLP_MS = new BarrenLandPlot(BLS, "MainStory", "Diary");

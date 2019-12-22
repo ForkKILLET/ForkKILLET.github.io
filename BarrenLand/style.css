@@ -172,7 +172,13 @@
 
     background: #d0d0d0;
 }
-#module_setting_body>p
+#module_setting_body>div
+{
+    display: flex;
+
+    margin-bottom: 10px;
+}
+#module_setting_body>div>p
 {
     display: inline-block;
 
@@ -180,7 +186,7 @@
 
     font-size: 18px;
 }
-#module_setting_body>p *
+#module_setting_body>div>p *
 {
     font-size: inherit;
 }
@@ -204,6 +210,7 @@
     height: 50px;
 
     font-size: 26px;
+    cursor: alias;
 
     /* Anchor: animation: jelly 500ms; */
 }
@@ -231,10 +238,6 @@
 
     transition: opacity 1s;
 }
-.btn_square:hover
-{
-    cursor: pointer;
-}
 .btn_square:hover::after
 {
     visibility: visible;
@@ -252,24 +255,32 @@
 .btn_inline
 {
     display: inline-block;
-    padding: 0 20px;
+    padding: 0 10px;
 
     user-select: none;
     color: black;
 
     transition: color 100ms;
 }
-.btn_inline_used::before, .btn_inline_used::after
+.btn_inline_used::before
 {
-    color: #8e8e8e!important;
+    border-right-color: #8e8e8e!important;
+}
+.btn_inline_used::after
+{
+    border-left-color: #8e8e8e!important;
 }
 .btn_inline::before
 {
     position: relative;
-    right: 2px;
+    display: inline-block;
 
-    content: "<|";
-    color: #1eb6ff;
+    top: 4px;
+    right: 2px;
+    border: 10px solid;
+    border-color: transparent #1eb6ff transparent transparent;
+
+    content: "";
     font-weight: bold;
 
     transition: right 500ms;
@@ -277,10 +288,14 @@
 .btn_inline::after
 {
     position: relative;
-    left: 2px;
+    display: inline-block;
 
-    content: "|>";
-    color: #1eb6ff;
+    top: 4px;
+    left: 2px;
+    border: 10px solid;
+    border-color: transparent transparent transparent #1eb6ff;
+
+    content: "";
     font-weight: bold;
 
     transition: left 500ms;
@@ -296,6 +311,19 @@
 .btn_inline:hover::after
 {
     left: 11px;
+}
+
+/* Unit: BtnMicro */
+
+.btn_micro
+{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 25px;
+    border-radius: 6px;
 }
 
 /* Unit: Switch */
@@ -325,7 +353,7 @@
     left: 5px;
 
     content: "";
-    background-color: #ffffff;
+    background-color: #efefef;
     border-radius: 12px;
 
     transition: left 500ms;
@@ -339,7 +367,34 @@
     left: 30px;
 }
 
-/* Unit: SplitLine */
+/* Unit:  */
+
+input:hover, input:focus
+{
+    background-color: #efefef;
+}
+input
+{
+    width: 75px;
+    height: 25px;
+    border: 4px solid #1eb6ff;
+    font-size: inherit;
+    padding: 0 5px;
+    margin: 0 10px;
+    border-radius: 12px;
+    background-color: #c5c5c5;
+    transition: background-color 500ms;
+    display: inline-block;
+}
+input+.btn_micro
+{
+    align-self: center;
+
+    color: #ffffff;
+    background-color: #f99256;
+}
+
+/* Unit: Divider */
 
 #module_log_body hr
 {
