@@ -573,17 +573,21 @@ input[type=text], input[type=password], input[type=email]
 .contents
 {
 	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	z-index: 1;
 	top: 100px;
 	right: 35px;
-	z-index: 1;
 	width: 200px;
 	height: calc(100% - 180px);
 	max-height: 400px;
-	overflow-y: scroll;
 	padding: 10px 30px;
 
 	background-color: black;
 	box-shadow: 0 3px 10px #0000004D;
+	overflow-y: scroll;
 }
 .contents::-webkit-scrollbar
 {
@@ -628,17 +632,17 @@ input[type=text], input[type=password], input[type=email]
 .btn_contents
 {
 	position: fixed;
+	z-index: 1;
 	top: 100px;
 	right: 35px;
-	z-index: 1;
 	width: 50px;
 	height: 50px;
 
 	line-height: 50px;
 	text-align: center;
-	background-color: black;
 	font-size: 26px;
 	color: white;
+	background-color: black;
 	box-shadow: 0 3px 10px #0000004D;
 }
 .contents_mark
