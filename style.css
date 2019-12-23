@@ -573,9 +573,6 @@ input[type=text], input[type=password], input[type=email]
 .contents
 {
 	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 
 	z-index: 1;
 	top: 100px;
@@ -632,7 +629,11 @@ input[type=text], input[type=password], input[type=email]
 .btn_contents
 {
 	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	z-index: 1;
+
 	top: 100px;
 	right: 35px;
 	width: 50px;
@@ -653,7 +654,7 @@ input[type=text], input[type=password], input[type=email]
 /* 调教专区*/
 
 /* ----Font awesome */
-.fa
+.fas, .fab
 {
 	padding-top: 0;
 	padding-bottom: 0;

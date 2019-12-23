@@ -369,22 +369,29 @@
 
 /* Unit:  */
 
+input
+{
+    display: inline-block;
+
+    width: 100px;
+    height: 25px;
+    padding: 0 5px;
+    margin: 0 10px;
+    border: 4px solid #1eb6ff;
+    border-radius: 12px;
+
+    font-size: inherit;
+    background-color: #c5c5c5;
+
+    transition: background-color 500ms;
+}
+input:disabled
+{
+    border-color: #8e8e8e;
+}
 input:enabled:hover, input:enabled:focus
 {
     background-color: #efefef;
-}
-input
-{
-    width: 100px;
-    height: 25px;
-    border: 4px solid #1eb6ff;
-    font-size: inherit;
-    padding: 0 5px;
-    margin: 0 10px;
-    border-radius: 12px;
-    background-color: #c5c5c5;
-    transition: background-color 500ms;
-    display: inline-block;
 }
 input+.btn_micro
 {
