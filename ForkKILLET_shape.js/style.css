@@ -1,7 +1,7 @@
 .line
 {
 	position: absolute;
-	transform-origin: right;
+	transform-origin: top left;
 
 	/* 默认颜色 */
 	background-color: black;

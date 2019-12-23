@@ -39,9 +39,8 @@ class BarrenLandSystem
 			console.error(e);
 			throw e;
 		};
-		this.toString = () => "BarrenLandSystem";
 
-		if (!$ || typeof($) !== "function") this.error_and_throw("R001", "Require JQuery but not found the correct $ function.");
+		if (!$ || typeof($) !== "function") this.error_and_throw("R001", `Require JQuery but not found the correct "$" function.`);
 		if (!window.script || !window.script.main) this.error_and_throw("R002", "Require [icelava.top/main.js] but didn't find.");
 		if (!window.script || !window.script.ExtendedMarkdownParser) this.error_and_throw("R003", "Require [icelava.top/ExtendedMarkdownParser/main.js] but didn't find.");
 
@@ -51,29 +50,28 @@ class BarrenLandSystem
 		$("#btn_toggle_guide").trigger("click"); // Note: 隐藏导航栏
 
 		// Note: 绑定 ExMD
-		if (typeof(ExMD) !== "object" || typeof(ExMD.render) !== "function")
-			this.error_and_throw("C001", `Got an incorrect "ExMD" object.`);
+		if (!ExMD instanceof ExtendedMarkdownParser) this.error_and_throw("C001", `Got an incorrect "ExMD" object.`);
 		else this.ExMD = ExMD;
 
 		// Note: 渲染模块选择模块
 		this.info =
 		{
-			name:                 "BarrenLand",
-			name_Chinese:         "蛮荒大陆",
-			author:               "ForkKILLET",
-			brief:                "一款更新缓慢的文字 RPG 游戏，适合放置 $i smile-wink i$",
+			name:                   "BarrenLand",
+			name_Chinese:           "蛮荒大陆",
+			author:                 "ForkKILLET",
+			brief:                  "一款更新缓慢的文字 RPG 游戏，适合放置 $i smile-wink i$",
 			version:
 			{
-				era: "β",
-				main: 0,
-				sub: 2,
-				upd: 3,
-				toString: () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
+				era:                "β",
+				main:               0,
+				sub:                2,
+				upd:                4,
+				toString:           () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
 			},
-			first_update_time:    new Date(2019, 12 - 1, 7, 0, 0, 0),
-			last_update_time:     new Date(2019, 12 - 1, 21, 0, 0, 0),
-			github_repo_URL: "https://github.com/ForkFG/ForkFG.github.io",
-			github_repo_path: "/BarrenLand",
+			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
+			last_update_time:       new Date(2019, 12 - 1, 23, 0, 0, 0),
+			github_repo_URL:        "https://github.com/ForkFG/ForkFG.github.io",
+			github_repo_path:       "/BarrenLand",
 			toString: () => `
 ---
 
@@ -87,7 +85,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 
 可以在 $ib github ib$ [Github repo](${this.info.github_repo_URL}) 的 \`${this.info.github_repo_path}\` 目录下看到游戏代码，  
 
-求 star $c #efe942;$i star i$ c$ qwq  
+求 star $c #009c0c;$i star i$ c$ qwq  
 
 ---
 			`
@@ -99,7 +97,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 			callback: () =>
 			{
 				this.focus_tab_log("System");
-				this.page_log("System", this.info.toString(), true, ExMD);
+				this.page_log("System", this.info.toString());
 			}},
 			setting:    { fa_name: "cog",           color: "#4d4d4d", available: true, position: 2, rank: 0,
 			callback: () =>
@@ -129,7 +127,8 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		};
 		this.repaint_module_setting();
 
-		this.page_log("System", "**BarrenLand System** loaded.", true, ExMD);
+		this.log_data = {};
+		this.page_log("System", "**BarrenLand System** loaded.");
 	}
 
 	repaint_module_change()
@@ -234,10 +233,30 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		else this.log_info[name].counter++;
 	}
 
-	page_log(tav, msg)
+	page_log(tav, msg, data)
 	{
-		msg = msg.replace(/<\|/g, "<span class='btn_inline'>")
-			     .replace(/\|>/g, "</span>");
+		msg = msg
+		.replace(/<\|/g,    `<span class='btn_inline'>`)
+		.replace(/\|>/g,    `</span>`)
+		.replace(/\[\|/g,   `<input placeholder="`)
+		.replace(/\|]/g,    `">`);
+
+		let l = /{\|/, r = /\|}/, n, i, j, k = 0;
+		while (1)
+		{
+			i = msg.substring(k).match(l);
+			j = msg.substring(k).match(r);
+			if (!i || !j) break;
+			i = i.index;
+			j = j.index;
+			n = msg.substring(k + i + 2, j);
+			if (!data || typeof(data[n]) !== "function") if (typeof(this.log_data[n]) !== "function")
+				this.error_and_throw("C005", `"page_log" method expects a callback "${n}" in the "data" object but not found.`);
+				else msg = msg.substring(k, i) + this.log_data[n]() + msg.substring(j + 2);
+			else msg = msg.substring(k, i) + data[n]() + msg.substring(j + 2);
+			k = j + 2;
+		}
+
 		let $msg = $(`<p></p>`);
 		$(`#tav_log_${tav}`).prepend($msg);
 		if (!this.if_log_animation) $msg.addClass("no_animation");
@@ -246,27 +265,38 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		if (this.ExMD) this.ExMD.render($msg[0], msg);
 		else this.error_and_throw("C002", `"page_log" method require an "ExMD" object but didn't bind.`);
 
-		let $btn_inline = $msg.find(".btn_inline");
+		let $units = $msg.find(".btn_inline, input");
 
-		// Note: Currying!
 		return (arr_callback) =>
 		{
 			if (typeof(arr_callback) !== "object") arr_callback = [arr_callback];
-			for (let i = 0; i < $btn_inline.length; i++)
+			for (let i = 0, $i; i < $units.length; i++)
 			{
 				if (typeof(arr_callback[i]) !== "function")
 				{
-					this.warn("C003", `The BtnInline Units managing currying of "page_log" method expects an array of callbacks. But array item ${i} isn't a function.`);
+					this.warn("C003", `The units managing currying of "page_log" method expects an array of callbacks. But array item ${i} isn't a function.`);
 					continue;
 				}
-				$($btn_inline[i]).click(arr_callback[i]);
+				$i = $($units[i]);
+				if ($i.is(".btn_inline")) $i.click(arr_callback[i]);
+				else if ($i.is("input")) $i.on("_input", () =>
+				{
+					arr_callback[i]($i.val());
+					$i
+					.attr("disabled", "")
+					.next(".btn_micro_for_input")
+					.css("backgroundColor", "#ff2222")
+					.html(`<i class="fas fa-times"></i>`)
+					.off("click")
+					.parent().off("click", ".btn_micro_for_input");
+				});
 			}
 		};
 	}
 
-	page_log_with_time(tav, msg)
+	page_log_with_time(tav, msg, data)
 	{
-		let page_log_currying = this.page_log(tav, `[${time(true, null)}] ${msg}`, this.ExMD);
+		let page_log_currying = this.page_log(tav, `[${time(true, null)}] ${msg}`, data);
 		if (page_log_currying) return page_log_currying;
 	}
 
@@ -296,7 +326,7 @@ class BarrenLandUnit
 
 		if (!$ || typeof($) !== "function") this.error_and_throw("R001", "Require JQuery but not found the correct $ function.");
 		if (!window.script || !window.script.main) this.error_and_throw("R002", "Require [icelava.top/main.js] but didn't find.");
-		if (typeof(BLS) !== "object" || BLS.toString() !== "BarrenLandSystem") this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
+		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
 
 		if (!window.script.BarrenLandUnit) window.script.BarrenLandUnit = {};
 		window.script.BarrenLandUnit[name] = true;
@@ -309,13 +339,13 @@ class BarrenLandUnit
 		if (typeof(reg_callback) !== "function") this.error_and_throw("C002", "Got an incorrect register callback.");
 		else this.reg = reg_callback;
 
-		this.BLS.page_log("System", `**BarrenLand Unit**: \`${name}\` loaded.`, true);
+		this.BLS.page_log("System", `**BarrenLand Unit**: \`${name}\` loaded.`);
 	}
 
 	register($sel)
 	{
 		this.reg($sel);
-		$sel.data("registered", true);
+		$sel.addClass("registered");
 	}
 
 	all() { return $(":not(.registered)" + this.rule); }
@@ -337,6 +367,7 @@ class BarrenLandPlot
 			console.error(e);
 			throw e;
 		};
+		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
 
 		if (!window.script.BarrenLandPlot) window.script.BarrenLandPlot = {};
 		window.script.BarrenLandPlot[name] = true;
@@ -353,7 +384,7 @@ class BarrenLandPlot
 			start: (callback) =>
 			{
 				if (typeof(callback) !== "function")
-					this.error_and_throw("C003", `The "start" type curring of "add_milestone" method expect a callback but didn't get a function.`);
+					this.error_and_throw("C004", `The "start" type curring of "add_milestone" method expect a callback but didn't get a function.`);
 				else
 				{
 					let old = this.BLS.start;
@@ -364,8 +395,8 @@ class BarrenLandPlot
 			play_end: (play_rule, callback) =>
 			{
 				if (typeof(callback) !== "function")
-					this.error_and_throw("C003", `The "start" type curring of "add_milestone" method expect a callback but didn't get a function.`);
-				else $(document).on("playend", (e, play_info) =>
+					this.error_and_throw("C004", `The "start" type curring of "add_milestone" method expect a callback but didn't get a function.`);
+				else $(document).on("_playend", (e, play_info) =>
 				{
 					for (let i in play_rule) if (play_rule[i] !== play_info[i]) return;
 					callback();
@@ -373,16 +404,16 @@ class BarrenLandPlot
 			}
 		};
 
-		this.BLS.page_log("System", `**BarrenLand Plot**: \`${name}\` loaded.`, true);
+		this.BLS.page_log("System", `**BarrenLand Plot**: \`${name}\` loaded.`);
 	}
 
-	play(msg)
+	play(msg, data)
 	{
 		let play_info = {};
 		play_info.id = this.play_num++;
-
 		setTimeout(() => $(document).trigger("_playend", play_info), 500);
-		let page_log_currying = this.BLS.page_log(this.tav, msg);
+
+		let page_log_currying = this.BLS.page_log(this.tav, msg, data);
 		if (page_log_currying) return page_log_currying;
 	}
 
@@ -390,12 +421,12 @@ class BarrenLandPlot
 	{
 		// Done: 每次使用不同的延迟
 		if (typeof(arr_play) !== "object")
-			this.error_and_throw("C001", `"play_in_list" method expect a play array but didn't get a correct object.`);
+			this.error_and_throw("C002", `"play_in_list" method expect a play array but didn't get a correct object.`);
 		let every_play = (i) =>
 		{
 			if (!arr_play[i]) return;
-			let play_btn_currying = this.play(arr_play[i][0]);
-			if (play_btn_currying) play_btn_currying(arr_play[i].slice(1));
+			let play_btn_currying = this.play(arr_play[i][0], arr_play[i][1]);
+			if (play_btn_currying) play_btn_currying(arr_play[i].slice(2));
 			setTimeout(() => every_play(i + 1), BLS.play_break);
 		};
 		every_play(0);
@@ -403,7 +434,7 @@ class BarrenLandPlot
 
 	add_milestone(type)
 	{
-		if (!this.milestone_info[type]) this.error_and_throw("C002", `"add_milestone" method got an unknown type "${type}".`);
+		if (!this.milestone_info[type]) this.error_and_throw("C003", `"add_milestone" method got an unknown type "${type}".`);
 		else return this.milestone_info[type];
 	}
 }
@@ -412,16 +443,16 @@ class BarrenLandCharacter
 {
 	constructor()
 	{
-
+		this.name = "Anonymous";
 	}
 }
 
 $(() =>
 {
-	// Note: BarrenLandSystem
+// Section: BarrenLandSystem
 	window.BLS = new BarrenLandSystem(ExMD);
 
-	// Note: BarrenLandUnit : BtnSquare
+// Section: BarrenLandUnit : BtnSquare
 	window.BLU_BS = new BarrenLandUnit(BLS, "BtnSquare", ".btn_square:not(.no_animation)", ($sel) => $sel.click((e) =>
 	{
 		let $this = $(e.currentTarget);
@@ -432,7 +463,7 @@ $(() =>
 	$("#module_log>.btn_square").click(BLS.clear_log_focused);
 	BLU_BS.register_all();
 
-	// Note: BarrenLandUnit : BtnInline
+// Section: BarrenLandUnit : BtnInline
 	window.BLU_BI = new BarrenLandUnit(BLS, "BtnInline", ".btn_inline", ($sel) => $sel.click((e) =>
 	{
 		let $i = $(e.currentTarget).parents(), $msg;
@@ -443,17 +474,15 @@ $(() =>
 		}
 		$msg.find(".btn_inline").unbind("click").addClass("btn_inline_used");
 	}));
-
-	// Note: Override BarrenLandSystem . "page_log" method
-	BLS.origin_page_log = BLS.page_log;
-	BLS.page_log = (tav, msg) =>
+	BLS.page_log_0 = BLS.page_log;
+	BLS.page_log = (tav, msg, data) =>
 	{
-		let page_log_currying = BLS.origin_page_log(tav, msg);
+		let page_log_currying = BLS.page_log_0(tav, msg, data);
 		BLU_BI.register_all();
 		return page_log_currying;
 	};
 
-	// Note: BarrenLandUnit : Switch
+// Section: BarrenLandUnit : Switch
 	window.BLU_SW = new BarrenLandUnit(BLS, "Switch", ".switch", ($sel) => $sel.click((e) =>
 	{
 		let $this = $(e.currentTarget);
@@ -461,11 +490,20 @@ $(() =>
 	}));
 	BLU_SW.register_all();
 
-	// Note: BarrenLandUnit : Input
+// Section: BarrenLandUnit : BtnMicro
+	window.BLU_BM = new BarrenLandUnit(BLS, "BtnMicro", ".btn_micro", ($sel) => $sel.click((e) =>
+	{
+		let $this = $(e.currentTarget);
+		$this.css("animation", "jelly 500ms")
+			 .on("animationend", () => $this.css("animation", ""));
+	}));
+
+// Section: BarrenLandUnit : Input
 	window.BLU_IP = new BarrenLandUnit(BLS, "Input", "input", ($sel) =>
 	{
 		let $btn = $(`<div class="btn_micro btn_micro_for_input"><i class="fas fa-check"></i></div>`);
 		$sel.after($btn);
+		BLU_BM.register_all();
 		$sel.parent().on("click", ".btn_micro_for_input", (e) =>
 		{
 			let $i = $(e.currentTarget).prev("input");
@@ -481,54 +519,92 @@ $(() =>
 		});
 	});
 	BLU_IP.register_all();
-
-	// Note: BarrenLandUnit : BtnSmall
-	window.BLU_BM = new BarrenLandUnit(BLS, "BtnMicro", ".btn_micro", ($sel) => $sel.click((e) =>
+	BLS.page_log_1 = BLS.page_log;
+	BLS.page_log = (tav, msg, data) =>
 	{
-		let $this = $(e.currentTarget);
-		$this.css("animation", "jelly 500ms")
-			 .on("animationend", () => $this.css("animation", ""));
-	}));
-	BLU_BM.register_all();
+		let page_log_currying = BLS.page_log_1(tav, msg, data);
+		BLU_IP.register_all();
+		return page_log_currying;
+	};
 
-	// Note: BarrenLandPlot : MainStory
+// Section: BarrenLandPlot : MainStory
 	window.BLP_MS = new BarrenLandPlot(BLS, "MainStory", "Diary");
 	BLS.page_log("System", "暂未开放 **存/读档** 功能。请直接<|开始游戏|>") (() => BLS.focus_tab_log("Diary"));
 
-	BLP_MS.default_list =
-	[
-		[`作为一个租房住的大学生，你结束了一天的**刻苦**学习，走回家，放下书包，熟练地打开你的 Macbook Pro。`],
-		[`「干什么呢？」你想了想，随后` + random_item(
-		[
-			`玩起了 $i cubes i$ Minecraft，打算继续做昨天的红石机器人。`,
-			`开始看[《诡秘之主》](https://book.qidian.com/info/1010868264)的新章节，乌贼又断章了，难受。`,
-			`愉快地刷起了朋友圈。`,
-			`瞄了一眼 [slay.one](https://slay.one)，发现还不能玩。`
-		]
-		)],
-		[`**「啪——嗒」**，你听到了什么东西掉落的声音。`],
-		[`你回头一看，只见地面上躺着一块黑色的纸片。`],
-		[`你疑惑地捡起了它。`],
-		[`看起来很薄的 “纸片”，拎在手里却并不轻，或许比一个鼠标还重。`],
-		[`正当你观察它时，上面亮起了白色的文字：`],
-		[`「世界那么**多**，你不想去看看嘛？」`],
-		[`你心想：「什么叫 “多” 啊……这是同学无聊做的整人道具？我来研究一下——」`],
-		[`“纸片” 上又亮起了文字「研究你 $i horse-head i$ 哦，我问你要不要去**异世界**玩！」`],
-		[`「笑死老子了」你正在思考是哪个沙雕同学做的，突然发现了一个问题：`],
-		[`「这个纸片怎么知道我要研究它？！」`],
-		[`「我是**域牌**当然知道你在想什么，傻X，再问你最后一遍要不要去别的世界！」`],
-		[`「似乎这个什么域牌，在邀请我穿越？它为什么要这么做？是不是要骗我去……」`],
-		[`「谁骗你啊，这么好的机会别人都是抢着要的真搞不懂你——我倒数了啊，3、」`],
-		[`「感觉这玩意很神奇但是……」`],
-		[`「2、」`],
-		[`「就算穿越之后回不来，嗯，不对，这东西似乎是可以双向的吧？是的吧？」`],
-		[`「1、$i angry i$」`],
-		[`你做出了决定<|我要去！|><|算了吧|>`,
-		 () => BLP_MS.play("剧情正在~~咕咕~~策划中，敬请期待！"),
-		 () => BLP_MS.play("剧情正在~~咕咕~~策划中，敬请期待！说起来你的选择很不正常诶！")]
-	];
-	BLP_MS.add_milestone("start") (() =>
+	BLP_MS.list =
 	{
-		BLP_MS.play_in_list(BLP_MS.default_list);
-	});
+		0: [
+			["作为一个租房住的大学生，你结束了一天的**刻苦**学习，走回家，放下书包，熟练地打开你的 Macbook Pro。"],
+			["“干什么呢？”你想了想，随后" + random_item(
+				[
+					"玩起了 $i cubes i$ Minecraft，打算继续做昨天的红石机器人。",
+					"开始看[《诡秘之主》](https://book.qidian.com/info/1010868264)的新章节，乌贼又断章了，难受。",
+					"愉快地刷起了朋友圈。",
+					"瞄了一眼 [slay.one](https://slay.one)，发现还是不能玩。"
+				]
+			)],
+			["**“啪——嗒”**，你听到了什么东西掉落的声音。"],
+			["你回头一看，只见地面上躺着一块漆黑的纸片状物品。"],
+			["你疑惑地捡起了它。"],
+			["看起来很薄的 “纸片”，拎在手里却并不轻，或许比一个鼠标还重。"],
+			["正当你观察它时，上面亮起了白色的文字："],
+			["“世界那么**多**，你不想去看看嘛？”"],
+			["你心想：“什么叫 ‘多’ 啊……这是同学无聊做的整人道具？我来研究一下——”"],
+			["“纸片” 上又亮起了文字：“研究你 $i horse-head i$ 哦，我问你要不要去**异世界**！”"],
+			["“异世界？笑死老子了……” 你正在思考是哪个沙雕同学做的，突然发现了一个问题："],
+			["“这个纸片怎么知道我要研究它？！”"],
+			["“我是**「域牌」**当然知道你在想什么，傻 X，再问你最后一遍要不要去别的世界！”"],
+			["“似乎这个什么「域牌」，在邀请我穿越？它为什么要这么做？是不是要骗我去……”"],
+			["“谁骗你啊，这么好的机会别人都是抢着要的真搞不懂你——我倒数了啊，**3、**”"],
+			["“感觉这玩意很神奇但是……”"],
+			["“**2、**”"],
+			["“就算穿越之后回不来，嗯，不对，这东西似乎是可以双向的吧？是的吧？”"],
+			["“**1！**$i angry i$”"],
+			["你做出了决定<|我要去！|><|算了吧|>", {},
+				() => BLP_MS.play_in_list(BLP_MS.list[1]),
+				() => BLP_MS.play_in_list(BLP_MS.list[2])
+			]
+		],
+		1: [
+			["你手中「域牌」亮起新的文字：“很好。那么，你的名字是？”"],
+			["你正要回答，「域牌」打断了你：“你可以为自己取个新的名字。”"],
+			["“为啥？”"],
+			["“**如果**异世界的人都叫「" + random_item(
+				[
+					"克莱恩", "$c #d0d0d0d;空白 c$", "艾默丝", "安娜", "威尔逊"
+				]
+			) + "」一类的名字，你原先的名字可能就会比较奇怪——"],
+			["当然，行不改名坐不改姓也是比较**方便**的做法。”"],
+			["域牌上文字消失，亮起了一个方框。[|你的名字|]", {},
+				(value) =>
+				{
+					BLC_P.name = value;
+					BLP_MS.play_in_list(BLP_MS.list[3]);
+				}
+			]
+		],
+		2: [
+			["选这个对你有好处吗，，剧情策划中……"]
+		],
+		3: [
+			["域牌：“{|name|}，在离开这里之前，你可以带点东西……说不定有什么用处呢？或者当个纪念也行哦。"],
+			["“但是必须能放进 2dm x 2dm x 2dm 的立方体空间里面。”"],
+			["你环顾左右，可以带的物品有……"],
+			["剧情策划中……"]
+		],
+		4: [
+			["“准备好了吗，{|name|}？”"],
+			["你毫无犹豫地回答：“是的船长！”"],
+			["你手上的「域牌」突然抖动起来。"],
+			["抖动得越来越剧烈。"],
+			["这时，有数根不可名状的深蓝色线条从「域牌」的中心处凭空 “生长” 出来。"],
+			["线条迅速地在空中延伸，一下子就从你身边穿过。"],
+			["你急忙转过身去，发现众多深蓝线条已经将你团团围住。"]
+		]
+	};
+	BLP_MS.add_milestone("start") (() => BLP_MS.play_in_list(BLP_MS.list[0]));
+
+// Section: BarrenLandCharacter : Player
+	window.BLC_P = new BarrenLandCharacter();
+	BLS.log_data["name"] = () => "$c #009c0c;「" + BLC_P.name + "」 c$";
 });

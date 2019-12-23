@@ -233,7 +233,6 @@ class ExtendedMarkdownParser
 		for (let i in this.escape)
 			str = str.replace(RegExp(RegExp_escape(this.escape[i].from), "g"), this.escape[i].temp);
 
-		// Note: ExtendedMarkdownParser
 		function parse_label(rule, str) // Note: 传入标签规则和标签内的内容，返回解析后的字符串。
 		{
 			let arr_param = str.split(";");

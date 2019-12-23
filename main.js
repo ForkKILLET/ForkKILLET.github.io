@@ -66,9 +66,9 @@ $(() =>
 	$body.prepend(`<div id="btn_toggle_guide"></div>`);
 	let $btn_toggle_guide = $("#btn_toggle_guide");
 	$btn_toggle_guide.append(`<i class="fas fa-angle-left"></i>`).data("show", true);
-	let $btn_and_guide = $("#guide,#btn_toggle_guide"),
+	let $btn_and_guide = $("#guide, #btn_toggle_guide"),
 	    $arrow = $("#btn_toggle_guide>i"),
-	    $core = $("#main,#pos,#copyright"),
+	    $core = $("#main, #pos, #copyright"),
 	    $main = $("#main");
 	$btn_toggle_guide.click(() =>
 	{
