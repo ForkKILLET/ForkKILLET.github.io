@@ -29,6 +29,7 @@ if (!window.random_item) window.random_item = (arr) =>
 
 class BarrenLandSystem
 {
+
 	constructor(ExMD)
 	{
 		this.log = (msg) => log(`[INFO]: BarrenLand @ System\n${msg}`);
@@ -65,11 +66,11 @@ class BarrenLandSystem
 				era:                "β",
 				main:               0,
 				sub:                2,
-				upd:                4,
+				upd:                5,
 				toString:           () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
 			},
 			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
-			last_update_time:       new Date(2019, 12 - 1, 23, 0, 0, 0),
+			last_update_time:       new Date(2019, 12 - 1, 24, 0, 0, 0),
 			github_repo_URL:        "https://github.com/ForkFG/ForkFG.github.io",
 			github_repo_path:       "/BarrenLand",
 			toString: () => `
@@ -122,8 +123,9 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		{
 			if_log_animation:   { msg: "日志渐显特效",    type: "switch",     default: true,
 			callback: (state) => this.if_log_animation = state },
-			play_break:         { msg: "剧情显示间隔",    type: "num",        hint: "毫秒数",      default: 1000,
-			callback: (value) => this.play_break = value }
+			play_break:         { msg: "剧情显示间隔",    type: "num",        hint: "毫秒数", default: 1000,
+			callback: (value) => this.play_break = value },
+			data_place:         { msg: "数据储存位置",    type: "list",       items: ["Cookie", "无"], default: 1 }
 		};
 		this.repaint_module_setting();
 
@@ -200,6 +202,8 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 				$body.append($i);
 				if (this.setting_info[i].default) $j.val(this.setting_info[i].default).trigger("_input", this.setting_info[i].default);
 				break;
+			case "list":
+				$j = $(`<div class="list"></div>`);
 			}
 		}
 	}
@@ -233,7 +237,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		else this.log_info[name].counter++;
 	}
 
-	page_log(tav, msg, data)
+	page_log(tav, msg, data, BI, IP)
 	{
 		msg = msg
 		.replace(/<\|/g,    `<span class='btn_inline'>`)
@@ -241,20 +245,22 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		.replace(/\[\|/g,   `<input placeholder="`)
 		.replace(/\|]/g,    `">`);
 
-		let l = /{\|/, r = /\|}/, n, i, j, k = 0;
-		while (1)
+		for (let l = /{\|/, r = /\|}/, id, i, j, k = 0;; k = j + 2)
 		{
 			i = msg.substring(k).match(l);
 			j = msg.substring(k).match(r);
 			if (!i || !j) break;
+
+			debugger;
+
 			i = i.index;
 			j = j.index;
-			n = msg.substring(k + i + 2, j);
-			if (!data || typeof(data[n]) !== "function") if (typeof(this.log_data[n]) !== "function")
-				this.error_and_throw("C005", `"page_log" method expects a callback "${n}" in the "data" object but not found.`);
-				else msg = msg.substring(k, i) + this.log_data[n]() + msg.substring(j + 2);
-			else msg = msg.substring(k, i) + data[n]() + msg.substring(j + 2);
-			k = j + 2;
+			id = msg.substring(k + i + 2, j);
+			if (!data || typeof(data[id]) !== "function")
+				if (typeof(this.log_data[id]) !== "function")
+					this.error_and_throw("C005", `"page_log" method expects a callback "${id}" in the "data" object but not found.`);
+				else msg = msg.substring(k, i) + this.log_data[id]() + msg.substring(j + 2);
+			else msg = msg.substring(k, i) + data[id]() + msg.substring(j + 2);
 		}
 
 		let $msg = $(`<p></p>`);
@@ -265,40 +271,29 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		if (this.ExMD) this.ExMD.render($msg[0], msg);
 		else this.error_and_throw("C002", `"page_log" method require an "ExMD" object but didn't bind.`);
 
-		let $units = $msg.find(".btn_inline, input");
-
-		return (arr_callback) =>
+		let $btn = $msg.find(".btn_inline");
+		if ($btn.length) for (let [j, k] = BLU_BI.register_all($btn), i = j, $i; i < k; i++)
 		{
-			if (typeof(arr_callback) !== "object") arr_callback = [arr_callback];
-			for (let i = 0, $i; i < $units.length; i++)
+			$i = BLU_BI.all_objects[i];
+			$i.click(() =>
+            {
+                BI[i - j]();
+                $i.disable($i);
+            });
+		}
+		let $input = $msg.find("input");
+		if ($input.length) for (let [j, k] = BLU_IP.register_all($input), i = j, $i; i < k; i++)
+		{
+			$i = BLU_IP.all_objects[i];
+			$i.on("_input", () =>
 			{
-				if (typeof(arr_callback[i]) !== "function")
-				{
-					this.warn("C003", `The units managing currying of "page_log" method expects an array of callbacks. But array item ${i} isn't a function.`);
-					continue;
-				}
-				$i = $($units[i]);
-				if ($i.is(".btn_inline")) $i.click(arr_callback[i]);
-				else if ($i.is("input")) $i.on("_input", () =>
-				{
-					arr_callback[i]($i.val());
-					$i
-					.attr("disabled", "")
-					.next(".btn_micro_for_input")
-					.css("backgroundColor", "#ff2222")
-					.html(`<i class="fas fa-times"></i>`)
-					.off("click")
-					.parent().off("click", ".btn_micro_for_input");
-				});
-			}
-		};
+				IP[i - j]($i.val());
+				$i.disable($i);
+			})
+		}
 	}
 
-	page_log_with_time(tav, msg, data)
-	{
-		let page_log_currying = this.page_log(tav, `[${time(true, null)}] ${msg}`, data);
-		if (page_log_currying) return page_log_currying;
-	}
+	page_log_with_time(tav, msg, data, BI, IP) { this.page_log(tav, time(true, null) + msg, data, BI, IP); }
 
 	clear_log(name)
 	{
@@ -314,7 +309,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 
 class BarrenLandUnit
 {
-	constructor(BLS, name, rule, reg_callback)
+	constructor(BLS, name, rule, init_callback)
 	{
 		this.log = (msg) => log(`[INFO]: BarrenLand @ Unit\n${msg}`);
 		this.error_and_throw = (code, msg) =>
@@ -332,27 +327,44 @@ class BarrenLandUnit
 		window.script.BarrenLandUnit[name] = true;
 		log(`[LOAD]: icelava.top/BarrenLand/main.js @ Unit : ${name}`);
 
-		this.BLS = BLS;
 		this.name = name;
 		this.rule = rule;
+		this.all_objects = [];
 
-		if (typeof(reg_callback) !== "function") this.error_and_throw("C002", "Got an incorrect register callback.");
-		else this.reg = reg_callback;
+		if (typeof(init_callback) !== "function") this.error_and_throw("C002", "Got an incorrect init callback.");
+		else this.init = init_callback;
+		this.binds = {};
 
-		this.BLS.page_log("System", `**BarrenLand Unit**: \`${name}\` loaded.`);
+		BLS.page_log("System", `**BarrenLand Unit**: \`${name}\` loaded.`);
 	}
+
+	update($sel)
+	{
+		let l = this.all_objects.length, i;
+		for (i = 0; i < $sel.length; i++)
+		{
+			this.all_objects[l + i] = $($sel[i]);
+			for (let j in this.binds) this.all_objects[l + i][j] = this.binds[j];
+		}
+		return [l, l + i];
+	}
+
+	all() { return $(":not(.inited)" + this.rule); }
 
 	register($sel)
 	{
-		this.reg($sel);
-		$sel.addClass("registered");
+		$sel.addClass("inited");
+		this.init($sel);
+		return this.update($sel);
 	}
 
-	all() { return $(":not(.registered)" + this.rule); }
+	register_all() { return this.register(this.all()); }
 
-	registered() { return $(".registered" + this.rule); }
-
-	register_all() { this.register(this.all()); }
+	bind_method(name, callback)
+	{
+		if (typeof(callback) !== "function")  this.error_and_throw("C003", "Got an incorrect bind callback.");
+		this.binds[name] = callback;
+	}
 }
 
 class BarrenLandPlot
@@ -373,7 +385,6 @@ class BarrenLandPlot
 		window.script.BarrenLandPlot[name] = true;
 		log(`[LOAD]: icelava.top/BarrenLand/main.js @ Plot : ${name}`);
 
-		this.BLS = BLS;
 		this.name = name;
 		this.tav = tav;
 
@@ -387,9 +398,9 @@ class BarrenLandPlot
 					this.error_and_throw("C004", `The "start" type curring of "add_milestone" method expect a callback but didn't get a function.`);
 				else
 				{
-					let old = this.BLS.start;
-					this.BLS.start = () => { old(); callback(); };
-					$("#tab_log_Diary").one("tab_focus", this.BLS.start);
+					let old = BLS.start;
+					BLS.start = () => { old(); callback(); };
+					$("#tab_log_Diary").one("tab_focus", BLS.start);
 				}
 			},
 			play_end: (play_rule, callback) =>
@@ -404,17 +415,16 @@ class BarrenLandPlot
 			}
 		};
 
-		this.BLS.page_log("System", `**BarrenLand Plot**: \`${name}\` loaded.`);
+		BLS.page_log("System", `**BarrenLand Plot**: \`${name}\` loaded.`);
 	}
 
-	play(msg, data)
+	play(msg, data, BI, IP)
 	{
 		let play_info = {};
 		play_info.id = this.play_num++;
 		setTimeout(() => $(document).trigger("_playend", play_info), 500);
 
-		let page_log_currying = this.BLS.page_log(this.tav, msg, data);
-		if (page_log_currying) return page_log_currying;
+		BLS.page_log(this.tav, msg, data, BI, IP);
 	}
 
 	play_in_list(arr_play)
@@ -425,8 +435,8 @@ class BarrenLandPlot
 		let every_play = (i) =>
 		{
 			if (!arr_play[i]) return;
-			let play_btn_currying = this.play(arr_play[i][0], arr_play[i][1]);
-			if (play_btn_currying) play_btn_currying(arr_play[i].slice(2));
+			if (!arr_play[i]["m"]) this.error_and_throw("C005", `"play_in_list" method expects a "m" prop in the play list, but not found in item [${i}].`);
+			this.play(arr_play[i]["m"], arr_play[i]["data"], arr_play[i]["BI"], arr_play[i]["IP"]);
 			setTimeout(() => every_play(i + 1), BLS.play_break);
 		};
 		every_play(0);
@@ -464,23 +474,17 @@ $(() =>
 	BLU_BS.register_all();
 
 // Section: BarrenLandUnit : BtnInline
-	window.BLU_BI = new BarrenLandUnit(BLS, "BtnInline", ".btn_inline", ($sel) => $sel.click((e) =>
+	window.BLU_BI = new BarrenLandUnit(BLS, "BtnInline", ".btn_inline", ($sel) => {});
+	BLU_BI.bind_method("disable", ($sel) =>
 	{
-		let $i = $(e.currentTarget).parents(), $msg;
-		for (let i = 0; i < $i.length; i++) if ($($i[i]).hasClass("tav_log"))
+		let $pa = $sel.parents(), $msg;
+		for (let i = 0; i < $pa.length; i++) if ($($pa[i]).hasClass("tav_log"))
 		{
-			$msg = $($i[i - 1]);
+			$msg = $($pa[i - 1]);
 			break;
 		}
-		$msg.find(".btn_inline").unbind("click").addClass("btn_inline_used");
-	}));
-	BLS.page_log_0 = BLS.page_log;
-	BLS.page_log = (tav, msg, data) =>
-	{
-		let page_log_currying = BLS.page_log_0(tav, msg, data);
-		BLU_BI.register_all();
-		return page_log_currying;
-	};
+		$msg.find(".btn_inline").off("click").addClass("btn_inline_used");
+	});
 
 // Section: BarrenLandUnit : Switch
 	window.BLU_SW = new BarrenLandUnit(BLS, "Switch", ".switch", ($sel) => $sel.click((e) =>
@@ -518,90 +522,99 @@ $(() =>
 			}
 		});
 	});
+	BLU_IP.bind_method("disable", ($sel) => $sel
+		.attr("disabled", "")
+		.next(".btn_micro_for_input")
+		.css("backgroundColor", "#ff2222")
+		.html(`<i class="fas fa-times"></i>`)
+		.off("click")
+		.parent().off("click", ".btn_micro_for_input")
+	);
 	BLU_IP.register_all();
-	BLS.page_log_1 = BLS.page_log;
-	BLS.page_log = (tav, msg, data) =>
-	{
-		let page_log_currying = BLS.page_log_1(tav, msg, data);
-		BLU_IP.register_all();
-		return page_log_currying;
-	};
 
 // Section: BarrenLandPlot : MainStory
 	window.BLP_MS = new BarrenLandPlot(BLS, "MainStory", "Diary");
-	BLS.page_log("System", "暂未开放 **存/读档** 功能。请直接<|开始游戏|>") (() => BLS.focus_tab_log("Diary"));
 
 	BLP_MS.list =
 	{
 		0: [
-			["作为一个租房住的大学生，你结束了一天的**刻苦**学习，走回家，放下书包，熟练地打开你的 Macbook Pro。"],
-			["“干什么呢？”你想了想，随后" + random_item(
+			{   m: "作为一个租房住的大学生，你结束了一天的**刻苦**学习，走回家，放下书包，熟练地打开你的 Macbook Pro。" },
+			{   m: "“干什么呢？”你想了想，随后" + random_item(
 				[
 					"玩起了 $i cubes i$ Minecraft，打算继续做昨天的红石机器人。",
 					"开始看[《诡秘之主》](https://book.qidian.com/info/1010868264)的新章节，乌贼又断章了，难受。",
 					"愉快地刷起了朋友圈。",
 					"瞄了一眼 [slay.one](https://slay.one)，发现还是不能玩。"
 				]
-			)],
-			["**“啪——嗒”**，你听到了什么东西掉落的声音。"],
-			["你回头一看，只见地面上躺着一块漆黑的纸片状物品。"],
-			["你疑惑地捡起了它。"],
-			["看起来很薄的 “纸片”，拎在手里却并不轻，或许比一个鼠标还重。"],
-			["正当你观察它时，上面亮起了白色的文字："],
-			["“世界那么**多**，你不想去看看嘛？”"],
-			["你心想：“什么叫 ‘多’ 啊……这是同学无聊做的整人道具？我来研究一下——”"],
-			["“纸片” 上又亮起了文字：“研究你 $i horse-head i$ 哦，我问你要不要去**异世界**！”"],
-			["“异世界？笑死老子了……” 你正在思考是哪个沙雕同学做的，突然发现了一个问题："],
-			["“这个纸片怎么知道我要研究它？！”"],
-			["“我是**「域牌」**当然知道你在想什么，傻 X，再问你最后一遍要不要去别的世界！”"],
-			["“似乎这个什么「域牌」，在邀请我穿越？它为什么要这么做？是不是要骗我去……”"],
-			["“谁骗你啊，这么好的机会别人都是抢着要的真搞不懂你——我倒数了啊，**3、**”"],
-			["“感觉这玩意很神奇但是……”"],
-			["“**2、**”"],
-			["“就算穿越之后回不来，嗯，不对，这东西似乎是可以双向的吧？是的吧？”"],
-			["“**1！**$i angry i$”"],
-			["你做出了决定<|我要去！|><|算了吧|>", {},
-				() => BLP_MS.play_in_list(BLP_MS.list[1]),
-				() => BLP_MS.play_in_list(BLP_MS.list[2])
-			]
+			)},
+			{   m: "**“啪——嗒”**，你听到了什么东西掉落的声音。" },
+			{   m: "你回头一看，只见地面上躺着一块漆黑的纸片状物品。" },
+			{   m: "你疑惑地捡起了它。" },
+			{   m: "看起来很薄的 “纸片”，拎在手里却并不轻，或许比一个鼠标还重。" },
+			{   m: "正当你观察它时，上面亮起了白色的文字：" },
+			{   m: "“世界那么**多**，你不想去看看嘛？”" },
+			{   m: "你心想：“什么叫 ‘多’ 啊……这是同学无聊做的整人道具？我来研究一下——”" },
+			{   m: "“纸片” 上又亮起了文字：“研究你 $i horse-head i$ 哦，我问你要不要去**异世界**！”" },
+			{   m: "“异世界？笑死老子了……” 你正在思考是哪个沙雕同学做的，突然发现了一个问题：" },
+			{   m: "“这个纸片怎么知道我要研究它？！”" },
+			{   m: "“我是**「域牌」**当然知道你在想什么，傻 X，再问你最后一遍要不要去别的世界！”" },
+			{   m: "“似乎这个什么「域牌」，在邀请我穿越？它为什么要这么做？是不是要骗我去……”" },
+			{   m: "“谁骗你啊，这么好的机会别人都是抢着要的真搞不懂你——我倒数了啊，**3、**”" },
+			{   m: "“感觉这玩意很神奇但是……”" },
+			{   m: "“**2、**”" },
+			{   m: "“就算穿越之后回不来，嗯，不对，这东西似乎是可以双向的吧？是的吧？”" },
+			{   m: "“**1！**$i angry i$”" },
+			{   m: "你做出了决定<|我要去！|><|算了吧|>",
+				BI:
+				[
+					() => BLP_MS.play_in_list(BLP_MS.list[1]),
+					() => BLP_MS.play_in_list(BLP_MS.list[2])
+				]
+			}
 		],
 		1: [
-			["你手中「域牌」亮起新的文字：“很好。那么，你的名字是？”"],
-			["你正要回答，「域牌」打断了你：“你可以为自己取个新的名字。”"],
-			["“为啥？”"],
-			["“**如果**异世界的人都叫「" + random_item(
+			{   m: "你手中「域牌」亮起新的文字：“很好。那么，你的名字是？”" },
+			{   m: "你正要回答，「域牌」打断了你：“你可以为自己取个新的名字。”" },
+			{   m: "“为啥？”" },
+			{   m: "“**如果**异世界的人都叫「" + random_item(
 				[
 					"克莱恩", "$c #d0d0d0d;空白 c$", "艾默丝", "安娜", "威尔逊"
 				]
-			) + "」一类的名字，你原先的名字可能就会比较奇怪——"],
-			["当然，行不改名坐不改姓也是比较**方便**的做法。”"],
-			["域牌上文字消失，亮起了一个方框。[|你的名字|]", {},
-				(value) =>
-				{
-					BLC_P.name = value;
-					BLP_MS.play_in_list(BLP_MS.list[3]);
-				}
-			]
+				) + "」一类的名字，你原先的名字可能就会比较奇怪——" },
+			{   m: "当然，行不改名坐不改姓也是比较**方便**的做法。”" },
+			{   m: "域牌上文字消失，亮起了一个方框。[|你的名字|]",
+				IP:
+				[
+					(value) =>
+					{
+						BLC_P.name = value;
+						BLP_MS.play_in_list(BLP_MS.list[3]);
+					}
+				]
+			}
 		],
 		2: [
-			["选这个对你有好处吗，，剧情策划中……"]
+			{   m: "选这个对你有好处吗，，剧情策划中……" }
 		],
 		3: [
-			["域牌：“{|name|}，在离开这里之前，你可以带点东西……说不定有什么用处呢？或者当个纪念也行哦。"],
-			["“但是必须能放进 2dm x 2dm x 2dm 的立方体空间里面。”"],
-			["你环顾左右，可以带的物品有……"],
-			["剧情策划中……"]
+			{	m: "域牌：“{|name|}，在离开这里之前，你可以带点东西……说不定有什么用处呢？或者当个纪念也行哦。"
+			},
+			{	m: "“但是必须能放进 2dm x 2dm x 2dm 的立方体空间里面。”" },
+			{	m: "你环顾左右，可以带的物品有……" },
+			{	m: "剧情策划中……" }
 		],
 		4: [
-			["“准备好了吗，{|name|}？”"],
-			["你毫无犹豫地回答：“是的船长！”"],
-			["你手上的「域牌」突然抖动起来。"],
-			["抖动得越来越剧烈。"],
-			["这时，有数根不可名状的深蓝色线条从「域牌」的中心处凭空 “生长” 出来。"],
-			["线条迅速地在空中延伸，一下子就从你身边穿过。"],
-			["你急忙转过身去，发现众多深蓝线条已经将你团团围住。"]
+			{	m: "“准备好了吗，{|name|}？”" },
+			{	m: "你毫无犹豫地回答：“是的船长！”" },
+			{	m: "你手上的「域牌」突然抖动起来。" },
+			{	m: "抖动得越来越剧烈。" },
+			{	m: "这时，有数根不可名状的深蓝色线条从「域牌」的中心处凭空 “生长” 出来。" },
+			{	m: "线条迅速地在空中延伸，一下子就从你身边穿过。" },
+			{	m: "你急忙转过身去，发现众多深蓝线条已经将你团团围住。" }
 		]
 	};
+
+	BLS.page_log("System", "暂未开放 **存/读档** 功能。请直接<|开始游戏|>", null, [() => BLS.focus_tab_log("Diary")]);
 	BLP_MS.add_milestone("start") (() => BLP_MS.play_in_list(BLP_MS.list[0]));
 
 // Section: BarrenLandCharacter : Player

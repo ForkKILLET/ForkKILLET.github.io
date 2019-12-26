@@ -290,6 +290,7 @@ p>strong, p>em, strong>em, em>strong, span>em, span>strong, a>em, a>strong, li>e
 p>a, strong>a, em>a, h1>a, h2>a, li>a
 {
 	display: inline-block;
+	padding: 0;
 }
 h1>a, h2>a, p>a
 {
