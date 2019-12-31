@@ -26,7 +26,8 @@ if (!window.random_item) window.random_item = (arr) =>
 	if (typeof(arr) === "object") return arr[Math.random_in_range(0, arr.length - 1, true)];
 	else return null;
 };
-if (!window.is_empty) window.is_empty = (n) => (n === null || n === undefined);
+if (!window.is_empty) window.is_empty = n => n === null || n === undefined;
+if (!window.is_array) window.is_array = n => typeof(n) === "object" && n.constructor.name === "Array";
 if (!window.cb) window.cb = (str, color) => `$c ${color};「${str}」 c$`;
 
 class BarrenLandSystem
@@ -68,7 +69,7 @@ class BarrenLandSystem
 				era:                "β",
 				main:               0,
 				sub:                2,
-				upd:                7,
+				upd:                8,
 				toString:           () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
 			},
 			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
@@ -88,7 +89,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 
 可以在 $ib github ib$ [Github repo](${this.info.github_repo_URL}) 的 \`${this.info.github_repo_path}\` 目录下看到游戏代码，  
 
-求 star $c #009c0c;$i star i$ c$ qwq  
+求 star $c #fdef32;$i star i$ c$ qwq  
 
 ---
 			`
@@ -99,7 +100,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 			info:       { fa_name: "info-circle",   color: "#ff2890", available: true, position: 2, rank: 1,
 			callback: () =>
 			{
-				this.focus_tab_log("System");
+				if (this.if_auto_focus_log_tab) this.focus_tab_log("System");
 				this.page_log("System", this.info.toString());
 			}},
 			setting:    { fa_name: "cog",           color: "#4d4d4d", available: true, position: 2, rank: 0,
@@ -123,17 +124,22 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		// Note: 渲染设置模块
 		this.setting_info =
 		{
-			if_log_animation:   { msg: "日志渐显特效",    unit: "Switch",     default: true,
+			log_style:              { msg: "日志样式", unit: "Title" },
+			if_log_animation:       { msg: "日志渐显特效",    unit: "Switch",     default: true,
 			callback: (state) => this.if_log_animation = state },
-			play_break:         { msg: "剧情显示间隔",    unit: "Input",      placeholder: "毫秒数", type: "number", default: 1000,
+			play_break:             { msg: "剧情播放间隔",    unit: "Input",      placeholder: "毫秒数", type: "number", default: 1000,
 			callback: (value) => this.play_break = value },
-			data_place:         { msg: "数据储存位置",    unit: "Select",     placeholder: "请选择", items: ["无", "localStorage"], default: 1,
+			log_tab:                { msg: "日志标签", unit: "Title" },
+			if_auto_focus_log_tab:  { msg: "自动切换标签",    unit: "Switch",     default: true,
+			callback: (state) => this.if_auto_focus_log_tab = state },
+			storage:                { msg: "游戏数据", unit: "Title" },
+			data_place:             { msg: "数据储存位置",    unit: "Select",     placeholder: "请选择", items: ["无", "localStorage"], default: 1,
 			callback: (rank) => this.data_place = rank }
 		};
 		this.repaint_module_setting();
 
 		this.log_data = {};
-		this.page_log("System", "**BLS**: loaded.");
+		this.page_log("System", "**BarrenLandSystem**: loaded.");
 	}
 
 	repaint_module_change()
@@ -186,10 +192,20 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		let $body = $("#module_setting_body");
 		$body.html("");
 
+		let f = false;
+
 		for (let i in this.setting_info)
 		{
 			let value = this[i];
 			if (is_empty(value)) value = this.setting_info[i].default;
+
+			if (this.setting_info[i].unit === "Title")
+			{
+				if (f) $body.append(`<hr>`);
+				$body.append(`<h2>${this.setting_info[i].msg}</h2>`);
+				f = true;
+				continue;
+			}
 
 			let $i = $(`<div></div>`), $j;
 			$i.append(`<p>${this.setting_info[i].msg} </p>`);
@@ -226,6 +242,10 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 					let item = this.setting_info[i].items[value - 1];
 					$j.data("itemChosen", value).trigger("_select", value);
 				}
+				break;
+			default:
+				this.warn("C007", `Unknown unit type "${this.setting_info[i].unit}"`);
+				break;
 			}
 		}
 	}
@@ -261,7 +281,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 
 	page_log(tav, msg, data, params)
 	{
-		this.focus_tab_log(tav);
+		if (this.if_auto_focus_log_tab) this.focus_tab_log(tav);
 
 		for (let l = /\${/, r = /}\$/, id, i, j, k = 0;; k = j + 2)
 		{
@@ -309,13 +329,13 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 
 class BarrenLandStorage
 {
-	constructor()
+	constructor(name, data_names)
 	{
-		this.log = (msg) => log(`[INFO]: BarrenLand @ Storage\n${msg}`);
-		this.warn = (code, msg) => console.warn(`[WARN: ${code}]: BarrenLand @ Storage\n${msg}`);
+		this.log = (msg) => log(`[INFO]: BarrenLand @ Storage : ${name}\n${msg}`);
+		this.warn = (code, msg) => console.warn(`[WARN: ${code}]: BarrenLand @ Storage : ${name}\n${msg}`);
 		this.error_and_throw = (code, msg) =>
 		{
-			let e = Error(`[ERROR: ${code}]: BarrenLand @ Storage\n${msg}`);
+			let e = Error(`[ERROR: ${code}]: BarrenLand @ Storage : ${name}\n${msg}`);
 			console.error(e);
 			throw e;
 		};
@@ -323,6 +343,10 @@ class BarrenLandStorage
 		if (!$ || typeof($) !== "function") this.error_and_throw("R001", "Require JQuery but not found the correct $ function.");
 		if (!window.script || !window.script.main) this.error_and_throw("R002", "Require [icelava.top/main.js] but didn't find.");
 		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
+
+		this.name = name;
+		if (!is_array(data_names)) this.error_and_throw("C002", `Got an incorrect "data_name" array.`);
+		this.data_names = data_names;
 
 		if (!window.script.BarrenLandStorage) window.script.BarrenLandStorage = true;
 		log(`[LOAD]: icelava.top/BarrenLand/main.js @ Storage`);
@@ -353,14 +377,15 @@ class BarrenLandStorage
 	save()
 	{
 		if (BLS.data_place === 1) return;
-		for (let i in BLS.setting_info) this.set(i, BLS[i]);
-		BLS.page_log_with_time("System", "**BLST**: settings saved.");
+		for (let i in this.data_names) this.set(this.data_names[i], BLS[this.data_names[i]]);
+		BLS.page_log_with_time("System", `**BarrenLandStorage**: \`${this.name}\` saved.`);
 	}
 
 	load()
 	{
 		if (BLS.data_place === 1 && (this.get("data_place") === 1 || this.get("data_place") === null)) return;
-		for (let i in BLS.setting_info) BLS[i] = this.get(i);
+		for (let i in this.data_names) BLS[this.data_names[i]] = this.get(this.data_names[i]);
+		BLS.page_log("System", `**BarrenLandStorage**: \`${this.name}\` loaded.`);
 	}
 }
 
@@ -392,7 +417,7 @@ class BarrenLandUnit
 		else this.init = init_callback;
 		this.binds = {};
 
-		BLS.page_log("System", `**BLU**: \`${name}\` loaded.`);
+		BLS.page_log("System", `**BarrenLandUnit**: \`${name}\` loaded.`);
 	}
 
 	update($sel)
@@ -473,7 +498,7 @@ class BarrenLandPlot
 			}
 		};
 
-		BLS.page_log("System", `**BLP**: \`${name}\` loaded.`);
+		BLS.page_log("System", `**BarrenLandPlot**: \`${name}\` loaded.`);
 	}
 
 	play(msg, data, params)
@@ -488,7 +513,7 @@ class BarrenLandPlot
 	play_in_list(group)
 	{
 		let arr_play = this.list[group];
-		if (typeof(arr_play) !== "object")
+		if (!is_array(arr_play))
 			this.error_and_throw("C002", `"play_in_list" method expect a play array but didn't get a correct object.`);
 		let every_play = (i) =>
 		{
@@ -624,14 +649,14 @@ $(() =>
 	window.BLS = new BarrenLandSystem(ExMD);
 
 // Section: BarrenLandStorage
-	window.BLST = new BarrenLandStorage();
+	window.BLST_S = new BarrenLandStorage("Setting", ["if_log_animation", "data_place", "play_break", "if_auto_focus_log_tab"]);
 	for (let i in BLS.setting_info)
 	{
 		let origin_callback = BLS.setting_info[i].callback;
 		BLS.setting_info[i].callback = (p) =>
 		{
 			origin_callback(p);
-			BLST.save();
+			BLST_S.save();
 		}
 	}
 	BLS.repaint_module_setting(); // Todo: Optimize this
@@ -781,16 +806,16 @@ $(() =>
 			{   m: "正当你观察它时，上面亮起了白色的文字：" },
 			{   m: "“世界那么**多**，你不想去看看嘛？”" },
 			{   m: "你心想：“什么叫 ‘多’ 啊……这是同学无聊做的整人道具？我来研究一下——”" },
-			{   m: "“纸片” 上又亮起了文字：“研究你 $i horse-head i$ 哦，我问你要不要去**异世界**！”" },
+			{   m: "“纸片” 上又亮起了文字：“研究你 $i horse-head i$ 呢，我问你要不要去**异世界**！”" },
 			{   m: "“异世界？笑死老子了……” 你正在思考是哪个沙雕同学做的，突然发现了一个问题：" },
 			{   m: "“这个纸片怎么知道我要研究它？！”" },
-			{   m: "“我是**「域牌」**当然知道你在想什么，傻 X，再问你最后一遍要不要去别的世界！”" },
+			{   m: "“我是**「域牌」**当然知道你在想什么，憨憨，再问你最后一遍要不要去别的世界！”" },
 			{   m: "“似乎这个什么「域牌」，在邀请我穿越？它为什么要这么做？是不是要骗我去……”" },
 			{   m: "“谁骗你啊，这么好的机会别人都是抢着要的真搞不懂你——我倒数了啊，**3、**”" },
 			{   m: "“感觉这玩意很神奇但是……”" },
 			{   m: "“**2、**”" },
 			{   m: "“就算穿越之后回不来，嗯，不对，这东西似乎是可以双向的吧？是的吧？”" },
-			{   m: "“**1！**$c #ff2222;$i angry i$ c$”" },
+			{   m: "“**1！**$c #ff2222;$i angry i$ c$ ”" },
 			{   m: "你做出了决定$+我要去！+$ $+算了吧+$",
 				BI:
 				[
@@ -857,7 +882,7 @@ $(() =>
 			{   m: "「域牌」：“那么，带上你的${origin_name}$，出发吧！”" },
 			{	m: "你手上的「域牌」突然抖动起来。" },
 			{	m: "抖动得越来越剧烈。" },
-			{	m: "这时，有数根不可名状的 $c #0e59d8;$i bolt i$ 深蓝色线条 c$ 从「域牌」的中心处凭空 “生长” 出来。" },
+			{	m: "这时，有数根不可名状的 $c #0e59d8;$i bolt i$ c$ 深蓝色线条从「域牌」的中心处凭空 “生长” 出来。" },
 			{	m: "线条迅速地在空中延伸，一下子就从你身边穿过。" },
 			{	m: "你急忙转过身去，发现众多深蓝线条已经把你团团围住。" },
 			{	m: "于此同时，另外一些颜色较浅的蓝色线条则是 “框起” 了你的${origin_name}$。" },

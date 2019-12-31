@@ -128,6 +128,12 @@
     color: inherit;
     font-size: inherit;
 }
+#main h2
+{
+    padding: 0;
+    margin-left: -3px;
+    font-size: 24px;
+}
 .tav_log a
 {
     padding: 0;
@@ -424,7 +430,7 @@ input:not(.disabled):hover, input:not(.disabled):focus
 
 /* Unit: Divider */
 
-#module_log_body hr
+#main hr
 {
 	display: inline-block;
     position: relative;
@@ -436,7 +442,7 @@ input:not(.disabled):hover, input:not(.disabled):focus
 	background: none;
 	box-shadow: none;
 }
-#module_log_body hr::before
+#main hr::before
 {
 	position: absolute;
 
@@ -454,11 +460,11 @@ input:not(.disabled):hover, input:not(.disabled):focus
 	animation-timing-function: linear;
     animation-play-state: running;
 }
-#module_log_body hr:hover::before
+#main hr:hover::before
 {
     animation-play-state: paused;
 }
-#module_log_body hr::after
+#main hr::after
 {
     display: block;
     position: absolute;
@@ -510,11 +516,12 @@ input:not(.disabled):hover, input:not(.disabled):focus
 .select_list
 {
     position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
 
     top: 10px;
-    left: -8px;
+    left: -9px;
 
     border-style: solid;
     border-width: 3px 5px;
