@@ -68,7 +68,7 @@ class BarrenLandSystem
 				era:                "β",
 				main:               0,
 				sub:                2,
-				upd:                6,
+				upd:                7,
 				toString:           () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
 			},
 			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
@@ -755,9 +755,9 @@ $(() =>
 			.off("click")
 			.next(".btn_micro_submit")
 			.addClass("disabled")
+			.off("click")
 			.html(`<i class="fas fa-times"></i>`)
 			.next(".btn_micro_select").remove()
-			.off("click")
 	});
 	BLU_SL.register_all();
 
