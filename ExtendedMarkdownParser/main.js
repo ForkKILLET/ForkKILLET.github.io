@@ -4,7 +4,7 @@ class ExtendedMarkdownParser
 	{
 		if (!window.log) window.log = (msg) => console.log(msg);
 		this.log = (msg) => log(`[INFO]: ExtendedMarkdownParser\n${msg}`);
-		this.warn = (code, msg) => console.warn(`[WARN: ${code}]: ExtendedMarkdownParser\n${msg}`)
+		this.warn = (code, msg) => console.warn(`[WARN: ${code}]: ExtendedMarkdownParser\n${msg}`);
 		this.error_and_throw = (code, msg) =>
 		{
 			let e = Error(`[ERROR: ${code}]: ExtendedMarkdownParser\n${msg}`);
@@ -52,7 +52,7 @@ class ExtendedMarkdownParser
 				end: `</sub>`
 			},
 			{ // Note: 图标 e.g. $fas font-awesome fa$ $i spin;fw;cogs i$
-				name: ['font-awesome-solid', 'fas', 'i'],
+				name: ['FontAwesomeSolid', 'fas', 'i'],
 				space: [true, true, true],
 				begin: `<i class="fas`,
 				end: `"></i>`,
@@ -65,8 +65,8 @@ class ExtendedMarkdownParser
 					}
 				]
 			},
-			{ // Note: 图标（商标）
-				name: ['font-awesome-brand', 'fab', 'ib'],
+			{ // Note: 商标 e.g. $fab github fab$ $ib qq ib$
+				name: ['FontAwesomeBrand', 'fab', 'ib'],
 				space: [true, true, true],
 				begin: `<i class="fab`,
 				end: `"></i>`,
@@ -119,7 +119,7 @@ class ExtendedMarkdownParser
 				begin: `<span class="lottery">`,
 				end: `</span>`
 			},
-			{ // Note: 词汇盒子
+			{ // Note: 词汇盒子 e.g. $w apple;æpl;n.;苹果;I have an apple. 我拥有一个苹果。 w$
 				name: ['wordbox', 'w'],
 				space: [true, true],
 				begin: `<div class="wordbox">`,
@@ -156,26 +156,26 @@ class ExtendedMarkdownParser
 		];
 		this.modules =
 		{
-			wordbox: (e) =>
+			wordbox: ($sel) =>
 			{
-				$(e).find(".wordbox>a:not(.ready)")
+				$sel.find(".wordbox>a:not(.ready)")
 					.click((event) => $(event.currentTarget).parent().children("a.ready~*").fadeToggle(500))
 					.addClass("ready")
 					.parent().children("a.ready~*").hide();
-				let $p = $(e).find(".wordbox>p:nth-child(2)");
+				let $p = $sel.find(".wordbox>p:nth-child(2)");
 				for (let i = 0; i < $p.length; i++)
 				{
 					let $i = $($p[i]);
-					if ($i.html() === "//&nbsp;")$i.remove();
+					if ($i.html() === "//&nbsp;") $i.remove();
 				}
 			},
-			contents: (e) =>
+			contents: ($sel) =>
 			{
-				let $m = $(e).find(".contents_mark");
-				if ($m.length !== 1)return;
+				let $m = $sel.find(".contents_mark");
+				if ($m.length !== 1) return;
 
 				let $titles = $m.parent().find("~ h1, ~ h2");
-				let HTML = `<div class="contents"><h1>Contents <i class="fas fa-angle-right"></i></h1>`;
+				let str = `<div class="contents"><h1>Contents <i class="fas fa-angle-right"></i></h1>`;
 				for (let i = 0; i < $titles.length; i++)
 				{
 					let e = $titles[i];
@@ -183,30 +183,30 @@ class ExtendedMarkdownParser
 					s = s.replace(/<a.+?>/g, "").replace(/<\/a>/g, "");
 					if (e.tagName === "H1")
 					{
-						if (i > 0)HTML += `</ul>`;
-						HTML += `<a href="#${e.id}">${s}</a> <ul>`;
+						if (i > 0) str += `</ul>`;
+						str += `<a href="#${e.id}">${s}</a> <ul>`;
 					}
-					else HTML += `<li><a href="#${e.id}">${s}</a></li>`;
+					else str += `<li><a href="#${e.id}">${s}</a></li>`;
 				}
-				HTML += `</div>`;
-				$(e).append($(HTML));
+				str += `</div>`;
+				$sel.append($(str));
 
-				HTML = `<div class="btn_contents"><i class="fas fa-angle-left"></div>`;
-				$(HTML).appendTo($(e)).hide().click((event) =>
+				str = `<div class="btn_contents"><i class="fas fa-angle-left"></div>`;
+				$(str).appendTo($sel).hide().click((event) =>
 			    {
 					$(event.currentTarget).fadeOut();
-					$(e).find(".contents").fadeIn();
+				    $sel.find(".contents").fadeIn();
 			    });
 
-				$(e).find(".contents>h1").click((event) =>
+				$sel.find(".contents>h1").click((e) =>
 				{
-					$(event.currentTarget).parent().fadeOut();
+					$(e.currentTarget).parent().fadeOut();
 					$(e).find(".btn_contents").fadeIn();
 				});
 			},
-			Maths: function(e, ExMD)
+			Maths: ($sel, self) =>
 			{
-				if (typeof ExMD.Maths === "function")ExMD.Maths(e);
+				if (typeof self.Maths === "function") self.Maths($sel[0]);
 			}
 		};
 	}
@@ -217,8 +217,7 @@ class ExtendedMarkdownParser
 			if (str)
 			{
 				let chars = ["\\\\", "\\/" , "\\(", "\\)", "\\[", "\\]", "\\{", "\\}", "\\*", "\\+", "\\?", "\\$",  "\\^", "\\."];
-				for (let c in chars)
-					str = str.replace(RegExp(chars[c], "g"), chars[c]);
+				for (let c in chars) str = str.replace(RegExp(chars[c], "g"), chars[c]);
 			}
 			return str;
 		}
@@ -235,7 +234,7 @@ class ExtendedMarkdownParser
 
 		function parse_label(rule, str) // Note: 传入标签规则和标签内的内容，返回解析后的字符串。
 		{
-			let arr_param = str.split(";");
+			let arr_param = str.split(";"), b, e;
 			if (rule.param) for
 			(
 				let param_i = 0, param_type = 0, param_time = 0;
@@ -249,7 +248,9 @@ class ExtendedMarkdownParser
 					param_type++;
 					if (!rule.param[param_type]) break;
 				}
-				arr_param[param_i] = rule.param[param_type].begin + arr_param[param_i] + rule.param[param_type].end;
+				b = rule.param[param_type].begin.replace("$cnt$", param_i);
+				e = rule.param[param_type].end.replace("$cnt$", param_i);
+				arr_param[param_i] = b + arr_param[param_i] + e;
 			}
 			return rule.begin + arr_param.join("") + rule.end;
 		}
@@ -290,15 +291,14 @@ class ExtendedMarkdownParser
 		}
 
 		// Note: 还原转义
-		for (let i in this.escape)
-			str = str.replace(RegExp(RegExp_escape(this.escape[i].temp), "g"), this.escape[i].to);
+		for (let i in this.escape) str = str.replace(RegExp(RegExp_escape(this.escape[i].temp), "g"), this.escape[i].to);
 
 		return str;
 	}
-	render(e, str)
+	render($sel, str, modules_params)
 	{
-		e.innerHTML = this.parse(str);
-		for (let i in this.modules) this.modules[i](e, this);
+		$sel.html(this.parse(str));
+		for (let i in this.modules) this.modules[i]($sel, this, modules_params);
 	}
 	settings(s)
 	{

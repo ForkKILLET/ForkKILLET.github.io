@@ -99,7 +99,7 @@ class ForkKILLETShape
 		if (use_ExMD)
 		{
 			if (typeof(ExMD.render) !== "function") this.error_and_throw("R002", "Require ExtendedMarkdownParser but didn't get a correct ExtendedMarkdownParser object.");
-			ExMD.render($i[0], $i.html());
+			ExMD.render($i, $i.html());
 		}
 	}
 

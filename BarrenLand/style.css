@@ -59,7 +59,7 @@
     display: flex;
 
     height: 50px;
-    width: calc(100% - 50px);
+    width: 100%;
 
     background-color: #4d4d4d;
 }
@@ -73,11 +73,13 @@
 
     overflow-y: scroll;
 }
-#module_log>.btn_square
+#module_log_head>.btn_square
 {
+    margin-left: auto;
+
     background-color: #f99256;
 }
-#module_log>.btn_square::after, #module_setting>.btn_square::after
+#module_log_head>.btn_square::after, #module_setting_head>.btn_square::after
 {
     right: 70px;
     left: unset;
@@ -102,7 +104,7 @@
 {
     font-size: 24px;
 }
-.tab_log_focused, .tab_log:hover
+.tab_log.focused, .tab_log:hover
 {
     background-color: #d0d0d0;
 }
@@ -157,10 +159,12 @@
 }
 #module_setting_head
 {
-    width: calc(100% - 70px);
+    width: calc(100% - 20px);
 }
-#module_setting>.btn_square
+#module_setting_head>.btn_square
 {
+    margin-left: auto;
+
     background-color: #ff2222;
 }
 #module_setting_body
@@ -171,6 +175,8 @@
     padding: 20px;
 
     background: #d0d0d0;
+
+    overflow-y: scroll;
 }
 #module_setting_body>div
 {
@@ -262,11 +268,11 @@
 
     transition: color 100ms;
 }
-.btn_inline_used::before
+.btn_inline.disabled::before
 {
     border-right-color: #8e8e8e!important;
 }
-.btn_inline_used::after
+.btn_inline.disabled::after
 {
     border-left-color: #8e8e8e!important;
 }
@@ -300,7 +306,7 @@
 
     transition: left 500ms;
 }
-.btn_inline:not(.btn_inline_used):active
+.btn_inline:not(.disabled):active
 {
     color: #1eb6ff;
 }
@@ -320,10 +326,31 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    align-self: center;
 
     width: 25px;
     height: 25px;
     border-radius: 6px;
+}
+.btn_micro_submit
+{
+    background-color: #f99256;
+    color: #ffffff;
+}
+.btn_micro_submit.disabled
+{
+    background-color: #ff2222;
+    color: #ffffff;
+}
+.btn_micro_select
+{
+    margin-left: 6px;
+
+    opacity: 0;
+    background-color: #009c0c;
+    color: #ffffff;
+
+    transition: opacity 500ms;
 }
 
 /* Unit: Switch */
@@ -369,36 +396,30 @@
 
 /* Unit:  */
 
-input
+input, .select
 {
     display: inline-block;
 
     width: 100px;
-    height: 25px;
-    padding: 0 5px;
+    height: 23px;
+    padding: 2px 5px 0 5px;
     margin: 0 10px;
     border: 4px solid #1eb6ff;
     border-radius: 12px;
 
     font-size: inherit;
+    font-family: inherit;
     background-color: #c5c5c5;
 
     transition: background-color 500ms;
 }
-input:disabled
+input.disabled, .select.disabled
 {
     border-color: #8e8e8e;
 }
-input:enabled:hover, input:enabled:focus
+input:not(.disabled):hover, input:not(.disabled):focus
 {
     background-color: #efefef;
-}
-input+.btn_micro
-{
-    align-self: center;
-
-    color: #ffffff;
-    background-color: #f99256;
 }
 
 /* Unit: Divider */
@@ -452,4 +473,110 @@ input+.btn_micro
 {
 	0%, 100% { margin-left: -6px; }
 	50% { margin-left: calc(100% - 120px); }
+}
+
+/* Unit: Select */
+
+.select
+{
+    position: relative;
+    vertical-align: middle;
+    width: auto;
+    min-width: 100px;
+
+    transition: background-color 500ms;
+}
+.select:not(.disabled):hover, .select:not(.disabled).focused
+{
+    background-color: #efefef;
+}
+.select:hover + .btn_micro_submit + .btn_micro_select
+{
+    opacity: 1;
+}
+.select *
+{
+    padding: 0;
+    font-size: inherit;
+}
+.select>p:first-child
+{
+    line-height: 25px;
+}
+.select>p:first-child.placeholder
+{
+    color: #787878;
+}
+.select_list
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    top: 10px;
+    left: -8px;
+
+    border-style: solid;
+    border-width: 3px 5px;
+    border-color: #1eb6ff;
+    border-radius: 5px;
+
+    word-break: keep-all;
+    background-color: #C5C5C5;
+    visibility: hidden;
+    opacity: 0;
+
+    transition: opacity 500ms;
+}
+.select.disabled>.select_list
+{
+    visibility: hidden;
+}
+.select_item
+{
+    padding: 2px 20px;
+    line-height: 25px;
+
+    font-size: inherit;
+    background-color: #C5C5C5;
+
+    transition: background-color 500ms;
+}
+.select_item:first-child
+{
+    padding-top: 3px;
+}
+.select_item:last-child
+{
+    padding-bottom: 0;
+}
+.select_item:hover
+{
+    background-color: #efefef;
+}
+.select_item_chosen::before
+{
+    position: absolute;
+    display: inline-block;
+
+    float: left;
+    left: 0;
+    border: 10px solid;
+    border-color: transparent transparent transparent #1eb6ff;
+
+    content: "";
+    font-weight: bold;
+}
+.select_item_chosen::after
+{
+    position: absolute;
+    display: inline-block;
+
+    float: right;
+    right: 0;
+    border: 10px solid;
+    border-color: transparent #1eb6ff transparent transparent;
+
+    content: "";
+    font-weight: bold;
 }
