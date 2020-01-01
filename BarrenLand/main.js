@@ -69,11 +69,11 @@ class BarrenLandSystem
 				era:                "β",
 				main:               0,
 				sub:                2,
-				upd:                8,
+				upd:                9,
 				toString:           () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
 			},
 			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
-			last_update_time:       new Date(2019, 12 - 1, 31, 0, 0, 0),
+			last_update_time:       new Date(2019, 12 - 1, 30, 0, 0, 0),
 			github_repo_URL:        "https://github.com/ForkFG/ForkFG.github.io",
 			github_repo_path:       "/BarrenLand",
 			toString: () => `
@@ -713,7 +713,8 @@ $(() =>
 	});
 	BLU_IP.bind_method("disable", ($sel) =>
 	{
-		$sel.addClass("disabled")
+		$sel.attr("disabled", "disabled")
+			.addClass("disabled")
 			.next(".btn_micro_submit")
 			.addClass("disabled")
 			.html(`<i class="fas fa-times"></i>`)
