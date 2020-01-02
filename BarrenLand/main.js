@@ -713,11 +713,7 @@ $(() =>
 	});
 	BLU_IP.bind_method("disable", ($sel) =>
 	{
-<<<<<<< HEAD
 		$sel.attr("disabled", "disabled")
-=======
-		$sel.attr("disable", "disable")
->>>>>>> ad0b86be9f3d86c7cfe448e8e7e5bf473d4a0519
 			.addClass("disabled")
 			.next(".btn_micro_submit")
 			.addClass("disabled")
