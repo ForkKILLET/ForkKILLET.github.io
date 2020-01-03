@@ -91,9 +91,7 @@ $(() =>
 
 	// Note: 用户功能
 	$body.prepend(`<div id="user_op"></div>`);
-	$("#user_op").hide().html(`
-<a><i class="fas fa-sign-out-alt"></i> Sign out</a>
-	`);
+	$("#user_op").hide().html(`<a><i class="fas fa-sign-out-alt"></i> Sign out</a>`);
 	$("#user_op>a:first-child").click(() => AJAX("GET", "http://qwq.icelava.top/sign_out.php", "application/x-www-form-urlencoded", null,
 	() => location.reload()));
 
