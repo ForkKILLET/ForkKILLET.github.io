@@ -1,3 +1,0 @@
-// options
-
-var debug = false;
