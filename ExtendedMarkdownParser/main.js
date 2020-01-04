@@ -11,7 +11,7 @@ class ExtendedMarkdownParser
 			console.error(e);
 			throw e;
 		};
-		if (!$ || typeof($) !== "function") this.error_and_throw("R001", `Require JQuery but "$" function isn't correct.`);
+		if (!$ || typeof $ !== "function") this.error_and_throw("R001", `Require JQuery but "$" function isn't correct.`);
 		if (!window.script) window.script = {};
 		window.script.ExtendedMarkdownParser = true;
 		log("[LOAD]: icelava.top/ExtendedMarkdownParser/main.js");

@@ -1,5 +1,12 @@
-if (!window.log) window.log = msg => console.log(msg);
-if (!window.time) window.time = (if_hms, date) =>
+Object.prototype._am = (n, m) =>
+{
+	if (!this[n]) this[n] = m;
+	return this;
+};
+
+window
+._am("log", msg => console.log(msg))
+._am("time", (if_hms, date) =>
 {
 	let d = date ? date : new Date(),
 		Y = d.getFullYear(),
@@ -14,21 +21,34 @@ if (!window.time) window.time = (if_hms, date) =>
 	if (m < 10) m = "0" + m;
 	if (s < 10) s = "0" + s;
 	return `${Y}-${M}-${D}` + (if_hms ? ` ${h}:${m}:${s}` : "");
-};
-if (!Math.random_in_range) Math.random_in_range = (min, max, if_int) =>
+})
+._am("is_empty", n => n === null || n === undefined)
+._am("is_array", n => typeof n === "object" && n.constructor.name === "Array");
+Math
+._am("deg_to_rad", (deg) => deg * Math.PI / 180)
+._am("rad_to_deg", (rad) => rad / Math.PI * 180)
+._am("random_in_range", (min, max, if_int) =>
 {
 	let r = Math.random() * (max - min + 1) + min;
 	if (if_int) r = Math.trunc(r);
 	return r;
-};
-if (!window.random_item) window.random_item = (arr) =>
+})
+._am("Worker_from_function", (f, worker_name) =>
 {
-	if (typeof(arr) === "object") return arr[Math.random_in_range(0, arr.length - 1, true)];
+	let blob = new Blob([`(${f.toString()})()`]),
+		url = window.URL.createObjectURL(blob);
+	return new Worker(url, { name: worker_name });
+})
+._am("random_in_100", () => Math.random_in_range(0, 100, true));
+window
+._am("random_item", (arr) =>
+{
+	if (typeof arr === "object") return arr[Math.random_in_range(0, arr.length - 1, true)];
 	else return null;
-};
-if (!window.is_empty) window.is_empty = n => n === null || n === undefined;
-if (!window.is_array) window.is_array = n => typeof(n) === "object" && n.constructor.name === "Array";
-if (!window.cb) window.cb = (str, color) => `$c ${color};「${str}」 c$`;
+})
+._am("cb", (str, color) => `$c ${color};「${str}」 c$`);
+
+delete Object.prototype._am;
 
 class BarrenLandSystem
 {
@@ -43,7 +63,7 @@ class BarrenLandSystem
 			throw e;
 		};
 
-		if (!$ || typeof($) !== "function") this.error_and_throw("R001", `Require JQuery but not found the correct "$" function.`);
+		if (!$ || typeof $ !== "function") this.error_and_throw("R001", `Require JQuery but not found the correct "$" function.`);
 		if (!window.script || !window.script.main) this.error_and_throw("R002", "Require [icelava.top/main.js] but didn't find.");
 		if (!window.script || !window.script.ExtendedMarkdownParser) this.error_and_throw("R003", "Require [icelava.top/ExtendedMarkdownParser/main.js] but didn't find.");
 
@@ -68,12 +88,12 @@ class BarrenLandSystem
 			{
 				era:                "β",
 				main:               0,
-				sub:                2,
-				upd:                9,
+				sub:                3,
+				upd:                0,
 				toString:           () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
 			},
 			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
-			last_update_time:       new Date(2019, 12 - 1, 30, 0, 0, 0),
+			last_update_time:       new Date(2020, 12 - 1, 30, 0, 0, 0),
 			github_repo_URL:        "https://github.com/ForkFG/ForkFG.github.io",
 			github_repo_path:       "/BarrenLand",
 			toString: () => `
@@ -85,7 +105,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 
 目前版本：\`${this.info.version.toString()}\`；  
 
-最近更新时间：\`${time(false, this.info.last_update_time)}\`。  
+最近更新时间$c red;（2020 啦，新年快落哦！） c$：\`${time(false, this.info.last_update_time)}\`。  
 
 可以在 $ib github ib$ [Github repo](${this.info.github_repo_URL}) 的 \`${this.info.github_repo_path}\` 目录下看到游戏代码，  
 
@@ -147,17 +167,18 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		$("#module_change_1, #module_change_2").html("");
 		for (let i in this.module_info)
 		{
-			if (!this.module_info[i].available) continue;
-			$(`#module_change_${this.module_info[i].position}`).append(`<div id="btn_square_${i}" class="btn_square"></div>`);
+			let v = this.module_info[i];
+			if (!v.available) continue;
+			$(`#module_change_${v.position}`).append(`<div id="btn_square_${i}" class="btn_square"></div>`);
 			$(`#btn_square_${i}`)
 			.attr("name", i)
-			.addClass(this.module_info[i].position === 1 ? "btn_square_top" : "btn_square_bottom")
-			.css("order", this.module_info[i].rank)
-			.css("backgroundColor", this.module_info[i].color)
-			.html(`<i class="fas fa-${this.module_info[i].fa_name}"></i>`)
+			.addClass(v.position === 1 ? "btn_square_top" : "btn_square_bottom")
+			.css("order", v.rank)
+			.css("backgroundColor", v.color)
+			.html(`<i class="fas fa-${v.fa_name}"></i>`)
 			.click(() =>
 			{
-				if (typeof(this.module_info[i].callback) === "function") this.module_info[i].callback(this);
+				if (typeof v.callback === "function") v.callback(this);
 			});
 		}
 	}
@@ -171,11 +192,12 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		$body.html("");
 		for (let i in this.log_info)
 		{
+			let v = this.log_info[i];
 			$head.append(`<div id="tab_log_${i}" class="tab_log"></div>`);
 			$(`#tab_log_${i}`)
-			.append(`<i class="fas fa-${this.log_info[i].fa_name}"></i>&nbsp;<p>${i}</p>`)
+			.append(`<i class="fas fa-${v.fa_name}"></i>&nbsp;<p>${i}</p>`)
 			.click(() => this.focus_tab_log(i))
-			.children("i").css("color", this.log_info[i].color);
+			.children("i").css("color", v.color);
 			$body.append(`<div id="tav_log_${i}" class="tav_log"></div>`);
 		}
 		$head.append($(`<div class="btn_square" name="clear"><i class="fas fa-trash-alt"></i></div>`));
@@ -193,37 +215,37 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		$body.html("");
 
 		let f = false;
-
 		for (let i in this.setting_info)
 		{
-			let value = this[i];
-			if (is_empty(value)) value = this.setting_info[i].default;
+			let v = this.setting_info[i],
+				value = this[i];
+			if (is_empty(value)) value = v.default;
 
-			if (this.setting_info[i].unit === "Title")
+			if (v.unit === "Title")
 			{
 				if (f) $body.append(`<hr>`);
-				$body.append(`<h2>${this.setting_info[i].msg}</h2>`);
+				$body.append(`<h2>${v.msg}</h2>`);
 				f = true;
 				continue;
 			}
 
 			let $i = $(`<div></div>`), $j;
-			$i.append(`<p>${this.setting_info[i].msg} </p>`);
-			switch (this.setting_info[i].unit)
+			$i.append(`<p>${v.msg} </p>`);
+			switch (v.unit)
 			{
 			case "Switch":
 				$j = $(`<div class="switch"></div>`);
 				$i.append($j);
 				$body.append($i);
-				$j.on("_switch", (e, state) => this.setting_info[i].callback(state));
+				$j.on("_switch", (e, state) => v.callback(state));
 				if (value === true) $j.trigger("_switch", value).addClass("switch_on");
 				break;
 			case "Input":
-				$j = $(`<input type="${this.setting_info[i].type}" placeholder="${this.setting_info[i].placeholder}">`);
+				$j = $(`<input type="${v.type}" placeholder="${v.placeholder}">`);
 				$j.on("_input", (e, value) =>
 				{
-					if (this.setting_info[i].type === "number") value = Number(value);
-					this.setting_info[i].callback(value)
+					if (v.type === "number") value = Number(value);
+					v.callback(value)
 				});
 				$i.append($j);
 				$body.append($i);
@@ -232,19 +254,19 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 			case "Select":
 				$j = $(`<div class="select"></div>`);
 				$j
-				.attr("placeholder", value ? `$${value}$` : this.setting_info[i].placeholder)
-				.on("_select", () => this.setting_info[i].callback($j.data("itemChosen")));
-				for (let j = 0; j < this.setting_info[i].items.length; j++) $j.data(`item${j + 1}`, this.setting_info[i].items[j]);
+				.attr("placeholder", value ? `$${value}$` : v.placeholder)
+				.on("_select", () => v.callback($j.data("itemChosen")));
+				for (let j = 0; j < v.items.length; j++) $j.data(`item${j + 1}`, v.items[j]);
 				$i.append($j);
 				$body.append($i);
 				if (!is_empty(value))
 				{
-					let item = this.setting_info[i].items[value - 1];
+					let item = v.items[value - 1];
 					$j.data("itemChosen", value).trigger("_select", value);
 				}
 				break;
 			default:
-				this.warn("C007", `Unknown unit type "${this.setting_info[i].unit}"`);
+				this.warn("C007", `Unknown unit type "${v.unit}".`);
 				break;
 			}
 		}
@@ -292,8 +314,8 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 			i = i.index;
 			j = j.index;
 			id = msg.substring(k + i + 2, j);
-			if (!data || typeof(data[id]) !== "function")
-				if (typeof(this.log_data[id]) !== "function")
+			if (!data || typeof data[id] !== "function")
+				if (typeof this.log_data[id] !== "function")
 					this.error_and_throw("C005", `"page_log" method expects a callback "${id}" in the "data" object but not found.`);
 				else msg = msg.substring(k, i) + this.log_data[id]() + msg.substring(j + 2);
 			else msg = msg.substring(k, i) + data[id]() + msg.substring(j + 2);
@@ -340,7 +362,7 @@ class BarrenLandStorage
 			throw e;
 		};
 
-		if (!$ || typeof($) !== "function") this.error_and_throw("R001", "Require JQuery but not found the correct $ function.");
+		if (!$ || typeof $ !== "function") this.error_and_throw("R001", "Require JQuery but not found the correct $ function.");
 		if (!window.script || !window.script.main) this.error_and_throw("R002", "Require [icelava.top/main.js] but didn't find.");
 		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
 
@@ -401,7 +423,7 @@ class BarrenLandUnit
 			throw e;
 		};
 
-		if (!$ || typeof($) !== "function") this.error_and_throw("R001", "Require JQuery but not found the correct $ function.");
+		if (!$ || typeof $ !== "function") this.error_and_throw("R001", "Require JQuery but not found the correct $ function.");
 		if (!window.script || !window.script.main) this.error_and_throw("R002", "Require [icelava.top/main.js] but didn't find.");
 		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
 
@@ -413,7 +435,7 @@ class BarrenLandUnit
 		this.rule = rule;
 		this.all_objects = [];
 
-		if (typeof(init_callback) !== "function") this.error_and_throw("C002", "Got an incorrect init callback.");
+		if (typeof init_callback !== "function") this.error_and_throw("C002", "Got an incorrect init callback.");
 		else this.init = init_callback;
 		this.binds = {};
 
@@ -425,8 +447,9 @@ class BarrenLandUnit
 		let l = this.all_objects.length, i;
 		for (i = 0; i < $sel.length; i++)
 		{
+			let i_ = i;
 			this.all_objects[l + i] = $($sel[i]);
-			for (let j in this.binds) this.all_objects[l + i][j] = this.binds[j];
+			for (let j in this.binds) this.all_objects[l + i][j] = () => this.binds[j]($($sel[i_]));
 		}
 		return [l, l + i];
 	}
@@ -437,6 +460,7 @@ class BarrenLandUnit
 	{
 		$sel.addClass("inited");
 		this.init($sel);
+		// Todo: Cancel when delete
 		return this.update($sel);
 	}
 
@@ -444,7 +468,7 @@ class BarrenLandUnit
 
 	bind_method(name, callback)
 	{
-		if (typeof(callback) !== "function")  this.error_and_throw("C003", "Got an incorrect bind callback.");
+		if (typeof callback !== "function")  this.error_and_throw("C003", "Got an incorrect bind callback.");
 		this.binds[name] = callback;
 	}
 }
@@ -477,7 +501,7 @@ class BarrenLandPlot
 		{
 			start: (callback) =>
 			{
-				if (typeof(callback) !== "function")
+				if (typeof callback !== "function")
 					this.error_and_throw("C004", `The "start" type curring of "add_milestone" method expect a callback but didn't get a function.`);
 				else
 				{
@@ -488,7 +512,7 @@ class BarrenLandPlot
 			},
 			play_end: (play_rule, callback) =>
 			{
-				if (typeof(callback) !== "function")
+				if (typeof callback !== "function")
 					this.error_and_throw("C004", `The "start" type curring of "add_milestone" method expect a callback but didn't get a function.`);
 				else $(document).on("_playend", (e, play_info) =>
 				{
@@ -508,6 +532,7 @@ class BarrenLandPlot
 		setTimeout(() => $(document).trigger("_playend", play_info), 500);
 
 		BLS.page_log(this.tav, msg, data, params);
+		if (typeof params["f"] === "function") params["f"]();
 	}
 
 	play_in_list(group)
@@ -521,6 +546,7 @@ class BarrenLandPlot
 			if (!arr_play[i]["m"]) this.error_and_throw("C005", `"play_in_list" method expects a "m" prop in the play list, but not found in item [${i}].`);
 			this.play(arr_play[i]["m"], arr_play[i]["data"],
             {
+            	f:  arr_play[i]["f"],
             	BI: arr_play[i]["BI"],
 	            IP: arr_play[i]["IP"],
 	            SL: arr_play[i]["SL"]
@@ -542,6 +568,49 @@ class BarrenLandCharacter // Note: 目前是个摆设……
 	constructor()
 	{
 		this.name = "Anonymous";
+	}
+}
+
+class BarrenLandAnimation
+{
+	constructor(name, callback)
+	{
+		this.log = (msg) => log(`[INFO]: BarrenLand @ Animation : ${name}\n${msg}`);
+		this.warn = (code, msg) => console.warn(`[WARN: ${code}]: BarrenLand @ Animation\n${msg}`);
+		this.error_and_throw = (code, msg) =>
+		{
+			let e = Error(`[ERROR: ${code}]: BarrenLand @ Plot : ${name}\n${msg}`);
+			console.error(e);
+			throw e;
+		};
+		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
+
+		if (!window.script.BarrenLandAnimation) window.script.BarrenLandAnimation = true;
+		log(`[LOAD]: icelava.top/BarrenLand/main.js @ Animation : ${name}`);
+
+		this.name = name;
+		this.callback = callback;
+
+		this.FS = new ForkKILLETShape();
+		this.FS.bind_canvas("module_canvas");
+
+		FS.bind_canvas("module_canvas");
+
+		BLS.page_log("System", `**BarrenLandAnimation**: \`${name}\` loaded.`);
+	}
+
+	play(duration)
+	{
+		this.callback(this.FS);
+		$("#module_canvas").css("opacity", 1);
+		if (typeof duration === "number") setTimeout(() => this.stop(), duration + 1000);
+	}
+
+	stop()
+	{
+		let $c = $("#module_canvas");
+		$c.css("opacity", 0);
+		setTimeout(() => $c.html(""), 1000);
 	}
 }
 
@@ -607,7 +676,7 @@ $(() =>
 				$i.click(() =>
 				{
 					params["BI"][i - j]();
-					$i.disable($i);
+					$i.disable();
 				});
 			}
 		},
@@ -619,7 +688,7 @@ $(() =>
 				$i = BLU_IP.all_objects[i];
 				$i.on("_input", () =>
 				{
-					if (params["IP"][i - j]($i.val())) $i.disable($i);
+					if (params["IP"][i - j]($i.val())) $i.disable();
 				})
 			}
 		},
@@ -638,7 +707,7 @@ $(() =>
 						item = $i.attr("placeholder");
 					}
 					else item = $i.data(`item${rank}`);
-					if (params["SL"][i - j](rank, item)) $i.disable($i);
+					if (params["SL"][i - j](rank, item)) $i.disable();
 				})
 			}
 		}
@@ -659,7 +728,7 @@ $(() =>
 			BLST_S.save();
 		}
 	}
-	BLS.repaint_module_setting(); // Todo: Optimize this
+	BLS.repaint_module_setting();
 
 // Section: BarrenLandUnit : BtnSquare
 	window.BLU_BS = new BarrenLandUnit("BtnSquare", ".btn_square:not(.no_animation)", ($sel) => $sel.click((e) =>
@@ -672,16 +741,14 @@ $(() =>
 
 // Section: BarrenLandUnit : BtnInline
 	window.BLU_BI = new BarrenLandUnit("BtnInline", ".btn_inline", ($sel) => {});
-	BLU_BI.bind_method("disable", ($sel) =>
+	BLU_BI.bind_method("disable", ($sel) => $sel.parents(".tav_log").find(".btn_inline").off("click").addClass("disabled"));
+
+// Section: BarrenLandUnit : BtnMicro
+	window.BLU_BM = new BarrenLandUnit("BtnMicro", ".btn_micro", ($sel) => $sel.click((e) =>
 	{
-		let $pa = $sel.parents(), $msg;
-		for (let i = 0; i < $pa.length; i++) if ($($pa[i]).hasClass("tav_log"))
-		{
-			$msg = $($pa[i - 1]);
-			break;
-		}
-		$msg.find(".btn_inline").off("click").addClass("disabled");
-	});
+		let $this = $(e.currentTarget);
+		$this.css("animation", "jelly 500ms").on("animationend", () => $this.css("animation", ""));
+	}));
 
 // Section: BarrenLandUnit : Switch
 	window.BLU_SW = new BarrenLandUnit("Switch", ".switch", ($sel) => $sel.click((e) =>
@@ -689,15 +756,23 @@ $(() =>
 		let $this = $(e.currentTarget);
 		$this.toggleClass("switch_on").trigger("_switch", $this.hasClass("switch_on"));
 	}));
-	BLU_SW.register_all();
-
-// Section: BarrenLandUnit : BtnMicro
-	window.BLU_BM = new BarrenLandUnit("BtnMicro", ".btn_micro", ($sel) => $sel.click((e) =>
+	BLU_SW.bind_method("toggle_submit", ($sel) =>
 	{
-		let $this = $(e.currentTarget);
-		$this.css("animation", "jelly 500ms")
-			 .on("animationend", () => $this.css("animation", ""));
-	}));
+		let $i = $sel.next(".btn_micro_submit");
+		if ($i.length)
+		{
+			$i.remove();
+			$sel.click(() => $sel.toggleClass("switch_on").trigger("_switch", $sel.hasClass("switch_on")));
+		}
+		else
+		{
+			let $btn = $(`<div class="btn_micro btn_micro_submit"><i class="fas fa-check"></i></div>`);
+			$sel.off("click").click(() => $sel.toggleClass("switch_on")).after($btn);
+			$btn.click(() => $sel.trigger("_switch", $sel.hasClass("switch_on")));
+			BLU_BM.register($btn);
+		}
+	});
+	BLU_SW.register_all();
 
 // Section: BarrenLandUnit : Input
 	window.BLU_IP = new BarrenLandUnit("Input", "input", ($sel) =>
@@ -787,6 +862,26 @@ $(() =>
 	});
 	BLU_SL.register_all();
 
+// Section: BarrenLandAnimation : Transmit
+	window.BLA_T = new BarrenLandAnimation("Transmit", (FS) =>
+	{
+		let k1 = Math.random_in_range(0.5, 1.5),
+			k2 = 1 / k1, // Note: 两组直线互相垂直。
+			$m = $("#main_1"),
+			w = $m.width(),
+			h = $m.height();
+
+		for (let y = -k1 * w; y < h; y += Math.random_in_range(150, 250))
+			FS.line(null, null, Math.random_in_range(30, 80), 0, y, w + 80, k1 * w + y).addClass("blue_line");
+
+		setTimeout(() =>
+		{
+		   for (let y = -k2 * w; y < h; y += Math.random_in_range(150, 250))
+		       FS.line(null, null, Math.random_in_range(30, 80), w, y, -80, k2 * w + y).addClass(
+		           "blue_line");
+		}, 200);
+	});
+
 // Section: BarrenLandPlot : MainStory
 	window.BLP_MS = new BarrenLandPlot("MainStory", "Diary",
 	{
@@ -849,7 +944,7 @@ $(() =>
 			}
 		],
 		"0B0": [
-			{   m: "选这个对你有好处吗，，剧情策划中……" }
+			{   m: "选这个对你有好处吗，，**剧情策划中……**" }
 		],
 		"0A1": [
 			{	m: "域牌：“${name}$，在离开这里之前，你可以带点东西……说不定有什么用处呢？或者当个纪念也行哦。" },
@@ -887,8 +982,21 @@ $(() =>
 			{	m: "线条迅速地在空中延伸，一下子就从你身边穿过。" },
 			{	m: "你急忙转过身去，发现众多深蓝线条已经把你团团围住。" },
 			{	m: "于此同时，另外一些颜色较浅的蓝色线条则是 “框起” 了你的${origin_name}$。" },
-			{	m: "你的周围逐渐被纯粹的蓝占据……" },
-			{   m: "剧情策划中……" }
+			{	m: "你的周围逐渐被纯粹的蓝占据……", f: () => BLA_T.play(2 * 1000) },
+			{   m: "你失去了意识……" },
+			{   m: "……" },
+			{   m: "你缓缓睁开眼睛。" },
+			{   m: "眼前是白茫茫的一片。" },
+			{   m: "你开始思考人生的终极问题：“这是哪里？我死了吗？作为一个 ‘穿越者’，我是不是不应该问这种问题……”" },
+			{   m: "“似乎是强光照射着周围，却并不刺眼。”" },
+			{   m: "“似乎是地板与墙壁，却没有棱角。”" },
+			{   m: "“似乎是……” 有个声音打断了你：“似乎个锤锤，这里是**「域顶」**！本来就是白的！”" },
+			{   m: "你发现这种语气有点熟悉感：“嗯？「域牌」？能说话了？”" },
+			{   m: "那个声音再次说道：“咳，我实际上叫**「域灵」**，当我不在「域顶」时，只能通过「域牌」跟你交流。”" },
+			{   m: "“这样啊……” 你思索了片刻，随即向「域灵」问出一大堆问题：" },
+			{   m: "“能回去吗？怎么回去啊？「域顶」怎么是空的啊？不能换个异世界吗，不要空的那种？我现在有点饿有啥能吃的吗？你有没有人形啊？男的女的？”" },
+			{   m: "域灵：“你先别急，我慢慢说……”" },
+			{   m: "**剧情策划中……**" }
 		]
 	});
 
