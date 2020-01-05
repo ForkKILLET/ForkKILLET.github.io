@@ -189,19 +189,20 @@ class ExtendedMarkdownParser
 					else str += `<li><a href="#${e.id}">${s}</a></li>`;
 				}
 				str += `</div>`;
-				$sel.append($(str));
+				let $contents = $(str);
+				$sel.append($contents);
 
-				str = `<div class="btn_contents"><i class="fas fa-angle-left"></div>`;
-				$(str).appendTo($sel).hide().click((event) =>
+				let $btn = $(`<div class="btn_contents"><i class="fas fa-angle-left"></div>`);
+				$btn.appendTo($sel).hide().click(() =>
 			    {
-					$(event.currentTarget).fadeOut();
-				    $sel.find(".contents").fadeIn();
+					$btn.fadeOut();
+				    $contents.fadeIn();
 			    });
 
-				$sel.find(".contents>h1").click((e) =>
+				$sel.find(".contents>h1").click(() =>
 				{
-					$(e.currentTarget).parent().fadeOut();
-					$(e).find(".btn_contents").fadeIn();
+					$contents.fadeOut();
+					$btn.fadeIn();
 				});
 			},
 			Maths: ($sel, self) =>
