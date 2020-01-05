@@ -6,6 +6,10 @@
 
     overflow: hidden;
 }
+#main *::selection
+{
+    background-color: #8e8e8e;
+}
 #main_1, #main_2
 {
     display: flex;
@@ -17,7 +21,7 @@
 
 /* Module: change */
 
-#module_change
+#module_operation
 {
     display: flex;
     flex-direction: column;
@@ -28,14 +32,14 @@
 
     background-color: black;
 }
-#module_change_1
+#module_operation_1
 {
     display: flex;
     position: relative;
     flex-direction: column;
     align-self: flex-start;
 }
-#module_change_2
+#module_operation_2
 {
     display: flex;
     position: relative;
@@ -83,7 +87,7 @@
 }
 #module_log_body
 {
-    height: calc(100% - 90px);
+    height: calc(100% - 130px);
     width: calc(100% - 40px);
     padding: 20px;
 

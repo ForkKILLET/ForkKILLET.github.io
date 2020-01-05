@@ -77,7 +77,17 @@ class BarrenLandSystem
 		if (!ExMD instanceof ExtendedMarkdownParser) this.error_and_throw("C001", `Got an incorrect "ExMD" object.`);
 		else this.ExMD = ExMD;
 
-		// Note: 渲染模块选择模块
+		// Note: 模块相关
+		this.module_info =
+		{
+			operation:  { optional: false },
+			log:        { optional: true },
+			bag:        { optional: true },
+			setting:    { optional: true },
+			canvas:     { optional: false }
+		};
+
+		// Note: 渲染侧模块
 		this.info =
 		{
 			name:                   "BarrenLand",
@@ -88,7 +98,7 @@ class BarrenLandSystem
 			{
 				era:                "β",
 				main:               0,
-				sub:                3,
+				sub:                4,
 				upd:                0,
 				toString:           () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
 			},
@@ -105,7 +115,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 
 目前版本：\`${this.info.version.toString()}\`；  
 
-最近更新时间$c red;（2020 啦，新年快落哦！） c$：\`${time(false, this.info.last_update_time)}\`。  
+最近更新时间$c #ff2222;（2020 啦，新年快落哦！） c$：\`${time(false, this.info.last_update_time)}\`。  
 
 可以在 $ib github ib$ [Github repo](${this.info.github_repo_URL}) 的 \`${this.info.github_repo_path}\` 目录下看到游戏代码，  
 
@@ -114,22 +124,23 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 ---
 			`
 		};
-		this.module_info =
+		this.operation_info =
 		{
-			log:        { fa_name: "scroll",        color: "#1eb6ff", available: true, position: 1, rank: 0 },
-			info:       { fa_name: "info-circle",   color: "#ff2890", available: true, position: 2, rank: 1,
+			log:        { fa_name: "scroll",        color: "#1eb6ff", available: true,  position: 1, rank: 0 },
+			bag:        { fa_name: "briefcase",     color: "#f4ec06", available: false, position: 1, rank: 1 },
+			info:       { fa_name: "info-circle",   color: "#ff2890", available: true,  position: 2, rank: 1,
 			callback: () =>
 			{
 				if (this.if_auto_focus_log_tab) this.focus_tab_log("System");
 				this.page_log("System", this.info.toString());
 			}},
-			setting:    { fa_name: "cog",           color: "#4d4d4d", available: true, position: 2, rank: 0,
+			setting:    { fa_name: "cog",           color: "#4d4d4d", available: true,  position: 2, rank: 0,
 			callback: () =>
 			{
-				this.toggle_module("setting");
+				this.show_module("setting");
 			}}
 		};
-		this.repaint_module_change();
+		this.repaint_module_operation();
 
 		// Note: 渲染日志模块
 		this.log_info =
@@ -138,12 +149,15 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 			System:     { fa_name: "terminal",      color: "#4d4d4d",  rank: 233 },
 		};
 		this.repaint_module_log();
-		this.toggle_module("log");
+		this.show_module("log");
 		this.focus_tab_log("System");
 
 		// Note: 渲染设置模块
 		this.setting_info =
 		{
+			module_style:           { msg: "模块样式", unit: "Title" },
+			if_module_show_singly:  { msg: "模块单独显示",    unit: "Switch",     default: false,
+			callback: (state) => this.if_module_show_singly = state },
 			log_style:              { msg: "日志样式", unit: "Title" },
 			if_log_animation:       { msg: "日志渐显特效",    unit: "Switch",     default: true,
 			callback: (state) => this.if_log_animation = state },
@@ -162,14 +176,14 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		this.page_log("System", "**BarrenLandSystem**: loaded.");
 	}
 
-	repaint_module_change()
+	repaint_module_operation()
 	{
-		$("#module_change_1, #module_change_2").html("");
-		for (let i in this.module_info)
+		$("#module_operation_1, #module_operation_2").html("");
+		for (let i in this.operation_info)
 		{
-			let v = this.module_info[i];
+			let v = this.operation_info[i];
 			if (!v.available) continue;
-			$(`#module_change_${v.position}`).append(`<div id="btn_square_${i}" class="btn_square"></div>`);
+			$(`#module_operation_${v.position}`).append(`<div id="btn_square_${i}" class="btn_square"></div>`);
 			$(`#btn_square_${i}`)
 			.attr("name", i)
 			.addClass(v.position === 1 ? "btn_square_top" : "btn_square_bottom")
@@ -210,7 +224,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		let $head = $("#module_setting_head");
 		$head.html(`<p>Setting</p>`)
 			 .append(`<div class="btn_square no_animation" name="close"><i class="fas fa-times-circle"></i></div>`);
-		$("#module_setting_head>.btn_square").click(() => this.toggle_module("setting"));
+		$("#module_setting_head>.btn_square").click(() => this.hide_module("setting"));
 		let $body = $("#module_setting_body");
 		$body.html("");
 
@@ -266,21 +280,44 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 				}
 				break;
 			default:
-				this.warn("C007", `Unknown unit type "${v.unit}".`);
+				this.error_and_throw("C007", `Unknown unit type "${v.unit}".`);
 				break;
 			}
 		}
 	}
 
-	toggle_module(name)
+	show_module(name)
 	{
-		if (!this.module_info[name])
+		if (!this.operation_info[name])
 		{
 			this.warn("C004", `"focus_module" method got an unknown module name "${name}"`);
 			return;
 		}
 
-		$(`#module_${name}`).toggle();
+		if (this.if_module_show_singly) for (let i in this.module_info)
+		{
+			if (!this.module_info[i].optional) continue;
+			$(`#module_${i}`).hide();
+		}
+		$(`#module_${name}`).show();
+	}
+
+	hide_module(name)
+	{
+		if (!this.operation_info[name])
+		{
+			this.error_and_throw("C004", `"focus_module" method got an unknown module name "${name}"`);
+			return;
+		}
+
+		if (!this.module_info[name].optional)
+		{
+			this.error_and_throw("C008", `"focus_module" method got an not optional module name "${name}"`);
+			return;
+		}
+
+		$(`#module_${name}`).hide();
+		$(`#module_log`).show();
 	}
 
 	focus_tab_log(name)
@@ -305,7 +342,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 	{
 		if (this.if_auto_focus_log_tab) this.focus_tab_log(tav);
 
-		for (let l = /\${/, r = /}\$/, id, i, j, k = 0;; k = j + 2)
+		for (let l = /{/, r = /}/, id, i, j, k = 0;; k = j + 2)
 		{
 			i = msg.substring(k).match(l);
 			j = msg.substring(k).match(r);
@@ -313,12 +350,12 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 
 			i = i.index;
 			j = j.index;
-			id = msg.substring(k + i + 2, j);
+			id = msg.substring(k + i + 1, j);
 			if (!data || typeof data[id] !== "function")
 				if (typeof this.log_data[id] !== "function")
 					this.error_and_throw("C005", `"page_log" method expects a callback "${id}" in the "data" object but not found.`);
-				else msg = msg.substring(k, i) + this.log_data[id]() + msg.substring(j + 2);
-			else msg = msg.substring(k, i) + data[id]() + msg.substring(j + 2);
+				else msg = msg.substring(k, i) + this.log_data[id]() + msg.substring(j + 1);
+			else msg = msg.substring(k, i) + data[id]() + msg.substring(j + 1);
 		}
 
 		let $msg = $(`<p></p>`);
@@ -620,6 +657,12 @@ $(() =>
 	let ExMD_new_labels =
 	[
 		{
+			name: ["BLU_BI_P", "++"],
+			space: [true, false],
+			begin: `<span class="btn_inline reusable">`,
+			end: `</span>`
+		},
+		{
 			name: ["BLU_BI", "+"],
 			space: [true, false],
 			begin: `<span class="btn_inline">`,
@@ -718,7 +761,7 @@ $(() =>
 	window.BLS = new BarrenLandSystem(ExMD);
 
 // Section: BarrenLandStorage
-	window.BLST_S = new BarrenLandStorage("Setting", ["if_log_animation", "data_place", "play_break", "if_auto_focus_log_tab"]);
+	window.BLST_S = new BarrenLandStorage("Setting", ["if_module_show_singly", "if_log_animation", "data_place", "play_break", "if_auto_focus_log_tab"]);
 	for (let i in BLS.setting_info)
 	{
 		let origin_callback = BLS.setting_info[i].callback;
@@ -738,10 +781,16 @@ $(() =>
 			 .on("animationend", () => $this.css("animation", ""));
 	}));
 	BLU_BS.register_all();
+	BLS.origin_repaint_module_operation = BLS.repaint_module_operation;
+	BLS.repaint_module_operation = () =>
+	{
+		BLS.origin_repaint_module_operation();
+		BLU_BS.register_all();
+	};
 
 // Section: BarrenLandUnit : BtnInline
 	window.BLU_BI = new BarrenLandUnit("BtnInline", ".btn_inline", ($sel) => {});
-	BLU_BI.bind_method("disable", ($sel) => $sel.parents(".tav_log").find(".btn_inline").off("click").addClass("disabled"));
+	BLU_BI.bind_method("disable", ($sel) => $sel.parents(".tav_log").find(".btn_inline:not(.reusable)").off("click").addClass("disabled"));
 
 // Section: BarrenLandUnit : BtnMicro
 	window.BLU_BM = new BarrenLandUnit("BtnMicro", ".btn_micro", ($sel) => $sel.click((e) =>
@@ -947,7 +996,7 @@ $(() =>
 			{   m: "选这个对你有好处吗，，**剧情策划中……**" }
 		],
 		"0A1": [
-			{	m: "域牌：“${name}$，在离开这里之前，你可以带点东西……说不定有什么用处呢？或者当个纪念也行哦。" },
+			{	m: "域牌：“{name}，在离开这里之前，你可以带点东西……说不定有什么用处呢？或者当个纪念也行哦。" },
 			{	m: "“但是必须能放进 2dm x 2dm x 2dm 的立方体空间里面。”" },
 			{	m: "你环顾左右，适合带的物品有 4 件。你选择了 $#不拿;拉菲手办;华为手机;绿萝盆栽;便当盒子#$。",
 				SL:
@@ -973,15 +1022,15 @@ $(() =>
 			{   m: "域牌：“不不，不能不拿。这很重要的。你还是拿个什么吧？”" }
 		],
 		"0A1A1": [
-			{	m: "“准备好了吗，${name}$？”" },
+			{	m: "“准备好了吗，{name}？”" },
 			{	m: "你毫无犹豫地回答：“是的船长！”" },
-			{   m: "「域牌」：“那么，带上你的${origin_name}$，出发吧！”" },
+			{   m: "「域牌」：“那么，{origin_name}，出发吧！”" },
 			{	m: "你手上的「域牌」突然抖动起来。" },
 			{	m: "抖动得越来越剧烈。" },
 			{	m: "这时，有数根不可名状的 $c #0e59d8;$i bolt i$ c$ 深蓝色线条从「域牌」的中心处凭空 “生长” 出来。" },
 			{	m: "线条迅速地在空中延伸，一下子就从你身边穿过。" },
 			{	m: "你急忙转过身去，发现众多深蓝线条已经把你团团围住。" },
-			{	m: "于此同时，另外一些颜色较浅的蓝色线条则是 “框起” 了你的${origin_name}$。" },
+			{	m: "于此同时，另外一些颜色较浅的蓝色线条则是 “框起” 了你的{origin_name}。" },
 			{	m: "你的周围逐渐被纯粹的蓝占据……", f: () => BLA_T.play(2 * 1000) },
 			{   m: "你失去了意识……" },
 			{   m: "……" },
@@ -990,17 +1039,34 @@ $(() =>
 			{   m: "你开始思考人生的终极问题：“这是哪里？我死了吗？作为一个 ‘穿越者’，我是不是不应该问这种问题……”" },
 			{   m: "“似乎是强光照射着周围，却并不刺眼。”" },
 			{   m: "“似乎是地板与墙壁，却没有棱角。”" },
-			{   m: "“似乎是……” 有个声音打断了你：“似乎个锤锤，这里是**「域顶」**！本来就是白的！”" },
+			{   m: "“似乎是……” 有个声音打断了你：“似乎个锤锤，这里是「域顶」！本来就是白的！”" },
 			{   m: "你发现这种语气有点熟悉感：“嗯？「域牌」？能说话了？”" },
-			{   m: "那个声音再次说道：“咳，我实际上叫**「域灵」**，当我不在「域顶」时，只能通过「域牌」跟你交流。”" },
+			{   m: "那个声音再次说道：“咳，我实际上叫「域灵」，当我不在「域顶」时，只能通过「域牌」跟你交流。”" },
 			{   m: "“这样啊……” 你思索了片刻，随即向「域灵」问出一大堆问题：" },
 			{   m: "“能回去吗？怎么回去啊？「域顶」怎么是空的啊？不能换个异世界吗，不要空的那种？我现在有点饿有啥能吃的吗？你有没有人形啊？男的女的？”" },
-			{   m: "域灵：“你先别急，我慢慢说……”" },
+			{   m: "域灵：“你先别急，我慢慢说……不管怎么说，先拿上那个{bag}吧。”" },
+			{   m: "域灵指指你的后面，你于是转过身去，看到一个造型简单的{bag}躺在 “地上”。$+捡起它+$",
+				BI:
+				[
+					() =>
+					{
+						BLS.operation_info.bag.available = true;
+						BLS.repaint_module_operation();
+						BLP_MS.play_in_list("0A1A2");
+					}
+				]
+			}
+		],
+		"0A1A2": [
 			{   m: "**剧情策划中……**" }
 		]
 	});
 
-	BLS.page_log("System", "暂未开放 **存/读档** 功能。请直接 $+开始游戏+$", null, { BI: [() => BLS.focus_tab_log("Diary")] });
+	BLS.page_log("System", "暂未开放 **存/读档** 功能，请直接切换到 $c #009c0c;$i book i$ c$ Diary 标签以$++开始游戏++$点击游戏左下角 $i cog i$ 可$++设置++$", null, { BI:
+	[
+		() => BLS.focus_tab_log("Diary"),
+		() => BLS.show_module("setting")
+	] });
 	BLP_MS.add_milestone("start") (() => BLP_MS.play_in_list("0"));
 
 // Section: BarrenLandCharacter : Player
@@ -1008,6 +1074,7 @@ $(() =>
 	BLS.log_data =
 	{
 		name: () => cb(BLC_P.name, "#009c0c"),
-		origin_name: () => cb(BLC_P.origin.name, "#ff2890")
+		origin_name: () => cb(BLC_P.origin.name, "#ff2890"),
+		bag: () => cb("背包", "#f4ec06")
 	};
 });
