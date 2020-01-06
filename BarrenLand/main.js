@@ -99,11 +99,11 @@ class BarrenLandSystem
 				era:                "β",
 				main:               0,
 				sub:                4,
-				upd:                0,
+				upd:                1,
 				toString:           () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
 			},
 			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
-			last_update_time:       new Date(2020, 1 - 1, 5, 0, 0, 0),
+			last_update_time:       new Date(2020, 1 - 1, 6, 0, 0, 0),
 			github_repo_URL:        "https://github.com/ForkFG/ForkFG.github.io",
 			github_repo_path:       "/BarrenLand",
 			toString: () => `

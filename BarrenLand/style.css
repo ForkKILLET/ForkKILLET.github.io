@@ -187,9 +187,9 @@
 #module_setting_body
 {
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 270px);
 
-    padding: 20px;
+    padding: 20px 20px 200px 20px;
 
     background: #d0d0d0;
 
@@ -520,6 +520,7 @@ input:not(.disabled):hover, input:not(.disabled):focus
 }
 
 /* Unit: Select */
+/* Todo: fix bug: Select Unit cannot show completely when it's at the bottom of a scrollable container. */
 
 .select
 {
