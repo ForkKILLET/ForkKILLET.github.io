@@ -5,6 +5,7 @@ Object.prototype._am = (n, m) =>
 };
 
 window
+._am("ef", () => {})
 ._am("log", msg => console.log(msg))
 ._am("time", (if_hms, date) =>
 {
@@ -98,12 +99,12 @@ class BarrenLandSystem
 			{
 				era:                "β",
 				main:               0,
-				sub:                4,
-				upd:                1,
+				sub:                5,
+				upd:                0,
 				toString:           () => `[VER ${this.info.version.era}${this.info.version.main}.${this.info.version.sub}.${this.info.version.upd}]`
 			},
 			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
-			last_update_time:       new Date(2020, 1 - 1, 6, 0, 0, 0),
+			last_update_time:       new Date(2020, 1 - 1, 9, 0, 0, 0),
 			github_repo_URL:        "https://github.com/ForkFG/ForkFG.github.io",
 			github_repo_path:       "/BarrenLand",
 			toString: () => `
@@ -126,18 +127,18 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		};
 		this.operation_info =
 		{
-			log:        { fa_name: "scroll",        color: "#1eb6ff", available: true,  position: 1, rank: 0 },
-			bag:        { fa_name: "briefcase",     color: "#f4ec06", available: false, position: 1, rank: 1 },
-			info:       { fa_name: "info-circle",   color: "#ff2890", available: true,  position: 2, rank: 1,
+			log:        { fa_name: "scroll",        color: "#1eb6ff", hotkey: "l", available: true,  position: 1, rank: 0 },
+			bag:        { fa_name: "briefcase",     color: "#f4ec06", hotkey: "b", available: false, position: 1, rank: 1 },
+			info:       { fa_name: "info-circle",   color: "#ff2890", hotkey: "i", available: true,  position: 2, rank: 1,
 			callback: () =>
 			{
 				if (this.if_auto_focus_log_tab) this.focus_tab_log("System");
 				this.page_log("System", this.info.toString());
 			}},
-			setting:    { fa_name: "cog",           color: "#4d4d4d", available: true,  position: 2, rank: 0,
+			setting:    { fa_name: "cog",           color: "#4d4d4d", hotkey: "s", available: true,  position: 2, rank: 0,
 			callback: () =>
 			{
-				this.show_module("setting");
+				this.toggle_module("setting");
 			}}
 		};
 		this.repaint_module_operation();
@@ -156,19 +157,17 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 		this.setting_info =
 		{
 			module_style:           { msg: "模块样式", unit: "Title" },
-			if_module_show_singly:  { msg: "模块单独显示",    unit: "Switch",     default: false,
-			callback: (state) => this.if_module_show_singly = state },
+			if_module_show_singly:  { msg: "模块单独显示", unit: "Switch", default: false },
 			log_style:              { msg: "日志样式", unit: "Title" },
-			if_log_animation:       { msg: "日志渐显特效",    unit: "Switch",     default: true,
-			callback: (state) => this.if_log_animation = state },
-			play_break:             { msg: "剧情播放间隔",    unit: "Input",      placeholder: "毫秒数", type: "number", default: 1000,
-			callback: (value) => this.play_break = value },
+			if_log_animation:       { msg: "日志渐显特效", unit: "Switch", default: true },
+			play_break:             { msg: "剧情播放间隔", unit: "Input", placeholder: "毫秒数", type: "number", default: 1000 },
 			log_tab:                { msg: "日志标签", unit: "Title" },
-			if_auto_focus_log_tab:  { msg: "自动切换标签",    unit: "Switch",     default: true,
-			callback: (state) => this.if_auto_focus_log_tab = state },
+			if_auto_focus_log_tab:  { msg: "自动切换标签", unit: "Switch", default: true },
 			storage:                { msg: "游戏数据", unit: "Title" },
-			data_place:             { msg: "数据储存位置",    unit: "Select",     placeholder: "请选择", items: ["无", "localStorage"], default: 1,
-			callback: (rank) => this.data_place = rank }
+			data_place:             { msg: "数据储存位置", unit: "Select", placeholder: "请选择", items: ["无", "localStorage"], default: 1 },
+			hotkey:                 { msg: "快捷键", unit: "Title" },
+			if_operation_hotkey:    { msg: "侧条按钮", unit: "Switch", default: true },
+			if_tab_hotkey:          { msg: "切换标签", unit: "Switch", default: true }
 		};
 		this.repaint_module_setting();
 
@@ -243,6 +242,8 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 				continue;
 			}
 
+			if (is_empty(v.callback)) v.callback = (value) => this[i] = value;
+
 			let $i = $(`<div></div>`), $j;
 			$i.append(`<p>${v.msg} </p>`);
 			switch (v.unit)
@@ -255,7 +256,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 				if (value === true) $j.trigger("_switch", value).addClass("switch_on");
 				break;
 			case "Input":
-				$j = $(`<input type="${v.type}" placeholder="${v.placeholder}">`);
+				$j = $(`<span class="input_container"><input type="${v.type}" placeholder="${v.placeholder}"></span>`);
 				$j.on("_input", (e, value) =>
 				{
 					if (v.type === "number") value = Number(value);
@@ -263,7 +264,7 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 				});
 				$i.append($j);
 				$body.append($i);
-				if (!is_empty(value)) $j.val(value).trigger("_input", value);
+				if (!is_empty(value)) $j.children("input").val(value).trigger("_input", value);
 				break;
 			case "Select":
 				$j = $(`<div class="select"></div>`);
@@ -318,6 +319,18 @@ $c #3d942d;**${this.info.name}（${this.info.name_Chinese}）** c$，是${this.i
 
 		$(`#module_${name}`).hide();
 		$(`#module_log`).show();
+	}
+
+	toggle_module(name)
+	{
+		if (!this.operation_info[name])
+		{
+			this.error_and_throw("C004", `"focus_module" method got an unknown module name "${name}"`);
+			return;
+		}
+
+		if ($(`#module_${name}`).is(":visible")) this.hide_module(name);
+		else this.show_module(name);
 	}
 
 	focus_tab_log(name)
@@ -622,7 +635,8 @@ class BarrenLandAnimation
 		};
 		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
 
-		if (!window.script.BarrenLandAnimation) window.script.BarrenLandAnimation = true;
+		if (!window.script.BarrenLandAnimation) window.script.BarrenLandAnimation = {};
+		window.script.BarrenLandAnimation["name"] = true;
 		log(`[LOAD]: icelava.top/BarrenLand/main.js @ Animation : ${name}`);
 
 		this.name = name;
@@ -651,6 +665,110 @@ class BarrenLandAnimation
 	}
 }
 
+class BarrenLandKeyboard
+{
+	constructor(name, $ctx)
+	{
+		this.log = (msg) => log(`[INFO]: BarrenLand @ Keyboard : ${name}\n${msg}`);
+		this.warn = (code, msg) => console.warn(`[WARN: ${code}]: BarrenLand @ Keyboard\n${msg}`);
+		this.error_and_throw = (code, msg) =>
+		{
+			let e = Error(`[ERROR: ${code}]: BarrenLand @ Plot : ${name}\n${msg}`);
+			console.error(e);
+			throw e;
+		};
+		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
+
+		if (!window.script.BarrenLandKeyboard) window.script.BarrenLandKeyboard = {};
+		window.script.BarrenLandKeyboard["name"] = true;
+		log(`[LOAD]: icelava.top/BarrenLand/main.js @ Keyboard : ${name}`);
+
+		this.name = name;
+		if (is_empty($ctx)) this.$ctx = $(document);
+		else this.$ctx = $ctx;
+
+		// Note: form
+
+		this.enable_mark = () =>
+		{
+			let $sel = $(this.sel).not(".disabled");
+			for (this.mark_num = 0; this.mark_num < $sel.length; this.mark_num++)
+				$($sel[this.mark_num]).attr("name", this.mark_num).addClass("marked");
+			this.add_key({ a: true }, (e) => // Note: Jump.
+			{
+				let macOS_alt_numbers = "º¡™£¢∞§¶•ª";
+				for (let i in macOS_alt_numbers) if (e.key === macOS_alt_numbers[i]) e.key = i.toString();
+				if (e.key.match(/^[0-9]$/))
+				{
+					let $now = $();
+					let $tar = $(`.marked[name=${e.key}]`);
+					for (let i of this.all) if ($tar.is(i[0]))
+					{
+						i[1]($tar);
+						return;
+					}
+				}
+			});
+		};
+
+		this.disable_mark = () =>
+		{
+			let $sel = $(this.sel);
+			for (let i = 0; i < $sel.length; i++) $($sel[i]).attr("name", "").removeClass("marked");
+		};
+
+		this.add_key({ k: "Alt" }, this.enable_mark, this.disable_mark);
+
+		BLS.page_log("System", `**BarrenLandKeyboard**: \`${name}\` loaded.`);
+	}
+
+	add_key(rule, callback_1, callback_2)
+	{
+		if (typeof callback_1 !== "function")
+			this.error_and_throw("C002", `"add_key" method got an incorrect callback.`);
+		if (typeof rule === "string") rule = { k: rule };
+		this.$ctx.keydown((e) =>
+		{
+			if (rule.k && e.key !== rule.k ||
+				rule.a && !e.altKey ||
+				rule.c && !e.ctrlKey ||
+				rule.m && !e.metaKey ||
+				rule.s && !e.shiftKey) return;
+			callback_1(e);
+		});
+		if (typeof callback_2 === "function") this.$ctx.keyup((e) =>
+		{
+			if (rule.k && e.key !== rule.k ||
+			    rule.a && !e.altKey ||
+			    rule.c && !e.ctrlKey ||
+			    rule.m && !e.metaKey ||
+			    rule.s && !e.shiftKey) return;
+			callback_2(e);
+		});
+	}
+
+	remove_key(callback_1, callback_2)
+	{
+		let $i = $(this.sel);
+		$i.off("keydown", callback_1);
+		if (typeof callback_2 === "function") $i.off("keyup", callback_2);
+	}
+
+	form_key(sel, callback_1, callback_2)
+	{
+		if (is_empty(this.sel))
+		{
+			this.sel = sel;
+			this.all = [[sel, callback_1, callback_2]];
+		}
+		else
+		{
+			this.sel += "," + sel;
+			this.all.push([sel, callback_1, callback_2]);
+		}
+	}
+}
+
 $(() =>
 {
 // Section: ExtendMarkdownParser Config
@@ -659,20 +777,20 @@ $(() =>
 		{
 			name: ["BLU_BI_P", "++"],
 			space: [true, false],
-			begin: `<span class="btn_inline reusable">`,
-			end: `</span>`
+			begin: `<span class="btn_inline_container"><span class="btn_inline reusable">`,
+			end: `</span></span>`
 		},
 		{
 			name: ["BLU_BI", "+"],
 			space: [true, false],
-			begin: `<span class="btn_inline">`,
-			end: `</span>`
+			begin: `<span class="btn_inline_container"><span class="btn_inline">`,
+			end: `</span></span>`
 		},
 		{
 			name: ["BLU_IP", "="],
 			space: [true, false],
-			begin: `<input`,
-			end: `>`,
+			begin: `<span class="input_container">` + `<input`,
+			end: `></span>`,
 			param:
 			[
 				{
@@ -761,7 +879,10 @@ $(() =>
 	window.BLS = new BarrenLandSystem(ExMD);
 
 // Section: BarrenLandStorage
-	window.BLST_S = new BarrenLandStorage("Setting", ["if_module_show_singly", "if_log_animation", "data_place", "play_break", "if_auto_focus_log_tab"]);
+	window.BLST_S = new BarrenLandStorage("Setting", [
+		"if_module_show_singly", "if_log_animation", "data_place", "play_break", "if_auto_focus_log_tab", "if_operation_hotkey",
+		"if_tab_hotkey"
+	]);
 	for (let i in BLS.setting_info)
 	{
 		let origin_callback = BLS.setting_info[i].callback;
@@ -790,7 +911,13 @@ $(() =>
 
 // Section: BarrenLandUnit : BtnInline
 	window.BLU_BI = new BarrenLandUnit("BtnInline", ".btn_inline", ($sel) => {});
-	BLU_BI.bind_method("disable", ($sel) => $sel.parents(".tav_log").find(".btn_inline:not(.reusable)").off("click").addClass("disabled"));
+	BLU_BI.bind_method("disable", ($sel) => $sel
+		.parents(".tav_log")
+		.find(".btn_inline:not(.reusable)")
+		.off("click")
+		.addClass("disabled")
+		.parent()
+		.addClass("disabled"));
 
 // Section: BarrenLandUnit : BtnMicro
 	window.BLU_BM = new BarrenLandUnit("BtnMicro", ".btn_micro", ($sel) => $sel.click((e) =>
@@ -826,24 +953,25 @@ $(() =>
 // Section: BarrenLandUnit : Input
 	window.BLU_IP = new BarrenLandUnit("Input", "input", ($sel) =>
 	{
+		$sel.focus(() => $sel.addClass("focused")).blur(() => $sel.removeClass("focused"));
 		let $btn = $(`<div class="btn_micro btn_micro_submit"><i class="fas fa-check"></i></div>`);
 		$sel.after($btn);
 		BLU_BM.register($btn);
 		$btn.click(() => $sel.trigger("_input", $sel.val()));
 		$sel.keydown((e) =>
 		{
-			if (e.which === 13 || e.keyCode === 13) $btn.click();
+			if (e.which === 13) $btn.click();
 		});
 	});
-	BLU_IP.bind_method("disable", ($sel) =>
-	{
-		$sel.attr("disabled", "disabled")
-			.addClass("disabled")
-			.next(".btn_micro_submit")
-			.addClass("disabled")
-			.html(`<i class="fas fa-times"></i>`)
-			.off("click")
-	});
+	BLU_IP.bind_method("disable", ($sel) => $sel
+		.attr("disabled", "disabled")
+		.addClass("disabled")
+		.next(".btn_micro_submit")
+		.addClass("disabled")
+		.html(`<i class="fas fa-times"></i>`)
+		.off("click")
+		.parent()
+		.addClass("disabled"));
 	BLU_IP.register_all();
 
 // Section: BarrenLandUnit : Select
@@ -929,6 +1057,32 @@ $(() =>
 		       FS.line(null, null, Math.random_in_range(30, 80), w, y, -80, k2 * w + y).addClass(
 		           "blue_line");
 		}, 200);
+	});
+
+// Section: BarrenLandKeyboardForm
+	window.BLK = new BarrenLandKeyboard("Global");
+	BLK.form_key(".input_container",
+         ($sel) => setTimeout(() => $sel.children("input").focus(), 100), // Note: 避免快捷键内容写入输入框。
+         ($sel) => $sel.children("input").blur());
+	BLK.form_key(".btn_inline_container", ($sel) => $sel.children(".btn_inline").click());
+	BLK.form_key(".select",
+         ($sel) => { if ($sel.children(".select_list").css("visibility") !== "visible") $sel.click(); },
+	     ($sel) => { if ($sel.children(".select_list").css("visibility") !== "hidden") $sel.click(); });
+	for (let i in BLS.operation_info)
+	{
+		let v = BLS.operation_info[i];
+		if (!v.available || is_empty(v.hotkey)) continue;
+		BLK.add_key({ k: v.hotkey }, () => $(`#btn_square_${i}`).click(), ef);
+	}
+	BLK.add_key({ k: "c" }, () => $("#module_log_head>.btn_square").click());
+	BLK.add_key({ k: "`", c: true }, (e) =>
+	{
+		let $tabs = $(".tab_log"), $f = $tabs.filter(".focused"),
+			i = $.makeArray($tabs).indexOf($f[0]), l = $tabs.length;
+
+		if (e.shiftKey) i = (i - 1 === -1 ? l - 1 : i - 1);
+		else i = (i + 1 === l ? 0 : i + 1);
+		BLS.focus_tab_log($tabs[i].id.substring(8));
 	});
 
 // Section: BarrenLandPlot : MainStory
