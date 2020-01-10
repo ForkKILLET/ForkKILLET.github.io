@@ -101,7 +101,7 @@ class BarrenLandSystem
 				era:                "β",
 				main:               0,
 				sub:                5,
-				upd:                1,
+				upd:                2,
 				toString:           () => `[VER ${this.game_info.version.era}${this.game_info.version.main}.${this.game_info.version.sub}.${this.game_info.version.upd}]`
 			},
 			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
@@ -905,8 +905,7 @@ window.BLS = new BarrenLandSystem(ExMD);
 
 // Section: BarrenLandStorage
 window.BLST_S = new BarrenLandStorage("Setting", [
-	"if_module_show_singly", "if_log_animation", "data_place", "play_break", "if_auto_focus_log_tab", "if_operation_hotkey",
-	"if_tab_hotkey"
+	"if_module_show_singly", "if_log_animation", "data_place", "play_break", "if_auto_focus_log_tab"
 ]);
 for (let i in BLS.setting_info)
 {
