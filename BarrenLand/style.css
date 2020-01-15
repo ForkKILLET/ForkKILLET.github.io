@@ -187,9 +187,9 @@
 #module_setting_body
 {
 	width: 100%;
-	height: calc(100% - 270px);
+	height: 0;
 
-	padding: 20px 20px 200px 20px;
+	padding: 20px 20px 20px 20px;
 
 	background: #d0d0d0;
 
@@ -302,6 +302,10 @@
 
 /* Unit: BtnInline */
 
+.btn_inline_container
+{
+	position: relative;
+}
 .btn_inline
 {
 	display: inline-block;
@@ -600,11 +604,11 @@ input:not(.disabled):hover, input:not(.disabled).focused
 {
 	padding-bottom: 0;
 }
-.select_item:hover
+.select_item:hover, .select_item.staying
 {
 	background-color: #efefef;
 }
-.select_item_chosen::before
+.select_item.chosen::before
 {
 	position: absolute;
 	display: inline-block;
@@ -617,7 +621,7 @@ input:not(.disabled):hover, input:not(.disabled).focused
 	content: "";
 	font-weight: bold;
 }
-.select_item_chosen::after
+.select_item.chosen::after
 {
 	position: absolute;
 	display: inline-block;

@@ -1,13 +1,10 @@
-/OI-Nazo
+# System & Editor
+**/.DS_Store
+/.vscode/
+/.jshintrc
 
-favicon.ico
-QQicon.jpg
+# Debug
+**/test_index.html
 
-CNAME
-
-.jshintrc
-.DS_store
-.gitlog
-
-test_index.html
-/BarrenLand/test_index.html
+# Other repositories
+/OI-Nazo/

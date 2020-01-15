@@ -1,13 +1,13 @@
-Object.prototype._am = (n, m) =>
+Object.prototype.ex = (n, m) =>
 {
 	if (!this[n]) this[n] = m;
 	return this;
 };
 
 window
-._am("ef", () => {})
-._am("log", msg => console.log(msg))
-._am("time", (if_hms, date) =>
+.ex("ef", () => {})
+.ex("log", msg => console.log(msg))
+.ex("time", (if_hms, date) =>
 {
 	let d = date ? date : new Date(),
 		Y = d.getFullYear(),
@@ -23,34 +23,57 @@ window
 	if (s < 10) s = "0" + s;
 	return `${Y}-${M}-${D}` + (if_hms ? ` ${h}:${m}:${s}` : "");
 })
-._am("is_empty", n => n === null || n === undefined)
-._am("is_array", n => typeof n === "object" && n.constructor.name === "Array")
-._am("is_mobile", () => /iphone|ipod|ipad|android|mobile|blackberry|webos|incognito|webmate|bada|nokia|lg|ucweb|skyfire/.test(navigator.userAgent.toLowerCase()));
+.ex("is_empty", n => n === null || n === undefined)
+.ex("is_array", n => typeof n === "object" && n.constructor.name === "Array")
+.ex("is_mobile", () => /iphone|ipod|ipad|android|mobile|blackberry|webos|incognito|webmate|bada|nokia|lg|ucweb|skyfire/
+	.test(navigator.userAgent.toLowerCase()))
+.ex("jump", ($ctx, $tar, options, callback) =>
+{
+	let default_options = { time: 500, gap: 15 };
+	if (is_empty(options)) options = {};
+	for (let i in default_options) if (is_empty(options[i])) options[i] = default_options[i];
+
+	if (is_empty($ctx))
+	{
+		$ctx = $(window);
+		let $pa = $tar.parents();
+		for (let i in $pa)
+		{
+			let $i = $($pa[i])
+			if (/scroll/.test($i.css("overflow")))
+			{
+				$ctx = $i;
+				break;
+			}
+		}
+	}
+	$ctx.stop().animate({ scrollTop: $ctx.scrollTop() + $tar.offset().top - $ctx.offset().top - options.gap }, options.time, callback);
+});
 Math
-._am("deg_to_rad", (deg) => deg * Math.PI / 180)
-._am("rad_to_deg", (rad) => rad / Math.PI * 180)
-._am("random_in_range", (min, max, if_int) =>
+.ex("deg_to_rad", (deg) => deg * Math.PI / 180)
+.ex("rad_to_deg", (rad) => rad / Math.PI * 180)
+.ex("random_in_range", (min, max, if_int = false) =>
 {
 	let r = Math.random() * (max - min + 1) + min;
 	if (if_int) r = Math.trunc(r);
 	return r;
 })
-._am("Worker_from_function", (f, worker_name) =>
+.ex("Worker_from_function", (f, worker_name) =>
 {
 	let blob = new Blob([`(${f.toString()})()`]),
 		url = window.URL.createObjectURL(blob);
 	return new Worker(url, { name: worker_name });
 })
-._am("random_in_100", () => Math.random_in_range(0, 100, true));
+.ex("random_in_100", () => Math.random_in_range(0, 100, true));
 window
-._am("random_item", (arr) =>
+.ex("random_item", (arr) =>
 {
 	if (typeof arr === "object") return arr[Math.random_in_range(0, arr.length - 1, true)];
 	else return null;
 })
-._am("cb", (str, color) => `$c ${color};「${str}」 c$`);
+.ex("cb", (str, color) => `$c ${color};「${str}」 c$`);
 
-delete Object.prototype._am;
+delete Object.prototype.ex;
 
 class BarrenLandSystem
 {
@@ -101,11 +124,11 @@ class BarrenLandSystem
 				era:                "β",
 				main:               0,
 				sub:                5,
-				upd:                2,
+				upd:                3,
 				toString:           () => `[VER ${this.game_info.version.era}${this.game_info.version.main}.${this.game_info.version.sub}.${this.game_info.version.upd}]`
 			},
 			first_update_time:      new Date(2019, 12 - 1, 7, 0, 0, 0),
-			last_update_time:       new Date(2020, 1 - 1, 10, 0, 0, 0),
+			last_update_time:       new Date(2020, 1 - 1, 15, 0, 0, 0),
 			github_repo_URL:        "https://github.com/ForkFG/ForkFG.github.io",
 			github_repo_path:       "/BarrenLand",
 			toString: () => `
@@ -150,12 +173,9 @@ $c #3d942d;**${this.game_info.name}（${this.game_info.name_Chinese}）** c$，�
 			log:        { fa_name: "scroll",        color: "#1eb6ff", hotkey: "l", available: true,  position: 1, rank: 0 },
 			bag:        { fa_name: "briefcase",     color: "#f4ec06", hotkey: "b", available: false, position: 1, rank: 1 },
 			info:       { fa_name: "info-circle",   color: "#ff2890", hotkey: "i", available: true,  position: 2, rank: 1,
-			callback: () => this.repaint_info()},
+			callback: () => this.repaint_info() },
 			setting:    { fa_name: "cog",           color: "#4d4d4d", hotkey: "s", available: true,  position: 2, rank: 0,
-			callback: () =>
-			{
-				this.toggle_module("setting");
-			}}
+			callback: () => this.toggle_module("setting") }
 		};
 		this.repaint_module_operation();
 
@@ -173,12 +193,12 @@ $c #3d942d;**${this.game_info.name}（${this.game_info.name_Chinese}）** c$，�
 		this.setting_info =
 		{
 			module_style:           { msg: "模块样式", unit: "Title" },
-			if_module_show_singly:  { msg: "模块单独显示", unit: "Switch", default: false },
+			if_module_show_singly:  { msg: "模块单独显示", unit: "Switch", default_value: false },
 			log_style:              { msg: "日志样式", unit: "Title" },
-			if_log_animation:       { msg: "日志渐显特效", unit: "Switch", default: true },
-			play_break:             { msg: "剧情播放间隔", unit: "Input", placeholder: "毫秒数", type: "number", default: 1000 },
+			if_log_animation:       { msg: "日志渐显特效", unit: "Switch", default_value: true },
+			play_break:             { msg: "剧情播放间隔", unit: "Input", placeholder: "毫秒数", type: "number", default_value: 1000 },
 			log_tab:                { msg: "日志标签", unit: "Title" },
-			if_auto_focus_log_tab:  { msg: "自动切换标签", unit: "Switch", default: true },
+			if_auto_focus_log_tab:  { msg: "自动切换标签", unit: "Switch", default_value: true },
 			storage:                { msg: "游戏数据", unit: "Title" },
 			data_place:             { msg: "数据储存位置", unit: "Select", placeholder: "{1}", items: ["无", "localStorage"] }
 		};
@@ -232,7 +252,8 @@ $c #3d942d;**${this.game_info.name}（${this.game_info.name_Chinese}）** c$，�
 
 	repaint_module_setting()
 	{
-		$("#module_setting").hide();
+		let $m = $("#module_setting");
+		$m.hide();
 		let $head = $("#module_setting_head");
 		$head.html(`<p>Setting</p>`)
 			 .append(`<div class="btn_square no_animation" name="close"><i class="fas fa-times-circle"></i></div>`);
@@ -245,7 +266,7 @@ $c #3d942d;**${this.game_info.name}（${this.game_info.name_Chinese}）** c$，�
 		{
 			let v = this.setting_info[i],
 				value = this[i];
-			if (is_empty(value)) value = v.default;
+			if (is_empty(value)) value = v.default_value;
 
 			if (v.unit === "Title")
 			{
@@ -293,11 +314,15 @@ $c #3d942d;**${this.game_info.name}（${this.game_info.name_Chinese}）** c$，�
 					$j.data("itemChosen", value).trigger("_select", value);
 				}
 				break;
-			default:
+			default_value:
 				this.error_and_throw("C007", `Unknown unit type "${v.unit}".`);
 				break;
 			}
 		}
+
+		let add_blank = () => $body.css("paddingBottom", `${$m.height() - 50 - 20}px`);
+		$(window).off("resize").resize(() => add_blank());
+		add_blank();
 	}
 
 	repaint_info()
@@ -637,11 +662,17 @@ class BarrenLandPlot
 	}
 }
 
+class BarrenLandBag
+{
+
+}
+
 class BarrenLandCharacter // Note: 目前是个摆设……
 {
 	constructor()
 	{
 		this.name = "Anonymous";
+
 	}
 }
 
@@ -701,7 +732,8 @@ class BarrenLandKeyboard
 			console.error(e);
 			throw e;
 		};
-		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001", `Got an incorrect "BarrenLandSystem" object.`);
+		if (!BLS instanceof BarrenLandSystem) this.error_and_throw("C001",
+		                                                           `Got an incorrect "BarrenLandSystem" object.`);
 
 		if (!window.script.BarrenLandKeyboard) window.script.BarrenLandKeyboard = {};
 		window.script.BarrenLandKeyboard["name"] = true;
@@ -711,39 +743,35 @@ class BarrenLandKeyboard
 		if (is_empty($ctx)) this.$ctx = $(document);
 		else this.$ctx = $ctx;
 
-		// Note: form
-
-		this.enable_mark = () =>
-		{
-			let $sel = $(this.sel).not(".disabled");
-			for (this.mark_num = 0; this.mark_num < $sel.length; this.mark_num++)
-				$($sel[this.mark_num]).attr("name", this.mark_num).addClass("marked");
-			this.add_key({ a: true }, (e) => // Note: Jump.
-			{
-				let macOS_alt_numbers = "º¡™£¢∞§¶•ª";
-				for (let i in macOS_alt_numbers) if (e.key === macOS_alt_numbers[i]) e.key = i.toString();
-				if (e.key.match(/^[0-9]$/))
-				{
-					let $now = $();
-					let $tar = $(`.marked[name=${e.key}]`);
-					for (let i of this.all) if ($tar.is(i[0]))
-					{
-						i[1]($tar);
-						return;
-					}
-				}
-			});
-		};
-
-		this.disable_mark = () =>
-		{
-			let $sel = $(this.sel);
-			for (let i = 0; i < $sel.length; i++) $($sel[i]).attr("name", "").removeClass("marked");
-		};
-
-		this.add_key({ k: "Alt" }, this.enable_mark, this.disable_mark);
-
 		BLS.page_log("System", `**BarrenLandKeyboard**: \`${name}\` loaded.`);
+	}
+
+	enable_mark()
+	{
+		let $sel = $(this.sel).not(".disabled");
+		for (this.mark_num = 0; this.mark_num < $sel.length; this.mark_num++)
+			$($sel[this.mark_num]).attr("name", this.mark_num).addClass("marked");
+		this.add_key({ a: true }, (e) =>
+		{
+			let macOS_alt_numbers = "º¡™£¢∞§¶•ª";
+			for (let i in macOS_alt_numbers) if (e.key === macOS_alt_numbers[i]) e.key = i.toString();
+			if (e.key.match(/^[0-9]$/))
+			{
+				let $tar = $(`.marked[name=${e.key}]`);
+				for (let i of this.all) if ($tar.is(i[0]))
+				{
+					if ($tar.parents("#module_log").length === 1) i[1]($tar, e);
+					else jump(null, $tar, null, () => i[1]($tar, e));
+					return;
+				}
+			}
+		});
+	}
+
+	disable_mark()
+	{
+		let $sel = $(this.sel);
+		for (let i = 0; i < $sel.length; i++) $($sel[i]).attr("name", "").removeClass("marked");
 	}
 
 	add_key(rule, callback_1, callback_2)
@@ -790,6 +818,15 @@ class BarrenLandKeyboard
 			this.sel += "," + sel;
 			this.all.push([sel, callback_1, callback_2]);
 		}
+	}
+
+	test(if_only_key_name)
+	{
+		this.add_key({}, (e) =>
+		{
+			log(`[TEST]: icelava.top/BarrenLand/main.js @ Keyboard : ${name}`);
+			log(if_only_key_name ? e.key : e);
+		})
 	}
 }
 
@@ -1002,14 +1039,14 @@ window.BLU_SL = new BarrenLandUnit("Select", ".select", ($sel) =>
 	$btn_1.click((e) => $sel.trigger("_select", $sel.data("itemChosen")));
 
 	let $select_list = $(`<div class="select_list"></div>`);
-	let placeholder = $sel.attr("placeholder"), if_default_item = /^{\d+}$/.test(placeholder), default_rank;
-	if (if_default_item)
+	let placeholder = $sel.attr("placeholder"), if_default_value_item = /^{\d+}$/.test(placeholder), default_value_rank;
+	if (if_default_value_item)
 	{
-		default_rank = parseInt(placeholder.substring(1, placeholder.length - 1));
-		placeholder = $sel.data(`item${default_rank}`);
-		$sel.data("itemChosen", default_rank);
+		default_value_rank = parseInt(placeholder.substring(1, placeholder.length - 1));
+		placeholder = $sel.data(`item${default_value_rank}`);
+		$sel.data("itemChosen", default_value_rank);
 	}
-	$sel.append(`<p${if_default_item ? "" : ` class="placeholder"` }>${placeholder}</p>`).append($select_list);
+	$sel.append(`<p${if_default_value_item ? "" : ` class="placeholder"` }>${placeholder}</p>`).append($select_list);
 	for (let i = 1, item, $item;; i++)
 	{
 		item = $sel.data(`item${i}`);
@@ -1019,16 +1056,19 @@ window.BLU_SL = new BarrenLandUnit("Select", ".select", ($sel) =>
 		$item.html(item).click(() =>
 		{
 			$sel.data("itemChosen", i).children("p:first-child").html(item);
-			$select_list.find(".select_item_chosen").removeClass("select_item_chosen");
-			$item.addClass("select_item_chosen");
+			$select_list.find(".select_item.chosen").removeClass("chosen");
+			$item.addClass("chosen");
 		});
 	}
 
-	if (!if_default_item) $sel.find(".select_item").one("click", () => $sel.children("p:first-child").removeClass("placeholder"));
-	else $sel.find(`.select_item:nth-child(${default_rank})`).addClass("select_item_chosen");
+	if (!if_default_value_item) $sel.find(".select_item").one("click", () => $sel.children("p:first-child").removeClass("placeholder"));
+	else $sel.find(`.select_item:nth-child(${default_value_rank})`).addClass("chosen");
 
 	$sel.click(() =>
 	{
+		let $focused = $(".select.focused");
+		$focused.removeClass("focused").click();
+		$sel.addClass("focused");
 		if ($select_list.css("visibility") === "visible")
 		{
 			$sel.removeClass("focused");
@@ -1071,25 +1111,38 @@ window.BLA_T = new BarrenLandAnimation("Transmit", (FS) =>
 	}, 200);
 });
 
-// Section: BarrenLandKeyboardForm
 if (!is_mobile())
 {
-window.BLK = new BarrenLandKeyboard("Global");
-BLK.form_key(".input_container",
-     ($sel) => setTimeout(() => $sel.children("input").focus(), 100), // Note: 避免快捷键内容写入输入框。
-     ($sel) => $sel.children("input").blur());
-BLK.form_key(".btn_inline_container", ($sel) => $sel.children(".btn_inline").click());
-BLK.form_key(".select",
-     ($sel) => { if ($sel.children(".select_list").css("visibility") !== "visible") $sel.click(); },
-     ($sel) => { if ($sel.children(".select_list").css("visibility") !== "hidden") $sel.click(); });
+// Section: BarrenLandKeyboard : Global
+
+window.BLK_G = new BarrenLandKeyboard("Global");
+BLK_G.add_key({ k: "Alt" }, () => BLK_G.enable_mark(), () => BLK_G.disable_mark());
+BLK_G.form_key(".input_container",
+   ($sel, e) =>
+   {
+   	    e.preventDefault(); // Note: 避免快捷键内容写入输入框。
+		$sel.children("input").focus();
+   }, ($sel) => $sel.children("input").blur());
+BLK_G.form_key(".btn_inline_container", ($sel) => $sel.children(".btn_inline").click());
+BLK_G.form_key(".select", ($sel) =>
+{
+	if ($sel.children(".select_list").css("visibility") !== "visible") $sel.click();
+	let $chosen = $sel.find(".select_item.chosen");
+	if (!$chosen.length) $chosen = $sel.find(".select_item:first-child");
+	$chosen.addClass("staying");
+}, ($sel) =>
+{
+	if ($sel.children(".select_list").css("visibility") !== "hidden") $sel.click();
+});
+
 for (let i in BLS.operation_info)
 {
 	let v = BLS.operation_info[i];
 	if (!v.available || is_empty(v.hotkey)) continue;
-	BLK.add_key({ k: v.hotkey }, () => $(`#btn_square_${i}`).click(), ef);
+	BLK_G.add_key({ k: v.hotkey }, () => $(`#btn_square_${i}`).click(), ef);
 }
-BLK.add_key({ k: "c" }, () => $("#module_log_head>.btn_square").click());
-BLK.add_key({ k: "`", c: true }, (e) =>
+BLK_G.add_key({ k: "c" }, () => $("#module_log_head>.btn_square").click());
+BLK_G.add_key({ k: "`", c: true }, (e) =>
 {
 	let $tabs = $(".tab_log"), $f = $tabs.filter(".focused"),
 		i = $.makeArray($tabs).indexOf($f[0]), l = $tabs.length;
@@ -1097,6 +1150,47 @@ BLK.add_key({ k: "`", c: true }, (e) =>
 	if (e.shiftKey) i = (i - 1 === -1 ? l - 1 : i - 1);
 	else i = (i + 1 === l ? 0 : i + 1);
 	BLS.focus_tab_log($tabs[i].id.substring(8));
+});
+
+window.BLK_SL = new BarrenLandKeyboard("Select");
+BLU_SL.get_staying = () =>
+{
+	let $select = $(".select.focused");
+	if (!$select.length) return;
+	let $items = $select.find(".select_item"), $staying = $items.filter(".staying"),
+		l = $items.length, i = $.makeArray($items).indexOf($staying[0]);
+	return { rank: i, sel: $staying };
+};
+BLU_SL.move_staying_item = (delta) =>
+{
+	let $select = $(".select.focused");
+	if (!$select.length) return;
+	let $items = $select.find(".select_item"), $staying = $items.filter(".staying"),
+		l = $items.length, i = $.makeArray($items).indexOf($staying[0]);
+	i += delta;
+	if (i >= l) i %= l;
+	else if (i < 0) i = i % l + l;
+	$staying.removeClass("staying");
+	$($items[i]).addClass("staying");
+};
+BLK_SL.add_key({ k: "ArrowUp" }, (e) =>
+{
+	e.preventDefault();
+	BLU_SL.move_staying_item(-1);
+});
+BLK_SL.add_key({ k: "ArrowDown" }, (e) =>
+{
+	e.preventDefault();
+	BLU_SL.move_staying_item(1);
+});
+BLK_SL.add_key({ k: "Enter" }, () =>
+{
+	let $select = $(".select.focused");
+	if (!$select.length) return;
+	let { rank: i, sel: $staying} = BLU_SL.get_staying();
+	$select.find(".select_item.chosen").removeClass("chosen");
+	$staying.addClass("chosen").click();
+	$select.next(".btn_micro_submit").click();
 });
 }
 

@@ -83,8 +83,8 @@ $(() =>
 		{
 			$btn_and_guide.css("marginLeft", "0");
 			$btn_toggle_guide.data("show", true);
-			$core.css("left", "calc(260px + 50px)");
-			$main.css("width", "calc(100% - 260px - 50px * 2 - 30px)");
+			$core.css("left", "310px");
+			$main.css("width", "calc(100% - 390px)");
 		}
 		$arrow.toggleClass("fa-angle-left").toggleClass("fa-angle-right");
 	});
@@ -148,14 +148,7 @@ $(() =>
 	if (!is_local())
 	{
 		let $md_areas = $(".md");
-		
-		function mf_show_md(i)
-		{
-			return function(XHR)
-			{
-				ExMD.render($($md_areas[i]), XHR.responseText);
-			};
-		}
+		let mf_show_md = (i) => (XHR => ExMD.render($($md_areas[i]), XHR.responseText));
 		
 		// Note: 获取 Markdown 并解析显示。
 		for (let i = 0; i < $md_areas.length; i++)
