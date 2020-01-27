@@ -207,7 +207,7 @@ $toc$
 ---
 
 ## 2019-10-04
-1. `blogs/ForkKILLET/` `[VER 1.2.1]` `feat:` 可以通过 `http://icelava.top/blogs/ForkKILLET/?name=文章编号` 的方式直接进入文章了！
+1. `blogs/ForkKILLET/` `[VER 1.2.1]` `feat:` 可以通过 `http://icelava.top/blogs/ForkKILLET/?name={文章编号}` 的方式直接进入文章了！
 2. `ExMD/` `feat(atc add document):` 添加了 [`ExMD` 文档](http://icelava.top/ForkKILLET_blog/?name=N1902)
 3. `blogs/ForkKILLET/` `[VER 1.2.2]` `feat(contents):` 添入目录模块！！（可控制是否展示目录，目录根据 `Markdown` 中的 `#` 和 `##` 自动抓取）
 
@@ -230,7 +230,7 @@ $toc$
 1. `ExMD/` `[VER 1.2.1]` `fix(ExMD):` 解决了 `ExMD` 与 `nMD`（普通 `Markdown`） 冲突的问题。
 2. `config(logo):` 使用了图床，加载更快了！
 3. `config(highlight):` 换用了 `Bootstrap` 的 CDN，原先的 `Cloudflare` 的不知何故不能用了。
-4. `feat(user):` 登录 /` `注册后会刷新页面。
+4. `feat(user):` 登录 / 注册后会刷新页面。
 
 ---
 
@@ -302,13 +302,13 @@ $toc$
 ---
 
 ## 2019-09-13  
-1. `[VER 1.3.3]` `feat(user):` 根据 无限 UCW 的建议，用户密码存入数据库时加了一层 `md5`，更加安全了！
+1. `[VER 1.3.3]` `feat(security, user):` 根据 **无限 UCW** 的建议，用户密码存入数据库时加了一层 `md5`，更加安全了！
 
 ---
 
 ## AN ACCIDENT  
 
-1. 由于 ForkKILLET 的计算机出了点问题，（Windows 中毒了，现在使用 macOS 敲代码）网站有 3 天没有任何更新。  
+1. 由于 ForkKILLET 的计算机出了点问题，（固态盘坏了）网站有 3 天没有任何更新。  
 2. 已于 2019-09-13 恢复正常更新！
 
 ---
@@ -361,8 +361,7 @@ $toc$
 
 ## 2019-09-03  
 1. 完成了验证功能，开始测试。
-2. 对于通过验证的账户，将其 `ve` 字段设为 `"ACCEPT"`
-3. 成功地获取了正确的 `token`！
+2. 成功地获取了正确的 `token`！
 
 ---
 
