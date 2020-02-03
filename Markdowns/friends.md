@@ -38,7 +38,7 @@ $i globe-americas i$ [**Piterator**](https://www.piterator.com/)：一个沉迷�
   
 ---
   
-$i gamepad i$ [`OIer2048`](https://65864.blog.luogu.org/Oier2048)：**博瀚君**（Piterator 成员）所开发，支持存档和换肤的可爱而又简陋的 `2048` ……（需在 Windows 下玩耍）  
+$i gamepad i$ [`Oier2048`](https://65864.blog.luogu.org/Oier2048)：**博瀚君**（Piterator 成员）所开发，支持存档和换肤的可爱而又简陋的 `2048` ……（需在 Windows 下玩耍）  
   
 ---
 
