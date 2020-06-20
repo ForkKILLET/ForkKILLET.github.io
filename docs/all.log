@@ -1,0 +1,29 @@
+VER Typed δ #dev 0.1.0 Try loader
+
+MODIFY
+
+add:    Fletcher's basic functions
+add:    jQuery
+
+RELEASE null
+
+DOCUMENTS this
+
+@2020.06.07
+
+---
+
+VER Typed δ #dev 1.0.0 Wuicy update
+
+MODIFY
+
+rm:     Fletcher (that's a bad idea for TS)
+add:    Wuicy! Now support some basic components: (called wuicies)
+        Icon, Para, Badge, Link, Button.
+        Several garish colors. (fruits' and gems' names)
+
+RELEASE null
+
+DOCUMENTS this
+
+@2020.06.20

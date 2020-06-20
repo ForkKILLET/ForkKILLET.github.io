@@ -1,10 +1,14 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2020",
-        "sourceMap": true
+        "target": "es6",
+        "sourceMap": true,
+        "removeComments": false,
+        "module": "CommonJS"
     },
     "exclude": [
         "node_modules"
+    ],
+    "files": [
+        "Wuciy.ts"
     ]
 }
