@@ -1,8 +1,11 @@
 /.idea/
+/test/
 /node_modules/
 /package-lock.json
 /src/*.js
 /src/style/*.css
+expand
 *.js.map
 *.css.map
 .DS_Store
+/src/style/expanded

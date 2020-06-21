@@ -63,8 +63,7 @@
 
 .w-badge-juice {
   display: inline-block;
-  border-radius: 10px;
-  box-shadow: 0 0 4px 1px #ffb417; }
+  position: relative; }
 .w-badge-juice .w-badge-text, .w-badge-juice .w-badge-extra-text {
   display: inline-block;
   padding: 1px 3px;
@@ -78,16 +77,33 @@
 .w-badge-juice.w-badge-extra-share {
   position: relative;
   transition: width 1s; }
-.w-badge-juice.w-badge-extra-share span {
-  transition: border-radius 1s; }
+.w-badge-juice.w-badge-extra-share .w-badge-text {
+  display: inline-flex;
+  z-index: 2;
+  box-sizing: border-box;
+  height: 100%;
+  padding: .1em 10px 10px;
+  border-radius: 10px;
+  text-align: center;
+  transition: border-radius .3s; }
 .w-badge-juice.w-badge-extra-share .w-badge-extra-text {
-  position: absolute;
-  z-index: -1;
-  right: 0; }
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  left: -10px;
+  height: 100%;
+  max-width: 0;
+  padding-top: .1em;
+  padding-right: 10px;
+  border-radius: 0 6px 6px 0;
+  overflow: hidden;
+  transition: max-width .3s, padding-left 0.3s; }
 .w-badge-juice.w-badge-extra-share:hover .w-badge-text {
   border-radius: 10px 0 0 10px; }
 .w-badge-juice.w-badge-extra-share:hover .w-badge-extra-text {
-  border-radius: 0 10px 10px 0; }
+  padding-left: 16px;
+  max-width: 100%; }
 
 .w-button-juice {
   display: inline-block;
@@ -106,11 +122,35 @@
 .w-size-normal {
   font-size: 16px; }
 
+.w-color-f-litchi {
+  color: #ffecec; }
+
+.w-color-b-litchi {
+  background-color: #ffecec; }
+
+.w-color-f-pomegranate {
+  color: #ea4343; }
+
+.w-color-b-pomegranate {
+  background-color: #ea4343; }
+
 .w-color-f-orange {
   color: #fbc555; }
 
 .w-color-b-orange {
   background-color: #fbc555; }
+
+.w-color-f-greengage {
+  color: #6acb4a; }
+
+.w-color-b-greengage {
+  background-color: #6acb4a; }
+
+.w-color-f-blueberry {
+  color: #5727f5; }
+
+.w-color-b-blueberry {
+  background-color: #5727f5; }
 
 .w-color-f-grape {
   color: #ab09ee; }
@@ -118,10 +158,28 @@
 .w-color-b-grape {
   background-color: #ab09ee; }
 
-.w-color-f-litchi {
-  color: #ffecec; }
+.w-color-f-ruby {
+  color: #fa2a62; }
 
-.w-color-b-litchi {
-  background-color: #ffecec; }
+.w-color-b-ruby {
+  background-color: #fa2a62; }
+
+.w-color-f-topaz {
+  color: #f5a826; }
+
+.w-color-b-topaz {
+  background-color: #f5a826; }
+
+.w-color-f-emerald {
+  color: #42e278; }
+
+.w-color-b-emerald {
+  background-color: #42e278; }
+
+.w-color-f-sapphire {
+  color: #1232d9; }
+
+.w-color-b-sapphire {
+  background-color: #1232d9; }
 
 /*# sourceMappingURL=Wuicy.css.map */

@@ -80,14 +80,7 @@
 
 .w-badge-juice {
     display: inline-block;
-    border-radius: 10px;
-    box-shadow: 0 0 4px 1px #ffb417;
-
-    .w-badge-text, .w-badge-extra-text {
-        display: inline-block;
-        padding: 1px 3px;
-        border-radius: 10px;
-    }
+    position: relative;
 
     .w-badge-icon { margin-right: 5px; }
 
@@ -97,20 +90,48 @@
     }
 
     &.w-badge-extra-share {
-        position: relative;
-        transition: width 1s;
+        .w-badge-text {
+            display: inline-flex;
+            position: relative;
+            z-index: 2;
 
-        span {
-            transition: border-radius 1s;
+            box-sizing: border-box;
+            height: 100%;
+
+            padding: 0 10px;
+
+            border-radius: 10px;
+            text-align: center;
+            align-items: baseline;
+
+            transition: border-radius .5s;
         }
+
         .w-badge-extra-text {
-            position: absolute;
-            z-index: -1;
-            right: 0;
+            display: inline-flex;
+            position: relative;
+            z-index: 1;
+
+            box-sizing: border-box;
+            left: -11px;
+            height: 100%;
+            max-width: 0;
+
+            align-items: baseline;
+            padding-right: 10px;
+            border-radius: 0 10px 10px 0;
+
+            overflow: hidden;
+
+            transition: max-width .5s, padding-left .5s;
         }
 
         &:hover .w-badge-text { border-radius: 10px 0 0 10px; }
-        &:hover .w-badge-extra-text { border-radius: 0 10px 10px 0; }
+
+        &:hover .w-badge-extra-text {
+            max-width: 100%;
+            padding-left: 16px;
+        }
     }
 }
 

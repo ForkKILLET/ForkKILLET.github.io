@@ -345,23 +345,6 @@ class WuicyBadge extends Wuicy implements wBadgeConfig {
                 this.icon.glass = this.glass.children(".w-badge-text").doPrepend("<i></i>").addClass("w-badge-icon")
                 this.icon.make()
             }
-
-            if (this.theme === "juice") {
-                if (extra) switch (this.extraDisplay) {
-                    case "share":
-                        let originWidth: number
-                        this.glass.hover(() => {
-                                originWidth = this.glass.width()
-                                this.glass.width(originWidth + this.glass.children(".w-badge-extra-text").width() + 5)
-                            }, () => this.glass.width(originWidth)
-                        )
-                        break
-                    case "replace":
-                        // todo: complete this
-                    case "fix":
-                        break
-                }
-            }
         })
     }
 }

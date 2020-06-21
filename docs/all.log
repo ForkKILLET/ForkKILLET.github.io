@@ -27,3 +27,22 @@ RELEASE null
 DOCUMENTS this
 
 @2020.06.20
+
+---
+
+VER Typed δ #dev 1.0.1 Wuicy update: better badge
+
+THANK
+
+@bohanjun: He gives the prototype of the new badge style.
+
+MODIFY
+
+upg:    Better badge made by whole CSS.
+style:  Add newlines to each EOF.
+
+RELEASE null
+
+DOCUMENTS this
+
+@2020.06.21
