@@ -1,11 +1,17 @@
 @charset "UTF-8";
+@import "WuicyColor";
 
-.w {
-    color: inherit;
-}
+// :: Constants
+
+$sqrt-2: 1.4142;
+
+// :: Basic wuicies
 
 .w-root {
-    padding: 30px;
+    width: 100%;
+    height: 100%;
+
+    background-color: map_get($w-colors, "bowl");
 }
 
 .w-link {
@@ -33,56 +39,90 @@
     100% { top: 0; }
 }
 .w-link-juice {
-    padding: 0 8px;
-
     text-decoration: none;
     transition: color .5s;
 
-    &::after {
-        position: relative;
+    &.w-link-line-normal, &.w-link-line-bold {
+        &::after {
+            position: relative;
+            display: block;
+
+            left: -8px;
+            width: calc(100% + 16px);
+
+            border: dashed map_get($w-colors, "orange");
+            box-shadow: 0 1px 3px map_get($w-colors, "orange");
+            content: "";
+
+            animation: w-link-juice-line-move 2s forwards;
+            animation-iteration-count: 1;
+        }
+        &:hover::after {
+            animation: w-link-juice-line-jump 1s;
+        }
+
+        &.w-link-line-normal::after {
+            border-width: 1px 0 0 0;
+        }
+        &.w-link-line-bold::after {
+            border-width: 1px 0;
+        }
+
+        > *:last-child { margin-bottom: 3px; }
+    }
+
+    &.w-link-line-ripple {
         display: block;
+        position: relative;
+        box-sizing: content-box;
+        overflow: hidden;
 
-        left: -8px;
-        width: calc(100% + 16px);
+        &::before, &::after {
+            display: block;
+            position: absolute;
 
-        border: dashed #fbc555;
-        box-shadow: 0 1px 3px #fbc555;
-        content: "";
+            width: 100px;
+            height: 100px;
+            top: calc(50% - #{10px * $sqrt-2} - 2.5px);
 
-        animation: w-link-juice-line-move 2s forwards;
-        animation-iteration-count: 1;
-    }
-    &.w-link-line-normal::after {
-        border-width: 1px 0 0 0;
-    }
-    &.w-link-line-bold::after {
-        border-width: 1px 0;
+            border: {
+                radius: 0 0 40% 0;
+                color: #face80;
+                width: 0 3px 3px 0;
+                style: solid;
+            }
+
+            content: "";
+            transform: rotate(-45deg) translateY(-50%);
+            transition: left 1.5s;
+        }
+
+        &::before	{ left: -130px; }
+        &::after	{ left: -100px; }
+
+        &:hover {
+            &::before	{ left: calc(100% - 30px); }
+            &::after	{ left: 100%; }
+        }
     }
 
-    &:hover > * {
-        color: #face80;
+    > .w-para {
+        width: 100%;
+        transition: color .5s;
     }
-    &:hover::after {
-        animation: w-link-juice-line-jump 1s;
-    }
-    > *:last-child {
-        margin-bottom: 3px;
-    }
+    &:hover > .w-para:not(.w-color-fix) { color: map_get($w-colors, "banana"); }
 }
 
-.w-para {
-    display: inline-block;
-}
 .w-para-juice {
-    .w-para-left-icon { margin-right: 15px; }
-    .w-para-right-icon { margin-left: 15px; }
+    > .w-para-left-icon { margin-right: 15px; }
+    > .w-para-right-icon { margin-left: auto; }
 }
 
 .w-badge-juice {
     display: inline-block;
     position: relative;
 
-    .w-badge-icon { margin-right: 5px; }
+    > .w-icon { margin-right: 5px; }
 
     &.w-badge-extra-fix {
         .w-badge-text { border-radius: 10px 0 0 10px; }
@@ -114,8 +154,8 @@
 
             box-sizing: border-box;
             left: -11px;
-            height: 100%;
             max-width: 0;
+            height: 100%;
 
             align-items: baseline;
             padding-right: 10px;
@@ -135,19 +175,46 @@
     }
 }
 
-.w-button-juice {
-    display: inline-block;
-    margin: 0 5px;
-    padding: 3px 7px;
-    border: 1px solid #fbc555;
-    border-radius: 8px;
-    box-shadow: 0 0 6px #fbc555;
+// :: Structure wuicies
+
+.w-nav-juice {
+    width: 250px;
+    height: 100%;
+    box-shadow: 0 1px 5px 1px map_get($w-colors, "banana");
+    background-color: map_get($w-colors, "snowpear");
+
+    > .w-link {
+        display: block;
+        transition: background-color .5s;
+
+        &:hover { background-color: map_get($w-colors, "litchi"); }
+    }
+    > .w-para, .w-link, .w-badge {
+        &:not(:first-child) {
+            padding: 2.5px 15px;
+            max-width: calc(100% - 30px);
+        }
+    }
 }
 
-//////////////////////////////////////////////////
+// :: Form wuicies
+
+.w-button-juice {
+    display: inline-block;
+
+    margin: 0 5px;
+    padding: 3px 7px;
+
+    border: 1px solid map_get($w-colors, "orange");
+    border-radius: 8px;
+    box-shadow: 0 0 6px map_get($w-colors, "orange");
+}
+
+// :: Literals
 
 .w-size-title {
-    font-size: 35px;
+    text-align: center;
+    font-size: 34px;
 }
 .w-size-subtitle {
     font-size: 27px;
@@ -155,20 +222,3 @@
 .w-size-normal {
     font-size: 16px;
 }
-
-@mixin w-color($name, $color) {
-    .w-color-f-#{$name} { color: $color; }
-    .w-color-b-#{$name} { background-color: $color; }
-}
-
-@include w-color("litchi",      #ffecec);
-@include w-color("pomegranate", #ea4343);
-@include w-color("orange",      #fbc555);
-@include w-color("greengage",   #6acb4a);
-@include w-color("blueberry",   #5727f5);
-@include w-color("grape",       #ab09ee);
-
-@include w-color("ruby",        #fa2a62);
-@include w-color("topaz",       #f5a826);
-@include w-color("emerald",     #42e278);
-@include w-color("sapphire",    #1232d9);

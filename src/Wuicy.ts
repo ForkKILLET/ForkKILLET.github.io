@@ -1,12 +1,13 @@
-//////////////////// import & declare ////////////////////
+// :: Import & Declare
 
-import $ = require("jquery");
+import $ = require("jquery")
 
 declare global {
     interface String {
         toWuciyClass(): string
         toColorClass(loc: "f" | "b"): string
 
+        toHtmlTag(): string
         toLowerCaseInitial(): string
         toUpperCaseInitial(): string
     }
@@ -26,6 +27,7 @@ declare global {
         doAppend(...p: any[]): JQuery
         doBefore(...p: any[]): JQuery
         doAfter(...p: any[]): JQuery
+        ohtml(): string
     }
 }
 
@@ -36,6 +38,8 @@ $.extend(String.prototype, {
     toColorClass(loc: "f" | "b"): string {
         return `w-color-${loc}-${this}`
     },
+
+    toHtmlTag(): string { return `<${this}>` },
     toLowerCaseInitial(): string {
         return this[0].toLowerCase() + this.substring(1)
     },
@@ -108,12 +112,13 @@ $.fn.extend({
         let that = this as JQuery
         that.after(...p)
         return that.next()
-    }
+    },
+    ohtml(): string { return this.prop("outerHTML") }
 })
 
 type simpleFun = () => void
 
-//////////////////// Tools & types ////////////////////
+// :: Tools & types
 
 function $w(w: Wuicy) { return w.glass }
 
@@ -121,18 +126,29 @@ type wInit = simpleFun[]
 type wCallback = (w: Wuicy) => void
 
 type wTheme = "juice"
-type wLineStyle = "normal" | "bold"
-
-function wColor(fg: string = null, bg: string = null, useClass: boolean = true) {
-    return new wColorT(fg, bg, useClass)
+class wGlobal {
+    static theme: wTheme
 }
-function wRoloc(bg: string = null, fg: string = null, useClass: boolean = true) {
-    return new wColorT(fg, bg, useClass)
+
+type wLineStyle = "normal" | "bold" | "ripple" | "none"
+
+function wColor(fg: string = "ghfruit", bg: string = null, fix: boolean = false, useClass: boolean = true) {
+    return new wColorT(fg, bg, fix, useClass)
+}
+function wRoloc(bg: string = null, fg: string = "ghfruit", fix: boolean = false, useClass: boolean = true) {
+    return new wColorT(fg, bg, fix, useClass)
 }
 enum wColorLiteral {
-    orange =    "#fbc555",
-    grape =     "#ab09ee",
-    litchi =    "#f6dcdc"
+    snowpear =     "#ffffff",
+    bowl = 		   "#f9f9f9",
+    litchi =       "#ffecec",
+    pomegranate =  "#ea4343",
+    banana =       "#face80",
+    orange =       "#fbc555",
+    greengage =    "#6acb4a",
+    blueberry =    "#5727f5",
+    grape =        "#ab09ee",
+    ghfruit =      "#171515"
 }
 class wColorT {
     readonly fgName: wColorLiteral
@@ -140,7 +156,7 @@ class wColorT {
     readonly fg: string
     readonly bg: string
 
-    constructor(fg: string, bg: string, useClass: boolean) {
+    constructor(fg: string, bg: string, public readonly fix: boolean, useClass: boolean) {
         this.fg = fg
         this.bg = bg
         if (useClass) {
@@ -150,9 +166,9 @@ class wColorT {
     }
 
     get colorClass(): string {
-        return (this.fg ? "w-color-f-" + this.fg : "")
-             + (this.fg && this.bg ? " " : "")
-             + (this.bg ? "w-color-b-" + this.bg : "")
+        return (wColorLiteral[this.fg] ? "w-color-f-" + this.fg : "")
+            + (wColorLiteral[this.bg] ? " w-color-b-" + this.bg : "")
+            + (this.fix ? " w-color-fix" : "")
     }
 }
 
@@ -160,7 +176,7 @@ function wSize(sz: string | number, useClass: boolean = true) {
     return new wSizeT(sz, useClass)
 }
 enum wSizeLiteral {
-    title = 35,
+    title = 34,
     subtitle = 27,
     normal = 16
 }
@@ -178,7 +194,15 @@ class wSizeT {
     }
 }
 
-//////////////////// Basic wuicies ////////////////////
+function wLoc(loc: string) {
+    if (loc.startsWith("@"))
+        loc = (location.hostname === "localhost" ? "http://localhost:1627/IceLavaTop/dist/" : "/") + loc.substring(1)
+    return loc
+}
+
+type wTriggerMode = "click" | "hover"
+
+// :: Basic wuicies
 
 interface wConfig {
     id?: string
@@ -190,52 +214,79 @@ interface wConfig {
 abstract class Wuicy implements wConfig {
     id: string
     static instances: Wuicy[] = []
+    static pick(id: string): Wuicy {
+        for (let w of this.instances) if (w.id === id) return w
+        return null
+    }
+    static $pick(id: string): JQuery {
+        return this.pick(id)?.glass
+    }
 
-    get class(): any { return Object.getPrototypeOf(this).constructor }
+    get W(): any { return Object.getPrototypeOf(this).constructor }
     static readonly type: string = "w"
+    static readonly glassType: string[] = []
 
     lateMake: boolean
     protected makes: wInit = []
-    protected newMake(make: simpleFun, execWhenInited: boolean = null) {
-        if (execWhenInited == null) this.makes.push(make)
-        else if (execWhenInited == true)
-            if (this.lateMake) this.newMake(make)
-            else make()
+    protected newMake(make: simpleFun, execWhenInited: boolean = true) {
+        if (!execWhenInited) this.makes.push(make)
+        else if (this.lateMake) this.newMake(make, null)
+        else make()
     }
     make(): Wuicy {
+        this.assertGlass("")
         for (let i in this.makes) if (this.makes.hasOwnProperty(i)) (this.makes[i] as simpleFun)()
+        this.lateMake = false
         return this
     }
 
     glass: JQuery
-    theme: wTheme
+    theme: wTheme = wGlobal.theme
 
     wCreate: wCallback
 
-    protected assertLateMake(w: Wuicy, name: string): boolean {
-        if (w != null && !w.lateMake) this.error(`${name} must be lateMake or null.`);
-        return w != null
-    }
     protected assertGlass(s: string) {
-        if (!this.glass.isi(s)) this.error(`The glass must be: ${s}`);
+        for (let t of this.W.glassType) if (this.glass.isi(t + s)) return true
+        return false
+    }
+    protected assertLateMake(w: Wuicy, name: string): boolean {
+        if (w != null && !w.lateMake) this.error(`${name} must be lateMake or null.`)
+        return w != null
     }
     protected error(msg: string): never {
         throw `[Wuicy : ${this.constructor.name}] ${msg}`
     }
 
     protected constructor(c: wConfig) {
-        Wuicy.instances.push(this)
-
         if (c.glass == null) c.lateMake = true
         for (let i in c) if (c.hasOwnProperty(i)) this[i] = c[i]
+        this.W.instances.push(this)
 
         this.newMake(() => {
-            let className = this.class.type.toWuciyClass()
-            this.glass.addClass(className)
-            if (this.theme) this.glass.addClass(`${className}-${this.theme}`)
+            let className = this.W.type.toWuciyClass()
+            this.glass.addClass(className).addClass(`${className}-${this.theme}`)
             if (this.wCreate) this.wCreate(this)
             return this
-        }, true)
+        })
+    }
+}
+
+// :: Packed wuicies
+
+abstract class WuicyPack extends Wuicy {
+    protected abstract decorate($sel: JQuery): string
+    get pack(): string {
+        let className = this.W.type.toWuciyClass()
+        return this.decorate(
+            $(this.W.glassType[0].toHtmlTag())
+                .addClass(className).addClass(`${className}-${this.theme}`)
+        )
+    }
+    toString(): string { return this.pack }
+
+    protected constructor(c: wConfig) {
+        super(c)
+        this.newMake(() => this.decorate(this.glass))
     }
 }
 
@@ -246,8 +297,11 @@ interface wIconConfig extends wConfig {
     fixWidth?: boolean
     color?: wColorT
 }
-class WuicyIcon extends Wuicy implements wIconConfig {
-    static readonly type: string = "wIcon"
+class WuicyIcon extends WuicyPack implements wIconConfig {
+    static instances: WuicyIcon[] = []
+
+    static readonly type = "wIcon"
+    static readonly glassType = ["i", "span"]
 
     name: string
     get FaClass(): string {
@@ -263,48 +317,11 @@ class WuicyIcon extends Wuicy implements wIconConfig {
     fixWidth: boolean
     color: wColorT
 
-    constructor(c: wIconConfig) {
-        super(c)
-
-        this.newMake(() => {
-            this.assertGlass("i,span")
-            this.glass.addClass(this.FaClass).color(this.color)
-        }, true)
+    protected decorate($sel: JQuery): string {
+        return $sel.addClass(this.FaClass).color(this.color).ohtml()
     }
-}
 
-interface wParaConfig extends wConfig {
-    text: string
-    size?: wSizeT
-    color?: wColorT
-
-    leftIcon?: WuicyIcon
-    rightIcon?: WuicyIcon
-}
-class WuicyPara extends Wuicy implements wParaConfig {
-    static readonly type: string = "wPara"
-
-    text: string
-    size?: wSizeT
-    color?: wColorT
-
-    leftIcon?: WuicyIcon
-    rightIcon?: WuicyIcon
-
-    constructor(c: wParaConfig) {
-        super(c)
-
-        this.newMake(() => {
-            this.assertGlass("p,b,i,em,strong")
-            this.glass.text(this.text).color(this.color).size(this.size)
-            for (let i of ["leftIcon", "rightIcon"])
-                if (this.assertLateMake(this[i] as WuicyIcon, i)) {
-                    this[i].glass = this.glass[i == "leftIcon" ? "doPrepend" : "doAppend"](`<i></i>`)
-                        .addClass(`wPara-${i}`.toWuciyClass())
-                    this[i].make()
-                }
-        }, true)
-    }
+    constructor(c: wIconConfig) { super(c) }
 }
 
 interface wBadgeConfig extends wConfig {
@@ -316,48 +333,143 @@ interface wBadgeConfig extends wConfig {
 
     icon?: WuicyIcon
 }
-class WuicyBadge extends Wuicy implements wBadgeConfig {
-    static readonly type: string = "wBadge"
+class WuicyBadge extends WuicyPack implements wBadgeConfig {
+    static instances: WuicyBadge[] = []
+
+    static readonly type = "wBadge"
+    static readonly glassType = ["span"]
 
     text: string
     color: wColorT
     extraText: string
     extraColor: wColorT
-    extraDisplay: "fix" | "share" | "replace"
+    extraDisplay: "fix" | "share" | "replace" = "fix"
 
     icon: WuicyIcon
 
-    constructor(c: wBadgeConfig) {
-        super(c)
-
-        this.newMake(() => {
-            this.assertGlass("span")
-            let extra: boolean = this.extraText != null
-            if (extra) this.glass.addClass(`w-badge-extra-${this.extraDisplay ?? "fix"}`)
-            for (let i of ["", "extra"]) {
-                if (i == "" || extra) {
-                    let t = (i + "Text").toLowerCaseInitial()
-                    this.glass.doAppend(`<span>${this[t]}</span>`)
-                        .color(this[(i + "Color").toLowerCaseInitial()]).addClass(`w-badge-${t}`.toWuciyClass())
-                }
+    protected decorate($sel: JQuery): string {
+        let extra: boolean = this.extraText != null
+        if (extra) $sel.addClass(`w-badge-extra-${this.extraDisplay}`)
+        for (let i of ["", "extra"]) {
+            if (i == "" || extra) {
+                let t = (i + "Text").toLowerCaseInitial()
+                $sel.doAppend(`<span>${this[t]}</span>`)
+                    .color(this[(i + "Color").toLowerCaseInitial()])
+                    .addClass(`w-badge-${t}`.toWuciyClass())
             }
-            if (this.assertLateMake(this.icon, "icon")) {
-                this.icon.glass = this.glass.children(".w-badge-text").doPrepend("<i></i>").addClass("w-badge-icon")
-                this.icon.make()
-            }
-        })
+        }
+        if (this.assertLateMake(this.icon, "icon")) $sel.children(".w-badge-text").prepend(this.icon.pack)
+        return $sel.ohtml()
     }
+
+    constructor(c: wBadgeConfig) { super(c) }
 }
 
-//////////////////// Strawed wuicies ////////////////////
+interface wParaConfig extends wConfig {
+    text: string
+    size?: wSizeT
+    color?: wColorT
+
+    leftIcon?: WuicyIcon
+    rightIcon?: WuicyIcon
+}
+class WuicyPara extends WuicyPack implements wParaConfig {
+    static instances: WuicyPara[] = []
+
+    static readonly type = "wPara"
+    static readonly glassType = ["p", "b", "i", "em", "strong"]
+
+    text: string
+    size?: wSizeT
+    color?: wColorT
+
+    leftIcon?: WuicyIcon
+    rightIcon?: WuicyIcon
+
+    protected decorate($sel: JQuery): string {
+        $sel.text(this.text).color(this.color).size(this.size)
+        for (let n of ["leftIcon", "rightIcon"]) {
+            let i: WuicyIcon = this[n]
+            if (this.assertLateMake(i, n))
+                $sel[n == "leftIcon" ? "doPrepend" : "doAppend"](i.pack).addClass(`wPara-${n}`.toWuciyClass())
+        }
+        return $sel.ohtml()
+    }
+
+    constructor(c: wParaConfig) { super(c) }
+}
+
+type wListItem = WuicyPara | WuicyLink | WuicyBadge
+interface wListConfig extends wConfig {
+    items: wListItem[]
+}
+class WuicyList <tListItem = wListItem> extends WuicyPack implements wListConfig {
+    static instances: WuicyList[] = []
+
+    static readonly type: string = "wList"
+    static readonly glassType = ["div"]
+
+    items: wListItem[]
+
+    protected decorate($sel: JQuery): string {
+        for (let i in this.items)
+            $sel.doAppend((this.items[i] as WuicyPack).pack)
+        return $sel.ohtml()
+    }
+
+    constructor(c: wListConfig) { super(c) }
+}
+
+interface wTextListConfig extends wConfig{
+    items: [string, string?, string?][]
+    size?: wSizeT
+    textColor?: wColorT
+    iconColor?: wColorT
+}
+class WuicyTextList extends WuicyPack implements wTextListConfig {
+    static instances: WuicyTextList[] = []
+
+    static readonly type: string = "wTextList"
+    static readonly glassType = ["div"]
+
+    items: [string, string?, string?][]
+    size: wSizeT
+    textColor: wColorT
+    iconColor: wColorT
+
+    protected decorate($sel: JQuery): string {
+        let paras: WuicyPara[] = []
+        for (let i of this.items)
+            paras.push(new WuicyPara({
+                text: i[0],
+                color: this.textColor,
+                size: this.size,
+                leftIcon:   i[1] ? new WuicyIcon({ name: i[1], color: this.iconColor }) : undefined,
+                rightIcon:  i[2] ? new WuicyIcon({ name: i[2], color: this.iconColor }) : undefined
+            }))
+        new WuicyList<WuicyPara> ({
+            items: paras,
+            glass: $sel
+        })
+        return $sel.ohtml()
+    }
+
+    constructor(c: wTextListConfig) { super(c) }
+}
+
+// :: Strawed wuicies
 
 interface wStrawConfig extends wConfig {
-    target?: JQuery
+    target?: JQuery | Wuicy
 }
 abstract class WuicyStraw extends Wuicy implements wStrawConfig {
+    static readonly instances = null
     static readonly type: string = "wStraw"
 
-    target: JQuery
+    target: JQuery | Wuicy
+    get $target(): JQuery {
+        return this.target instanceof Wuicy ? this.target.glass : this.target
+    }
 
     protected prepare(make: simpleFun) {
         this.makes.unshift(make)
@@ -366,6 +478,10 @@ abstract class WuicyStraw extends Wuicy implements wStrawConfig {
     protected constructor(c: wStrawConfig) {
         if (c.target == null) c.lateMake = true
         super(c)
+
+        this.prepare(() => {
+            if (!this.glass) this.glass = this.$target.doBefore(this.W.glassType[0].toHtmlTag())
+        })
     }
 }
 
@@ -376,59 +492,106 @@ interface wLinkConfig extends wStrawConfig {
     wClick?: wCallback
 }
 class WuicyLink extends WuicyStraw implements wLinkConfig {
-    static readonly type: string = "wLink"
+    static instances: WuicyLink[] = []
+
+    static readonly type = "wLink"
+    static readonly glassType = ["a"]
 
     loc: string
-    line: wLineStyle
+    line: wLineStyle = "none"
 
     wClick: wCallback
 
     constructor(c: wLinkConfig) {
         super(c)
 
-        this.prepare(() => {
-            if (!this.glass) this.glass = this.target.doBefore(`<a></a>`)
-        })
         this.newMake(() => {
-            if (this.line) this.glass.addClass(`w-link-line-${this.line}`)
+            this.glass.addClass(`w-link-line-${this.line}`)
             if (this.wClick) this.glass.on("click", () => this.wClick(this))
-            this.target.appendTo(this.glass.attr("href", this.loc))
-        }, true)
+            this.$target.appendTo(this.glass.attr("href", this.loc = wLoc(this.loc)))
+        })
     }
 }
 
-//////////////////// Form wuicies ////////////////////
+interface wTogbarConfig extends wStrawConfig {
+    wToggle?: wCallback,
+    trigger?: wTriggerMode
+}
+class WuicyTogbar extends WuicyStraw implements wTogbarConfig {
+    static instances: WuicyTogbar[] = []
+
+    static readonly type = "wTogbar"
+    static readonly glassType = ["div", "span"]
+
+    wToggle: wCallback
+    trigger: wTriggerMode = "click"
+
+    constructor(c: wTogbarConfig) {
+        super(c)
+
+        this.newMake(() =>
+            this.glass[this.trigger as string](() => {
+                if (this.wToggle) this.wToggle(this)
+                else this.$target.hide()
+            })
+        )
+    }
+}
+
+// :: Structure wuicies
+
+type wNavItem = WuicyPara | WuicyLink | WuicyBadge
+interface wNavConfig extends wLinkConfig {
+    items: wNavItem[]
+}
+class WuicyNav extends WuicyList<wNavItem> implements wNavConfig {
+    static instances: WuicyNav[] = []
+
+    static readonly type = "wNav"
+    static readonly glassType = ["div"]
+
+    items: wNavItem[]
+
+    constructor(c: wNavConfig) { super(c) }
+}
+
+// :: Form wuicies
 
 interface wButtonConfig extends wConfig {
     wClick?: wCallback
 }
 class WuicyButton extends Wuicy implements wButtonConfig {
-    static readonly type: string = "wButton"
+    static instances: WuicyButton[] = []
+
+    static readonly type = "wButton"
 
     wClick?: wCallback
 
     constructor(c: wButtonConfig) {
         super(c)
 
-        this.newMake(() => {
-            if (c.wClick) c.glass.click(() => c.wClick(this))
-        }, true)
+        this.newMake(() => { if (c.wClick) c.glass.click(() => c.wClick(this)) })
     }
 }
 
-//////////////////// Export ////////////////////
+// :: Export
 
 export {
-    $w,
-    wColor, wRoloc, wSize, wInit, wTheme, wLineStyle,
+    wGlobal, $w,
+    wColor, wRoloc, wSize, wLoc, wInit, wTheme,
 
     Wuicy, wConfig,
     WuicyIcon, wIconConfig,
+    WuicyBadge, wBadgeConfig,
     WuicyPara, wParaConfig,
-    wBadgeConfig, WuicyBadge,
+    WuicyList, wListConfig,
+    WuicyTextList, wTextListConfig,
 
-    wStrawConfig, WuicyStraw,
-    WuicyLink, wLinkConfig,
+    WuicyStraw, wStrawConfig,
+    WuicyLink, wLinkConfig, wLineStyle,
+    WuicyTogbar, wTogbarConfig, wTriggerMode,
+
+    WuicyNav, wNavConfig, wNavItem,
 
     WuicyButton, wButtonConfig
 }

@@ -1,25 +1,37 @@
 import $ = require("jquery");
 
 import {
-    wColor, wRoloc, wSize,
-    WuicyBadge, WuicyButton, WuicyIcon, WuicyLink, WuicyPara
+    wGlobal, wColor, wLoc, wSize,
+    WuicyIcon, WuicyPara, WuicyBadge, WuicyLink, WuicyNav, WuicyTogbar, WuicyTextList
 } from "./Wuicy";
 
-$(".w-root").doAppend("<span></span>").pour(new WuicyBadge({
-    theme: "juice",
+// Debug:
+$.extend(window, {
+    $,
+    wGlobal, wColor, wLoc,
+    WuicyIcon, WuicyPara, WuicyBadge, WuicyLink, WuicyNav
+})
 
-    text: "masnn",
-    color: wColor("litchi", "orange"),
-    extraText: "txdy",
-    extraColor: wColor("litchi", "grape"),
-    extraDisplay: "share",
+wGlobal.theme = "juice"
 
-    icon: new WuicyIcon({ name: "flag" })
-})).mix(new WuicyLink({
-    theme: "juice",
-
-    line: "bold",
-    loc: "https://www.luogu.com.cn/"
+$(".w-root").doAppend("<div>").pour(new WuicyNav({
+    items: [
+        new WuicyPara({
+            id: "home",
+            text: "top", size: wSize("title"), color: wColor("snowpear", "ghfruit", true),
+            leftIcon: new WuicyIcon({ name: "home" })
+        }),
+        new WuicyLink({
+            target: WuicyPara.pick("home"),
+            loc: "@", line: "ripple"
+        })
+    ]
+})).doAppend("<div>").pour(new WuicyTextList({
+   items: [
+       ["ForkKILLET",   "arrow-up", "arrow-down"],
+       ["Bohanjun",     "flag"],
+       ["UCW",          "sun"]
+   ]
 }))
 
 console.log(
@@ -28,6 +40,3 @@ console.log(
     "font-weight: bold; color: blue;",
     "color: black;"
 )
-
-// Debug:
-window["$"] = $

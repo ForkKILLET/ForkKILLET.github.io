@@ -1,0 +1,27 @@
+$w-colors: (
+	"snowpear":     #ffffff,
+	"bowl": 		#f9f9f9,
+	"litchi":       #ffecec,
+	"pomegranate":  #ea4343,
+	"banana":       #face80,
+	"orange":       #fbc555,
+	"greengage":    #6acb4a,
+	"blueberry":    #5727f5,
+	"grape":        #ab09ee,
+	"ghfruit":      #171515,
+
+	"diamond":      #c6fdfd,
+	"ruby":         #fa2a62,
+	"topaz":        #f5a826,
+	"emerald":      #42e278,
+	"sapphire":     #1232d9,
+
+	"gold":         #e6c88c,
+	"copper":       #b47049,
+	"bronze":       #2b6c58
+);
+
+@each $n, $c in $w-colors {
+	.w-color-f-#{$n} { color: $c; }
+	.w-color-b-#{$n} { background-color: $c; }
+}

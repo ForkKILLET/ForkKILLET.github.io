@@ -4,5 +4,15 @@
 
     outline: none;
 
+    color: inherit;
     font-family: "JetBrains Mono", "Monaco", monospace;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+a:link, a:hover, a:active, a:visited {
+    color: unset;
 }
