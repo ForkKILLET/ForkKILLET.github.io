@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es2020",
         "sourceMap": true,
         "removeComments": false,
         "module": "CommonJS"
@@ -8,7 +8,9 @@
     "exclude": [
         "node_modules"
     ],
-    "files": [
-        "Wuciy.ts"
+    "include": [
+        "src/Wuicy.ts",
+        "src/main.ts",
+        "src/WuicyLog/main.ts"
     ]
 }

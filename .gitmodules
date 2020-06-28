@@ -1,0 +1,3 @@
+[submodule "WuicyLog"]
+	path = WuicyLog
+	url = https://github.com/ForkFG/WuicyLog.git
