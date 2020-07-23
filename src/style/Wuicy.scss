@@ -38,7 +38,7 @@ $sqrt-2: 1.4142;
     80% { top: 10px; }
     100% { top: 0; }
 }
-.w-link-juice {
+.w-link.juice {
     text-decoration: none;
     transition: color .5s;
 
@@ -113,20 +113,32 @@ $sqrt-2: 1.4142;
     &:hover > .w-para:not(.w-color-fix) { color: map_get($w-colors, "banana"); }
 }
 
-.w-para-juice {
+.w-icon.juice {
+    align-self: center;
+}
+
+.w-para.juice {
+    display: flex;
+
     > .w-para-left-icon { margin-right: 15px; }
     > .w-para-right-icon { margin-left: auto; }
 }
 
-.w-badge-juice {
+.w-badge.juice {
     display: inline-block;
     position: relative;
 
-    > .w-icon { margin-right: 5px; }
+    .w-icon { margin-right: 5px; }
 
     &.w-badge-extra-fix {
-        .w-badge-text { border-radius: 10px 0 0 10px; }
-        .w-badge-extra-text { border-radius: 0 10px 10px 0; }
+        .w-badge-text {
+            border-radius: 10px 0 0 10px;
+            padding: 1px 4px 1px 6px;
+        }
+        .w-badge-extra-text {
+            border-radius: 0 10px 10px 0;
+            padding: 1px 6px 1px 4px;
+        }
     }
 
     &.w-badge-extra-share {
@@ -146,7 +158,6 @@ $sqrt-2: 1.4142;
 
             transition: border-radius .5s;
         }
-
         .w-badge-extra-text {
             display: inline-flex;
             position: relative;
@@ -167,7 +178,6 @@ $sqrt-2: 1.4142;
         }
 
         &:hover .w-badge-text { border-radius: 10px 0 0 10px; }
-
         &:hover .w-badge-extra-text {
             max-width: 100%;
             padding-left: 16px;
@@ -175,9 +185,15 @@ $sqrt-2: 1.4142;
     }
 }
 
+.w-picture.juice {
+    max-width: calc(100% - 30px);
+    margin-left: 15px;
+    border-radius: 6px;
+}
+
 // :: Structure wuicies
 
-.w-nav-juice {
+.w-nav.juice {
     width: 250px;
     height: 100%;
     box-shadow: 0 1px 5px 1px map_get($w-colors, "banana");
@@ -189,7 +205,7 @@ $sqrt-2: 1.4142;
 
         &:hover { background-color: map_get($w-colors, "litchi"); }
     }
-    > .w-para, .w-link, .w-badge {
+    > .w-para, .w-link, .w-badge, .w-list, .w-tog-list {
         &:not(:first-child) {
             padding: 2.5px 15px;
             max-width: calc(100% - 30px);
@@ -199,7 +215,7 @@ $sqrt-2: 1.4142;
 
 // :: Form wuicies
 
-.w-button-juice {
+.w-button.juice {
     display: inline-block;
 
     margin: 0 5px;
@@ -213,7 +229,7 @@ $sqrt-2: 1.4142;
 // :: Literals
 
 .w-size-title {
-    text-align: center;
+    justify-content: center;
     font-size: 34px;
 }
 .w-size-subtitle {

@@ -1,42 +1,74 @@
 import $ = require("jquery");
-
 import {
-    wGlobal, wColor, wLoc, wSize,
-    WuicyIcon, WuicyPara, WuicyBadge, WuicyLink, WuicyNav, WuicyTogbar, WuicyTextList
+    $w, pick, $pick, wGlobal, dftConfig,
+    wInit, wTheme, wColor, wRoloc, wSize, wLoc, wList,
+
+    Wuicy, wConfig,
+    WuicyIcon, wIconConfig,
+    WuicyBadge, wBadgeConfig,
+    WuicyPara, wParaConfig,
+    WuicyList, wListConfig,
+    WuicyPicture, wPictureConfig,
+
+    WuicyStraw, wStrawConfig,
+    WuicyLink, wLinkConfig, wLineStyle,
+    WuicyTogBar, wTogBarConfig, wTriggerMode,
+
+    WuicyNav, wNavConfig, wNavItem,
+    WuicyTogList, wTogListConfig,
+
+    WuicyButton, wButtonConfig,
+
+    inputDiff
 } from "./Wuicy";
 
 // Debug:
 $.extend(window, {
     $,
-    wGlobal, wColor, wLoc,
-    WuicyIcon, WuicyPara, WuicyBadge, WuicyLink, WuicyNav
+
+    $w, pick, $pick, wGlobal, dftConfig,
+    wColor, wRoloc, wSize, wLoc, wList,
+
+    Wuicy, WuicyIcon, WuicyBadge, WuicyPara, WuicyList, WuicyPicture,
+    WuicyStraw, WuicyLink, WuicyTogBar, WuicyNav, WuicyTogList, WuicyButton,
+
+    inputDiff
 })
 
 wGlobal.theme = "juice"
 
-$(".w-root").doAppend("<div>").pour(new WuicyNav({
+$w.root.blend(new WuicyNav({
     items: [
         new WuicyPara({
-            id: "home",
-            text: "top", size: wSize("title"), color: wColor("snowpear", "ghfruit", true),
+            id: "home", size: wSize("title"),
+            text: "top", color: wColor("snowpear", "ghfruit", true),
             leftIcon: new WuicyIcon({ name: "home" })
         }),
         new WuicyLink({
-            target: WuicyPara.pick("home"),
-            loc: "@", line: "ripple"
+            target: pick("home"),
+            loc: "#", line: "ripple"
         })
     ]
-})).doAppend("<div>").pour(new WuicyTextList({
-   items: [
-       ["ForkKILLET",   "arrow-up", "arrow-down"],
-       ["Bohanjun",     "flag"],
-       ["UCW",          "sun"]
-   ]
-}))
-
-console.log(
-    "%cIce%cLava%c!",
-    "font-weight: bold; color: red;",
-    "font-weight: bold; color: blue;",
-    "color: black;"
-)
+})).then.blend([
+    new WuicyBadge({
+        id: "test", icon: new WuicyIcon({ name: "dice-d20" }),
+        text: "Ice", color: wColor("snowpear", "pomegranate"),
+        extraText: "Lava", extraColor: wColor("snowpear", "blueberry")
+    }), new WuicyPara({
+        text: "Click me!",
+        wCreate: w => $w(w).pour(new WuicyTogBar({
+            target: pick("test")
+        }))
+    }), new WuicyTogList({
+        barText: "IceLava",
+        list: wList({
+            items: [
+                [ "ForkKILLET"   , "arrow-up"    , "arrow-down"   ],
+                [ "Bohanjun"     , "flag"        ,                ],
+                [ "UCW"          , "sun"         ,                ]
+            ]
+        })
+    }), new WuicyPicture({
+        loc: "@res/icelava.jpg"
+    })
+])

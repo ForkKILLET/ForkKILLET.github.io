@@ -85,3 +85,44 @@ DOCUMENTS this
 
 @2020.06.25
 
+---
+
+VER Typed δ #dev 1.0.3 Wuicy update: toggle
+
+MODIFY
+
+upg!:   `WuicyTogBar` is formally supported now. It can be connected to a `target`
+        (like `WuicyLink`, they are both `WuicyStarw`), and when triggering the `glass`
+        (click or hover, that's configurable), the `target` **toggles**! (by default, `$w(this).toggle()`)
+        Passing callback `wToggle` is awesome, **but hide / show effect will disappear**.
+upg!:   `WuicyTogList`, a crude collapse list realized by `WuicyList` and `WuicytogBar`.
+upg!:   Use independent theme classes instead of Wuicy type hyphen theme name.
+upg:    Now elements' (not wuicies now) theme change when setting `wGlobal.theme`.
+        So it's easier to switch page theme!
+fix:    `WuicyBadge`'s icon has correct right margin now. (to separate from text)
+        Fix-style `WuicyBadge` has correct padding now.
+fix:    Title-size `WuicyPara` aligns correctly now.
+rm:     Use `wList` to generate `WuicyList` from string arrays instead of `WuicyTextList`.
+
+add!:   `JQuery:.blend` append a default container element of the given wuicy to `this` and `make` it.
+        return `this` and set `this.then` to the appended element.
+add:    `$w.get:root` returns `$("body>.w-root")`. Will create one when not found.
+add:    `Wuicy:.run` runs the callback with passing `this`.
+fix:    Default configs won't cover custom ones now.
+add:    Conventional console logs, but I like it.
+
+style:  There are always spaces around generic arguments and inside array literal now.
+style:  Removed unnecessary type casts.
+style:  Merge several `Wuicy` (comment) zones into a big one.
+style:  Use `$w(wuicy)` instead of `wuicy.glass`.
+style:  `JQuery:.mix` -- `JQuery:.conn`
+style:  `Wuicy.W` -- `T`
+style:  (typo) `String:.toWuciyClass` -- `toWuicyClass`
+
+@2020.07.12
+
+---
+
+VER Typed δ #dev 1.0.4 Wuicy update: picture
+
+upg!:   `WuicyPicture`
