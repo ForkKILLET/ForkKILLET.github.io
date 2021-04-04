@@ -1,0 +1,14 @@
+.node-content-wlog mark {
+    padding: 1px 4px;
+    margin-right: 5px;
+
+    background-color: aquamarine;
+    border-radius: 5px;
+}
+
+.node-content-wlog code {
+    background-color: white;
+    border: 2px;
+    padding: 0 3px;
+}
+

@@ -1,0 +1,37 @@
+body { margin: 0; }
+.node.top {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: calc(100% - 32px);
+	height: calc(100% - 32px);
+}
+
+.node {
+	margin: 8px;
+    padding: 8px;
+
+    border-radius: 8px;
+    box-shadow: 0 0 2px lightslategrey;
+}
+
+.node-children {
+	display: inline-flex;
+	flex-wrap: wrap;
+}
+
+.node.link {
+	cursor: pointer;
+
+	transition: background-color .5s;
+}
+.node.link:hover {
+	background-color: powderblue !important;
+}
+
+.node-content-icon {
+    margin: 5px 0;
+	border-radius: 5px;
+	box-shadow: 0 0 5px lightgrey;
+}
+
