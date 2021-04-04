@@ -5,7 +5,7 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "removeComments": true,
-    "target": "ES6",
+    "target": "ESNext",
     "outDir": "./docs/dist",
     "lib": [
       "es5",

@@ -1,6 +1,6 @@
 // :: Import
 
-import { fetchData } from "./utils"
+import { fetchData } from "./utils.js"
 
 // :: Mixins
 

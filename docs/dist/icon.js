@@ -1,4 +1,4 @@
-import { Mix, Log, FromData } from "./mixins";
+import { Mix, Log, FromData } from "./mixins.js";
 class Icon extends Mix(Log("icon", "orange"), FromData("icon/", ".tico")) {
     constructor(text) {
         super();

@@ -1,6 +1,6 @@
 // :: Import
 
-import { Mix, Log, FromData } from "./mixins"
+import { Mix, Log, FromData } from "./mixins.js"
 
 // :: Work
 

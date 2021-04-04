@@ -1,4 +1,4 @@
-import { Mix, Log, FromData } from "./mixins";
+import { Mix, Log, FromData } from "./mixins.js";
 class Wlog extends Mix(Log("wlog", "cornflowerblue"), FromData("wlog/", ".md")) {
     constructor(text) {
         super();

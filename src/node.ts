@@ -1,9 +1,9 @@
 // :: Import
 
-import { Mix, Log } from "./mixins"
-import { openUrl } from "./utils"
-import { Icon } from "./icon"
-import { Wlog } from "./wlog"
+import { Mix, Log } from "./mixins.js"
+import { openUrl } from "./utils.js"
+import { Icon } from "./icon.js"
+import { Wlog } from "./wlog.js"
 
 // :: Work
 

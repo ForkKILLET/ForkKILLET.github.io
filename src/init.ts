@@ -1,6 +1,6 @@
 // :: Init
 
-import { $top, $ } from "./node"
+import { $top, $ } from "./node.js"
 
 const init = async () => {
 
