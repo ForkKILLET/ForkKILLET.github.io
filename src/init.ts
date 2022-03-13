@@ -9,6 +9,7 @@ const
 	$games = $($top).title("Games"),
 		$hwn = await $($games).title("HardWayNazo").link("/HardWayNazo").icon("hwn"),
 		$tpe = await $($games).title("TrolleyProblemEmulator").link("/TrolleyProblemEmulator").icon("tpe"),
+		$som = await $($games).title("SudoerOfMyself").link("/SudoerOfMyself").icon("som"),
 	$novels = $($top).title("Novels"),
 		$xbqg = $($novels).title("TerminalXbqg").link("//github.com/ForkKILLET/TerminalXbqg"),
 	$friends = $($top).title("Friends"),

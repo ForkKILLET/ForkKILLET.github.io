@@ -18,7 +18,9 @@ class Icon extends Mix(
 		"b": "cornflowerblue",
 		"M": "rebeccapurple",
 		"m": "magenta",
-		"G": "grey",
+		"9": "grey",
+		"G": "green",
+		"g": "lightgreen"
 	}
 
 	matrix: string[][]
