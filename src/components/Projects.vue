@@ -6,115 +6,97 @@ import LogIndex from './LogIndex.vue'
 
 <template>
     <div class="projects">
-        <Card
-            name="IceLava Top"
-            :github="{ user: 'ForkKILLET', repo: 'ForkKILLET.github.io' }"
-            :langs="[ 'ts', 'vue' ]"
+        <masonry
+            :cols="{
+                default: 4,
+                1440: 3,
+                960: 2,
+                550: 1
+            }"
+            gutter="20px"
         >
-            <IceLava></IceLava>'s homepage. <br /> ζ refactor. <br />
-            Make with &lt;3 by <a href="//github.com/ForkKILLET">ForkKILLET</a> in Vue
-        </Card>
-
-        <Card name="Chat">
             <Card
-                name="WillBot"
-                :github="{ user: 'ForkKILLET', repo: 'WillBot' }"
-                :langs="[ 'js' ]"
+                name="IceLava Top"
+                :github="{ user: 'ForkKILLET', repo: 'ForkKILLET.github.io' }"
+                :langs="[ 'ts', 'vue' ]"
             >
-                A chat Bot with concise and free Will.
+                <IceLava></IceLava>'s homepage. <br /> ζ refactor. <br />
+                Make with &lt;3 by <a href="//github.com/ForkKILLET">ForkKILLET</a> in Vue
+            </Card>
+
+            <Card name="Chat">
+                <Card
+                    name="WillBot"
+                    :github="{ user: 'ForkKILLET', repo: 'WillBot' }"
+                    :langs="[ 'js' ]"
+                >
+                    A chat Bot with concise and free Will.
+                </Card>
+
+                <Card
+                    name="icalingua++"
+                    :github="{ user: 'icalingua-plus-plus', repo: 'icalingua-plus-plus' }"
+                    :langs="[ 'ts', 'js' ]"
+                >
+                    A client for QQ and more.
+                </Card>
+            </Card>
+
+            <Card name="Games">
+                <Card
+                    name="Sudoer Of Myself"
+                    :github="{ user: 'ForkKILLET', repo: 'SudoerOfMyself' }"
+                    :langs="[ 'js', 'rust' ]"
+                >
+                    A game tells the story of a will trapped in a terminal.
+                </Card>
+
+                <Card
+                    name="Trolley Problem Emulator"
+                    :github="{ user: 'ForkKILLET', repo: 'TrolleyProblemEmulator' }"
+                    :langs="[ 'js' ]"
+                >
+                    Survive the Trolley Problem.
+                </Card>
+            </Card>
+
+            <Card name="Novels">
+                <Card
+                    name="Terminal Xbqg"
+                    :github="{ user: 'ForkKILLET', repo: 'TerminalXbqg' }"
+                    :langs="[ 'js' ]"
+                >
+                    A fancy CLI novel reader.
+                </Card>
             </Card>
 
             <Card
-                name="icalingua++"
-                :github="{ user: 'icalingua-plus-plus', repo: 'icalingua-plus-plus' }"
-                :langs="[ 'ts', 'js' ]"
+                name="Extend Luogu"
+                :github="{ user: 'extend-luogu', repo: 'extend-luogu' }"
+                :langs="[ 'js', 'ts' ]"
             >
-                A client for QQ and more.
-            </Card>
-        </Card>
-
-        <Card name="Games">
-            <Card
-                name="Sudoer Of Myself"
-                :github="{ user: 'ForkKILLET', repo: 'SudoerOfMyself' }"
-                :langs="[ 'js', 'rust' ]"
-            >
-                A game tells the story of a will trapped in a terminal.
+                Make <a href="//luogu.com.cn/">Luogu</a> great again.
             </Card>
 
             <Card
-                name="Trolley Problem Emulator"
-                :github="{ user: 'ForkKILLET', repo: 'TrolleyProblemEmulator' }"
-                :langs="[ 'js' ]"
+                name="Logs"
+                :github="{ user: 'ForkKILLET', repo: 'FkLog' }"
+                :langs="[ 'md' ]"
             >
-                Survive the Trolley Problem.
+                <p>ForkKILLET's logs.</p>
+
+                <LogIndex></LogIndex>
             </Card>
-        </Card>
-
-        <Card name="Novels">
-            <Card
-                name="Terminal Xbqg"
-                :github="{ user: 'ForkKILLET', repo: 'TerminalXbqg' }"
-                :langs="[ 'js' ]"
-            >
-                A fancy CLI novel reader.
-            </Card>
-        </Card>
-
-        <Card
-            name="Extend Luogu"
-            :github="{ user: 'extend-luogu', repo: 'extend-luogu' }"
-            :langs="[ 'js', 'ts' ]"
-        >
-            Make <a href="//luogu.com.cn/">Luogu</a> great again.
-        </Card>
-
-        <Card
-            name="Logs"
-            :github="{ user: 'ForkKILLET', repo: 'FkLog' }"
-            :langs="[ 'md' ]"
-        >
-            ForkKILLET's logs.
-
-            <LogIndex></LogIndex>
-        </Card>
+        </masonry>
     </div>
 </template>
 
 <style scoped>
 .projects {
     margin: 10px;
-    column-gap: 30px;
 }
 
-@media screen and (min-width: 1440px) {
-    .projects {
-        columns: 4;
-    }
-}
-
-@media screen and (min-width: 960px) and (max-width: 1440px) {
-    .projects {
-        columns: 3;
-    }
-}
-
-@media screen and (min-width: 448px) and (max-width: 960px) {
-    .projects {
-        columns: 2;
-    }
-}
-
-@media screen and (max-width: 448px) {
-    .projects {
-        columns: 1;
-    }
-}
-
-.projects > * {
-    width: 100%;
-    break-inside: avoid;
+.projects .card-wrapper:not(:last-child) {
     margin-bottom: 30px;
-    margin-right: 20px;
 }
 </style>

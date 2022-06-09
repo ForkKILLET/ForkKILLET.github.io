@@ -23,9 +23,9 @@ const langColors = {
         <div class="card">
             <div class="card-inner">
                 <p class="card-title">{{ name }}</p>
-                <p class="card-content">
+                <div class="card-content">
                     <slot></slot>
-                </p>
+                </div>
             </div>
             <div class="card-badges">
                 <a
@@ -59,10 +59,6 @@ const langColors = {
 .card-inner {
     flex: 1;
     font-family: serif;
-}
-
-.card-content {
-    margin: 0;
 }
 
 :slotted(.card .card-wrapper) {

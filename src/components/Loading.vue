@@ -24,5 +24,5 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <p class="loading">{{ text }}</p>
+    <span class="loading">{{ text }}</span>
 </template>
