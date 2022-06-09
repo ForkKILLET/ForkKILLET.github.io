@@ -83,6 +83,7 @@ import LogIndex from './LogIndex.vue'
 
 <style scoped>
 .projects {
+    margin: 10px;
     column-gap: 30px;
 }
 

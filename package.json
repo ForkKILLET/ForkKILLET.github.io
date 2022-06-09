@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build --outDir docs",
+    "build": "vue-tsc --noEmit && vite build --outDir docs && echo -n icelava.top > docs/CNAME",
     "preview": "vite preview"
   },
   "dependencies": {
+    "normalize.css": "^8.0.1",
     "vue": "^3.2.25"
   },
   "devDependencies": {
