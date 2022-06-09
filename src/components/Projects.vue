@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { ref, Ref } from 'vue'
 import Card from './Card.vue'
 import IceLava from './IceLava.vue'
-import LogIndex from './LogIndex.vue'
+import Logs from './Logs.vue'
+import Badge from './Badge.vue'
+
+const fullScreen: Ref<boolean> = ref(false)
+
 </script>
 
 <template>
@@ -82,10 +87,19 @@ import LogIndex from './LogIndex.vue'
                 name="Logs"
                 :github="{ user: 'ForkKILLET', repo: 'FkLog' }"
                 :langs="[ 'md' ]"
+                :class="{ 'full-screen': fullScreen }"
             >
-                <p>ForkKILLET's logs.</p>
+                <Logs @view="fullScreen = true" @end-view="fullScreen = false"></Logs>
 
-                <LogIndex></LogIndex>
+                <template #badges>
+                    <Badge
+                        color="#66CCFF"
+                        active
+                        @click="fullScreen = ! fullScreen"
+                    >
+                        {{ fullScreen ? '-' : '+' }}
+                    </Badge>
+                </template>
             </Card>
         </masonry>
     </div>
@@ -96,7 +110,21 @@ import LogIndex from './LogIndex.vue'
     margin: 10px;
 }
 
-.projects .card-wrapper:not(:last-child) {
+.card-wrapper:not(:last-child) {
     margin-bottom: 30px;
+}
+
+.card-wrapper.full-screen {
+    position: fixed;
+    z-index: 1;
+    background-color: white;
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+}
+
+:deep(.card-wrapper.full-screen .card-inner) {
+    overflow-y: scroll;
 }
 </style>

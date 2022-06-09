@@ -40,6 +40,7 @@ const langColors = {
                         {{ langName }}
                     </Badge>
                 </template>
+                <slot name="badges"></slot>
             </div>
         </div>
     </div>
@@ -50,6 +51,7 @@ const langColors = {
     display: flex;
     flex: 1;
     justify-content: space-between;
+    height: calc(100% - 20px);
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 1px 1px #39C5BB;
