@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Card from './Card.vue'
 import IceLava from './IceLava.vue'
+import LogIndex from './LogIndex.vue'
 </script>
 
 <template>
@@ -66,6 +67,16 @@ import IceLava from './IceLava.vue'
             :langs="[ 'js', 'ts' ]"
         >
             Make <a href="//luogu.com.cn/">Luogu</a> great again.
+        </Card>
+
+        <Card
+            name="Logs"
+            :github="{ user: 'ForkKILLET', repo: 'FkLog' }"
+            :langs="[ 'md' ]"
+        >
+            ForkKILLET's logs.
+
+            <LogIndex></LogIndex>
         </Card>
     </div>
 </template>
