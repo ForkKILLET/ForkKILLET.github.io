@@ -2,10 +2,13 @@
 import { ref, Ref, onMounted } from 'vue'
 import yaml from 'js-yaml'
 import { marked } from 'marked'
+import Prism from 'prismjs'
 import markedKatex from '../utils/markedKatexExt'
 import Fetch from './Fetch.vue'
 
 marked.use(markedKatex)
+Prism.manual = true
+Object.assign(window, { Prism })
 
 const emits = defineEmits<{
     (e: 'view', id: string): void
@@ -26,7 +29,17 @@ const activeId: Ref<string | null> = ref(null)
 const html: Ref<string | null> = ref(null)
 function loadContent(markdown: string) {
     html.value = marked(markdown, {
-        baseUrl: './FkLog/'
+        baseUrl: './FkLog/',
+        highlight: (code, lang) => (
+            Prism.highlight(code, Prism.languages[lang], lang)
+                .split('\n')
+                .map((ln, i, lines, n = lines.length.toString().length) =>
+                    `<span class="line-number">${
+                        ' '.repeat(n - (i + 1).toString().length)
+                    }${i + 1}. </span>${ln}`
+                )
+                .join('\n')
+        )
     })
 }
 
@@ -118,5 +131,30 @@ onMounted(() => {
 
 .markdown img {
     max-width: 80%;
+}
+
+.markdown pre {
+    width: 90%;
+    overflow-x: auto;
+    background-color: black;
+    border-radius: 10px;
+    padding: 7px;
+    box-shadow: 0 1px 1px 1px black;
+}
+
+.markdown code:not(pre > code) {
+    display: inline-block;
+    margin: 0 1px;
+    padding: 0 2px;
+    border-radius: 3px;
+    color: white;
+    background-color: black;
+    box-shadow: 0 1px 1px 1px black;
+}
+
+.markdown blockquote {
+    border-left: 5px solid #C0C0C0;
+    margin-left: 10px;
+    padding-left: 20px;
 }
 </style>
