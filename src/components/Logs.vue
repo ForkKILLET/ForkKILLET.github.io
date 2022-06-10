@@ -80,7 +80,7 @@ window.addEventListener('hashchange', route)
                     :config="{
                         clientID: '3405c3c0316a15a2b35c',
                         clientSecret: '9c7f69f4397ec2021cc5391c29abfd4f511c6313',
-                        repo: 'ForkKILLET.github.io',
+                        repo: 'FkLog',
                         owner: 'ForkKILLET',
                         admin: [ 'ForkKILLET' ],
                         id: activeId,
