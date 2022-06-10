@@ -5,6 +5,7 @@ import { marked } from 'marked'
 import Prism from 'prismjs'
 import markedKatex from '../utils/markedKatexExt'
 import Fetch from './Fetch.vue'
+import Gitalk from './Gitalk.vue'
 
 marked.use(markedKatex)
 Prism.manual = true
@@ -43,23 +44,19 @@ function loadContent(markdown: string) {
     })
 }
 
-const inView = ref(false)
 function view(id: string, doUpdate: boolean = false) {
-    inView.value = true
     activeId.value = id
     if (doUpdate) query.log = id
     emits('view', id)
 }
 
 function endView(doUpdate: boolean = false) {
-    inView.value = false
     activeId.value = null
     if (doUpdate) delete query.log
     emits('endView')
 }
 
 function route() {
-    console.log(query.log)
     if (query.log) view(query.log)
     else endView()
 } 
@@ -69,7 +66,7 @@ window.addEventListener('hashchange', route)
 </script>
 
 <template>
-    <div class="log-content" v-if="inView">
+    <div class="log-content" v-if="activeId">
         <b>{{ activeId }}
             <a href="javascript:;" @click="endView(true)">&lt;&lt; back</a>
         </b>
@@ -79,6 +76,17 @@ window.addEventListener('hashchange', route)
                 :success="loadContent"
             >
                 <div class="markdown" v-html="html"></div>
+                <Gitalk
+                    :config="{
+                        clientID: '3405c3c0316a15a2b35c',
+                        clientSecret: '9c7f69f4397ec2021cc5391c29abfd4f511c6313',
+                        repo: 'ForkKILLET.github.io',
+                        owner: 'ForkKILLET',
+                        admin: [ 'ForkKILLET' ],
+                        id: activeId,
+                        language: 'zh-CN'
+                    }"
+                />
             </Fetch>
         </keep-alive>
     </div>

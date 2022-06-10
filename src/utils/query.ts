@@ -9,7 +9,6 @@ declare global {
 
 const write = (tar: URLSearchParams) => {
     location.hash = '#' + tar
-    console.log('#' + tar)
 }
 
 const read = () => new URLSearchParams(location.hash.slice(1))
