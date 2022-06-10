@@ -6,7 +6,6 @@ import Logs from './Logs.vue'
 import Badge from './Badge.vue'
 
 const fullScreen: Ref<boolean> = ref(false)
-
 </script>
 
 <template>
@@ -25,7 +24,7 @@ const fullScreen: Ref<boolean> = ref(false)
                 :github="{ user: 'ForkKILLET', repo: 'ForkKILLET.github.io' }"
                 :langs="[ 'ts', 'vue' ]"
             >
-                <IceLava></IceLava>'s homepage. <br /> ζ refactor. <br />
+                <IceLava />'s homepage. <br /> ζ refactor. <br />
                 Make with &lt;3 by <a href="//github.com/ForkKILLET">ForkKILLET</a> in Vue
             </Card>
 

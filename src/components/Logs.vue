@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
+import { ref, Ref, onMounted } from 'vue'
 import yaml from 'js-yaml'
 import { marked } from 'marked'
 import markedKatex from '../utils/markedKatexExt'
@@ -32,14 +32,20 @@ const inView = ref(false)
 function view(id: string) {
     inView.value = true
     activeId.value = id
+    query.log = id
     emits('view', id)
 }
 
 function endView() {
     inView.value = false
     activeId.value = null
+    delete query.log
     emits('endView')
 }
+
+onMounted(() => {
+    if ('log' in query) view(query.log)
+})
 </script>
 
 <template>
@@ -47,30 +53,34 @@ function endView() {
         <b>{{ activeId }}
             <a href="javascript:;" @click="endView">&lt;&lt; back</a>
         </b>
-        <Fetch
-            :url="`/FkLog/${activeId}`"
-            :success="loadContent"
-        >
-            <div class="markdown" v-html="html"></div>
-        </Fetch>
+        <keep-alive>
+            <Fetch
+                :url="`/FkLog/${activeId}`"
+                :success="loadContent"
+            >
+                <div class="markdown" v-html="html"></div>
+            </Fetch>
+        </keep-alive>
     </div>
     <div class="log-index" v-else>
-        <Fetch
-            url="/FkLog/@meta/index.yml"
-            :success="loadIndex"
-        >
-            <template #default>
-                <ul>
-                    <li
-                        v-for="{ id, name } in index"
-                        :key="id"
-                        @click="view(id)"
-                    >
-                        <p class="log-entry">{{ name }}</p>
-                    </li>
-                </ul>
-            </template>
-        </Fetch>
+        <keep-alive>
+            <Fetch
+                url="/FkLog/@meta/index.yml"
+                :success="loadIndex"
+            >
+                <template #default>
+                    <ul>
+                        <li
+                            v-for="{ id, name } in index"
+                            :key="id"
+                            @click="view(id)"
+                        >
+                            <p class="log-entry">{{ name }}</p>
+                        </li>
+                    </ul>
+                </template>
+            </Fetch>
+        </keep-alive>
     </div>
 </template>
 

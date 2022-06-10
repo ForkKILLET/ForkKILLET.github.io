@@ -28,7 +28,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <Loading v-if="loading"></Loading>
+    <p v-if="loading"><Loading /></p>
     <div v-else-if="res.err" style="color: red">
         {{ res.err }}
     </div>
