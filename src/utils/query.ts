@@ -7,27 +7,32 @@ declare global {
     }
 }
 
-const update = (tar: URLSearchParams) => location.hash = '#' + tar
-window.query = new Proxy(
-    new URLSearchParams(location.hash.slice(1)), {
-        get: (tar, k: string) => tar.get(k),
-        set: (tar, k: string, v) => {
-            tar.set(k, v)
-            update(tar)
-            return true
-        },
-        deleteProperty: (tar, k: string) => {
-            const has = tar.has(k)
-            if (has) {
-                tar.delete(k)
-                update(tar)
-            }
-            return has
-        },
-        has: (tar, k: string) => {
-            return tar.has(k)
+const write = (tar: URLSearchParams) => {
+    location.hash = '#' + tar
+    console.log('#' + tar)
+}
+
+const read = () => new URLSearchParams(location.hash.slice(1))
+
+window.query = new Proxy({}, {
+    get: (_, k: string) => read().get(k),
+    set: (_, k: string, v) => {
+        const q = read()
+        q.set(k, v)
+        write(q)
+        return true
+    },
+    deleteProperty: (_, k: string) => {
+        const q = read()
+        if (q.has(k)) {
+            q.delete(k)
+            write(q)
         }
+        return true
+    },
+    has: (_, k: string) => {
+        return read().has(k)
     }
-) as unknown as Record<string, string>
+}) as unknown as Record<string, string>
 
 export {}

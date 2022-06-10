@@ -44,29 +44,34 @@ function loadContent(markdown: string) {
 }
 
 const inView = ref(false)
-function view(id: string) {
+function view(id: string, doUpdate: boolean = false) {
     inView.value = true
     activeId.value = id
-    query.log = id
+    if (doUpdate) query.log = id
     emits('view', id)
 }
 
-function endView() {
+function endView(doUpdate: boolean = false) {
     inView.value = false
     activeId.value = null
-    delete query.log
+    if (doUpdate) delete query.log
     emits('endView')
 }
 
-onMounted(() => {
-    if ('log' in query) view(query.log)
-})
+function route() {
+    console.log(query.log)
+    if (query.log) view(query.log)
+    else endView()
+} 
+
+onMounted(route)
+window.addEventListener('hashchange', route)
 </script>
 
 <template>
     <div class="log-content" v-if="inView">
         <b>{{ activeId }}
-            <a href="javascript:;" @click="endView">&lt;&lt; back</a>
+            <a href="javascript:;" @click="endView(true)">&lt;&lt; back</a>
         </b>
         <keep-alive>
             <Fetch
@@ -88,7 +93,7 @@ onMounted(() => {
                         <li
                             v-for="{ id, name } in index"
                             :key="id"
-                            @click="view(id)"
+                            @click="view(id, true)"
                         >
                             <p class="log-entry">{{ name }}</p>
                         </li>
