@@ -30,6 +30,10 @@ defineProps<{
     mix-blend-mode: difference;
 }
 
+.badge.active {
+    cursor: pointer;
+}
+
 .badge.active:active {
     transform: scale(.9);
 }
