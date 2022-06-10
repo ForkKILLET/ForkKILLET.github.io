@@ -4,6 +4,7 @@ import Card from './Card.vue'
 import IceLava from './IceLava.vue'
 import Logs from './Logs.vue'
 import Badge from './Badge.vue'
+import { version } from '../../package.json'
 
 const fullScreen: Ref<boolean> = ref(false)
 </script>
@@ -24,7 +25,7 @@ const fullScreen: Ref<boolean> = ref(false)
                 :github="{ user: 'ForkKILLET', repo: 'ForkKILLET.github.io' }"
                 :langs="[ 'ts', 'vue' ]"
             >
-                <IceLava />'s homepage. <br /> ζ refactor. <br />
+                <IceLava />'s homepage. v{{ version }}-ζ <br />
                 Make with &lt;3 by <a href="//github.com/ForkKILLET">ForkKILLET</a> in Vue
             </Card>
 
