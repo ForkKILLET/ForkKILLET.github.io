@@ -25,7 +25,9 @@ function loadIndex(data: string) {
 const activeId: Ref<string | null> = ref(null)
 const html: Ref<string | null> = ref(null)
 function loadContent(markdown: string) {
-    html.value = marked(markdown)
+    html.value = marked(markdown, {
+        baseUrl: './FkLog/'
+    })
 }
 
 const inView = ref(false)
@@ -112,5 +114,9 @@ onMounted(() => {
 
 .markdown th {
     background-color: #EEEEEE;
+}
+
+.markdown img {
+    max-width: 80%;
 }
 </style>

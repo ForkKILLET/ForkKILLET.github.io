@@ -1,7 +1,7 @@
 {
   "name": "icelava-top-workspace",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.2.2",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build --outDir docs && echo -n icelava.top > docs/CNAME",
