@@ -15,5 +15,5 @@ onMounted(() => gitalk.render(gitalkContainer.value!))
 </script>
 
 <template>
-    <div ref="gitalkContainer"></div>
+    <div class="gitalk-container" ref="gitalkContainer"></div>
 </template>

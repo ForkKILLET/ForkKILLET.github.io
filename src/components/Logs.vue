@@ -170,4 +170,8 @@ window.addEventListener('hashchange', route)
     margin-left: 10px;
     padding-left: 20px;
 }
+
+.gitalk-container {
+    width: 90%;
+}
 </style>
