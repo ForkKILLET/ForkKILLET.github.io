@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import Loading from './Loading.vue'
 import useFetch, { FetchRes } from '../utils/useFetch'
-import { onMounted, reactive, ref, Ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 const props = defineProps<{
     url: string,
     success?: (data: string) => void | Promise<void>
 }>()
 
-const loading: Ref<boolean> = ref(true)
+const loading = ref<boolean>(true)
 
 const res = reactive<FetchRes>({})
 

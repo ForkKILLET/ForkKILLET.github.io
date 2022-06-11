@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import yaml from 'js-yaml'
 import { marked } from 'marked'
 import Prism from 'prismjs'
@@ -21,13 +21,13 @@ type Index = {
     name: string
 } []
 
-const index: Ref<Index | null> = ref(null)
+const index = ref<Index | null>(null)
 function loadIndex(data: string) {
     index.value = yaml.load(data!) as Index
 }
 
-const activeId: Ref<string | null> = ref(null)
-const html: Ref<string | null> = ref(null)
+const activeId = ref<string | null>(null)
+const html = ref<string | null>(null)
 function loadContent(markdown: string) {
     html.value = marked(markdown, {
         baseUrl: './FkLog/',

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Gitalk from 'gitalk'
 import 'gitalk/dist/gitalk.css'
-import { onMounted, ref, Ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps<{
     config: Gitalk.GitalkOptions
@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const gitalk = new Gitalk(props.config)
 
-const gitalkContainer: Ref<HTMLDivElement | null> = ref(null)
+const gitalkContainer = ref<HTMLDivElement | null>(null)
 
 onMounted(() => gitalk.render(gitalkContainer.value!))
 </script>

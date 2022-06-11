@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
+import { ref } from 'vue'
 import Badge from './Badge.vue'
 
 defineProps<{
@@ -20,7 +20,7 @@ const langColors = {
     md: '#FFFFFF'
 }
 
-const inner: Ref<HTMLDivElement | null> = ref(null)
+const inner = ref<HTMLDivElement | null>(null)
 </script>
 
 <template>
