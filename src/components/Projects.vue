@@ -45,7 +45,8 @@ const fullScreen = ref<boolean>(false)
                 :github="{ user: 'ForkKILLET', repo: 'SudoerOfMyself' }"
                 :langs="[ 'js', 'rust' ]"
             >
-                A game tells the story of a will trapped in a terminal.
+                A game tells the story of a will trapped in a terminal. (WIP)<br />
+                <a href="/SudoerOfMyself/">&gt;&gt; play</a>
             </Card>
 
             <Card
@@ -53,7 +54,8 @@ const fullScreen = ref<boolean>(false)
                 :github="{ user: 'ForkKILLET', repo: 'TrolleyProblemEmulator' }"
                 :langs="[ 'js' ]"
             >
-                Survive the Trolley Problem.
+                Survive the Trolley Problem. (WIP)<br />
+                <a href="/TrolleyProblemEmulator/">&gt;&gt; play</a>
             </Card>
         </Card>
 
