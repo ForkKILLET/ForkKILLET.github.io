@@ -87,6 +87,7 @@ const fullScreen: Ref<boolean> = ref(false)
                 name="Logs"
                 :github="{ user: 'ForkKILLET', repo: 'FkLog' }"
                 :langs="[ 'md' ]"
+                :scroll="fullScreen"
                 :class="{ 'full-screen': fullScreen }"
             >
                 <Logs @view="fullScreen = true" @end-view="fullScreen = false"></Logs>
@@ -122,9 +123,5 @@ const fullScreen: Ref<boolean> = ref(false)
     left: 10px;
     width: calc(100% - 20px);
     height: calc(100% - 20px);
-}
-
-:deep(.card-wrapper.full-screen .card-inner) {
-    overflow-y: scroll;
 }
 </style>

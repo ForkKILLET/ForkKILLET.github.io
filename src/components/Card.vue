@@ -1,12 +1,15 @@
 <script setup lang="ts">
+import { ref, Ref } from 'vue'
 import Badge from './Badge.vue'
+
 defineProps<{
     name: string,
     github?: {
         user: string,
         repo: string        
     },
-    langs?: ('js' | 'ts' | 'rust' | 'vue' | 'md')[]
+    langs?: ('js' | 'ts' | 'rust' | 'vue' | 'md')[],
+    scroll?: boolean
 }>()
 
 const langColors = {
@@ -16,12 +19,18 @@ const langColors = {
     vue: '#41B883',
     md: '#FFFFFF'
 }
+
+const inner: Ref<HTMLDivElement | null> = ref(null)
 </script>
 
 <template>
     <div class="card-wrapper">
         <div class="card">
-            <div class="card-inner">
+            <div
+                ref="inner"
+                class="card-inner"
+                :style="{ overflowY: scroll ? 'scroll' : undefined }"
+            >
                 <p class="card-title">{{ name }}</p>
                 <div class="card-content">
                     <slot></slot>
@@ -41,6 +50,14 @@ const langColors = {
                     </Badge>
                 </template>
                 <slot name="badges"></slot>
+                <Badge
+                    v-if="scroll"
+                    color="#66CCFF"
+                    active
+                    @click="inner!.scrollTo(0, 0)"
+                >
+                    ^
+                </Badge>
             </div>
         </div>
     </div>
@@ -83,7 +100,7 @@ const langColors = {
     opacity: 1;
 }
 
-.card-badges > * {
+:deep(.card-badges > *) {
     margin-bottom: 5px;
 }
 
