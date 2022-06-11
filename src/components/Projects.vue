@@ -83,16 +83,6 @@ const fullScreen = ref<boolean>(false)
             :class="{ 'full-screen': fullScreen }"
         >
             <Logs @view="fullScreen = true" @end-view="fullScreen = false"></Logs>
-
-            <template #badges>
-                <Badge
-                    color="#66CCFF"
-                    active
-                    @click="fullScreen = ! fullScreen"
-                >
-                    {{ fullScreen ? '-' : '+' }}
-                </Badge>
-            </template>
         </Card>
     </Waterfall>
 </template>
