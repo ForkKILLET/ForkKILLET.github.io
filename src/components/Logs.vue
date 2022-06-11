@@ -84,6 +84,7 @@ window.addEventListener('hashchange', route)
                         owner: 'ForkKILLET',
                         admin: [ 'ForkKILLET' ],
                         id: activeId,
+                        title: activeId,
                         language: 'zh-CN'
                     }"
                 />
