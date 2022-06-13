@@ -115,7 +115,7 @@ window.addEventListener('hashchange', route)
 
 <style>
 .log-index {
-    min-height: 300px;
+    height: 350px;
     padding: 10px;
 }
 

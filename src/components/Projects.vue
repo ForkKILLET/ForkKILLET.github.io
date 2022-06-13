@@ -11,7 +11,7 @@ const fullScreen = ref<boolean>(false)
 </script>
 
 <template>
-    <Waterfall class="projects">
+    <Waterfall :gap="30" class="projects">
         <Card
             name="IceLava Top"
             :github="{ user: 'ForkKILLET', repo: 'ForkKILLET.github.io' }"
@@ -81,7 +81,7 @@ const fullScreen = ref<boolean>(false)
             name="Logs"
             :github="{ user: 'ForkKILLET', repo: 'FkLog' }"
             :langs="[ 'md' ]"
-            :scroll="fullScreen"
+            scroll
             :class="{ 'full-screen': fullScreen }"
         >
             <Logs @view="fullScreen = true" @end-view="fullScreen = false"></Logs>
@@ -94,17 +94,13 @@ const fullScreen = ref<boolean>(false)
     margin: 10px;
 }
 
-.card-wrapper:not(:last-child) {
-    margin-bottom: 30px;
-}
-
 .card-wrapper.full-screen {
     position: fixed;
     z-index: 1;
     background-color: white;
     top: 10px;
     left: 10px;
-    width: calc(100% - 20px);
-    height: calc(100% - 20px);
+    width: calc(100% - 20px) !important;
+    height: calc(100% - 20px) !important;
 }
 </style>
