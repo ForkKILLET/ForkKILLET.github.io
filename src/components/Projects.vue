@@ -4,13 +4,14 @@ import Waterfall from './Waterfall.vue'
 import Card from './Card.vue'
 import IceLava from './IceLava.vue'
 import Logs from './Logs.vue'
-import Badge from './Badge.vue'
+import Mask from './Mask.vue'
 import { version } from '../../package.json'
 
 const fullScreen = ref<boolean>(false)
 </script>
 
 <template>
+    <Mask v-if="fullScreen" />
     <Waterfall :gap="30" class="projects">
         <Card
             name="IceLava Top"

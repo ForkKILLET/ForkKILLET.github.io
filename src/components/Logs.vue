@@ -104,7 +104,7 @@ window.addEventListener('hashchange', route)
                             :key="id"
                             @click="view(id, true)"
                         >
-                            <p class="log-entry">{{ name }}</p>
+                            <p class="log-entry">{{ name }} <small class="log-id"><br />{{ id }}</small></p>
                         </li>
                     </ul>
                 </template>
@@ -127,6 +127,10 @@ window.addEventListener('hashchange', route)
 .log-entry:hover {
     color: #39C5BB;
     text-decoration: underline;
+}
+
+.log-id {
+    color: #7D7D7D;
 }
 
 .markdown table {
