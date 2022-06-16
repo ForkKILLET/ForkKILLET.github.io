@@ -8,6 +8,17 @@ type mathBlockToken = {
     formula: string
 }
 
+const tryKatex = (formula: string, options?: any) => {
+    try {
+        return `<span>${
+            katex.renderToString(formula, options)
+        }</span>`
+    }
+    catch {
+        return `<span class="katex-error">${formula}</span>`
+    }
+}
+
 export const mathBlockExt = {
     name: 'math-block',
     level: 'block' as const,
@@ -23,7 +34,7 @@ export const mathBlockExt = {
         } : undefined
     },
     renderer(token: mathBlockToken) {
-        return '<span>' + katex.renderToString(token.formula, { displayMode: true }) + '</span>'
+        return tryKatex(token.formula, { displayMode: true })
     }
 }
 
@@ -48,7 +59,7 @@ export const mathInlineExt = {
         } : undefined
     },
     renderer(token: mathInlineToken) {
-        return '<span>' + katex.renderToString(token.formula) + '</span>'
+        return tryKatex(token.formula)
     }
 }
 

@@ -1,7 +1,11 @@
 <!-- I know this should be 'Masonry', but... -->
 
+<script lang="ts">
+export const kTypesetWaterfall = Symbol('typesetWaterfall') as InjectionKey<() => void>
+</script>
+
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { InjectionKey, onMounted, onUnmounted, provide, ref } from 'vue'
 
 const props = defineProps<{
     gap: number
@@ -28,7 +32,7 @@ function typeset() {
         if ([ 'fixed', 'absoluted' ].includes(el.style.position)) return s
         const h = + window.getComputedStyle(el).getPropertyValue('height').replace(/px$/, '')
         heights.push(h + props.gap)
-        return s + h
+        return s + h + props.gap
     }, 0)
     const hMean = hSum / colNum
     let hColMax = 0
@@ -46,6 +50,7 @@ function typeset() {
             self.style.height = hCol + 'px'
         }
 
+        if (col === colNum - 1) break
         const br = document.createElement('div')
         br.classList.add('waterfall-break')
         self.insertBefore(br, children[i])
@@ -59,6 +64,9 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('resize', typeset)
 })
+
+// Debug: Object.assign(window, { typeset })
+provide(kTypesetWaterfall, typeset)
 </script>
 
 <template>

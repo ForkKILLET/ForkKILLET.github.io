@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Waterfall from './Waterfall.vue'
 import Card from './Card.vue'
 import IceLava from './IceLava.vue'
@@ -17,6 +17,7 @@ const fullScreen = ref<boolean>(false)
             name="IceLava Top"
             :github="{ user: 'ForkKILLET', repo: 'ForkKILLET.github.io' }"
             :langs="[ 'ts', 'vue' ]"
+            tico="il"
         >
             <IceLava />'s homepage. v{{ version }}-ζ <br />
             Make with &lt;3 by <a href="//github.com/ForkKILLET">ForkKILLET</a> in Vue
@@ -45,6 +46,7 @@ const fullScreen = ref<boolean>(false)
                 name="Sudoer Of Myself"
                 :github="{ user: 'ForkKILLET', repo: 'SudoerOfMyself' }"
                 :langs="[ 'js', 'rust' ]"
+                tico="som"
             >
                 A game tells the story of a will trapped in a terminal. (WIP)<br />
                 <a href="/SudoerOfMyself/">&gt;&gt; play</a>
@@ -54,6 +56,7 @@ const fullScreen = ref<boolean>(false)
                 name="Trolley Problem Emulator"
                 :github="{ user: 'ForkKILLET', repo: 'TrolleyProblemEmulator' }"
                 :langs="[ 'js' ]"
+                tico="tpe"
             >
                 Survive the Trolley Problem. (WIP)<br />
                 <a href="/TrolleyProblemEmulator/">&gt;&gt; play</a>
@@ -74,6 +77,7 @@ const fullScreen = ref<boolean>(false)
             name="Extend Luogu"
             :github="{ user: 'extend-luogu', repo: 'extend-luogu' }"
             :langs="[ 'js', 'ts' ]"
+            tico="exlg"
         >
             Make <a href="//luogu.com.cn/">Luogu</a> great again.
         </Card>

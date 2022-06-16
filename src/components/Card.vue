@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Badge from './Badge.vue'
+import Fetch from './Fetch.vue'
+import Tico from './Tico.vue'
 
 defineProps<{
     name: string,
@@ -9,6 +11,7 @@ defineProps<{
         repo: string        
     },
     langs?: ('js' | 'ts' | 'rust' | 'vue' | 'md')[],
+    tico?: string
     scroll?: boolean
 }>()
 
@@ -33,6 +36,14 @@ const inner = ref<HTMLDivElement | null>(null)
             >
                 <p class="card-title">{{ name }}</p>
                 <div class="card-content">
+                    <div v-if="tico" class="card-tico">
+                        <Fetch
+                            :url="`/FkLog/@icon/${tico}.tico`"
+                            #default="{ data }"
+                        >
+                            <Tico :file="data!"></Tico>
+                        </Fetch>
+                    </div>
                     <slot></slot>
                 </div>
             </div>
@@ -80,6 +91,10 @@ const inner = ref<HTMLDivElement | null>(null)
     font-family: serif;
 }
 
+.card-content {
+    padding: 5px;
+}
+
 :slotted(.card .card-wrapper) {
     margin-top: 10px;
 }
@@ -94,6 +109,11 @@ const inner = ref<HTMLDivElement | null>(null)
     margin-left: 6px;
     opacity: 0;
     transition: .5s opacity;
+}
+
+.card-tico {
+    float: left;
+    margin-right: 5px;
 }
 
 .card:hover > .card-badges {

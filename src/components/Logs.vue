@@ -46,7 +46,9 @@ function loadContent(markdown: string) {
 
 function view(id: string, doUpdate: boolean = false) {
     activeId.value = id
-    if (doUpdate) query.log = id
+    if (doUpdate) {
+        query.log = id
+    }
     emits('view', id)
 }
 
@@ -174,6 +176,21 @@ window.addEventListener('hashchange', route)
     border-left: 5px solid #C0C0C0;
     margin-left: 10px;
     padding-left: 20px;
+}
+
+.markdown .katex-error {
+    position: relative;
+    color: red;
+}
+
+.markdown .katex-error::before {
+    content: '[';
+    color: black;
+}
+
+.markdown .katex-error::after {
+    content: ']';
+    color: black;
 }
 
 .gitalk-container {
