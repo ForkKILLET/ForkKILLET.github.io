@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import Waterfall from './Waterfall.vue'
 import Card from './Card.vue'
 import IceLava from './IceLava.vue'
 import Logs from './Logs.vue'
 import Mask from './Mask.vue'
 import { version } from '../../package.json'
+import Badge from './Badge.vue'
 
-const fullScreen = ref<boolean>(false)
+const inLogView = ref<boolean>(false)
+const logs = ref<typeof Logs | null>(null)
 </script>
 
 <template>
-    <Mask v-if="fullScreen" />
+    <Mask v-if="inLogView" />
     <Waterfall :gap="30" class="projects">
         <Card
             name="IceLava Top"
@@ -87,9 +89,23 @@ const fullScreen = ref<boolean>(false)
             :github="{ user: 'ForkKILLET', repo: 'FkLog' }"
             :langs="[ 'md' ]"
             scroll
-            :class="{ 'full-screen': fullScreen }"
+            :class="{ 'full-screen': inLogView }"
         >
-            <Logs @view="fullScreen = true" @end-view="fullScreen = false"></Logs>
+            <Logs
+                ref="logs"
+                @view="inLogView = true"
+                @end-view="inLogView = false"
+            />
+            <template #badges>
+                <Badge
+                    v-if="inLogView"
+                    color="#66CCFF"
+                    active
+                    @click="logs?.toggleToc()"
+                >
+                    toc
+                </Badge>
+            </template>
         </Card>
     </Waterfall>
 </template>

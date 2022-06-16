@@ -42,6 +42,15 @@ function loadContent(markdown: string) {
                 .join('\n')
         )
     })
+    nextTick(() => {
+        toc.value = Array
+            .from(markdownArea.value!.querySelectorAll('h1, h2') as NodeListOf<HTMLHeadElement>)
+            .map(head => ({
+                lv: + head.tagName.slice(1),
+                id: head.id,
+                html: head.innerHTML
+            }))
+    })
 }
 
 const logContent = ref<typeof Fetch | null>(null)
@@ -60,10 +69,30 @@ function endView(doUpdate: boolean = false) {
 function route() {
     if (query.log) view(query.log)
     else endView()
-} 
+}
 
 onMounted(route)
 window.addEventListener('hashchange', route)
+
+const markdownArea = ref<HTMLDivElement | null>(null)
+
+type LogToc = Array<{
+    lv: number,
+    id: string,
+    html: string
+}>
+
+const toc = ref<LogToc | null>(null)
+const inTocView = ref(false)
+function toggleToc() {
+    inTocView.value = ! inTocView.value
+}
+
+function gotoHeading(id: string) {
+    markdownArea.value?.querySelector('#' + id)?.scrollIntoView()
+}
+
+defineExpose({ toggleToc, gotoHeading })
 </script>
 
 <template>
@@ -76,7 +105,17 @@ window.addEventListener('hashchange', route)
             :url="`/FkLog/${activeId}`"
             :success="loadContent"
         >
-            <div class="markdown" v-html="html"></div>
+            <div class="log-toc markdown" v-if="inTocView">
+                <ul>
+                    <li
+                        v-for="{ lv, id, html } in toc"
+                        v-html="html"
+                        :class="[ `log-toc-item-${lv}`, 'implict-link' ]"
+                        @click="gotoHeading(id)"
+                    ></li>
+                </ul>
+            </div>
+            <div ref="markdownArea" class="markdown" v-html="html"></div>
             <Gitalk
                 :config="{
                     clientID: '3405c3c0316a15a2b35c',
@@ -104,7 +143,7 @@ window.addEventListener('hashchange', route)
                             :key="id"
                             @click="view(id, true)"
                         >
-                            <p class="log-entry">{{ name }} <small class="log-id"><br />{{ id }}</small></p>
+                            <p class="implict-link">{{ name }} <small class="log-id"><br />{{ id }}</small></p>
                         </li>
                     </ul>
                 </template>
@@ -119,18 +158,32 @@ window.addEventListener('hashchange', route)
     padding: 10px;
 }
 
-.log-entry {
+.implict-link {
     color: black;
     transition: color .3s;
 }
 
-.log-entry:hover {
+.implict-link:hover {
     color: #39C5BB;
     text-decoration: underline;
 }
 
 .log-id {
     color: #7D7D7D;
+}
+
+.log-toc {
+    position: absolute;
+    right: 10px;
+    z-index: 1;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 0 1px 1px #39C5BB;
+}
+
+.log-toc > ul {
+    padding: 0 10px 0 20px;
+    list-style-type: disclosure-closed;
 }
 
 .markdown table {

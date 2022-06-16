@@ -29,22 +29,24 @@ const inner = ref<HTMLDivElement | null>(null)
 <template>
     <div class="card-wrapper">
         <div class="card">
-            <div
-                ref="inner"
-                class="card-inner"
-                :style="{ overflowY: scroll ? 'scroll' : undefined }"
-            >
-                <p class="card-title">{{ name }}</p>
-                <div class="card-content">
-                    <div v-if="tico" class="card-tico">
-                        <Fetch
-                            :url="`/FkLog/@icon/${tico}.tico`"
-                            #default="{ data }"
-                        >
-                            <Tico :file="data!"></Tico>
-                        </Fetch>
+            <div class="card-inner-wrapper">
+                <div
+                    ref="inner"
+                    class="card-inner"
+                    :style="{ overflowY: scroll ? 'scroll' : undefined }"
+                >
+                    <p class="card-title">{{ name }}</p>
+                    <div class="card-content">
+                        <div v-if="tico" class="card-tico">
+                            <Fetch
+                                :url="`/FkLog/@icon/${tico}.tico`"
+                                #default="{ data }"
+                            >
+                                <Tico :file="data!"></Tico>
+                            </Fetch>
+                        </div>
+                        <slot></slot>
                     </div>
-                    <slot></slot>
                 </div>
             </div>
             <div class="card-badges">
@@ -89,6 +91,11 @@ const inner = ref<HTMLDivElement | null>(null)
 .card-inner {
     flex: 1;
     font-family: serif;
+    height: 100%;
+}
+
+.card-inner-wrapper {
+    position: relative;
 }
 
 .card-content {
