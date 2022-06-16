@@ -9,10 +9,9 @@ const props = defineProps<{
 }>()
 
 const loading = ref<boolean>(true)
-
 const res = reactive<FetchRes>({})
 
-onMounted(async () => {
+async function load () {
     await useFetch(props.url, res)
     if (! res.err) {
         try {
@@ -23,7 +22,10 @@ onMounted(async () => {
         }
     }
     loading.value = false
-})
+}
+defineExpose({ load })
+
+onMounted(load)
 
 </script>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import yaml from 'js-yaml'
 import { marked } from 'marked'
 import Prism from 'prismjs'
@@ -44,14 +44,13 @@ function loadContent(markdown: string) {
     })
 }
 
-function view(id: string, doUpdate: boolean = false) {
+const logContent = ref<typeof Fetch | null>(null)
+async function view(id: string, doUpdate: boolean = false) {
     activeId.value = id
-    if (doUpdate) {
-        query.log = id
-    }
+    if (doUpdate) query.log = id
     emits('view', id)
+    nextTick(() => logContent.value!.load())
 }
-
 function endView(doUpdate: boolean = false) {
     activeId.value = null
     if (doUpdate) delete query.log
@@ -72,26 +71,25 @@ window.addEventListener('hashchange', route)
         <b>{{ activeId }}
             <a href="javascript:;" @click="endView(true)">&lt;&lt; back</a>
         </b>
-        <keep-alive>
-            <Fetch
-                :url="`/FkLog/${activeId}`"
-                :success="loadContent"
-            >
-                <div class="markdown" v-html="html"></div>
-                <Gitalk
-                    :config="{
-                        clientID: '3405c3c0316a15a2b35c',
-                        clientSecret: '9c7f69f4397ec2021cc5391c29abfd4f511c6313',
-                        repo: 'FkLog',
-                        owner: 'ForkKILLET',
-                        admin: [ 'ForkKILLET' ],
-                        id: activeId,
-                        title: activeId,
-                        language: 'zh-CN'
-                    }"
-                />
-            </Fetch>
-        </keep-alive>
+        <Fetch
+            ref="logContent"
+            :url="`/FkLog/${activeId}`"
+            :success="loadContent"
+        >
+            <div class="markdown" v-html="html"></div>
+            <Gitalk
+                :config="{
+                    clientID: '3405c3c0316a15a2b35c',
+                    clientSecret: '9c7f69f4397ec2021cc5391c29abfd4f511c6313',
+                    repo: 'FkLog',
+                    owner: 'ForkKILLET',
+                    admin: [ 'ForkKILLET' ],
+                    id: activeId,
+                    title: activeId,
+                    language: 'zh-CN'
+                }"
+            />
+        </Fetch>
     </div>
     <div class="log-index" v-else>
         <keep-alive>
