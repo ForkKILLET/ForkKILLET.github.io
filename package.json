@@ -1,7 +1,7 @@
 {
   "name": "icelava-top-workspace",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build --outDir docs && echo -n icelava.top > docs/CNAME",
@@ -11,12 +11,14 @@
     "@types/js-yaml": "^4.0.5",
     "@types/katex": "^0.14.0",
     "@types/marked": "^4.0.3",
+    "@types/node-emoji": "^1.8.1",
     "@types/prismjs": "^1.26.0",
     "gitalk": "^1.7.2",
     "js-yaml": "^4.1.0",
     "katex": "^0.16.0",
     "marked": "^4.0.16",
     "marked-extended-latex": "^1.1.0",
+    "node-emoji": "^1.11.0",
     "normalize.css": "^8.0.1",
     "prismjs": "^1.28.0",
     "vue": "^3.2.25"

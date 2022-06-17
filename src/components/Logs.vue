@@ -4,12 +4,14 @@ import yaml from 'js-yaml'
 import { marked } from 'marked'
 import Prism from 'prismjs'
 import markedKatex from '../utils/markedKatexExt'
+import markedEmoji from '../utils/markedEmojiExt'
 import Fetch from './Fetch.vue'
 import Gitalk from './Gitalk.vue'
 
-marked.use(markedKatex)
+Object.assign(window, { marked })
+
+marked.use(markedKatex, markedEmoji)
 Prism.manual = true
-Object.assign(window, { Prism })
 
 const emits = defineEmits<{
     (e: 'view', id: string): void
@@ -42,7 +44,7 @@ function loadContent(markdown: string) {
                 .join('\n')
         )
     })
-    nextTick(() => {
+    setTimeout(() => {
         toc.value = Array
             .from(markdownArea.value!.querySelectorAll('h1, h2') as NodeListOf<HTMLHeadElement>)
             .map(head => ({
@@ -50,7 +52,7 @@ function loadContent(markdown: string) {
                 id: head.id,
                 html: head.innerHTML
             }))
-    })
+    }, 0)
 }
 
 const logContent = ref<typeof Fetch | null>(null)

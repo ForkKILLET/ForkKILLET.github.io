@@ -2,7 +2,7 @@ import katex from 'katex'
 import 'katex/contrib/mhchem'
 import 'katex/dist/katex.min.css'
 
-type mathBlockToken = {
+type MathBlockToken = {
     type: 'math-block',
     raw: string,
     formula: string
@@ -25,7 +25,7 @@ export const mathBlockExt = {
     start(src: string) {
         return src.match(/\${2}(?!\$)/)?.index ?? -1
     },
-    tokenizer(src: string) {
+    tokenizer(src: string): MathBlockToken | void {
         const match = src.match(/^\${2}([^\$]+?)\${2}/)
         return match ? {
             type: 'math-block',
@@ -33,12 +33,12 @@ export const mathBlockExt = {
             formula: match[1]
         } : undefined
     },
-    renderer(token: mathBlockToken) {
+    renderer(token: MathBlockToken) {
         return tryKatex(token.formula, { displayMode: true })
     }
 }
 
-type mathInlineToken = {
+type MathInlineToken = {
     type: 'math-inline',
     raw: string,
     formula: string
@@ -50,7 +50,7 @@ export const mathInlineExt = {
     start(src: string) {
         return src.match(/\$(?!\$)/)?.index ?? -1
     },
-    tokenizer(src: string) {
+    tokenizer(src: string): MathInlineToken | void {
         const match = src.match(/^\$([^\$\n]+?)\$/)
         return match ? {
             type: 'math-inline',
@@ -58,7 +58,7 @@ export const mathInlineExt = {
             formula: match[1]
         } : undefined
     },
-    renderer(token: mathInlineToken) {
+    renderer(token: MathInlineToken) {
         return tryKatex(token.formula)
     }
 }
