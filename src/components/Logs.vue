@@ -91,7 +91,7 @@ function toggleToc() {
 }
 
 function gotoHeading(id: string) {
-    markdownArea.value?.querySelector('#' + id)?.scrollIntoView()
+    markdownArea.value?.querySelector(`[id="${id}"]`)?.scrollIntoView()
 }
 
 defineExpose({ toggleToc, gotoHeading })
@@ -186,6 +186,10 @@ defineExpose({ toggleToc, gotoHeading })
 .log-toc > ul {
     padding: 0 10px 0 20px;
     list-style-type: disclosure-closed;
+}
+
+.log-toc-item-2 {
+    margin-left: 15px;
 }
 
 .markdown table {
