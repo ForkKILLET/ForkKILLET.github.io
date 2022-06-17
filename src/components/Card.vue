@@ -33,7 +33,7 @@ const inner = ref<HTMLDivElement | null>(null)
                 <div
                     ref="inner"
                     class="card-inner"
-                    :style="{ overflowY: scroll ? 'scroll' : undefined }"
+                    :class="{ 'card-inner-scroll': scroll }"
                 >
                     <p class="card-title">{{ name }}</p>
                     <div class="card-content">
@@ -92,6 +92,10 @@ const inner = ref<HTMLDivElement | null>(null)
     flex: 1;
     font-family: serif;
     height: 100%;
+}
+
+.card-inner-scroll {
+    overflow-y: scroll;
 }
 
 .card-inner-wrapper {

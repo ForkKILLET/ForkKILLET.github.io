@@ -12,10 +12,10 @@ export const emojiExt = {
     name: 'emoji',
     level: 'inline' as const,
     start(src: string) {
-        return src.match(/:[a-z\d\-_]+:/)?.index ?? -1
+        return src.match(/:[a-z\d+\-_]+:/)?.index ?? -1
     },
     tokenizer(src: string): EmojiToken | void {
-        const match = src.match(/^:([a-z\d\-_]+):/)
+        const match = src.match(/^:([a-z\d+\-_]+):/)
         return match ? {
             type: 'emoji',
             raw: match[0],
