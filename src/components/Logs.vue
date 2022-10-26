@@ -235,6 +235,10 @@ defineExpose({ toggleToc, gotoHeading })
     padding-left: 20px;
 }
 
+.markdown .katex {
+	display: inline-block;
+}
+
 .markdown .katex-error {
     position: relative;
     color: red;

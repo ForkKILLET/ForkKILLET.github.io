@@ -7,6 +7,10 @@ import Projects from './components/Projects.vue'
 </template>
 
 <style>
+  body {
+    overflow: hidden;
+  }
+
   a {
     text-decoration: none;
     color: #39C5BB;
