@@ -177,7 +177,9 @@ defineExpose({ toggleToc, gotoHeading })
 
 .log-toc {
     position: absolute;
-    right: 10px;
+	top: 5px;
+	padding: 10px 5px;
+    right: 25px;
     z-index: 1;
     border-radius: 10px;
     background: white;
