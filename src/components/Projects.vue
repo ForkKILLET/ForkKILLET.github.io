@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import Waterfall from './Waterfall.vue'
 import Card from './Card.vue'
 import IceLava from './IceLava.vue'
@@ -8,8 +8,16 @@ import Mask from './Mask.vue'
 import { version } from '../../package.json'
 import Badge from './Badge.vue'
 
+const buildTime = import.meta.env.VITE_BUILD_TIME ?? 'DEV'
+
 const inLogView = ref<boolean>(false)
 const logs = ref<typeof Logs | null>(null)
+
+watch(inLogView, val => {
+	console.log('ok %o', val)
+	document.body.className = val ? 'masked' : ''
+})
+
 </script>
 
 <template>
@@ -22,7 +30,7 @@ const logs = ref<typeof Logs | null>(null)
             tico="il"
         >
             <IceLava />'s homepage. v{{ version }}-ζ <br />
-            Make with &lt;3 by <a href="//github.com/ForkKILLET">ForkKILLET</a> in Vue
+            Make with &lt;3 by <a href="//github.com/ForkKILLET">ForkKILLET</a> in Vue on <u>{{ buildTime }}</u>
         </Card>
 
         <Card name="Chat">

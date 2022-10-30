@@ -3,9 +3,10 @@
   "private": true,
   "version": "0.7.3",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build --outDir docs && echo -n icelava.top > docs/CNAME",
-    "preview": "vite preview"
+    "dev": "vite --port 1628",
+    "dev:share": "vite --host 0.0.0.0 --port 1628",
+    "serve": "serve docs -p 1628",
+    "build": "vue-tsc --noEmit && VITE_BUILD_TIME=\"$(date '+%Y-%m-%d %H:%M:%S')\" vite build --outDir docs && echo -n icelava.top > docs/CNAME"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
+    "serve": "^14.0.1",
     "typescript": "^4.5.4",
     "vite": "^2.9.9",
     "vite-plugin-prismjs": "^0.0.8",

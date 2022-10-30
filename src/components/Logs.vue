@@ -112,6 +112,7 @@ defineExpose({ toggleToc, gotoHeading })
                     <li
                         v-for="{ lv, id, html } in toc"
                         v-html="html"
+						:key="id"
                         :class="[ `log-toc-item-${lv}`, 'implict-link' ]"
                         @click="gotoHeading(id)"
                     ></li>

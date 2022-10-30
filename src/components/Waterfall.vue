@@ -65,7 +65,6 @@ onUnmounted(() => {
     window.removeEventListener('resize', typeset)
 })
 
-// Debug: Object.assign(window, { typeset })
 provide(kTypesetWaterfall, typeset)
 </script>
 

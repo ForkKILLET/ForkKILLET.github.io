@@ -7,8 +7,8 @@ import Projects from './components/Projects.vue'
 </template>
 
 <style>
-  body {
-    overflow: hidden;
+  body.masked {
+    overflow-y: hidden;
   }
 
   a {
