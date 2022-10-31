@@ -98,7 +98,7 @@ const inner = ref<HTMLDivElement | null>(null)
 
 .card-inner-wrapper {
     position: relative;
-	width: calc(100% - 35px);
+    width: calc(100% - 35px);
 }
 
 .card-content {
@@ -116,7 +116,7 @@ const inner = ref<HTMLDivElement | null>(null)
 .card-badges {
     display: flex;
     flex-direction: column;
-	width: 35px;
+    width: 35px;
     margin-left: 6px;
     opacity: 0;
     transition: .5s opacity;

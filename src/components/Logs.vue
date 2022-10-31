@@ -112,7 +112,7 @@ defineExpose({ toggleToc, gotoHeading })
                     <li
                         v-for="{ lv, id, html } in toc"
                         v-html="html"
-						:key="id"
+                        :key="id"
                         :class="[ `log-toc-item-${lv}`, 'implict-link' ]"
                         @click="gotoHeading(id)"
                     ></li>
@@ -123,6 +123,7 @@ defineExpose({ toggleToc, gotoHeading })
                 :config="{
                     clientID: '3405c3c0316a15a2b35c',
                     clientSecret: '9c7f69f4397ec2021cc5391c29abfd4f511c6313',
+                    proxy: 'https://be.icelava.top/github/login/oauth/access_token',
                     repo: 'FkLog',
                     owner: 'ForkKILLET',
                     admin: [ 'ForkKILLET' ],
@@ -177,8 +178,8 @@ defineExpose({ toggleToc, gotoHeading })
 
 .log-toc {
     position: absolute;
-	top: 5px;
-	padding: 10px 5px;
+    top: 5px;
+    padding: 10px 5px;
     right: 25px;
     z-index: 1;
     border-radius: 10px;
@@ -239,7 +240,7 @@ defineExpose({ toggleToc, gotoHeading })
 }
 
 .markdown .katex {
-	display: inline-block;
+    display: inline-block;
 }
 
 .markdown .katex-error {

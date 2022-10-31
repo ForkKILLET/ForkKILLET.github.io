@@ -14,8 +14,7 @@ const inLogView = ref<boolean>(false)
 const logs = ref<typeof Logs | null>(null)
 
 watch(inLogView, val => {
-	console.log('ok %o', val)
-	document.body.className = val ? 'masked' : ''
+    document.body.className = val ? 'masked' : ''
 })
 
 </script>
