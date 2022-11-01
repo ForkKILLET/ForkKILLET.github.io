@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     vue(),
     prismjs({
-      languages: [ 'javascript', 'typescript', 'bash' ],
+      languages: [ 'javascript', 'typescript', 'bash', 'markup' ],
       theme: 'okaidia',
       css: true
     })
