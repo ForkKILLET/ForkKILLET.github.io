@@ -123,7 +123,7 @@ defineExpose({ toggleToc, gotoHeading })
                 :config="{
                     clientID: '3405c3c0316a15a2b35c',
                     clientSecret: '9c7f69f4397ec2021cc5391c29abfd4f511c6313',
-                    proxy: 'https://be.icelava.top/CORSA/github.com/login/oauth/access_token',
+                    proxy: 'https://be.icelava.top/github_access_token',
                     repo: 'FkLog',
                     owner: 'ForkKILLET',
                     admin: [ 'ForkKILLET' ],
