@@ -4,7 +4,7 @@ import { kTypesetWaterfall } from './Waterfall.vue'
 
 const props = withDefaults(defineProps<{
     file: string,
-    pixelSize: number
+    pixelSize?: number
 }>(), {
     pixelSize: 3
 })

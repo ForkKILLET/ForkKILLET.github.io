@@ -35,7 +35,7 @@ export const mathBlockExt = {
         } : undefined
     },
     renderer(token: MathBlockToken) {
-        return tryKatex(token.formula, { displayMode: true })
+        return tryKatex(token.formula, { displayMode: true, strict: false })
     }
 }
 
@@ -60,7 +60,7 @@ export const mathInlineExt = {
         } : undefined
     },
     renderer(token: MathInlineToken) {
-        return tryKatex(token.formula)
+        return tryKatex(token.formula, { strict: false })
     }
 }
 

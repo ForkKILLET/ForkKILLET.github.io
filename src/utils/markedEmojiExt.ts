@@ -1,7 +1,5 @@
 import emoji from 'node-emoji'
 
-Object.assign(window, emoji)
-
 type EmojiToken = {
     type: 'emoji',
     raw: string,

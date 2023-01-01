@@ -1,7 +1,7 @@
 {
   "name": "icelava-top-workspace",
   "private": true,
-  "version": "0.7.3",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite --port 1628",
     "dev:share": "vite --host 0.0.0.0 --port 1628",
@@ -11,25 +11,28 @@
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
     "@types/katex": "^0.14.0",
-    "@types/marked": "^4.0.3",
-    "@types/node-emoji": "^1.8.1",
+    "@types/marked": "^4.0.8",
+    "@types/node-emoji": "^1.8.2",
     "@types/prismjs": "^1.26.0",
-    "gitalk": "^1.7.2",
+    "cuiping-component": "^1.2.0",
+    "gitalk": "^1.8.0",
     "js-yaml": "^4.1.0",
-    "katex": "^0.16.0",
-    "marked": "^4.0.16",
+    "katex": "^0.16.4",
+    "marked": "^4.2.5",
     "marked-extended-latex": "^1.1.0",
     "node-emoji": "^1.11.0",
     "normalize.css": "^8.0.1",
-    "prismjs": "^1.28.0",
-    "vue": "^3.2.25"
+    "prismjs": "^1.29.0",
+    "react": "15.7.0",
+    "react-dom": "15.7.0",
+    "vue": "^3.2.45"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.3",
-    "serve": "^14.0.1",
-    "typescript": "^4.5.4",
-    "vite": "^2.9.9",
+    "@vitejs/plugin-vue": "^2.3.4",
+    "serve": "^14.1.2",
+    "typescript": "^4.9.4",
+    "vite": "^2.9.15",
     "vite-plugin-prismjs": "^0.0.8",
-    "vue-tsc": "^0.34.7"
+    "vue-tsc": "^0.34.17"
   }
 }

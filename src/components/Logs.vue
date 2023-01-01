@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, createApp } from 'vue'
 import yaml from 'js-yaml'
 import { marked } from 'marked'
 import Prism from 'prismjs'
 import markedKatex from '../utils/markedKatexExt'
 import markedEmoji from '../utils/markedEmojiExt'
+import markedCuiping from '../utils/markedCuipingExt'
 import Fetch from './Fetch.vue'
 import Gitalk from './Gitalk.vue'
+import { Cuiping } from 'cuiping-component'
+import 'cuiping-component/dist/style.css'
 
-Object.assign(window, { marked })
-
-marked.use(markedKatex, markedEmoji)
+marked.use(markedCuiping, markedKatex, markedEmoji)
 Prism.manual = true
 
 const emits = defineEmits<{
@@ -52,6 +53,13 @@ function loadContent(markdown: string) {
                 id: head.id,
                 html: head.innerHTML
             }))
+
+        const cuipings = markdownArea.value!.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
+        cuipings.forEach(el => {
+            if (el.dataset.vApp !== "") createApp(Cuiping, {
+                molecule: el.dataset.molecule
+            }).mount(el)
+        })
     }, 0)
 }
 
