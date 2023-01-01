@@ -110,7 +110,7 @@ watch(inLogView, val => {
                     active
                     @click="logs?.toggleToc()"
                 >
-                    toc
+                    TOC
                 </Badge>
             </template>
         </Card>

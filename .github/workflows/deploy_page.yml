@@ -2,7 +2,8 @@ name: deploy_page
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - zeta-refactor
 
 jobs:
   deploy:
