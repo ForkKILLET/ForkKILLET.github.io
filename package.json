@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "vite --port 1628",
     "dev:share": "vite --host 0.0.0.0 --port 1628",
-    "serve": "serve docs -p 1628",
-    "build": "vue-tsc --noEmit && VITE_BUILD_TIME=\"$(date '+%Y-%m-%d %H:%M:%S')\" vite build --outDir dist && echo -n icelava.top > dist/CNAME"
+    "serve": "serve dist -p 1629",
+    "build": "vue-tsc --noEmit && VITE_BUILD_TIME=\"$(date '+%Y-%m-%d %H:%M:%S')\" vite build --outDir dist && echo -n icelava.top > dist/CNAME && ln -s ~/log dist/FkLog"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
@@ -14,7 +14,7 @@
     "@types/marked": "^4.0.8",
     "@types/node-emoji": "^1.8.2",
     "@types/prismjs": "^1.26.0",
-    "cuiping-component": "^1.2.0",
+    "cuiping-component": "^1.2.2",
     "gitalk": "^1.8.0",
     "js-yaml": "^4.1.0",
     "katex": "^0.16.4",
