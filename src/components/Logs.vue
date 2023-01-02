@@ -7,7 +7,7 @@ import markedKatex from '../utils/markedKatexExt'
 import markedEmoji from '../utils/markedEmojiExt'
 import markedCuiping from '../utils/markedCuipingExt'
 import Fetch from './Fetch.vue'
-import Gitalk from './Gitalk.vue'
+import Giscus from '@giscus/vue'
 import { Cuiping } from 'cuiping-component'
 import 'cuiping-component/dist/style.css'
 
@@ -127,19 +127,18 @@ defineExpose({ toggleToc, gotoHeading })
                 </ul>
             </div>
             <div ref="markdownArea" class="markdown" v-html="html"></div>
-            <Gitalk
-                :config="{
-                    clientID: '3405c3c0316a15a2b35c',
-                    clientSecret: '9c7f69f4397ec2021cc5391c29abfd4f511c6313',
-                    proxy: 'https://be.icelava.top/github_access_token',
-                    repo: 'FkLog',
-                    owner: 'ForkKILLET',
-                    admin: [ 'ForkKILLET' ],
-                    id: activeId,
-                    title: activeId,
-                    language: 'zh-CN'
-                }"
-            />
+            <div class="giscus-container">
+                <Giscus
+                    repo="ForkKILLET/FkLog"
+                    repo-id="R_kgDOHeN7yQ"
+                    category="Announcements"
+                    category-id="DIC_kwDOHeN7yc4CTXKN"
+                    mapping="specific"
+                    :term="activeId"
+                    theme="preferred_color_scheme"
+                    lang="zh-CN"
+                />
+            </div>
         </Fetch>
     </div>
     <div class="log-index" v-else>
@@ -266,7 +265,7 @@ defineExpose({ toggleToc, gotoHeading })
     color: black;
 }
 
-.gitalk-container {
+.giscus-container {
     width: 90%;
 }
 </style>
