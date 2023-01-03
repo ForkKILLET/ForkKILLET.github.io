@@ -8,7 +8,7 @@ specifiers:
   '@types/node-emoji': ^1.8.2
   '@types/prismjs': ^1.26.0
   '@vitejs/plugin-vue': ^2.3.4
-  cuiping-component: ^1.2.2
+  cuiping-component: ^1.3.0
   js-yaml: ^4.1.0
   katex: ^0.16.4
   marked: ^4.2.5
@@ -32,7 +32,7 @@ dependencies:
   '@types/marked': 4.0.8
   '@types/node-emoji': 1.8.2
   '@types/prismjs': 1.26.0
-  cuiping-component: 1.2.2
+  cuiping-component: 1.3.0
   js-yaml: 4.1.0
   katex: 0.16.4
   marked: 4.2.5
@@ -728,15 +728,15 @@ packages:
   /csstype/2.6.21:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==}
 
-  /cuiping-component/1.2.2:
-    resolution: {integrity: sha512-krzNwlNoKGWaRiqyFl+GpY2dyF+eWwkjpvuHfuPje9N7olKTw9yrtJMdan/Yc8OiYnTkNlJSXiv7RbwhER7TwA==}
+  /cuiping-component/1.3.0:
+    resolution: {integrity: sha512-qLfIYZekJooaynyJTVozlhF83KJNRtZesxDNNf7OKT+oHvIgMu8YBLDze9P7R/0gVVg/GQJW2Cgy0LDqrxNXNw==}
     dependencies:
-      cuiping: 1.6.0
+      cuiping: 1.7.0
       vue: 3.2.45
     dev: false
 
-  /cuiping/1.6.0:
-    resolution: {integrity: sha512-b1fth775ZbDhjaagRp5PbyOMtrUpWEJRtIgxXZviVlYAjbUPF35oQDelzopfUg/ViutUVjdBOUjctnDEyPJAgA==}
+  /cuiping/1.7.0:
+    resolution: {integrity: sha512-88HZkj6D03917Uzmbm3OpjTtEaZvH6rbsS7RWObejz7bR89lD6gXqKFBZmWjXn0lc1nAlV/OHj+++phw/x8k2w==}
     dependencies:
       chalk: 5.2.0
     dev: false
