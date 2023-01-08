@@ -92,6 +92,15 @@ watch(inLogView, val => {
         </Card>
 
         <Card
+            name="Cuiping.js"
+            :github="{ user: 'ForkKILLET', repo: 'cuiping.js' }"
+            :langs="[ 'ts', 'vue' ]"
+        >
+            A TypeScript library rendering chemistry strutures to SVG <br />
+            <a href="/cuiping.js/">&gt;&gt; Try</a>
+        </Card>
+
+        <Card
             name="Logs"
             :github="{ user: 'ForkKILLET', repo: 'FkLog' }"
             :langs="[ 'md' ]"
