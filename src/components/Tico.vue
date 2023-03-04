@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { inject, onMounted, ref } from 'vue'
-import { kTypesetWaterfall } from './Waterfall.vue'
+import { onMounted, ref } from 'vue'
 
 const props = withDefaults(defineProps<{
     file: string,
@@ -25,8 +24,6 @@ const colors = {
     'g': 'lightgreen'
 }
 
-const typesetWaterfall = inject(kTypesetWaterfall)
-
 onMounted(() => {
     const lines = props.file.split('\n')
     const config = lines[0] === '<<<' ? {} : JSON.parse(lines[0])
@@ -49,8 +46,6 @@ onMounted(() => {
             ctx.fillStyle = board[y][x]
             ctx.fillRect(x * p, y * p, p, p)
         }
-   
-    typesetWaterfall?.()
 })
 </script>
 

@@ -3,24 +3,24 @@ import Projects from './components/Projects.vue'
 </script>
 
 <template>
-  <Projects></Projects>
+    <Projects></Projects>
 </template>
 
 <style>
-  body.masked {
+body.masked {
     overflow-y: hidden;
-  }
+}
 
-  a {
+a {
     text-decoration: none;
     color: #39C5BB;
     transition: color .5s;
     text-shadow: 0 0 1px #66CCFF;
-  }
-  a:hover {
-    text-decoration: underline;    
-  }
-  a:active {
+}
+a:hover {
+    text-decoration: underline;        
+}
+a:active {
     color: black
-  }
+}
 </style>
