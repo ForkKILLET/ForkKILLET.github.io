@@ -4,21 +4,24 @@ import useFetch, { FetchRes } from '../utils/useFetch'
 import { onMounted, reactive, ref } from 'vue'
 
 const props = defineProps<{
-    url: string,
+    url: string
+    noLoad?: boolean
     success?: (data: string) => void | Promise<void>
 }>()
 
 const loading = ref<boolean>(true)
 const res = reactive<FetchRes>({})
 
-async function load () {
-    await useFetch(props.url, res)
-    if (! res.err) {
-        try {
-            await props.success?.(res.data!)
-        }
-        catch (err) {
-            res.err = err
+async function load() {
+    if (! props.noLoad) {
+        await useFetch(props.url, res)
+        if (! res.err) {
+            try {
+                await props.success?.(res.data!)
+            }
+            catch (err) {
+                res.err = err
+            }
         }
     }
     loading.value = false
@@ -26,7 +29,6 @@ async function load () {
 defineExpose({ load })
 
 onMounted(load)
-
 </script>
 
 <template>

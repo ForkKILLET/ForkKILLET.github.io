@@ -1,35 +1,27 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick, createApp } from 'vue'
-import yaml from 'js-yaml'
+import { ref, createApp } from 'vue'
+import { useRoute } from 'vue-router'
+
 import { marked } from 'marked'
 import Prism from 'prismjs'
 import markedKatex from '../utils/markedKatexExt'
 import markedEmoji from '../utils/markedEmojiExt'
 import markedCuiping from '../utils/markedCuipingExt'
+
 import Fetch from './Fetch.vue'
 import Giscus from '@giscus/vue'
 import { Cuiping } from 'cuiping-component'
+
 import 'cuiping-component/dist/style.css'
+
+const route = useRoute()
+const logId = route.params.id as string
+
+console.log(logId)
 
 marked.use(markedCuiping, markedKatex, markedEmoji)
 Prism.manual = true
 
-const emits = defineEmits<{
-    (e: 'view', id: string): void
-    (e: 'endView'): void
-}>()
-
-type Index = {
-    id: string,
-    name: string
-} []
-
-const index = ref<Index | null>(null)
-function loadIndex(data: string) {
-    index.value = yaml.load(data!) as Index
-}
-
-const activeId = ref<string | null>(null)
 const html = ref<string | null>(null)
 function loadContent(markdown: string) {
     html.value = marked(markdown, {
@@ -63,59 +55,32 @@ function loadContent(markdown: string) {
     }, 0)
 }
 
-const logContent = ref<typeof Fetch | null>(null)
-async function view(id: string, doUpdate: boolean = false) {
-    activeId.value = id
-    if (doUpdate) query.log = id
-    emits('view', id)
-    nextTick(() => logContent.value!.load())
-}
-function endView(doUpdate: boolean = false) {
-    activeId.value = null
-    if (doUpdate) delete query.log
-    emits('endView')
-}
-
-function route() {
-    if (query.log) view(query.log)
-    else endView()
-}
-
-onMounted(route)
-window.addEventListener('hashchange', route)
-
 const markdownArea = ref<HTMLDivElement | null>(null)
 
-type LogToc = Array<{
+type LogToc = {
     lv: number,
     id: string,
     html: string
-}>
+} []
 
 const toc = ref<LogToc | null>(null)
-const inTocView = ref(false)
+const showToc = ref(false)
 function toggleToc() {
-    inTocView.value = ! inTocView.value
+    showToc.value = ! showToc.value
 }
 
 function gotoHeading(id: string) {
     markdownArea.value?.querySelector(`[id="${id}"]`)?.scrollIntoView()
 }
-
-defineExpose({ toggleToc, gotoHeading })
 </script>
 
 <template>
-    <div class="log-content" v-if="activeId">
-        <b>{{ activeId }}
-            <a href="javascript:;" @click="endView(true)">&lt;&lt; back</a>
-        </b>
+    <div class="log-content">
         <Fetch
-            ref="logContent"
-            :url="`/FkLog/${activeId}`"
+            :url="`/FkLog/${logId}`"
             :success="loadContent"
         >
-            <div class="log-toc markdown" v-if="inTocView">
+            <div class="log-toc markdown" v-if="showToc">
                 <ul>
                     <li
                         v-for="{ lv, id, html } in toc"
@@ -134,55 +99,16 @@ defineExpose({ toggleToc, gotoHeading })
                     category="Announcements"
                     category-id="DIC_kwDOHeN7yc4CTXKN"
                     mapping="specific"
-                    :term="activeId"
+                    :term="logId"
                     theme="preferred_color_scheme"
                     lang="zh-CN"
                 />
             </div>
         </Fetch>
     </div>
-    <div class="log-index" v-else>
-        <keep-alive>
-            <Fetch
-                url="/FkLog/@meta/index.yml"
-                :success="loadIndex"
-            >
-                <template #default>
-                    <ul>
-                        <li
-                            v-for="{ id, name } in index"
-                            :key="id"
-                            @click="view(id, true)"
-                        >
-                            <p class="implict-link">{{ name }} <small class="log-id"><br />{{ id }}</small></p>
-                        </li>
-                    </ul>
-                </template>
-            </Fetch>
-        </keep-alive>
-    </div>
 </template>
 
-<style>
-.log-index {
-    height: 350px;
-    padding: 10px;
-}
-
-.implict-link {
-    color: black;
-    transition: color .3s;
-}
-
-.implict-link:hover {
-    color: #39C5BB;
-    text-decoration: underline;
-}
-
-.log-id {
-    color: #7D7D7D;
-}
-
+<style scoped>
 .log-toc {
     position: absolute;
     top: 5px;
@@ -202,7 +128,9 @@ defineExpose({ toggleToc, gotoHeading })
 .log-toc-item-2 {
     margin-left: 15px;
 }
+</style>
 
+<style>
 .markdown table {
     border-collapse: collapse;
 }
@@ -235,6 +163,8 @@ defineExpose({ toggleToc, gotoHeading })
     margin: 0 1px;
     padding: 0 2px;
     border-radius: 3px;
+    vertical-align: text-top;
+    font-size: 0.8em;
     color: white;
     background-color: black;
     box-shadow: 0 1px 1px 1px black;

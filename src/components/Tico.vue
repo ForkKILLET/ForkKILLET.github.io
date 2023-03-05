@@ -50,5 +50,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <canvas ref="canvas"></canvas>
+    <canvas class="tico-canvas" ref="canvas"></canvas>
 </template>
