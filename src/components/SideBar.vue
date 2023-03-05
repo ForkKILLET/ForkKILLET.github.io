@@ -5,7 +5,7 @@ const buildTime = import.meta.env.VITE_BUILD_TIME ?? 'dev'
 <template>
     <nav class="sidebar">
         <RouterLink to="/">
-            <img class="logo" src="/FkLog/@banner/icelava.jpg" />
+            <img class="logo" :src="'/FkLog/@banner/icelava.jpg'" />
         </RouterLink>
 
         <p class="build-info">
