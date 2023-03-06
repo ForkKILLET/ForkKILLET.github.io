@@ -27,7 +27,7 @@ h1 {
 }
 
 h1 > small {
-    color: #aaa;
+    color: #888;
 }
 
 main {

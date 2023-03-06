@@ -29,7 +29,7 @@ const filterTitle = ref<string | undefined>()
             <template #default>
                 <div>
                     <template
-                        v-for="{ id, name, time } in logStore.index"
+                        v-for="{ id, name, time, tags } in logStore.index"
                         :key="id"
                     >
                         <div
@@ -38,7 +38,15 @@ const filterTitle = ref<string | undefined>()
                         >
                             <RouterLink :to="`/log/${id}`">{{ name }}</RouterLink>
                             <div class="index-item-detail">
-                                <small class="index-item-time">{{ dayjs(time).format('YYYY-MM-DD HH:MM') }}</small>
+                                <span>
+                                    <small class="index-item-time">{{ dayjs(time).format('YYYY-MM-DD HH:MM') }}</small>
+                                    <small class="index-item-tags">
+                                        <template v-if="tags?.length">
+                                            <span v-for="tag of tags" class="index-item-tag"> &middot; {{ tag }}</span>
+                                        </template>
+                                        <span v-else>None</span>
+                                    </small>
+                                </span>
                                 <small>{{ id }}</small>
                             </div>
                         </div>
@@ -56,7 +64,7 @@ const filterTitle = ref<string | undefined>()
     transition: .2s background-color;
 }
 .index-item:hover {
-    background-color: #eee
+    background-color: #eee;
 }
 
 .index-item-detail {
@@ -64,8 +72,8 @@ const filterTitle = ref<string | undefined>()
     justify-content: space-between;
 }
 
-.index-item-time {
-    margin: 0 1em;
+.index-item-tag {
+    color: #888;
 }
 
 .filter-input {
