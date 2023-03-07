@@ -25,8 +25,8 @@ const removeFilterTag = (tag: string) => {
 const sortMethods = [ 'default', 'newest', 'oldest' ] as const
 const sortFunctions: Record<SortMethod, (a: Index[number], b: Index[number]) => number> = {
     default: () => 0,
-    newest: (a, b) => + a.time - + b.time,
-    oldest: (a, b) => + b.time - + a.time
+    oldest: (a, b) => + a.time - + b.time,
+    newest: (a, b) => + b.time - + a.time
 }
 type SortMethod = (typeof sortMethods)[number]
 const sortMethod = ref<SortMethod>('default')
@@ -67,7 +67,7 @@ const filteredIndex = computed(
             <template #default>
                 <div>
                     <template
-                        v-for="{ id, name, time, tags } in sortedIndex"
+                        v-for="{ id, name, time, tags } in filteredIndex"
                         :key="id"
                     >
                         <div class="index-item">

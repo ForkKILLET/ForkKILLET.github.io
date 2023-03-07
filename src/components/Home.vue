@@ -35,7 +35,7 @@ main {
 
     padding: 1em;
 
-    overflow-y: scroll;
+    overflow: scroll;
     scrollbar-width: none;
     
     background-color: white;
