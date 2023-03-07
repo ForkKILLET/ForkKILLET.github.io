@@ -43,13 +43,15 @@ const filteredIndex = computed(
 
 <template>
     <div class="index">
-        <div>
+        <div class="index-toolbar">
             <b>Filter:</b>
             <input class="filter-input" placeholder="Title" v-model="filterTitle" />
             <template v-if="filterTags.length">
-                <span v-for="tag of filterTags" @click="removeFilterTag(tag)" class="filter-tag">
-                    &middot; {{ tag }}
-                </span>
+                &middot; <span
+                    v-for="tag of filterTags"
+                    @click="removeFilterTag(tag)"
+                    class="filter-tag tag"
+                >{{ tag }}</span>
             </template>
             <br />
             <b>Sort:</b>
@@ -65,6 +67,7 @@ const filteredIndex = computed(
             :success="loadIndex"
         >
             <template #default>
+                <small>Found {{ filteredIndex.length }} log(s).</small>
                 <div>
                     <template
                         v-for="{ id, name, time, tags } in filteredIndex"
@@ -77,9 +80,12 @@ const filteredIndex = computed(
                                     <small class="index-item-time">{{ dayjs(time).format('YYYY-MM-DD HH:MM') }}</small>
                                     <small class="index-item-tags">
                                         <template v-if="tags?.length">
-                                            <span v-for="tag of tags" @click="addFilterTag(tag)" class="index-item-tag">
-                                                &middot; {{ tag }}
-                                            </span>
+                                            &middot; <span
+                                                v-for="tag of tags"
+                                                @click="addFilterTag(tag)"
+                                                class="index-item-tag tag"
+                                                :class="{ filtered: filterTags.includes(tag) }"
+                                            >{{ tag }}</span>
                                         </template>
                                         <span v-else>None</span>
                                     </small>
@@ -95,6 +101,14 @@ const filteredIndex = computed(
 </template>
 
 <style scoped>
+.index-toolbar {
+    position: sticky;
+    top: -1em;
+    padding: .5em 0;
+
+    background: white;
+}
+
 .index-item {
     padding: .5em;
 
@@ -109,13 +123,38 @@ const filteredIndex = computed(
     justify-content: space-between;
 }
 
-.index-item-tag {
-    color: #888;
+.tag {
+    margin: 0 .15em;
+    padding: .1em .25em;
+
+    border-radius: .8em;
+
+    color: white;
+    transition: .3s background-color;
+}
+.tag:hover {
+    cursor: pointer;
+}
+.index-item-tag, .filter-tag:hover {
+    background: #bbb;
+}
+.filter-tag, .index-item-tag:hover, .index-item-tag.filtered {
+    background: #39C5BB;
 }
 
 .filter-input {
-    outline: none;
     margin: 0 1em;
+    padding: 0;
+
+    border: solid black;
+    border-width: 0 0 1px 0;
+    outline: none;
+
+    transition: .3s border-color;
+}
+
+.filter-input:focus {
+    border-color: #39C5BB;
 }
 
 .sort-method {
@@ -126,9 +165,11 @@ const filteredIndex = computed(
 
 .sort-method:hover {
     color: #39C5BB;
+    cursor: pointer;
 }
 
 .sort-method.active {
+    color: #39C5BB;
     text-decoration: underline;
 }
 </style>
