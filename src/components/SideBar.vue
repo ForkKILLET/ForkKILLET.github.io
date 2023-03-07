@@ -26,9 +26,9 @@ const buildEnv = import.meta.env.VITE_BUILD_ENV ?? 'localhost'
 @media screen and (min-width: 501px) {
     .sidebar {
         position: relative;
+        flex-shrink: 0;
         height: 100%;
-        width: 15%;
-        min-width: 200px;
+        width: 200px;
 
         background: white;
         box-shadow: 0 0 .5em #aaa;

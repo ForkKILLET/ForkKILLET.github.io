@@ -16,8 +16,18 @@ const route = useRoute()
 </template>
 
 <style scoped>
+@media screen and (max-width: 500px) {
+    .home {
+        width: calc(100% - 3em);
+    }
+}
+@media screen and (min-width: 501px) {
+    .home {
+        width: calc(100% - 200px - 3em);
+    }
+
+}
 .home {
-    flex: 1;
     padding: 1.5em;
 }
 
@@ -25,7 +35,6 @@ h1 {
     height: 1em;
     margin: 0 0 1em 0;
 }
-
 h1 > small {
     color: #888;
 }
@@ -36,13 +45,8 @@ main {
     padding: 1em;
 
     overflow: scroll;
-    scrollbar-width: none;
     
     background-color: white;
     box-shadow: 0 0 .5em #aaa;
-}
-
-main::-webkit-scrollbar {
-    width: 0;
 }
 </style>
