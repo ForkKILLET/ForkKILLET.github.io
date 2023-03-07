@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia' 
+import yaml from 'js-yaml'
 
 export type Index = {
     id: string

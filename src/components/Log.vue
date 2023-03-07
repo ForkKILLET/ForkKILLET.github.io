@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, createApp } from 'vue'
+import { ref, computed, createApp } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { marked } from 'marked'
@@ -15,7 +15,7 @@ import { Cuiping } from 'cuiping-component'
 import 'cuiping-component/dist/style.css'
 
 const route = useRoute()
-const logId = route.params.id as string
+const logId = computed(() => route.params.id as string)
 
 marked.use(markedCuiping, markedKatex, markedEmoji)
 Prism.manual = true
@@ -35,6 +35,7 @@ function loadContent(markdown: string) {
                 .join('\n')
         )
     })
+
     setTimeout(() => {
         toc.value = Array
             .from(markdownArea.value!.querySelectorAll('h1, h2') as NodeListOf<HTMLHeadElement>)
@@ -75,6 +76,7 @@ function gotoHeading(id: string) {
 <template>
     <div class="log-content">
         <Fetch
+            :key="logId"
             :url="`/FkLog/${logId}`"
             :success="loadContent"
         >
