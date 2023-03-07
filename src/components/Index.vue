@@ -103,7 +103,7 @@ const filteredIndex = computed(
 <style scoped>
 .index-toolbar {
     position: sticky;
-    top: -1em;
+    top: -1.5em;
     padding: .5em 0;
 
     background: white;
@@ -125,7 +125,7 @@ const filteredIndex = computed(
 
 .tag {
     margin: 0 .15em;
-    padding: .1em .25em;
+    padding: .1em .4em;
 
     border-radius: .8em;
 

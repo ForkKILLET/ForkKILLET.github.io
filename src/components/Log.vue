@@ -17,8 +17,6 @@ import 'cuiping-component/dist/style.css'
 const route = useRoute()
 const logId = route.params.id as string
 
-console.log(logId)
-
 marked.use(markedCuiping, markedKatex, markedEmoji)
 Prism.manual = true
 
@@ -112,9 +110,11 @@ function gotoHeading(id: string) {
 .log-toc {
     position: absolute;
     top: 5px;
-    padding: 10px 5px;
     right: 25px;
     z-index: 1;
+
+    padding: 10px 5px;
+
     border-radius: 10px;
     background: white;
     box-shadow: 0 0 1px 1px #39C5BB;
@@ -122,6 +122,7 @@ function gotoHeading(id: string) {
 
 .log-toc > ul {
     padding: 0 10px 0 20px;
+
     list-style-type: disclosure-closed;
 }
 

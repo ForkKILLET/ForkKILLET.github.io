@@ -34,15 +34,17 @@ const route = useRoute()
 h1 {
     height: 1em;
     margin: 0 0 1em 0;
+
+    overflow: hidden;
 }
 h1 > small {
     color: #888;
 }
 
 main {
-    height: calc(100% - 5em);
+    height: calc(100% - 6em);
 
-    padding: 1em;
+    padding: 1.5em;
 
     overflow: scroll;
     
