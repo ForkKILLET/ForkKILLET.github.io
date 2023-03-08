@@ -27,7 +27,6 @@ const routeId = computed(() => route.params.id)
     .home {
         width: calc(100% - 200px - 3em);
     }
-
 }
 .home {
     padding: 1.5em;
@@ -47,11 +46,11 @@ h1 > small {
 }
 
 main {
-    height: calc(100% - 6em);
+    height: calc(100% - 7em);
 
     padding: 1.5em;
 
-    overflow: scroll;
+    overflow: auto;
     
     background-color: white;
     box-shadow: 0 0 .5em #aaa;

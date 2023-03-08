@@ -90,7 +90,7 @@ const filteredIndex = computed(
                                         <span v-else>None</span>
                                     </small>
                                 </span>
-                                <small>{{ id }}</small>
+                                <small class="index-item-id">{{ id }}</small>
                             </div>
                         </div>
                     </template>
@@ -155,6 +155,14 @@ const filteredIndex = computed(
 
 .filter-input:focus {
     border-color: #39C5BB;
+}
+
+.index-item-id {
+    max-width: 15em;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .sort-method {
