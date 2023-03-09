@@ -28,12 +28,12 @@ const route = useRoute()
 
 }
 .home {
-    padding: 1.5em;
+    padding: 1.5em 2em;
 }
 
 h1 {
     height: 1em;
-    margin: 0 0 1em 0;
+    margin: .2em 0 1.2em 0;
 
     overflow: hidden;
 }
@@ -42,13 +42,13 @@ h1 > small {
 }
 
 main {
-    height: calc(100% - 6em);
+    height: calc(100% - 7.2em);
 
-    padding: 1.5em;
+    padding: 1.2em 2.5em;
 
     overflow: scroll;
     
     background-color: white;
-    box-shadow: 0 0 .5em #aaa;
+    box-shadow: 0 0 1.5em #7774;
 }
 </style>

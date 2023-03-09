@@ -16,7 +16,7 @@ import SideBar from './components/SideBar.vue'
     height: 100vh;
     width: 100vw;
 
-    background: aliceblue;
+    background: #E6F8FF;
 }
 </style>
 
@@ -27,7 +27,7 @@ body {
 
 a {
     text-decoration: none;
-    color: #39C5BB;
+    color: #40CAC1;
     transition: color .2s;
     text-shadow: 0 0 1px #66CCFF;
 }
@@ -35,6 +35,6 @@ a:hover {
     text-decoration: underline;        
 }
 a:active {
-    color: black
+    color: #2C918B;
 }
 </style>

@@ -10,28 +10,34 @@ const buildEnv = import.meta.env.VITE_BUILD_ENV ?? 'localhost'
         </RouterLink>
 
         <p class="build-info">
-            Ver &zeta;2.0.0 made by <a href="https://github.com/ForkKILLET">ForkKILLET</a>
-            with Vue at <u>{{ buildTime }}</u> on <u>{{ buildEnv }}</u>
+            Ver &zeta;2.0.0
+            <br>
+            Made by <a href="https://github.com/ForkKILLET">ForkKILLET</a>
+            <br>
+            with <span class="meta">Vue</span>
+            <br>
+            at <span class="meta">{{ buildTime }}</span>
+            <br>
+            on <span class="meta">{{ buildEnv }}</span>
         </p>
     </nav>
 </template>
 
 <style scoped>
-@media screen and (max-width: 500px) {
-    .sidebar {
-        display: none;
-    }
+.sidebar {
+    display: none;
 }
 
-@media screen and (min-width: 501px) {
+@media screen and (min-width: 500px) {
     .sidebar {
+        display: block;
         position: relative;
         flex-shrink: 0;
         height: 100%;
         width: 200px;
 
         background: white;
-        box-shadow: 0 0 .5em #aaa;
+        box-shadow: 0 0 1.5em #7774;
     }
 }
 
@@ -42,7 +48,11 @@ const buildEnv = import.meta.env.VITE_BUILD_ENV ?? 'localhost'
 
 .build-info {
     position: absolute;
-    padding: .5em;
+    padding: 0 1em;
     bottom: 0;
+}
+
+.meta {
+    color: #bbbabb;
 }
 </style>

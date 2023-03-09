@@ -44,7 +44,7 @@ const filteredIndex = computed(
 <template>
     <div class="index">
         <div class="index-toolbar">
-            <b>Filter:</b>
+            <b class="field-name">Filter</b>
             <input class="filter-input" placeholder="Title" v-model="filterTitle" />
             <template v-if="filterTags.length">
                 &middot; <span
@@ -54,12 +54,14 @@ const filteredIndex = computed(
                 >{{ tag }}</span>
             </template>
             <br />
-            <b>Sort:</b>
-            <span
-                v-for="method of sortMethods"
-                @click="sortMethod = method"
-                class="sort-method" :class="{ active: sortMethod === method }"
-            >{{ method }}</span>
+            <b class="field-name">Sort</b>
+            <div class="sort-methods">
+                <span
+                    v-for="method of sortMethods"
+                    @click="sortMethod = method"
+                    class="sort-method" :class="{ active: sortMethod === method }"
+                >{{ method }}</span>
+            </div>
         </div>
         <Fetch
             url="/FkLog/@meta/index.yml"
@@ -107,6 +109,14 @@ const filteredIndex = computed(
     padding: .5em 0;
 
     background: white;
+
+    line-height: 1.8em;
+}
+
+.field-name {
+    display: inline-block;
+    min-width: 3em;
+    padding-right: 1.2em;
 }
 
 .index-item {
@@ -143,7 +153,6 @@ const filteredIndex = computed(
 }
 
 .filter-input {
-    margin: 0 1em;
     padding: 0;
 
     border: solid black;
@@ -157,9 +166,19 @@ const filteredIndex = computed(
     border-color: #39C5BB;
 }
 
-.sort-method {
-    margin: 0 .5em;
+.sort-methods {
+    display: inline-block;
+}
 
+.sort-method:not(:first-child) {
+    margin-left: .5em;
+}
+
+.sort-method:not(:last-child) {
+    margin-right: .5em;
+}
+
+.sort-method {
     transition: .3s color;
 }
 
