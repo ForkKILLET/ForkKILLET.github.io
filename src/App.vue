@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Home from './components/Home.vue';
-import SideBar from './components/SideBar.vue'
+import Home from './components/views/Home.vue';
+import SideBar from './components/views/SideBar.vue'
 </script>
 
 <template>

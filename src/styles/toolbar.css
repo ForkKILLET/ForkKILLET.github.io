@@ -1,0 +1,7 @@
+.toolbar {
+    position: sticky;
+    top: -1.5em;
+    padding: .5em 0;
+
+    background: white;
+}
