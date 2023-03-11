@@ -1,7 +1,8 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import IndexView from './components/Index.vue'
+import IndexView from './components/views/Index.vue'
 import LogView from './components/Log.vue'
+import TagsView from './components/views/Tags.vue'
 
 export default [
     {
@@ -13,5 +14,10 @@ export default [
         path: '/log/:id',
         component: LogView,
         name: 'Log'
+    },
+    {
+        path: '/tags',
+        component: TagsView,
+        name: 'Tags'
     }
 ] as RouteRecordRaw[]

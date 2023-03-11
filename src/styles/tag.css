@@ -1,0 +1,22 @@
+.tag {
+    margin: 0 .15em;
+    padding: .1em .4em;
+
+    border-radius: .8em;
+
+    white-space: nowrap;
+    color: white;
+    transition: .3s background-color;
+}
+
+.tag:hover {
+    cursor: pointer;
+}
+
+.tag.inversed, .tag:hover, .tag.filtered {
+    background: #39C5BB;
+}
+
+.tag, .tag.inversed:hover {
+    background: #bbb;
+}
