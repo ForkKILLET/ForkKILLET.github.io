@@ -5,6 +5,8 @@
     border-radius: .8em;
 
     white-space: nowrap;
+    user-select: none;
+
     color: white;
     transition: .3s background-color;
 }

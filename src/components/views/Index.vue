@@ -42,22 +42,25 @@ onMounted(async () => {
 <template>
     <div class="index">
         <div class="toolbar">
-            <b>Filter:</b>
-            <input class="filter-input" placeholder="Title" v-model="filterTitle" />
-            <template v-if="filterTags.length">
-                &middot; <span
-                    v-for="tag of filterTags"
-                    @click="removeFilterTag(tag)"
-                    class="tag inversed"
-                >{{ tag }}</span>
-            </template>
-            <br />
-            <b>Sort:</b>
-            <span
-                v-for="method of sortMethods"
-                @click="sortMethod = method"
-                class="sort-method" :class="{ active: sortMethod === method }"
-            >{{ method }}</span>
+            <p class="toolbar-line">
+                <b>Filter:</b>
+                <input class="filter-input" placeholder="Title" v-model="filterTitle" />
+                <template v-if="filterTags.length">
+                    <span
+                        v-for="tag of filterTags"
+                        @click="removeFilterTag(tag)"
+                        class="tag inversed"
+                    >{{ tag }}</span>
+                </template>
+            </p>
+            <p class="toolbar-line">
+                <b>Sort:</b>
+                <span
+                    v-for="method of sortMethods"
+                    @click="sortMethod = method"
+                    class="sort-method" :class="{ active: sortMethod === method }"
+                >{{ method }}</span>
+            </p>
         </div>
         <template v-if="index">
             <small>Found {{ filteredIndex.length }} log(s).</small>

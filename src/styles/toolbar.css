@@ -19,6 +19,11 @@
     }
 }
 
+.toolbar-line {
+    line-height: 1.5;
+    margin: 0;
+}
+
 .toolbar-button {
     display: inline-block;
 }

@@ -23,6 +23,7 @@ const sideBarActive = ref(false)
     width: 100vw;
 
     background: aliceblue;
+    font-family: 'Times New Roman', 'Simsun', serif;
 }
 </style>
 
