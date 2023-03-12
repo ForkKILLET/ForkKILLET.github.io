@@ -21,7 +21,7 @@ defineEmits<{
                 <small class="index-item-time">{{ dayjs(log.time).format('YYYY-MM-DD HH:MM') }}</small>
                 <small class="index-item-tags">
                     <template v-if="log.tags?.length">
-                        &middot; <span
+                        <span
                             v-for="tag of log.tags"
                             @click="$emit('tag-click', tag)"
                             class="tag"
@@ -51,6 +51,10 @@ defineEmits<{
 .index-item-detail {
     display: flex;
     justify-content: space-between;
+}
+
+.index-item-tags {
+    margin: 0 .2em;
 }
 
 .index-item-id {

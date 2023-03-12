@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import Home from './components/views/Home.vue';
+import { ref } from 'vue'
+
+import Home from './components/views/Home.vue'
 import SideBar from './components/views/SideBar.vue'
+import SideBarButton from './components/SideBarButton.vue'
+
+const sideBarActive = ref(false)
 </script>
 
 <template>
     <div class="root">
-        <SideBar class="sidebar"></SideBar>
+        <SideBar class="sidebar" :class="{ active: sideBarActive }"></SideBar>
+        <SideBarButton @click="sideBarActive = ! sideBarActive"></SideBarButton>
         <Home></Home>
     </div>
 </template>
@@ -17,6 +23,7 @@ import SideBar from './components/views/SideBar.vue'
     width: 100vw;
 
     background: #E6F8FF;
+    font-family: 'Times New Roman', 'Simsun', serif;
 }
 </style>
 

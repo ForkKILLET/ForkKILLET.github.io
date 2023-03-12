@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { version } from '../../../package.json'
+
 const buildTime = import.meta.env.VITE_BUILD_TIME ?? 'dev'
 const buildEnv = import.meta.env.VITE_BUILD_ENV ?? 'localhost'
 
@@ -15,6 +17,10 @@ const items: SideBarItem[] = [
     {
         name: 'Tags',
         route: '/tags'
+    },
+    {
+        name: 'Friends',
+        route: '/log/log-friends'
     }
 ]
 </script>
@@ -33,29 +39,35 @@ const items: SideBarItem[] = [
         </p>
 
         <p class="build-info">
-            Ver &zeta;2.0.0 made by <a href="https://github.com/ForkKILLET">ForkKILLET</a>
+            Ver <a href="https://github.com/ForkKILLET/ForkKILLET.github.io/">&zeta;{{ version }}</a> made by <a href="https://github.com/ForkKILLET">ForkKILLET</a>
             with Vue at <u>{{ buildTime }}</u> on <u>{{ buildEnv }}</u>
         </p>
     </nav>
 </template>
 
 <style scoped>
-@media screen and (max-width: 500px) {
-    .sidebar {
-        display: none;
+@media screen and (max-width: 600px) {
+    .sidebar:not(.active) {
+        opacity: 0;
+        max-width: 0;
+    }
+    .sidebar.active {
+        opacity: 1;
+        max-width: 200px;
     }
 }
 
-@media screen and (min-width: 501px) {
-    .sidebar {
-        position: relative;
-        flex-shrink: 0;
-        height: 100%;
-        width: 200px;
+.sidebar {
+    position: relative;
+    flex-shrink: 0;
+    height: 100%;
+    width: 200px;
 
-        background: white;
-        box-shadow: 0 0 .5em #aaa;
-    }
+    background: white;
+    box-shadow: 0 0 .5em #aaa;
+    overflow: hidden;
+
+    transition: .5s max-width, .5s opacity;
 }
 
 .sidebar-item {

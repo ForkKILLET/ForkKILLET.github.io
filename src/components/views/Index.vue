@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useLogStore, Index } from '../../stores/log'
 
-import dayjs from 'dayjs'
 import IndexItem from '../IndexItem.vue';
 
 const filterTitle = ref<string | undefined>()
@@ -43,36 +42,36 @@ onMounted(async () => {
 <template>
     <div class="index">
         <div class="toolbar">
-            <b>Filter:</b>
-            <input class="filter-input" placeholder="Title" v-model="filterTitle" />
-            <template v-if="filterTags.length">
-                &middot; <span
-                    v-for="tag of filterTags"
-                    @click="removeFilterTag(tag)"
-                    class="tag inversed"
-                >{{ tag }}</span>
-            </template>
-            <br />
-            <b>Sort:</b>
-            <span
-                v-for="method of sortMethods"
-                @click="sortMethod = method"
-                class="sort-method" :class="{ active: sortMethod === method }"
-            >{{ method }}</span>
+            <p class="toolbar-line">
+                <b>Filter:</b>
+                <input class="filter-input" placeholder="Title" v-model="filterTitle" />
+                <template v-if="filterTags.length">
+                    <span
+                        v-for="tag of filterTags"
+                        @click="removeFilterTag(tag)"
+                        class="tag inversed"
+                    >{{ tag }}</span>
+                </template>
+            </p>
+            <p class="toolbar-line">
+                <b>Sort:</b>
+                <span
+                    v-for="method of sortMethods"
+                    @click="sortMethod = method"
+                    class="sort-method" :class="{ active: sortMethod === method }"
+                >{{ method }}</span>
+            </p>
         </div>
         <template v-if="index">
             <small>Found {{ filteredIndex.length }} log(s).</small>
             <div>
-                <template
+                <IndexItem
                     v-for="log of filteredIndex"
-                    :key="id"
-                >
-                    <IndexItem
-                        :log="log"
-                        :filter-tags="filterTags"
-                        @tag-click="tag => addFilterTag(tag)"
-                    ></IndexItem>
-                </template>
+                    :key="log.id"
+                    :log="log"
+                    :filter-tags="filterTags"
+                    @tag-click="tag => addFilterTag(tag)"
+                ></IndexItem>
             </div>
         </template>
     </div>

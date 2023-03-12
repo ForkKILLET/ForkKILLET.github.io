@@ -13,12 +13,18 @@ const logStore = useLogStore()
 const tagGroups = ref<TagGroups>()
 const maxGroupSize = ref<number>()
 
-const toolbar = ref<HTMLDivElement>()
-
+const mainEl = document.querySelector('main')!
 const showTagGraph = ref(false)
+const openTagGraph = () => {
+    showTagGraph.value = true
+    mainEl.scrollTo({ top: 0 })
+}
+const closeTagGraph = () => {
+    showTagGraph.value = false
+}
 
 const gotoTag = (tag: string) => {
-    document.querySelector(`[data-tag=${tag}]`)?.scrollIntoView()
+    document.querySelector(`[data-tag=${tag}]`)?.scrollIntoView({ behavior: 'smooth' })
 }
 
 onMounted(async () => {
@@ -49,26 +55,27 @@ onMounted(async () => {
 
 <template>
     <div>
-        <div class="toolbar" ref="toolbar">
-            <b @click="showTagGraph = ! showTagGraph">Graph {{ showTagGraph ? 'Δ' : '∇' }}</b>
-
-            <DropTransition name="drop" height="50vh">
-                <div v-show="showTagGraph" class="tag-graph">
-                    <div
-                        v-for="{ logs, paddings: [ paddingX, paddingY ] }, tag in tagGroups"
-                        @click="gotoTag(tag)"
-                        class="tag-cloud"
-                        :key="tag"
-                        :style="{
-                            fontSize: 0.8 + (1.2 * logs.length / maxGroupSize!) + 'em',
-                            padding: `${paddingX}px ${paddingY}px`
-                        }"
-                    >
-                        <span class="tag">{{ tag }} &middot; {{ logs.length }}</span>
-                    </div>
-                </div>
-            </DropTransition>
+        <div class="toolbar">
+            <b @click="openTagGraph" class="toolbar-button">Graph</b>
+            <b v-if="showTagGraph" @click="closeTagGraph" class="toolbar-close">x</b>
         </div>
+
+        <DropTransition name="drop" height="50vh">
+            <div v-show="showTagGraph" class="tag-graph">
+                <div
+                    v-for="{ logs, paddings: [ paddingX, paddingY ] }, tag in tagGroups"
+                    @click="gotoTag(tag)"
+                    class="tag-cloud"
+                    :key="tag"
+                    :style="{
+                        fontSize: 0.8 + (1.2 * logs.length / maxGroupSize!) + 'em',
+                        padding: `${paddingX}px ${paddingY}px`
+                    }"
+                >
+                    <span class="tag">{{ tag }} &middot; {{ logs.length }}</span>
+                </div>
+            </div>
+        </DropTransition>
 
         <div v-for="{ logs }, tag in tagGroups" class="tag-group">
             <div class="tag-group-header">
