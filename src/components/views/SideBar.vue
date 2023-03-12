@@ -63,9 +63,10 @@ const items: SideBarItem[] = [
     height: 100%;
     width: 200px;
 
-    background: white;
-    box-shadow: 0 0 .5em #aaa;
     overflow: hidden;
+
+    background: white;
+    box-shadow: 0 0 1.5em #7774;
 
     transition: .5s max-width, .5s opacity;
 }

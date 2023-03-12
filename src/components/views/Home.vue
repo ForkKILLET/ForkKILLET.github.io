@@ -31,7 +31,7 @@ const entering = ref(false)
 .home {
     flex-grow: 1;
     width: 0;
-    padding: 1.5em;
+    padding: 1.5em 2em;
 }
 
 .float-enter-active {
@@ -61,15 +61,15 @@ h1 > small {
 }
 
 main {
-    height: calc(100% - 7em);
+    height: calc(100% - 7.2em);
 
-    padding: 1.5em;
+    padding: 1.2em 2.5em;
 
     overflow: auto;
     overflow-anchor: none;
     
     background-color: white;
-    box-shadow: 0 0 .5em #aaa;
+    box-shadow: 0 0 1.5em #7774;
 }
 main.entering {
     overflow-x: hidden;
