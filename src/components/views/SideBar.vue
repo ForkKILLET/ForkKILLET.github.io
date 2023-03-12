@@ -17,6 +17,10 @@ const items: SideBarItem[] = [
     {
         name: 'Tags',
         route: '/tags'
+    },
+    {
+        name: 'Friends',
+        route: '/log/log-friends'
     }
 ]
 </script>
