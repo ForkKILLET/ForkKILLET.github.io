@@ -1,0 +1,51 @@
+<script setup lang="ts">
+</script>
+
+<template>
+    <div class="sidebar-button">
+        <span class="sidebar-button-dots">&middot;&middot;&middot;</span>
+    </div>
+</template>
+
+<style scoped>
+.sidebar-button {
+    position: fixed;
+    top: 1em;
+    right: 1em;
+
+    display: flex;
+    justify-content: center;
+
+    width: 3em;
+    height: 3em;
+
+    border-radius: 1.5em;
+    user-select: none;
+
+    background: white;
+    filter: drop-shadow(0 0 .3em #aaa);
+}
+
+@keyframes bounce {
+    0% {
+        transform: none;
+    }
+    80% {
+        transform: scale(1.2);
+    }
+}
+
+.sidebar-button:active {
+    animation: .5s bounce;
+}
+
+.sidebar-button-dots {
+    align-self: center;
+}
+
+@media screen and (min-width: 601px) {
+    .sidebar-button {
+        display: none;
+    }
+}
+</style>

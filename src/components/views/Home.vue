@@ -28,17 +28,9 @@ const entering = ref(false)
 </template>
 
 <style scoped>
-@media screen and (max-width: 500px) {
-    .home {
-        width: calc(100% - 3em);
-    }
-}
-@media screen and (min-width: 501px) {
-    .home {
-        width: calc(100% - 200px - 3em);
-    }
-}
 .home {
+    flex-grow: 1;
+    width: 0;
     padding: 1.5em;
 }
 
