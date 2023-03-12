@@ -7,6 +7,7 @@ import routes from './routes'
 
 import './styles/tag.css'
 import './styles/toolbar.css'
+import './styles/animations.css'
 import 'normalize.css'
 
 createApp(App)

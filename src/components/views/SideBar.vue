@@ -72,12 +72,15 @@ const items: SideBarItem[] = [
 }
 
 .sidebar-item {
+    display: inline-block;
     padding: 0 1em;
 
     color: black;
 
     text-decoration: none;
     text-shadow: none;
+
+    transition: .5s transform;
 }
 .sidebar-item::before {
     content: '>';
@@ -92,6 +95,10 @@ const items: SideBarItem[] = [
 }
 .sidebar-item:hover::before {
     opacity: 1;
+}
+
+.sidebar-item:active {
+    transform: translateX(1em);
 }
 
 .logo-container {

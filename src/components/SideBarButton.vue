@@ -27,15 +27,6 @@
     filter: drop-shadow(0 0 .3em #aaa);
 }
 
-@keyframes bounce {
-    0% {
-        transform: none;
-    }
-    80% {
-        transform: scale(1.2);
-    }
-}
-
 .sidebar-button:active {
     animation: .5s bounce;
 }

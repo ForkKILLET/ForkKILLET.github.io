@@ -1,0 +1,8 @@
+@keyframes bounce {
+    0% {
+        transform: none;
+    }
+    80% {
+        transform: scale(1.2);
+    }
+}

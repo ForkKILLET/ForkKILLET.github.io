@@ -1,4 +1,5 @@
 .tag {
+    display: inline-block;
     margin: 0 .15em;
     padding: .1em .4em;
 
@@ -8,6 +9,8 @@
     user-select: none;
 
     color: white;
+    font-size: .8rem;
+    line-height: 1rem;
     transition: .3s background-color;
 }
 
@@ -21,4 +24,8 @@
 
 .tag, .tag.inversed:hover {
     background: #bbb;
+}
+
+.tag:active {
+    animation: .3s bounce;
 }
