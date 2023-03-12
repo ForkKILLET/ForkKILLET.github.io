@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useLogStore, Index } from '../../stores/log'
 
-import dayjs from 'dayjs'
 import IndexItem from '../IndexItem.vue';
 
 const filterTitle = ref<string | undefined>()
@@ -63,16 +62,13 @@ onMounted(async () => {
         <template v-if="index">
             <small>Found {{ filteredIndex.length }} log(s).</small>
             <div>
-                <template
+                <IndexItem
                     v-for="log of filteredIndex"
-                    :key="id"
-                >
-                    <IndexItem
-                        :log="log"
-                        :filter-tags="filterTags"
-                        @tag-click="tag => addFilterTag(tag)"
-                    ></IndexItem>
-                </template>
+                    :key="log.id"
+                    :log="log"
+                    :filter-tags="filterTags"
+                    @tag-click="tag => addFilterTag(tag)"
+                ></IndexItem>
             </div>
         </template>
     </div>

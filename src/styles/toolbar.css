@@ -5,3 +5,37 @@
 
     background: white;
 }
+
+.toolbar-button {
+    transition: .3s transform;
+}
+
+@keyframes jump {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.toolbar-button {
+    display: inline-block;
+}
+
+.toolbar-button:hover {
+    cursor: pointer;
+    animation: .3s jump;
+}
+
+.toolbar-close {
+    float: right;
+
+    padding: 0 1em;
+
+    transition: .3s transform;
+}
+
+.toolbar-close:hover {
+    transform: rotate(360deg);
+}
