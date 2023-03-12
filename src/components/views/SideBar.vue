@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { version } from '../../../package.json'
+
 const buildTime = import.meta.env.VITE_BUILD_TIME ?? 'dev'
 const buildEnv = import.meta.env.VITE_BUILD_ENV ?? 'localhost'
 
@@ -33,7 +35,7 @@ const items: SideBarItem[] = [
         </p>
 
         <p class="build-info">
-            Ver &zeta;2.0.0 made by <a href="https://github.com/ForkKILLET">ForkKILLET</a>
+            Ver <a href="https://github.com/ForkKILLET/ForkKILLET.github.io/">&zeta;{{ version }}</a> made by <a href="https://github.com/ForkKILLET">ForkKILLET</a>
             with Vue at <u>{{ buildTime }}</u> on <u>{{ buildEnv }}</u>
         </p>
     </nav>
