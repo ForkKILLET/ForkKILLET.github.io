@@ -2,39 +2,24 @@
 import { ref, computed, createApp } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { marked } from 'marked'
-import Prism from 'prismjs'
-import markedKatex from '../utils/markedKatexExt'
-import markedEmoji from '../utils/markedEmojiExt'
-import markedCuiping from '../utils/markedCuipingExt'
-
 import Fetch from './Fetch.vue'
 import Giscus from '@giscus/vue'
 import { Cuiping } from 'cuiping-component'
+
+import { marked, markedOption, loadKatexExt } from '../utils/markdownManager'
 
 import 'cuiping-component/dist/style.css'
 
 const route = useRoute()
 const logId = computed(() => route.params.id as string)
 
-marked.use(markedCuiping, markedKatex, markedEmoji)
-Prism.manual = true
-
 const html = ref<string | null>(null)
-function loadContent(markdown: string) {
-    html.value = marked(markdown, {
-        baseUrl: './FkLog/',
-        highlight: (code, lang) => (
-            Prism.highlight(code, Prism.languages[lang], lang)
-                .split('\n')
-                .map((ln, i, lines, n = lines.length.toString().length) =>
-                    `<span class="line-number">${
-                        ' '.repeat(n - (i + 1).toString().length)
-                    }${i + 1}. </span>${ln}`
-                )
-                .join('\n')
-        )
-    })
+async function loadContent(markdown: string) {
+    if (markdown.match(/(?<!`)\$/)) {
+        await loadKatexExt()
+    }
+
+    html.value = marked(markdown, markedOption)
 
     setTimeout(() => {
         toc.value = Array
