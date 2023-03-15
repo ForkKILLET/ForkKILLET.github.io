@@ -24,7 +24,7 @@ defineEmits<{
                         <span
                             v-for="tag of log.tags"
                             @click="$emit('tag-click', tag)"
-                            class="tag"
+                            class="tag index-item-tag"
                             :class="{
                                 filtered: filterTags ? filterTags.includes(tag): false 
                             }"

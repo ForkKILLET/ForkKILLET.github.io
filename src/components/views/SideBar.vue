@@ -80,7 +80,7 @@ const items: SideBarItem[] = [
     text-decoration: none;
     text-shadow: none;
 
-    transition: .5s transform;
+    transition: .2s transform;
 }
 .sidebar-item::before {
     content: '>';
@@ -96,7 +96,6 @@ const items: SideBarItem[] = [
 .sidebar-item:hover::before {
     opacity: 1;
 }
-
 .sidebar-item:active {
     transform: translateX(1em);
 }

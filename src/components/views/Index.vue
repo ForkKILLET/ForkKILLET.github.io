@@ -49,7 +49,7 @@ onMounted(async () => {
                     <span
                         v-for="tag of filterTags"
                         @click="removeFilterTag(tag)"
-                        class="tag inversed"
+                        class="tag inversed filter-tag"
                     >{{ tag }}</span>
                 </template>
             </p>
@@ -87,6 +87,10 @@ onMounted(async () => {
     outline: none;
 
     transition: .3s border-color;
+}
+
+.filter-tag {
+    line-height: 1rem;
 }
 
 .filter-input:focus {

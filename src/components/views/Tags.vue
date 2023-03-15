@@ -68,11 +68,12 @@ onMounted(async () => {
                     class="tag-cloud"
                     :key="tag"
                     :style="{
-                        fontSize: 0.8 + (1.2 * logs.length / maxGroupSize!) + 'em',
                         padding: `${paddingX}px ${paddingY}px`
                     }"
                 >
-                    <span class="tag">{{ tag }} &middot; {{ logs.length }}</span>
+                    <span class="tag" :style="{
+                        fontSize: 0.8 + (1.2 * logs.length / maxGroupSize!) + 'em'
+                    }">{{ tag }} &middot; {{ logs.length }}</span>
                 </div>
             </div>
         </DropTransition>
