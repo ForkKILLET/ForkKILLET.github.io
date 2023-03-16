@@ -1,21 +1,26 @@
-import katex from 'katex'
-import 'katex/contrib/mhchem'
-import 'katex/contrib/copy-tex'
-import 'katex/dist/katex.min.css'
+import type { marked } from 'marked'
+import type { NotiManager } from '../components/views/Notifications.vue'
+
+type katexWrapper = typeof import('./katexWrapper')
+let katexWrapper: Promise<katexWrapper>
 
 type MathBlockToken = {
-    type: 'math-block',
-    raw: string,
+    type: 'math-block'
+    raw: string
     formula: string
+    html: string
 }
 
-const tryKatex = (formula: string, options?: any) => {
+const tryKatex = (katex: katexWrapper['katex'], formula: string, options?: any) => {
+    if (! katex) {
+    }
     try {
         return `<span>${
             katex.renderToString(formula, options)
         }</span>`
     }
-    catch {
+    catch (err) {
+        console.error('KaTeX error: %o', err)
         return `<span class="katex-error">${formula}</span>`
     }
 }
@@ -31,18 +36,20 @@ export const mathBlockExt = {
         return match ? {
             type: 'math-block',
             raw: match[0],
-            formula: match[1]
+            formula: match[1],
+            html: ''
         } : undefined
     },
     renderer(token: MathBlockToken) {
-        return tryKatex(token.formula, { displayMode: true, strict: false })
+        return token.html
     }
 }
 
 type MathInlineToken = {
-    type: 'math-inline',
-    raw: string,
+    type: 'math-inline'
+    raw: string
     formula: string
+    html: string
 }
 
 export const mathInlineExt = {
@@ -56,14 +63,32 @@ export const mathInlineExt = {
         return match ? {
             type: 'math-inline',
             raw: match[0],
-            formula: match[1]
+            formula: match[1],
+            html: ''
         } : undefined
     },
     renderer(token: MathInlineToken) {
-        return tryKatex(token.formula, { strict: false })
+        return token.html
     }
 }
 
-export default {
-    extensions: [ mathBlockExt, mathInlineExt ]
-}
+export default (options: { notiManager: NotiManager }): marked.MarkedExtension => ({
+    extensions: [ mathBlockExt, mathInlineExt ],
+    async: true,
+    walkTokens: (token: marked.Token | MathBlockToken | MathInlineToken) => {
+        if (token.type === 'math-block' || token.type === 'math-inline') {
+            let nid: number | null = null
+            if (! katexWrapper) {
+                nid = options.notiManager.addNoti({ content: 'Loading KaTeX...' })
+                katexWrapper = import('./katexWrapper')
+            }
+            return katexWrapper.then(({ katex }) => {
+                if (nid !== null) options.notiManager.removeNoti(nid)
+                token.html = tryKatex(katex, token.formula, {
+                    strict: false,
+                    displayMode: token.type === 'math-block'
+                })
+            })
+        }
+    }
+})

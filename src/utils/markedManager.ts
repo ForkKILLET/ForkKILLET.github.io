@@ -3,18 +3,14 @@ import Prism from 'prismjs'
 
 import markedEmoji from './markedEmojiExt'
 import markedCuiping from './markedCuipingExt'
+import markedKatex from './markedKatexExt'
+
+import type { NotiManager } from '../components/views/Notifications.vue'
 
 Prism.manual = true
 
-marked.use(markedCuiping, markedEmoji)
-
-let katexLoaded = false
-export const loadKatexExt = async () => {
-    if (! katexLoaded) {
-        const markedKatex = await import('./markedKatexExt')
-        katexLoaded = true
-        marked.use(markedKatex.default)
-    }
+export const loadMarked = (options: { notiManager: NotiManager }) => {
+    marked.use(markedCuiping, markedEmoji, markedKatex(options))
 }
 
 export const markedOption = {

@@ -6,7 +6,7 @@ import Fetch from './Fetch.vue'
 import Giscus from '@giscus/vue'
 import { Cuiping } from 'cuiping-component'
 
-import { marked, markedOption, loadKatexExt } from '../utils/markdownManager'
+import { marked, markedOption } from '../utils/markedManager'
 
 import 'cuiping-component/dist/style.css'
 
@@ -15,11 +15,7 @@ const logId = computed(() => route.params.id as string)
 
 const html = ref<string | null>(null)
 async function loadContent(markdown: string) {
-    if (markdown.match(/(?<!`)\$/)) {
-        await loadKatexExt()
-    }
-
-    html.value = marked(markdown, markedOption)
+    html.value = await marked(markdown, markedOption)
 
     setTimeout(() => {
         toc.value = Array
@@ -32,7 +28,7 @@ async function loadContent(markdown: string) {
 
         const cuipings = markdownArea.value!.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
         cuipings.forEach(el => {
-            if (el.dataset.vApp !== "") createApp(Cuiping, {
+            if (el.dataset.vApp) createApp(Cuiping, {
                 molecule: el.dataset.molecule
             }).mount(el)
         })

@@ -1,17 +1,38 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 
 import Home from './components/views/Home.vue'
 import SideBar from './components/views/SideBar.vue'
 import SideBarButton from './components/SideBarButton.vue'
+import Notifications from './components/views/Notifications.vue'
+
+import { kNotiManager } from './utils/injections'
+import { loadMarked } from './utils/markedManager'
+import { storageRef } from './utils/storage'
 
 const sideBarActive = ref(false)
+
+const welcomed = storageRef('welcomed', false)
+
+const notifications = ref<InstanceType<typeof Notifications>>()
+onMounted(() => {
+    const notiManager = notifications.value!.notiManager!
+    loadMarked({ notiManager })
+
+    if (! welcomed.value) {
+        welcomed.value = true
+        notiManager.addNoti({ content: 'Welcome to icelava.top' })
+    }
+
+    provide(kNotiManager, notiManager)
+})
 </script>
 
 <template>
     <div class="root">
         <SideBar class="sidebar" :class="{ active: sideBarActive }"></SideBar>
         <SideBarButton @click="sideBarActive = ! sideBarActive"></SideBarButton>
+        <Notifications ref="notifications"></Notifications>
         <Home></Home>
     </div>
 </template>
