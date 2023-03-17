@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { provide, reactive } from 'vue'
-import { kNotiManager } from '../../utils/injections'
+import { reactive } from 'vue'
+
+import ListTransitionGroup from '../transitions/ListTransitionGroup.vue'
 
 export type Noti = {
     content: string
@@ -32,14 +33,14 @@ defineExpose({
 
 <template>
     <div class="notis">
-        <template v-for="noti, i of notis">
-            <Transition name="fade">
+        <ListTransitionGroup offset="50px">
+            <template v-for="noti, i of notis" :key="i">
                 <div v-if="noti" class="noti">
                     <div class="noti-content">{{ noti.content }}</div>
                     <div class="noti-close" @click="notiManager.removeNoti(i)">x</div>
                 </div>
-            </Transition>
-        </template>
+            </template>
+        </ListTransitionGroup>
     </div>
 </template>
 
@@ -50,11 +51,14 @@ defineExpose({
     top: 1em;
     z-index: 2;
 
+    min-width: 10vw;
     padding: 1em;
 }
 
 .noti {
     display: flex;
+    justify-content: space-between;
+
     padding: .5em 1em;
     margin-bottom: 1em;
 
@@ -73,17 +77,5 @@ defineExpose({
 .noti-close:hover {
     cursor: pointer;
     transform: rotate(360deg);
-}
-
-.fade-enter-active, .fade-leave-active {
-    transition: .5s opacity;
-}
-
-.fade-enter-to, .fade-leave-from {
-    opacity: 1;
-}
-
-.fade-enter-from, .fade-leave-to {
-    opacity: 0;
 }
 </style>

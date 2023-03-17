@@ -4,6 +4,7 @@ import { useLogStore, Index } from '../../stores/log'
 import { kNotiManager } from '../../utils/injections';
 
 import IndexItem from '../IndexItem.vue'
+import ListTransitionGroup from '../transitions/ListTransitionGroup.vue'
 
 const filterTitle = ref<string | undefined>()
 const filterTags = ref<string[]>([])
@@ -28,7 +29,10 @@ const sortMethod = ref<SortMethod>('default')
 const logStore = useLogStore()
 const index = ref<Index | undefined>()
 const sortedIndex = computed(
-    () => [ ...logStore.index ?? [] ].sort(sortFunctions[sortMethod.value])
+    () => [ ...logStore.index ?? [] ].sort((a, b) => (
+        (updateStates.value[b.id] & 0b1110) - (updateStates.value[a.id] & 0b1110) ||
+        sortFunctions[sortMethod.value](a, b)
+    ))
 )
 const filteredIndex = computed(
     () => sortedIndex.value?.filter(({ id, name, tags }) =>
@@ -88,9 +92,8 @@ onMounted(async () => {
         </div>
         <template v-if="index">
             <small>Found {{ filteredIndex.length }} log(s).</small>
-            <div>
+            <div v-for="log of filteredIndex">
                 <IndexItem
-                    v-for="log of filteredIndex"
                     :key="log.id"
                     :log="log"
                     :filter-tags="filterTags"
