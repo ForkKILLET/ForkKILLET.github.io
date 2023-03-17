@@ -32,11 +32,11 @@ defineExpose({
 
 <template>
     <div class="notis">
-        <template v-for="noti, id of notis">
+        <template v-for="noti, i of notis">
             <Transition name="fade">
                 <div v-if="noti" class="noti">
                     <div class="noti-content">{{ noti.content }}</div>
-                    <div class="noti-close" @click="notiManager.removeNoti(id)">x</div>
+                    <div class="noti-close" @click="notiManager.removeNoti(i)">x</div>
                 </div>
             </Transition>
         </template>

@@ -1,12 +1,20 @@
 <script setup lang="ts">
-import type { Index } from '../stores/log'
+import { computed } from 'vue'
+
+import { Index, getLogUpdateStateNames } from '../stores/log'
 
 import dayjs from 'dayjs'
 
-defineProps<{
+const props = defineProps<{
     log: Index[number]
     filterTags?: string[]
+    updateState?: number
 }>()
+
+const updateStatesNames = computed(() => props.updateState
+    ? getLogUpdateStateNames(props.updateState)
+    : []
+)
 
 defineEmits<{
     (event: 'tag-click', tag: string): void
@@ -16,6 +24,13 @@ defineEmits<{
 <template>
     <div class="index-item">
         <RouterLink :to="`/log/${log.id}`">{{ log.name }}</RouterLink>
+        <small class="index-item-states">
+            <span
+                v-for="stateName of updateStatesNames"
+                class="index-item-state"
+                :data-state="stateName"
+            >{{ stateName }}</span>
+        </small>
         <div class="index-item-detail">
             <span>
                 <small class="index-item-time">{{ dayjs(log.time).format('YYYY-MM-DD HH:MM') }}</small>
@@ -55,6 +70,25 @@ defineEmits<{
 
 .index-item-tags {
     margin: 0 .2em;
+}
+
+.index-item-states {
+    margin: 0 .5em;
+}
+.index-item-state {
+    padding: 0 .2em;
+    margin: 0 .2em;
+
+    color: white;
+}
+.index-item-state[data-state=Unread] {
+    background: #39C5BB;
+}
+.index-item-state[data-state=Updated] {
+    background: orange;
+}
+.index-item-state[data-state=Recent] {
+    background: #FF5B5A;
 }
 
 .index-item-id {

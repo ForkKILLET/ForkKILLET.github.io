@@ -21,7 +21,7 @@ onMounted(() => {
 
     if (! welcomed.value) {
         welcomed.value = true
-        notiManager.addNoti({ content: 'Welcome to icelava.top' })
+        notiManager.addNoti({ content: 'Welcome to icelava.top ~' })
     }
 
     provide(kNotiManager, notiManager)

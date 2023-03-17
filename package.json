@@ -1,7 +1,7 @@
 {
   "name": "icelava-top-workspace",
   "private": true,
-  "version": "2.2.0",
+  "version": "2.3.0",
   "scripts": {
     "dev": "vite --port 1628",
     "dev:share": "vite --host 0.0.0.0 --port 1628",

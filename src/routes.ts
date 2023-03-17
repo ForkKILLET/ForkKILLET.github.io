@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 
 import IndexView from './components/views/Index.vue'
-import LogView from './components/Log.vue'
+import LogView from './components/views/Log.vue'
 import TagsView from './components/views/Tags.vue'
 
 export default [

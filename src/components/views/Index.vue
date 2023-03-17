@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, inject } from 'vue'
 import { useLogStore, Index } from '../../stores/log'
+import { kNotiManager } from '../../utils/injections';
 
-import IndexItem from '../IndexItem.vue';
+import IndexItem from '../IndexItem.vue'
 
 const filterTitle = ref<string | undefined>()
 const filterTags = ref<string[]>([])
+const filterUnreadOnly = ref(false)
 const addFilterTag = (tag: string) => {
     if (! filterTags.value.includes(tag)) filterTags.value.push(tag)
 }
@@ -29,13 +31,30 @@ const sortedIndex = computed(
     () => [ ...logStore.index ?? [] ].sort(sortFunctions[sortMethod.value])
 )
 const filteredIndex = computed(
-    () => sortedIndex.value?.filter(({ name, tags }) =>
-        name.includes(filterTitle.value ?? '') && filterTags.value.every(tag => tags.includes(tag))
+    () => sortedIndex.value?.filter(({ id, name, tags }) =>
+        name.includes(filterTitle.value ?? '') &&
+        filterTags.value.every(tag => tags.includes(tag)) &&
+        (! filterUnreadOnly.value || updateStates.value[id])
     )
 )
 
+const updateStates = ref<Record<string, number>>({})
+
+const notiManager = inject(kNotiManager)
+
 onMounted(async () => {
     index.value = await logStore.fetchIndex()
+    let updatedCount = 0
+    updateStates.value = Object.fromEntries(await Promise.all(
+        index.value!.map(async log => {
+            const states = await logStore.getLogUpdateState(log)
+            if (states & 0b1110) updatedCount ++
+            return [ log.id, states ]
+        })
+    ))
+    if (updatedCount) {
+        notiManager?.addNoti({ content: `You got ${updatedCount} update(s)!` })
+    }
 })
 </script>
 
@@ -45,6 +64,11 @@ onMounted(async () => {
             <p class="toolbar-line">
                 <b>Filter:</b>
                 <input class="filter-input" placeholder="Title" v-model="filterTitle" />
+                <span
+                    @click="filterUnreadOnly = ! filterUnreadOnly"
+                    class="filter-button"
+                    :data-checked="filterUnreadOnly"
+                >unread only</span>
                 <template v-if="filterTags.length">
                     <span
                         v-for="tag of filterTags"
@@ -70,6 +94,7 @@ onMounted(async () => {
                     :key="log.id"
                     :log="log"
                     :filter-tags="filterTags"
+                    :update-state="updateStates[log.id]"
                     @tag-click="tag => addFilterTag(tag)"
                 ></IndexItem>
             </div>
@@ -87,6 +112,22 @@ onMounted(async () => {
     outline: none;
 
     transition: .3s border-color;
+}
+
+.filter-button {
+    user-select: none;
+    transition: .5s color;
+}
+.filter-button[data-checked=false] {
+    text-decoration: line-through;
+    color: #aaa;
+}
+.filter-button[data-checked=true] {
+    text-decoration: underline;
+    color: #39C5BB;
+}
+.filter-button:hover {
+    cursor: pointer;
 }
 
 .filter-tag {

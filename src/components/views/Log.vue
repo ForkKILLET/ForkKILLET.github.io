@@ -1,17 +1,25 @@
 <script setup lang="ts">
-import { ref, computed, createApp } from 'vue'
+import { ref, computed, createApp, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useLogStore } from '../../stores/log'
 
-import Fetch from './Fetch.vue'
+import Fetch from '../Fetch.vue'
 import Giscus from '@giscus/vue'
 import { Cuiping } from 'cuiping-component'
 
-import { marked, markedOption } from '../utils/markedManager'
+import { marked, markedOption } from '../../utils/markedManager'
 
 import 'cuiping-component/dist/style.css'
 
 const route = useRoute()
 const logId = computed(() => route.params.id as string)
+
+onMounted(async () => {
+    const logStore = useLogStore()
+    const logItem = (await logStore.getLogById(logId.value))!
+    logItem.lastRead = new Date
+    logStore.updateLastIndex()
+})
 
 const html = ref<string | null>(null)
 async function loadContent(markdown: string) {
