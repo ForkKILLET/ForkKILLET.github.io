@@ -10,8 +10,8 @@
 <style scoped>
 .sidebar-button {
     position: fixed;
-    z-index: 1;
-    top: 1em;
+    z-index: 3;
+    top: 4em;
     right: 1em;
 
     display: flex;
