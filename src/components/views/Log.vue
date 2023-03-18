@@ -98,6 +98,10 @@ function gotoHeading(id: string) {
 </template>
 
 <style scoped>
+.log-content {
+	min-width: 500px;
+}
+
 .log-toc {
     position: absolute;
     top: 5px;
@@ -185,6 +189,10 @@ function gotoHeading(id: string) {
 .markdown .katex-error::after {
     content: ']';
     color: black;
+}
+
+.markdown .prism-line-number {
+	color: #aaa;
 }
 
 .giscus-container {

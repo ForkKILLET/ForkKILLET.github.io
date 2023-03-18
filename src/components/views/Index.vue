@@ -116,9 +116,14 @@ onMounted(async () => {
 
     transition: .3s border-color;
 }
+.filter-input:focus {
+    border-color: #39C5BB;
+}
 
 .filter-button {
+	white-space: nowrap;
     user-select: none;
+
     transition: .5s color;
 }
 .filter-button[data-checked=false] {
@@ -133,12 +138,11 @@ onMounted(async () => {
     cursor: pointer;
 }
 
+.filter-tags {
+	margin-left: 1em;
+}
 .filter-tag {
     line-height: 1rem;
-}
-
-.filter-input:focus {
-    border-color: #39C5BB;
 }
 
 .sort-method {

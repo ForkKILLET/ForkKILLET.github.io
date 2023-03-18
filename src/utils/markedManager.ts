@@ -19,7 +19,7 @@ export const markedOption = {
         Prism.highlight(code, Prism.languages[lang], lang)
             .split('\n')
             .map((ln, i, lines, n = lines.length.toString().length) =>
-                `<span class="line-number">${
+                `<span class="prism-line-number">${
                     ' '.repeat(n - (i + 1).toString().length)
                 }${i + 1}. </span>${ln}`
             )

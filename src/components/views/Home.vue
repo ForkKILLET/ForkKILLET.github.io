@@ -63,7 +63,7 @@ h1 > small {
 main {
     height: calc(100% - 7.2em);
 
-    padding: 1.2em 2.5em;
+    padding: 1.2em 1.5em;
 
     overflow: auto;
     overflow-anchor: none;

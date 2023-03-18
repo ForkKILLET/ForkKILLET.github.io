@@ -46,17 +46,6 @@ const items: SideBarItem[] = [
 </template>
 
 <style scoped>
-@media screen and (max-width: 600px) {
-    .sidebar:not(.active) {
-        opacity: 0;
-        max-width: 0;
-    }
-    .sidebar.active {
-        opacity: 1;
-        max-width: 200px;
-    }
-}
-
 .sidebar {
     position: relative;
     flex-shrink: 0;

@@ -25,8 +25,12 @@
 
     background: white;
     filter: drop-shadow(0 0 .3em #aaa);
-}
 
+	transition: filter .5s;
+}
+.sidebar-button:hover, .sidebar-button:focus {
+    filter: drop-shadow(0 0 .3em #39C5BB);
+}
 .sidebar-button:active {
     animation: .5s bounce;
 }

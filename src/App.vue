@@ -10,7 +10,7 @@ import { kNotiManager } from './utils/injections'
 import { loadMarked } from './utils/markedManager'
 import { storageRef } from './utils/storage'
 
-const sideBarActive = ref(false)
+const sidebarActive = ref(false)
 
 const welcomed = storageRef('welcomed', false)
 
@@ -29,9 +29,11 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="root">
-        <SideBar class="sidebar" :class="{ active: sideBarActive }"></SideBar>
-        <SideBarButton @click="sideBarActive = ! sideBarActive"></SideBarButton>
+	<div class="root" :class="{ masked: sidebarActive }">
+		<Transition name="side">
+			<SideBar v-show="sidebarActive" class="sidebar"></SideBar>
+		</Transition>
+        <SideBarButton @click="sidebarActive = ! sidebarActive"></SideBarButton>
         <Notifications ref="notifications"></Notifications>
         <Home></Home>
     </div>
@@ -46,11 +48,34 @@ onMounted(() => {
     background: #E6F8FF;
     font-family: 'Times New Roman', 'Simsun', serif;
 }
+.root.masked .home {
+	filter: blur(1px);
+}
+
+@media screen and (max-width: 600px) {
+	.sidebar {
+		position: fixed;
+		z-index: 3;
+	}
+}
+
+
+.side-enter-active, .side-leave-active {
+	transition: transform .8s ease;
+}
+.side-enter-from, .side-leave-to {
+	transform: translateX(-200px);
+}
+.side-enter-to, .side-leave-from {
+	transform: none;
+}
 </style>
 
 <style>
 body {
     margin: 0;
+
+	overflow: hidden;
 }
 
 a {
