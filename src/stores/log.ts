@@ -50,11 +50,12 @@ export const useLogStore = defineStore('log', {
             let state = 0
             if (! this.lastIndex) return LogUpdateStates.Unread
 
-            if (! this.origLastIndex?.find(i => i.id === log.id)) state |= LogUpdateStates.Recent
+			const origLastLog = this.origLastIndex?.find(i => i.id === log.id)
+            if (! origLastLog) state |= LogUpdateStates.Recent
 
-            const recordedLog = (await this.getLogById(log.id))!
-            if (! recordedLog.lastRead) state |= LogUpdateStates.Unread
-            else if (new Date(recordedLog.lastRead) < new Date(log.time)) state |= LogUpdateStates.Updated
+            const lastLog = (await this.getLogById(log.id))!
+            if (! lastLog.lastRead) state |= LogUpdateStates.Unread
+            if (new Date(lastLog.lastRead ?? origLastLog?.time ?? log.time) < new Date(log.time)) state |= LogUpdateStates.Updated
 
             return state
         }
