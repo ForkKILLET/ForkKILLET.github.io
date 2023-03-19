@@ -56,7 +56,12 @@ onMounted(async () => {
 <template>
     <div>
         <div class="toolbar">
-            <b @click="openTagGraph" class="toolbar-button">Graph</b>
+            <b
+                @click="openTagGraph"
+                @keypress.enter="openTagGraph"
+                class="toolbar-button"
+                tabindex="0"
+            >Graph</b>
             <b v-if="showTagGraph" @click="closeTagGraph" class="toolbar-close">x</b>
         </div>
 

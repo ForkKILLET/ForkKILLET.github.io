@@ -39,7 +39,8 @@ const items: SideBarItem[] = [
         </p>
 
         <p class="build-info">
-            Ver <a href="https://github.com/ForkKILLET/ForkKILLET.github.io/">&zeta;{{ version }}</a> made by <a href="https://github.com/ForkKILLET">ForkKILLET</a>
+            Ver <a href="https://github.com/ForkKILLET/ForkKILLET.github.io/" tabindex="-1">&zeta;{{ version }}</a>
+            made by <a href="https://github.com/ForkKILLET" tabindex="-1">ForkKILLET</a>
             with Vue at <u>{{ buildTime }}</u> on <u>{{ buildEnv }}</u>
         </p>
     </nav>
@@ -79,10 +80,10 @@ const items: SideBarItem[] = [
     opacity: 0;
     transition: .3s opacity;
 }
-.sidebar-item:hover {
+.sidebar-item:hover, .sidebar-item:focus {
     color: #39C5BB;
 }
-.sidebar-item:hover::before {
+.sidebar-item:hover::before, .sidebar-item:focus::before {
     opacity: 1;
 }
 .sidebar-item:active {
@@ -98,6 +99,9 @@ const items: SideBarItem[] = [
     overflow: hidden;
     text-decoration: none;
     text-shadow: none;
+}
+.logo-container:hover, .logo-container:focus {
+    animation: 1.5s pulse infinite;
 }
 
 .logo {

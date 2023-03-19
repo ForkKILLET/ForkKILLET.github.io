@@ -4,17 +4,19 @@ import { useLogStore, Index } from '../../stores/log'
 import { kNotiManager } from '../../utils/injections';
 
 import IndexItem from '../IndexItem.vue'
-import ListTransitionGroup from '../transitions/ListTransitionGroup.vue'
 
 const filterTitle = ref<string | undefined>()
 const filterTags = ref<string[]>([])
-const filterUnreadOnly = ref(false)
 const addFilterTag = (tag: string) => {
     if (! filterTags.value.includes(tag)) filterTags.value.push(tag)
 }
 const removeFilterTag = (tag: string) => {
     const i = filterTags.value.indexOf(tag)
     if (i >= 0) filterTags.value.splice(i, 1)
+}
+const filterUnreadOnly = ref(false)
+const toggleUnreadOnly = () => {
+    filterUnreadOnly.value = ! filterUnreadOnly.value
 }
 
 const sortMethods = [ 'default', 'newest', 'oldest' ] as const
@@ -67,17 +69,25 @@ onMounted(async () => {
         <div class="toolbar">
             <p class="toolbar-line">
                 <b>Filter:</b>
-                <input class="filter-input" placeholder="Title" v-model="filterTitle" />
+                <input
+                    v-model="filterTitle"
+                    class="filter-input"
+                    placeholder="Title"
+                />
                 <span
-                    @click="filterUnreadOnly = ! filterUnreadOnly"
-                    class="filter-button"
+                    @click="toggleUnreadOnly"
+                    @keypress.enter="toggleUnreadOnly"
                     :data-checked="filterUnreadOnly"
+                    class="filter-button"
+                    tabindex="0"
                 >unread only</span>
                 <template v-if="filterTags.length">
                     <span
                         v-for="tag of filterTags"
                         @click="removeFilterTag(tag)"
+                        @keypress.enter="removeFilterTag(tag)"
                         class="tag inversed filter-tag"
+                        tabindex="0"
                     >{{ tag }}</span>
                 </template>
             </p>
@@ -86,7 +96,9 @@ onMounted(async () => {
                 <span
                     v-for="method of sortMethods"
                     @click="sortMethod = method"
+                    @keypress.enter="sortMethod = method"
                     class="sort-method" :class="{ active: sortMethod === method }"
+                    tabindex="0"
                 >{{ method }}</span>
             </p>
         </div>
@@ -107,6 +119,7 @@ onMounted(async () => {
 
 <style scoped>
 .filter-input {
+    display: inline-block;
     margin: 0 1em;
     padding: 0;
 
@@ -118,9 +131,12 @@ onMounted(async () => {
 }
 .filter-input:focus {
     border-color: #39C5BB;
+    animation: .5s hop;
 }
 
 .filter-button {
+    display: inline-block;
+
 	white-space: nowrap;
     user-select: none;
 
@@ -137,6 +153,9 @@ onMounted(async () => {
 .filter-button:hover {
     cursor: pointer;
 }
+.filter-button:hover, .filter-button:focus {
+    animation: .3s hop;
+}
 
 .filter-tags {
 	margin-left: 1em;
@@ -146,14 +165,19 @@ onMounted(async () => {
 }
 
 .sort-method {
+    display: inline-block;
     margin: 0 .5em;
 
     transition: .3s color;
 }
 
 .sort-method:hover {
-    color: #39C5BB;
     cursor: pointer;
+}
+
+.sort-method:hover, .sort-method:focus {
+    color: #39C5BB;
+    animation: .3s hop;
 }
 
 .sort-method.active {

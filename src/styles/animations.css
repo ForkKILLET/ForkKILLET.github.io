@@ -6,3 +6,21 @@
         transform: scale(1.2);
     }
 }
+
+@keyframes hop {
+    0% {
+        transform: none;
+    }
+    80% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: none;
+    }
+    50% {
+        transform: scale(0.95);
+    }
+}

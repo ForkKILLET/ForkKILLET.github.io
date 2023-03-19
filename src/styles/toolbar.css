@@ -13,15 +13,6 @@
     transition: .3s transform;
 }
 
-@keyframes jump {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-3px);
-    }
-}
-
 .toolbar-line {
     line-height: 1.5;
     margin: 0;
@@ -31,9 +22,9 @@
     display: inline-block;
 }
 
-.toolbar-button:hover {
+.toolbar-button:hover, .toolbar-button:focus {
     cursor: pointer;
-    animation: .3s jump;
+    animation: .3s hop;
 }
 
 .toolbar-close {

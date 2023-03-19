@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, provide, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import Home from './components/views/Home.vue'
 import SideBar from './components/views/SideBar.vue'
@@ -32,6 +33,11 @@ onMounted(() => {
     }
 
     provide(kNotiManager, notiManager)
+})
+
+const router = useRouter()
+router.afterEach(() => {
+    document.querySelector('main')?.focus()
 })
 </script>
 
@@ -81,6 +87,10 @@ onMounted(() => {
 </style>
 
 <style>
+* {
+    outline: none;
+}
+
 body {
     margin: 0;
 
@@ -93,7 +103,7 @@ a {
     transition: color .2s;
     text-shadow: 0 0 1px #66CCFF;
 }
-a:hover {
+a:hover, a:focus {
     text-decoration: underline;        
 }
 a:active {

@@ -70,6 +70,11 @@ main {
     
     background-color: white;
     box-shadow: 0 0 1.5em #7774;
+
+    transition: box-shadow .5s;
+}
+main:focus {
+    box-shadow: 0 0 .5em #39C5BB;
 }
 main.entering {
     overflow-x: hidden;

@@ -17,11 +17,11 @@
     cursor: pointer;
 }
 
-.tag.inversed, .tag:hover, .tag.filtered {
+.tag.inversed, .tag:hover, .tag:focus, .tag.filtered {
     background: #39C5BB;
 }
 
-.tag, .tag.inversed:hover {
+.tag, .tag.inversed:hover, .tag.inversed:focus {
     background: #bbb;
 }
 
