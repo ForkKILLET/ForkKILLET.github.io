@@ -20,7 +20,9 @@ const entering = ref(false)
                     @before-enter="entering = true"
                     @after-enter="entering = false"
                 >
-                    <component :is="Component" :key="route.path"></component>
+                    <KeepAlive>
+                        <component :is="Component" :key="route.path"></component>
+                    </KeepAlive>
                 </Transition>
             </RouterView>
         </main>

@@ -1,20 +1,25 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, inject } from 'vue'
+import { ref, reactive, computed, onMounted, inject, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router';
 import { useLogStore, Index } from '../../stores/log'
+
 import { kNotiManager } from '../../utils/injections';
 
 import IndexItem from '../IndexItem.vue'
 
-const filterTitle = ref<string | undefined>()
-const filterTags = ref<string[]>([])
+const route = useRoute()
+const { title, tags, unreadOnly, sort } = route.query
+
+const filterTitle = ref(typeof title === 'string' ? title : undefined)
+const filterTags = reactive(Array.isArray(tags) ? tags.map(String) : [])
 const addFilterTag = (tag: string) => {
-    if (! filterTags.value.includes(tag)) filterTags.value.push(tag)
+    if (! filterTags.includes(tag)) filterTags.push(tag)
 }
 const removeFilterTag = (tag: string) => {
-    const i = filterTags.value.indexOf(tag)
-    if (i >= 0) filterTags.value.splice(i, 1)
+    const i = filterTags.indexOf(tag)
+    if (i >= 0) filterTags.splice(i, 1)
 }
-const filterUnreadOnly = ref(false)
+const filterUnreadOnly = ref(typeof unreadOnly === 'boolean' ? unreadOnly : false)
 const toggleUnreadOnly = () => {
     filterUnreadOnly.value = ! filterUnreadOnly.value
 }
@@ -26,7 +31,8 @@ const sortFunctions: Record<SortMethod, (a: Index[number], b: Index[number]) => 
     newest: (a, b) => + b.time - + a.time
 }
 type SortMethod = (typeof sortMethods)[number]
-const sortMethod = ref<SortMethod>('default')
+const isSortMethod = (x: any): x is SortMethod => sortMethods.includes(x)
+const sortMethod = ref(isSortMethod(sort) ? sort : 'default')
 
 const logStore = useLogStore()
 const index = ref<Index | undefined>()
@@ -39,10 +45,23 @@ const sortedIndex = computed(
 const filteredIndex = computed(
     () => sortedIndex.value?.filter(({ id, name, tags }) =>
         name.includes(filterTitle.value ?? '') &&
-        filterTags.value.every(tag => tags.includes(tag)) &&
+        filterTags.every(tag => tags.includes(tag)) &&
         (! filterUnreadOnly.value || updateStates.value[id])
     )
 )
+
+const router = useRouter()
+const generateQuery = () => ({
+    title: filterTitle.value,
+    tags: filterTags,
+    unreadOnly: filterUnreadOnly.value ? 'yes' : 'no',
+    sort: sortMethod.value
+})
+watch([ filterTitle, filterTags, filterUnreadOnly, sortMethod ], () => {
+    router.replace({
+        query: generateQuery()
+    })
+})
 
 const updateStates = ref<Record<string, number>>({})
 
@@ -118,6 +137,10 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.filter-input {
+    margin: 0 1em;
+}
+
 .filter-button {
     display: inline-block;
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, provide, ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import Home from './components/views/Home.vue'
@@ -35,8 +35,9 @@ onMounted(() => {
 })
 
 const router = useRouter()
-router.afterEach(() => {
-    document.querySelector('main')?.focus()
+router.afterEach((from, to) => {
+    if (from.path !== to.path)
+        document.querySelector('main')?.focus()
 })
 </script>
 
