@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useLogStore, Index } from '../../stores/log'
 
 import { kNotiManager } from '../../utils/injections';
+import { keyboardManager } from '../../utils/keyboardManager'
 
 import IndexItem from '../IndexItem.vue'
 
@@ -68,6 +69,9 @@ const updateStates = ref<Record<string, number>>({})
 
 const notiManager = inject(kNotiManager)
 
+const filterInputEl = ref<HTMLInputElement | undefined>()
+const onKeyFilter = 
+
 onMounted(async () => {
     index.value = await logStore.fetchIndex()
     let updatedCount = 0
@@ -82,6 +86,20 @@ onMounted(async () => {
         notiManager?.addNoti({ content: `You got ${updatedCount} update(s)!` })
     }
 })
+
+watch(route, () => {
+    if (route.path === '/') keyboardManager.register('keypress', {
+        key: '/',
+        description: 'Focus filter',
+        action: (event) => {
+            if (event.key === '/') {
+                filterInputEl.value?.focus()
+                event.preventDefault()
+            }
+        }
+    })
+    else keyboardManager.dispose('keypress')
+}, { immediate: true })
 </script>
 
 <template>
@@ -91,6 +109,7 @@ onMounted(async () => {
                 <b>Filter:</b>
                 <input
                     v-model="filterTitle"
+                    ref="filterInputEl"
                     class="filter-input"
                     placeholder="Title"
                 />
