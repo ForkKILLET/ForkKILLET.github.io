@@ -10,7 +10,14 @@ import { kNotiManager } from './utils/injections'
 import { loadMarked } from './utils/markedManager'
 import { storageRef } from './utils/storage'
 
+const matchSidebarFixedWidth = () => window.matchMedia('screen and (min-width: 601px')
+const sidebarFixed = ref(matchSidebarFixedWidth().matches)
 const sidebarActive = ref(false)
+matchSidebarFixedWidth().addEventListener('change', event => {
+    console.log(event)
+    sidebarFixed.value = event.matches
+    sidebarActive.value = ! event.matches
+})
 
 const welcomed = storageRef('welcomed', false)
 
@@ -29,9 +36,9 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="root" :class="{ masked: sidebarActive }">
+	<div class="root" :class="{ masked: ! sidebarFixed && sidebarActive }">
 		<Transition name="side">
-			<SideBar v-show="sidebarActive" class="sidebar"></SideBar>
+			<SideBar v-show="sidebarFixed || sidebarActive" class="sidebar"></SideBar>
 		</Transition>
         <SideBarButton @click="sidebarActive = ! sidebarActive"></SideBarButton>
         <Notifications ref="notifications"></Notifications>
@@ -40,6 +47,13 @@ onMounted(() => {
 </template>
 
 <style scoped>
+@media screen and (max-width: 600px) {
+	.sidebar {
+		position: fixed;
+		z-index: 3;
+	}
+}
+
 .root {
     display: flex;
     height: 100vh;
@@ -48,17 +62,12 @@ onMounted(() => {
     background: #E6F8FF;
     font-family: 'Times New Roman', 'Simsun', serif;
 }
+.home {
+    transition: .8s filter;
+}
 .root.masked .home {
 	filter: blur(1px);
 }
-
-@media screen and (max-width: 600px) {
-	.sidebar {
-		position: fixed;
-		z-index: 3;
-	}
-}
-
 
 .side-enter-active, .side-leave-active {
 	transition: transform .8s ease;
