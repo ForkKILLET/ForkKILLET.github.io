@@ -118,22 +118,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.filter-input {
-    display: inline-block;
-    margin: 0 1em;
-    padding: 0;
-
-    border: solid black;
-    border-width: 0 0 1px 0;
-    outline: none;
-
-    transition: .3s border-color;
-}
-.filter-input:focus {
-    border-color: #39C5BB;
-    animation: .5s hop;
-}
-
 .filter-button {
     display: inline-block;
 

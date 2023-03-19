@@ -5,6 +5,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import routes from './routes'
 
+import './styles/base.css'
 import './styles/tag.css'
 import './styles/toolbar.css'
 import './styles/animations.css'

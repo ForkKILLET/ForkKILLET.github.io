@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, provide, ref } from 'vue'
+import { nextTick, onMounted, provide, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import Home from './components/views/Home.vue'
@@ -15,7 +15,6 @@ const matchSidebarFixedWidth = () => window.matchMedia('screen and (min-width: 6
 const sidebarFixed = ref(matchSidebarFixedWidth().matches)
 const sidebarActive = ref(false)
 matchSidebarFixedWidth().addEventListener('change', event => {
-    console.log(event)
     sidebarFixed.value = event.matches
     sidebarActive.value = ! event.matches
 })
@@ -83,30 +82,5 @@ router.afterEach(() => {
 }
 .side-enter-to, .side-leave-from {
 	transform: none;
-}
-</style>
-
-<style>
-* {
-    outline: none;
-}
-
-body {
-    margin: 0;
-
-	overflow: hidden;
-}
-
-a {
-    text-decoration: none;
-    color: #40CAC1;
-    transition: color .2s;
-    text-shadow: 0 0 1px #66CCFF;
-}
-a:hover, a:focus {
-    text-decoration: underline;        
-}
-a:active {
-    color: #2C918B;
 }
 </style>

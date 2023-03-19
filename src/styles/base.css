@@ -1,0 +1,37 @@
+* {
+    outline: none;
+}
+
+body {
+    margin: 0;
+
+	overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: #40CAC1;
+    transition: color .2s;
+    text-shadow: 0 0 1px #66CCFF;
+}
+a:hover, a:focus {
+    text-decoration: underline;        
+}
+a:active {
+    color: #2C918B;
+}
+
+input {
+    display: inline-block;
+    margin: 0 1em;
+    padding: 0;
+
+    border: solid black;
+    border-width: 0 0 1px 0;
+
+    transition: .3s border-color;
+}
+input:focus {
+    border-color: #39C5BB;
+    animation: .5s hop;
+}
