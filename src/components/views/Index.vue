@@ -8,7 +8,8 @@ import { kNotiManager } from '../../utils/injections';
 import IndexItem from '../IndexItem.vue'
 
 const route = useRoute()
-const { title, tags, unreadOnly, sort } = route.query
+const { title, tags: origTags, unreadOnly, sort } = route.query
+const tags = Array.isArray(origTags) || ! origTags ? origTags : [ origTags ]
 
 const filterTitle = ref(typeof title === 'string' ? title : undefined)
 const filterTags = reactive(Array.isArray(tags) ? tags.map(String) : [])
@@ -100,7 +101,7 @@ onMounted(async () => {
                     class="filter-button"
                     tabindex="0"
                 >unread only</span>
-                <template v-if="filterTags.length">
+                <span v-if="filterTags.length" class="filter-tags">
                     <span
                         v-for="tag of filterTags"
                         @click="removeFilterTag(tag)"
@@ -108,7 +109,7 @@ onMounted(async () => {
                         class="tag inversed filter-tag"
                         tabindex="0"
                     >{{ tag }}</span>
-                </template>
+                </span>
             </p>
             <p class="toolbar-line">
                 <b>Sort:</b>
@@ -165,7 +166,7 @@ onMounted(async () => {
 }
 
 .filter-tags {
-	margin-left: 1em;
+	margin-left: .8em;
 }
 .filter-tag {
     line-height: 1rem;

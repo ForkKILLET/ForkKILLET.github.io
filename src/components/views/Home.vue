@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const routeId = computed(() => route.params.id)
 
 const entering = ref(false)
+
+onMounted(() => {
+    document.querySelector('main')?.focus()
+})
 </script>
 
 <template>
@@ -13,7 +17,7 @@ const entering = ref(false)
         <h1>{{ route.name }}
             <small v-if="routeId">/ {{ routeId }}</small>
         </h1>
-        <main :class="{ entering }">
+        <main :class="{ entering }" tabindex="0">
             <RouterView v-slot="{ Component }">
                 <Transition
                     name="float"
