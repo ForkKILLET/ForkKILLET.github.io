@@ -92,10 +92,8 @@ watch(route, () => {
         key: '/',
         description: 'Focus filter',
         action: (event) => {
-            if (event.key === '/') {
-                filterInputEl.value?.focus()
-                event.preventDefault()
-            }
+            filterInputEl.value?.focus()
+            event.preventDefault()
         }
     })
     else keyboardManager.dispose('keypress')

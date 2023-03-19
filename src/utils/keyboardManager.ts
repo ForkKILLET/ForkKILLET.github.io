@@ -12,40 +12,39 @@ export const keyboardManager = {
     register: (name: string, op: KeyboardOp): boolean => {
         if (keyboardOps[name]) return false
         keyboardOps[name] = op
-        window.addEventListener('keypress', op.action)
         return true
     },
     dispose: (name: string): boolean => {
-        if (keyboardOps[name]) {
-            window.removeEventListener('keypress', keyboardOps[name].action)
-            delete keyboardOps[name]
-            return true
-        }
-        return false
+        return delete keyboardOps[name]
     }
 }
+
+window.addEventListener('keypress', (event) => {
+    if ((event.target as HTMLElement)?.tagName === 'INPUT') return
+    for (const name in keyboardOps) {
+        const op = keyboardOps[name]
+        if (op.key === event.key) op.action(event)
+    }
+})
 
 keyboardManager.register('focusIceLava', {
     key: 'i',
     description: 'Focus icelava logo',
-    action: event => {
-        if (event.key === 'i')
-            (document.querySelector('.logo-container') as HTMLLinkElement | undefined)?.focus()
+    action: () => {
+        (document.querySelector('.logo-container') as HTMLLinkElement | undefined)?.focus()
     }
 })
 keyboardManager.register('focusMain', {
     key: 'm',
     description: 'Focus main',
-    action: event => {
-        if (event.key === 'm')
-            document.querySelector('main')?.focus()
+    action: () => {
+        document.querySelector('main')?.focus()
     }
 })
 keyboardManager.register('openGitHub', {
     key: 'G',
     description: 'Open GitHub',
-    action: event => {
-        if (event.key === 'G')
-            window.open('https://github.com/ForkKILLET/ForkKILLET.github.io/')
+    action: () => {
+        window.open('https://github.com/ForkKILLET/ForkKILLET.github.io/')
     }
 })

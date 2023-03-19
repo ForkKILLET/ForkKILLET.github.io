@@ -52,10 +52,8 @@ const showKeyboardIns = ref(false)
 keyboardManager.register('toggleKeyboardIns', {
     key: '?',
     description: 'Toggle keyboard instruction',
-    action: event => {
-        if (event.key === '?') {
-            showKeyboardIns.value = ! showKeyboardIns.value
-        }
+    action: () => {
+        showKeyboardIns.value = ! showKeyboardIns.value
     }
 })
 </script>
