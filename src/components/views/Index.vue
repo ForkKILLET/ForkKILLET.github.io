@@ -21,7 +21,7 @@ const removeFilterTag = (tag: string) => {
     const i = filterTags.indexOf(tag)
     if (i >= 0) filterTags.splice(i, 1)
 }
-const filterUnreadOnly = ref(typeof unreadOnly === 'boolean' ? unreadOnly : false)
+const filterUnreadOnly = ref(unreadOnly === 'true' ? true : false)
 const toggleUnreadOnly = () => {
     filterUnreadOnly.value = ! filterUnreadOnly.value
 }
@@ -56,7 +56,7 @@ const router = useRouter()
 const generateQuery = () => ({
     title: filterTitle.value,
     tags: filterTags,
-    unreadOnly: filterUnreadOnly.value ? 'yes' : 'no',
+    unreadOnly: String(filterUnreadOnly.value),
     sort: sortMethod.value
 })
 watch([ filterTitle, filterTags, filterUnreadOnly, sortMethod ], () => {
