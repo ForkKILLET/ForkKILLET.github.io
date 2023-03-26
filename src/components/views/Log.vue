@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref, computed, createApp, onMounted } from 'vue'
+import { ref, computed, createApp, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useLogStore } from '../../stores/log'
 
 import Fetch from '../Fetch.vue'
 import Giscus from '@giscus/vue'
 import { Cuiping } from 'cuiping-component'
+import 'cuiping-component/dist/style.css'
 
 import { marked, markedOption } from '../../utils/markedManager'
 
-import 'cuiping-component/dist/style.css'
-
+const devMode = import.meta.env.DEV
 const route = useRoute()
 const logId = computed(() => route.params.id as string)
 
@@ -22,28 +22,29 @@ onMounted(async () => {
 })
 
 const html = ref<string | null>(null)
+const markdownArea = ref<HTMLDivElement | null>(null)
 async function loadContent(markdown: string) {
     html.value = await marked(markdown, markedOption)
-
-    setTimeout(() => {
-        toc.value = Array
-            .from(markdownArea.value!.querySelectorAll('h1, h2') as NodeListOf<HTMLHeadElement>)
-            .map(head => ({
-                lv: + head.tagName.slice(1),
-                id: head.id,
-                html: head.innerHTML
-            }))
-
-        const cuipings = markdownArea.value!.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
-        cuipings.forEach(el => {
-            if (el.dataset.vApp) createApp(Cuiping, {
-                molecule: el.dataset.molecule
-            }).mount(el)
-        })
-    }, 0)
 }
 
-const markdownArea = ref<HTMLDivElement | null>(null)
+watch(markdownArea, () => {
+    if (! markdownArea.value) return
+
+    toc.value = Array
+        .from(markdownArea.value.querySelectorAll('h1, h2') as NodeListOf<HTMLHeadElement>)
+        .map(head => ({
+            lv: + head.tagName.slice(1),
+            id: head.id,
+            html: head.innerHTML
+        }))
+
+    const cuipings = markdownArea.value.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
+    cuipings.forEach(el => {
+        if (el.dataset.vApp) createApp(Cuiping, {
+            molecule: el.dataset.molecule
+        }).mount(el)
+    })
+})
 
 type LogToc = {
     lv: number,
@@ -52,13 +53,16 @@ type LogToc = {
 } []
 
 const toc = ref<LogToc | null>(null)
-const showToc = ref(false)
+const showToc = ref(true)
 function toggleToc() {
     showToc.value = ! showToc.value
 }
 
 function gotoHeading(id: string) {
-    markdownArea.value?.querySelector(`[id="${id}"]`)?.scrollIntoView()
+    markdownArea.value?.querySelector(`[id="${id}"]`)?.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'start'
+    })
 }
 </script>
 
@@ -69,19 +73,28 @@ function gotoHeading(id: string) {
             :url="`/FkLog/${logId}`"
             :success="loadContent"
         >
-            <div class="log-toc markdown" v-if="showToc">
-                <ul>
+            <div class="log-toc markdown" tabindex="0">
+                <span
+                    class="log-toc-button"
+                    tabindex="0"
+                    @click="toggleToc"
+                    @keypress.enter="toggleToc"
+                >#</span>
+                <ul class="log-toc-content" v-if="showToc">
                     <li
                         v-for="{ lv, id, html } in toc"
                         v-html="html"
                         :key="id"
-                        :class="[ `log-toc-item-${lv}`, 'implict-link' ]"
+                        :data-lv="lv"
+                        class="log-toc-item"
+                        tabindex="0"
                         @click="gotoHeading(id)"
+                        @keypress.enter="gotoHeading(id)"
                     ></li>
                 </ul>
             </div>
-            <div ref="markdownArea" class="markdown" v-html="html"></div>
-            <div class="giscus-container">
+            <div ref="markdownArea" class="log-text markdown" v-html="html"></div>
+            <div class="giscus-container" v-if="! devMode">
                 <Giscus
                     repo="ForkKILLET/FkLog"
                     repo-id="R_kgDOHeN7yQ"
@@ -103,30 +116,72 @@ function gotoHeading(id: string) {
 }
 
 .log-toc {
-    position: absolute;
-    top: 5px;
-    right: 25px;
+    position: sticky;
+    top: 0;
     z-index: 1;
 
-    padding: 10px 5px;
+    display: inline-flex;
+    padding: .6em;
 
-    border-radius: 10px;
     background: white;
-    box-shadow: 0 0 1px 1px #39C5BB;
+    box-shadow: 0 0 .5em #7774;
+    transition: .5s box-shadow;
+}
+.log-toc:hover, .log-toc:focus {
+    box-shadow: 0 0 .5em #39C5BB;
 }
 
-.log-toc > ul {
-    padding: 0 10px 0 20px;
+.log-toc-button {
+    display: inline-block;
+    width: 1em;
+    z-index: 1;
 
+    user-select: none;
+    text-align: center;
+    transition: color;
+}
+.log-toc-button:hover {
+    cursor: pointer;
+}
+.log-toc-button:hover, .log-toc-button:focus {
+    animation: .3s hop;
+    color: #39C5BB;
+}
+.log-toc-content {
+    margin: 0 -1em 0;
+    padding-right: 1em;
     list-style-type: disclosure-closed;
 }
-
-.log-toc-item-2 {
-    margin-left: 15px;
+.log-toc-item {
+    transition: .3s color;
+}
+.log-toc-item:hover, .log-toc-item:focus {
+    color: #39C5BB;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.log-toc-item[data-lv='2'] {
+    margin-left: 1em;
 }
 </style>
 
 <style>
+@media screen and (max-width: 600px) {
+    .markdown {
+        font-size: .9em;
+    }
+
+    .log-text li {
+        margin-left: -1em;
+    }
+}
+
+.markdown h1, .markdown h2 {
+    padding-top: .3em;
+    margin-left: -1.2em;
+    padding-left: 1.2em;
+}
+
 .markdown table {
     border-collapse: collapse;
 }

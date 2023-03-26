@@ -43,10 +43,6 @@ h3 {
     text-align: center;
 }
 
-.toolbar-close {
-    float: right;
-}
-
 .ins-table {
     display: flex;
     flex-direction: column;

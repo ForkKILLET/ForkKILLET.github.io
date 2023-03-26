@@ -59,7 +59,8 @@ keyboardManager.register('toggleKeyboardIns', {
 </script>
 
 <template>
-	<div class="root" :class="{ masked: ! sidebarFixed && sidebarActive }">
+	<div class="root">
+        <div class="mask" :class="{ active: ! sidebarFixed && sidebarActive }"></div>
 		<Transition name="side">
 			<SideBar v-show="sidebarFixed || sidebarActive" class="sidebar"></SideBar>
 		</Transition>
@@ -88,6 +89,7 @@ keyboardManager.register('toggleKeyboardIns', {
 }
 
 .root {
+    position: relative;
     display: flex;
     height: 100vh;
     width: 100vw;
@@ -95,11 +97,19 @@ keyboardManager.register('toggleKeyboardIns', {
     background: #E6F8FF;
     font-family: 'Times New Roman', 'Simsun', serif;
 }
-.home {
-    transition: .8s filter;
+
+.mask {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+    transition: .8s background-color;
 }
-.root.masked .home {
-	filter: blur(1px);
+.mask.active {
+    pointer-events: all;
+    background: #7774;
 }
 
 .side-enter-active, .side-leave-active {
