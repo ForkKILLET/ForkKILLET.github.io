@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, createApp, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useLogStore } from '../../stores/log'
 
 import Fetch from '../Fetch.vue'
@@ -11,6 +11,7 @@ import 'cuiping-component/dist/style.css'
 import { marked, markedOption } from '../../utils/markedManager'
 
 const devMode = import.meta.env.DEV
+const router = useRouter()
 const route = useRoute()
 const logId = computed(() => route.params.id as string)
 
@@ -38,6 +39,9 @@ watch(markdownArea, () => {
             html: head.innerHTML
         }))
 
+    const { anchor } = route.query
+    if (typeof anchor === 'string') gotoHeading(anchor)
+
     const cuipings = markdownArea.value.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
     cuipings.forEach(el => {
         if (el.dataset.vApp) createApp(Cuiping, {
@@ -63,6 +67,8 @@ function gotoHeading(id: string) {
         behavior: 'smooth',
         inline: 'start'
     })
+
+    router.replace({ query: { anchor: id } })
 }
 </script>
 

@@ -72,7 +72,6 @@ main {
     padding: 1.2em 1.5em;
 
     overflow: auto;
-    overflow-anchor: none;
     
     background-color: white;
     box-shadow: 0 0 1.5em #7774;
