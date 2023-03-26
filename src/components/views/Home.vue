@@ -55,12 +55,20 @@ onMounted(() => {
 
 h1 {
     height: 1em;
-    margin: 0 0 1em 0;
+    margin-bottom: 0 0 1em 0;
     padding: .2em 0;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: clip;
+}
+@media screen and (max-width: 600px) {
+    .home {
+        padding: .5em 1em;
+    }
+    h1 {
+        margin: 0 0 .5em 0;
+    }
 }
 h1 > small {
     color: #888;

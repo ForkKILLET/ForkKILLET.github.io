@@ -124,16 +124,18 @@ function gotoHeading(id: string) {
 .log-toc {
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 2;
 
     display: inline-flex;
     padding: .6em;
 
     background: white;
     box-shadow: 0 0 .5em #7774;
-    transition: .5s box-shadow;
+    opacity: .5;
+    transition: .5s box-shadow, .5s opacity;
 }
 .log-toc:hover, .log-toc:focus {
+    opacity: 1;
     box-shadow: 0 0 .5em #39C5BB;
 }
 
