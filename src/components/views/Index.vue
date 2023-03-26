@@ -65,16 +65,16 @@ watch([ filterTitle, filterTags, filterUnreadOnly, sortMethod ], () => {
     })
 })
 
-const updateStates = ref<Record<string, number>>({})
+const filterInputEl = ref<HTMLInputElement | undefined>()
 
+let updateNotified = false
+let updatedCount = 0
+const updateStates = ref<Record<string, number>>({})
 const notiManager = inject(kNotiManager)
 
-const filterInputEl = ref<HTMLInputElement | undefined>()
-const onKeyFilter = 
-
-onMounted(async () => {
+const checkUpdate = async () => {
     index.value = await logStore.fetchIndex()
-    let updatedCount = 0
+
     updateStates.value = Object.fromEntries(await Promise.all(
         index.value!.map(async log => {
             const states = await logStore.getLogUpdateState(log)
@@ -82,21 +82,32 @@ onMounted(async () => {
             return [ log.id, states ]
         })
     ))
-    if (updatedCount) {
+
+    if (! updateNotified && updatedCount) {
+        updateNotified = true
         notiManager?.addNoti({ content: `You got ${updatedCount} update(s)!` })
     }
+}
+
+onMounted(async () => {
+    await checkUpdate()
 })
 
-watch(route, () => {
-    if (route.path === '/') keyboardManager.register('keypress', {
-        key: '/',
-        description: 'Focus filter',
-        action: (event) => {
-            filterInputEl.value?.focus()
-            event.preventDefault()
-        }
-    })
-    else keyboardManager.dispose('keypress')
+watch(route, async () => {
+    if (route.path === '/') {
+        keyboardManager.register('keypress', {
+            key: '/',
+            description: 'Focus filter',
+            action: (event) => {
+                filterInputEl.value?.focus()
+                event.preventDefault()
+            }
+        })
+        await checkUpdate()
+    }
+    else {
+        keyboardManager.dispose('keypress')
+    }
 }, { immediate: true })
 </script>
 
