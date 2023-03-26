@@ -134,7 +134,7 @@ watch(route, async () => {
                         v-for="tag of filterTags"
                         @click="removeFilterTag(tag)"
                         @keypress.enter="removeFilterTag(tag)"
-                        class="tag inversed filter-tag"
+                        class="log-tag inversed filter-tag"
                         tabindex="0"
                     >{{ tag }}</span>
                 </span>

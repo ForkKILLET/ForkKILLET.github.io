@@ -76,7 +76,7 @@ onMounted(async () => {
                         padding: `${paddingX}px ${paddingY}px`
                     }"
                 >
-                    <span class="tag" :style="{
+                    <span class="log-tag" :style="{
                         fontSize: 0.8 + (1.2 * logs.length / maxGroupSize!) + 'em'
                     }">{{ tag }} &middot; {{ logs.length }}</span>
                 </div>
@@ -85,7 +85,7 @@ onMounted(async () => {
 
         <div v-for="{ logs }, tag in tagGroups" class="tag-group">
             <div class="tag-group-header">
-                <span class="tag" :data-tag="tag">{{ tag }}</span> <span>({{ logs.length }})</span>
+                <span class="log-tag" :data-tag="tag">{{ tag }}</span> <span>({{ logs.length }})</span>
             </div>
             <template v-for="log of logs">
                 <IndexItem :log="log"></IndexItem>

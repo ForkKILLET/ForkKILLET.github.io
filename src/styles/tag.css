@@ -1,4 +1,4 @@
-.tag {
+.log-tag {
     display: inline-block;
     margin: 0 .15em;
     padding: .1em .4em;
@@ -13,18 +13,18 @@
     transition: .3s background-color;
 }
 
-.tag:hover {
+.log-tag:hover {
     cursor: pointer;
 }
 
-.tag.inversed, .tag:hover, .tag:focus, .tag.filtered {
+.log-tag.inversed, .log-tag:hover, .log-tag:focus, .log-tag.filtered {
     background: #39C5BB;
 }
 
-.tag, .tag.inversed:hover, .tag.inversed:focus {
+.log-tag, .log-tag.inversed:hover, .log-tag.inversed:focus {
     background: #bbb;
 }
 
-.tag:active {
+.log-tag:active {
     animation: .3s bounce;
 }
