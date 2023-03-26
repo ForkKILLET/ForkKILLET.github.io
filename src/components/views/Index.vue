@@ -95,7 +95,7 @@ onMounted(async () => {
 
 watch(route, async () => {
     if (route.path === '/') {
-        keyboardManager.register('keypress', {
+        keyboardManager.register('focusFilter', {
             key: '/',
             description: 'Focus filter',
             action: (event) => {
@@ -106,7 +106,7 @@ watch(route, async () => {
         await checkUpdate()
     }
     else {
-        keyboardManager.dispose('keypress')
+        keyboardManager.dispose('focusFilter')
     }
 }, { immediate: true })
 </script>

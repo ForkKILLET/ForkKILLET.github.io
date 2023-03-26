@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, createApp, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 import { useLogStore } from '../../stores/log'
 
 import Fetch from '../Fetch.vue'
@@ -9,23 +10,43 @@ import { Cuiping } from 'cuiping-component'
 import 'cuiping-component/dist/style.css'
 
 import { marked, markedOption } from '../../utils/markedManager'
+import { keyboardManager } from '../../utils/keyboardManager'
 
 const devMode = import.meta.env.DEV
 const router = useRouter()
 const route = useRoute()
 const logId = computed(() => route.params.id as string)
-
-onMounted(async () => {
-    const logStore = useLogStore()
-    const logItem = (await logStore.getLogById(logId.value))!
-    logItem.lastRead = new Date
-    logStore.updateLastIndex()
-})
+const logStore = useLogStore()
+const { showToc } = storeToRefs(logStore)
 
 const html = ref<string | null>(null)
 const markdownArea = ref<HTMLDivElement | null>(null)
 async function loadContent(markdown: string) {
     html.value = await marked(markdown, markedOption)
+}
+
+type LogToc = {
+    lv: number,
+    id: string,
+    html: string
+} []
+
+const toc = ref<LogToc>()
+function toggleToc() {
+    if (logStore.showToc = ! logStore.showToc) {
+        (document.querySelector('.log-toc') as HTMLDivElement)?.focus()
+    }
+}
+
+Object.assign(window, {logStore})
+
+function gotoHeading(id: string) {
+    markdownArea.value?.querySelector(`[id="${id}"]`)?.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'start'
+    })
+
+    router.replace({ query: { anchor: id } })
 }
 
 watch(markdownArea, () => {
@@ -40,7 +61,9 @@ watch(markdownArea, () => {
         }))
 
     const { anchor } = route.query
-    if (typeof anchor === 'string') gotoHeading(anchor)
+    if (typeof anchor === 'string') {
+        setTimeout(() => gotoHeading(anchor), 600)
+    }
 
     const cuipings = markdownArea.value.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
     cuipings.forEach(el => {
@@ -50,26 +73,27 @@ watch(markdownArea, () => {
     })
 })
 
-type LogToc = {
-    lv: number,
-    id: string,
-    html: string
-} []
+watch(route, async () => {
+    if (route.path.startsWith('/log/')) {
+        keyboardManager.dispose('toggleToc')
+        keyboardManager.register('toggleToc', {
+            key: 't',
+            description: 'Toggle table of content',
+            action: () => {
+                toggleToc()
+            }
+        })
+    }
+    else {
+        keyboardManager.dispose('toggleToc')
+    }
+}, { immediate: true })
 
-const toc = ref<LogToc | null>(null)
-const showToc = ref(true)
-function toggleToc() {
-    showToc.value = ! showToc.value
-}
-
-function gotoHeading(id: string) {
-    markdownArea.value?.querySelector(`[id="${id}"]`)?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'start'
-    })
-
-    router.replace({ query: { anchor: id } })
-}
+onMounted(async () => {
+    const logItem = (await logStore.getLogById(logId.value))!
+    logItem.lastRead = new Date
+    logStore.updateLastIndex()
+})
 </script>
 
 <template>
@@ -134,7 +158,7 @@ function gotoHeading(id: string) {
     opacity: .5;
     transition: .5s box-shadow, .5s opacity;
 }
-.log-toc:hover, .log-toc:focus {
+.log-toc:hover, .log-toc:focus-within {
     opacity: 1;
     box-shadow: 0 0 .5em #39C5BB;
 }

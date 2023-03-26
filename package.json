@@ -1,7 +1,7 @@
 {
   "name": "icelava-top-workspace",
   "private": true,
-  "version": "2.5.0",
+  "version": "2.5.1",
   "scripts": {
     "dev": "vite --port 1628",
     "dev:share": "vite --host 0.0.0.0 --port 1628",
@@ -19,11 +19,11 @@
     "dayjs": "^1.11.7",
     "js-yaml": "^4.1.0",
     "katex": "^0.16.4",
-    "marked": "^4.2.12",
+    "marked": "^4.3.0",
     "marked-extended-latex": "^1.1.0",
     "node-emoji": "^1.11.0",
     "normalize.css": "^8.0.1",
-    "pinia": "^2.0.32",
+    "pinia": "^2.0.33",
     "prismjs": "^1.29.0",
     "react": "15.7.0",
     "react-dom": "15.7.0",
