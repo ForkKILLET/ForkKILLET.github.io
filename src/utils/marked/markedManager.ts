@@ -4,13 +4,14 @@ import Prism from 'prismjs'
 import markedEmoji from './markedEmojiExt'
 import markedCuiping from './markedCuipingExt'
 import markedKatex from './markedKatexExt'
+import markedAnchor from './markedAnchorExt'
 
-import type { NotiManager } from '../components/views/Notifications.vue'
+import type { NotiManager } from '../../components/views/Notifications.vue'
 
 Prism.manual = true
 
 export const loadMarked = (options: { notiManager: NotiManager }) => {
-    marked.use(markedCuiping, markedEmoji, markedKatex(options))
+    marked.use(markedCuiping, markedEmoji, markedAnchor, markedKatex(options))
 }
 
 export const markedOption = {

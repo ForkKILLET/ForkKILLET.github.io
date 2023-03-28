@@ -9,7 +9,7 @@ import Giscus from '@giscus/vue'
 import { Cuiping } from 'cuiping-component'
 import 'cuiping-component/dist/style.css'
 
-import { marked, markedOption } from '../../utils/markedManager'
+import { marked, markedOption } from '../../utils/marked/markedManager'
 import { keyboardManager } from '../../utils/keyboardManager'
 
 const devMode = import.meta.env.DEV
@@ -53,9 +53,9 @@ watch(markdownArea, () => {
     if (! markdownArea.value) return
 
     toc.value = Array
-        .from(markdownArea.value.querySelectorAll('h1, h2') as NodeListOf<HTMLHeadElement>)
+        .from(markdownArea.value.querySelectorAll('h1, h2, .anchor') as NodeListOf<HTMLHeadElement>)
         .map(head => ({
-            lv: + head.tagName.slice(1),
+            lv: head.tagName === 'SPAN' ? 2 : + head.tagName.slice(1),
             id: head.id,
             html: head.innerHTML
         }))
@@ -280,6 +280,12 @@ onMounted(async () => {
 
 .markdown .prism-line-number {
 	color: #aaa;
+}
+
+.markdown .anchor::after {
+    content: '#';
+    margin: 0 .3em;
+    color: #39C5BB;
 }
 
 .giscus-container {

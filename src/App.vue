@@ -9,7 +9,7 @@ import Notifications from './components/views/Notifications.vue'
 import KeyboardInstruction from './components/views/KeyboardInstruction.vue'
 
 import { kNotiManager } from './utils/injections'
-import { loadMarked } from './utils/markedManager'
+import { loadMarked } from './utils/marked/markedManager'
 import { storageRef } from './utils/storage'
 import { keyboardManager } from './utils/keyboardManager'
 
