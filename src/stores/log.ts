@@ -22,7 +22,7 @@ export const useLogStore = defineStore('log', {
         const lastIndexJSON = localStorage.getItem('icelavaLastIndex')
         const getLastIndex = () => lastIndexJSON ? JSON.parse(lastIndexJSON) as Index : undefined
         return {
-            showToc: true,
+            showToc: false,
             index: undefined as Index | undefined,
             lastIndex: getLastIndex(),
             origLastIndex: getLastIndex()

@@ -38,8 +38,6 @@ function toggleToc() {
     }
 }
 
-Object.assign(window, {logStore})
-
 function gotoHeading(id: string) {
     markdownArea.value?.querySelector(`[id="${id}"]`)?.scrollIntoView({
         behavior: 'smooth',
@@ -49,21 +47,25 @@ function gotoHeading(id: string) {
     router.replace({ query: { anchor: id } })
 }
 
+function gotoAnchor() {
+    const { anchor } = route.query
+    if (typeof anchor === 'string') {
+        setTimeout(() => gotoHeading(anchor), 600)
+    }
+}
+
 watch(markdownArea, () => {
     if (! markdownArea.value) return
 
     toc.value = Array
         .from(markdownArea.value.querySelectorAll('h1, h2, .anchor') as NodeListOf<HTMLHeadElement>)
         .map(head => ({
-            lv: head.tagName === 'SPAN' ? 2 : + head.tagName.slice(1),
+            lv: head.tagName === 'SPAN' ? 3 : + head.tagName.slice(1),
             id: head.id,
             html: head.innerHTML
         }))
 
-    const { anchor } = route.query
-    if (typeof anchor === 'string') {
-        setTimeout(() => gotoHeading(anchor), 600)
-    }
+    gotoAnchor()
 
     const cuipings = markdownArea.value.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
     cuipings.forEach(el => {
@@ -75,6 +77,8 @@ watch(markdownArea, () => {
 
 watch(route, async () => {
     if (route.path.startsWith('/log/')) {
+        gotoAnchor()
+
         keyboardManager.dispose('toggleToc')
         keyboardManager.register('toggleToc', {
             key: 't',
@@ -147,6 +151,7 @@ onMounted(async () => {
 
 .log-toc {
     position: sticky;
+    left: 0;
     top: 0;
     z-index: 2;
 
@@ -194,6 +199,10 @@ onMounted(async () => {
 }
 .log-toc-item[data-lv='2'] {
     margin-left: 1em;
+}
+.log-toc-item[data-lv='3'] {
+    margin-left: 2em;
+    list-style-type: disc;
 }
 </style>
 
