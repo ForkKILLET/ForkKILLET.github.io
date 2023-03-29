@@ -40,6 +40,8 @@ onMounted(() => {
     }
 
     provide(kNotiManager, notiManager)
+
+    Object.assign(window, {notiManager})
 })
 
 const router = useRouter()

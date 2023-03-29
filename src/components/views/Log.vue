@@ -69,7 +69,7 @@ watch(markdownArea, () => {
 
     const cuipings = markdownArea.value.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
     cuipings.forEach(el => {
-        if (el.dataset.vApp) createApp(Cuiping, {
+        if (! el.dataset.vApp) createApp(Cuiping, {
             molecule: el.dataset.molecule
         }).mount(el)
     })

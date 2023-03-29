@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, inject, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router'
 import { useLogStore, Index } from '../../stores/log'
 
-import { kNotiManager } from '../../utils/injections';
+import { kNotiManager } from '../../utils/injections'
 import { keyboardManager } from '../../utils/keyboardManager'
 
 import IndexItem from '../IndexItem.vue'

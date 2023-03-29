@@ -49,6 +49,8 @@ defineExpose({
     position: fixed;
     right: 1em;
     top: 1em;
+    width: 40vw;
+    max-width: 400px;
     z-index: 2;
 
     min-width: 10vw;
