@@ -62,7 +62,13 @@ onMounted(async () => {
                 class="toolbar-button"
                 tabindex="0"
             >Graph</b>
-            <b v-if="showTagGraph" @click="closeTagGraph" class="toolbar-close">x</b>
+            <b
+                v-if="showTagGraph"
+                @click="closeTagGraph"
+                @keypress.enter="closeTagGraph"
+                class="toolbar-close"
+                tabindex="0"
+            >x</b>
         </div>
 
         <DropTransition name="drop" height="50vh">

@@ -24,6 +24,7 @@
 
 .toolbar-button:hover, .toolbar-button:focus {
     cursor: pointer;
+    text-decoration: underline;
     animation: .3s hop;
 }
 
@@ -35,7 +36,7 @@
     transition: .3s transform;
 }
 
-.toolbar-close:hover {
+.toolbar-close:hover, .toolbar-close:focus {
     cursor: pointer;
     transform: rotate(360deg);
 }
