@@ -32,12 +32,14 @@ defineExpose({
 </script>
 
 <template>
-    <div class="notis">
-        <ListTransitionGroup offset="50px">
+    <div>
+        <ListTransitionGroup offset="50px" class="notis">
             <template v-for="noti, i of notis" :key="i">
-                <div v-if="noti" class="noti">
-                    <div class="noti-content">{{ noti.content }}</div>
-                    <div class="noti-close" @click="notiManager.removeNoti(i)">x</div>
+                <div v-if="noti" class="noti-wrapper">
+                    <div class="noti">
+                        <div class="noti-content">{{ noti.content }}</div>
+                        <div class="noti-close" @click="notiManager.removeNoti(i)">x</div>
+                    </div>
                 </div>
             </template>
         </ListTransitionGroup>
@@ -49,24 +51,34 @@ defineExpose({
     position: fixed;
     right: 1em;
     top: 1em;
-    width: 40vw;
-    max-width: 400px;
     z-index: 2;
 
+    width: 40vw;
+    max-width: 400px;
     min-width: 10vw;
-    padding: 1em;
 }
 
-.noti {
+.noti-wrapper {
     display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.noti {    
+    display: inline-flex;
     justify-content: space-between;
 
+    max-width: 100%;
+    margin: 1em 1em 0 1em;
     padding: .5em 1em;
-    margin-bottom: 1em;
 
     border-radius: .3em;
     background: white;
     box-shadow: 0 0 1.5em #7774;
+}
+
+.noti-content {
+    word-break: break-all;
 }
 
 .noti-close {
