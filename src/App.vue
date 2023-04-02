@@ -33,6 +33,14 @@ onMounted(() => {
     const notiManager = notifications.value!.notiManager!
     loadMarked({ notiManager })
 
+	const showDevNoti = () => {
+		if (import.meta.env.DEV) notiManager.addNoti({
+			content: `Dev mode on ${Date()}`,
+			onClose: () => showDevNoti()
+		})
+	}
+	showDevNoti()
+
     if (! lastVersion.value || lastVersion.value !== version) {
         lastVersion.value = version
         notiManager.addNoti({ content: `Welcome to pretty new icelava.top ~ (ζ${version})` })
@@ -40,8 +48,6 @@ onMounted(() => {
     }
 
     provide(kNotiManager, notiManager)
-
-    Object.assign(window, {notiManager})
 })
 
 const router = useRouter()

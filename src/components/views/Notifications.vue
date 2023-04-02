@@ -5,6 +5,7 @@ import ListTransitionGroup from '../transitions/ListTransitionGroup.vue'
 
 export type Noti = {
     content: string
+	onClose?: () => void
 }
 
 export type Notis = (Noti | undefined)[]
@@ -22,7 +23,9 @@ const notiManager: NotiManager = {
         return notis.length - 1
     },
     removeNoti: (id) => {
-        notis[id] = undefined
+        const noti = notis[id]
+		noti.onClose?.()
+		notis[id] = undefined
     }
 }
 
@@ -53,9 +56,8 @@ defineExpose({
     top: 1em;
     z-index: 2;
 
-    width: 40vw;
-    max-width: 400px;
-    min-width: 10vw;
+    width: max(300px, 40vw);
+    max-width: max(400px, 80vw);
 }
 
 .noti-wrapper {
