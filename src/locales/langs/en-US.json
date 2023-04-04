@@ -1,0 +1,24 @@
+{
+  "op": {
+    "filter": "Filter",
+    "unread-only": "unread only",
+    "sort": "Sort"
+  },
+  "noti": {
+    "update": "You got {0} update(s)!"
+  },
+  "msg": {
+    "log-count": "Found {0} log(s)."
+  },
+  "sidebar": {
+    "friends": "Friends",
+    "tags": "Tags",
+    "home": "Home"
+  },
+  "route": {
+    "home": "Home",
+    "logs": "Logs",
+    "tags": "Tags",
+    "not-found": "Not found"
+  }
+}

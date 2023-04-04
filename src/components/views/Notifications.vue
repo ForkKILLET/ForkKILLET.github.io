@@ -24,8 +24,10 @@ const notiManager: NotiManager = {
     },
     removeNoti: (id) => {
         const noti = notis[id]
-		noti.onClose?.()
-		notis[id] = undefined
+        if (noti) {
+            noti.onClose?.()
+            notis[id] = undefined
+        }
     }
 }
 

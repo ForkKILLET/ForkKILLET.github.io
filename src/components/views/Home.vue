@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const route = useRoute()
 const routeId = computed(() => route.params.id)
@@ -14,7 +17,7 @@ onMounted(() => {
 
 <template>
     <div class="home">
-        <h1>{{ route.name }}
+        <h1>{{ t('route.' + (route.name as string)) }}
             <small v-if="routeId">/ {{ routeId }}</small>
         </h1>
         <main :class="{ entering }" tabindex="0">

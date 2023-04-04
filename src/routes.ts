@@ -9,21 +9,21 @@ export default [
     {
         path: '/',
         component: IndexView,
-        name: 'Home'
+        name: 'home'
     },
     {
         path: '/log/:id',
         component: LogView,
-        name: 'Log'
+        name: 'log'
     },
     {
         path: '/tags',
         component: TagsView,
-        name: 'Tags'
+        name: 'tags'
     },
     {
         path: '/:anyway(.*)*',
         component: NotFoundView,
-        name: 'Not Found'
+        name: 'not-found'
     }
 ] as RouteRecordRaw[]

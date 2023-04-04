@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, inject, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { useLogStore, Index } from '../../stores/log'
 
@@ -7,6 +8,8 @@ import { kNotiManager } from '../../utils/injections'
 import { keyboardManager } from '../../utils/keyboardManager'
 
 import IndexItem from '../IndexItem.vue'
+
+const { t } = useI18n()
 
 const route = useRoute()
 const { title, tags: origTags, unreadOnly, sort } = route.query
@@ -85,7 +88,7 @@ const checkUpdate = async () => {
 
     if (! updateNotified && updatedCount) {
         updateNotified = true
-        notiManager?.addNoti({ content: `You got ${updatedCount} update(s)!` })
+        notiManager?.addNoti({ content: t('noti.update', [ updatedCount ]) })
     }
 }
 
@@ -115,7 +118,7 @@ watch(route, async () => {
     <div class="index">
         <div class="toolbar">
             <p class="toolbar-line">
-                <b>Filter:</b>
+                <b>{{ t('op.filter') }}:</b>
                 <input
                     v-model="filterTitle"
                     ref="filterInputEl"
@@ -128,7 +131,7 @@ watch(route, async () => {
                     :data-checked="filterUnreadOnly"
                     class="filter-button"
                     tabindex="0"
-                >unread only</span>
+                >{{ t('op.unread-only') }}</span>
                 <span v-if="filterTags.length" class="filter-tags">
                     <span
                         v-for="tag of filterTags"
@@ -140,7 +143,7 @@ watch(route, async () => {
                 </span>
             </p>
             <p class="toolbar-line">
-                <b>Sort:</b>
+                <b>{{ t('op.sort') }}:</b>
                 <span
                     v-for="method of sortMethods"
                     @click="sortMethod = method"
@@ -151,7 +154,7 @@ watch(route, async () => {
             </p>
         </div>
         <template v-if="index">
-            <small>Found {{ filteredIndex.length }} log(s).</small>
+            <small>{{ t('msg.log-count', [ filteredIndex.length ]) }}</small>
             <div v-for="log of filteredIndex">
                 <IndexItem
                     :key="log.id"

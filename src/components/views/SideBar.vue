@@ -1,28 +1,38 @@
 <script setup lang="ts">
-import { version } from '../../../package.json'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { langs, locale, MessageLangs } from '../../locales'
 
+import Flag from '../Flag.vue'
+
+import { version } from '../../../package.json'
 const buildTime = import.meta.env.VITE_BUILD_TIME ?? 'dev'
 const buildEnv = import.meta.env.VITE_BUILD_ENV ?? 'localhost'
+
+const { t, locale: i18nLocale } = useI18n()
+const switchLang = (lang: MessageLangs) => {
+    i18nLocale.value = locale.value = lang
+}
 
 type SideBarItem = {
     name: string
     route: string
 }
 
-const items: SideBarItem[] = [
+const items = computed<SideBarItem[]>(() => [
     {
-        name: 'Home',
+        name: t('sidebar.home'),
         route: '/'
     },
     {
-        name: 'Tags',
+        name: t('sidebar.tags'),
         route: '/tags'
     },
     {
-        name: 'Friends',
+        name: t('sidebar.friends'),
         route: '/log/log-friends'
     }
-]
+])
 </script>
 
 <template>
@@ -30,6 +40,16 @@ const items: SideBarItem[] = [
         <RouterLink class="logo-container" to="/">
             <img class="logo" :src="'/FkLog/@banner/icelava.jpg'"/>
         </RouterLink>
+
+        <div class="langs">
+            <Flag
+                v-for="lang of langs"
+                :name="lang"
+                tabindex="0"
+                @click="switchLang(lang)"
+                @keypress.enter="switchLang(lang)"
+            ></Flag>
+        </div>
 
         <p v-for="item in items">
             <RouterLink
@@ -59,6 +79,19 @@ const items: SideBarItem[] = [
     box-shadow: 0 0 1.5em #7774;
 
     transition: .5s max-width, .5s opacity;
+}
+
+.langs {
+    padding: 0 .3em;
+    font-size: 1.5em;
+}
+.langs > .flag {
+    margin: 0 .2em;
+    transition: .5s text-shadow;
+}
+.langs > .flag:hover, .langs > .flag:focus {
+    text-shadow: 0 0 .1em #39C5BB;
+    cursor: pointer;
 }
 
 .sidebar-item {
