@@ -2,13 +2,23 @@
   "op": {
     "filter": "Filter",
     "unread-only": "unread only",
-    "sort": "Sort"
+    "sort": "Sort",
+    "tag-cloud": "Tag Cloud",
+    "sort-method": {
+      "default": "default",
+      "newest": "newest",
+      "oldest": "oldest"
+    }
   },
   "noti": {
-    "update": "You got {0} update(s)!"
+    "update": "You got {0} update(s)!",
+    "dev": "Dev mode on {0}",
+    "welcome": "Welcome to pretty new icelava.top ~ (ζ{0})",
+    "keyboard-ins": "Press ? to see keyboard instructions"
   },
   "msg": {
-    "log-count": "Found {0} log(s)."
+    "log-count": "Found {0} log(s).",
+    "log-title": "Title"
   },
   "sidebar": {
     "friends": "Friends",
@@ -17,7 +27,7 @@
   },
   "route": {
     "home": "Home",
-    "logs": "Logs",
+    "log": "Logs",
     "tags": "Tags",
     "not-found": "Not found"
   }

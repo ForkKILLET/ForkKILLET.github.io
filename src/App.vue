@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, provide, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 import Home from './components/views/Home.vue'
 import SideBar from './components/views/SideBar.vue'
@@ -14,6 +15,8 @@ import { storageRef } from './utils/storage'
 import { keyboardManager } from './utils/keyboardManager'
 
 import { version } from '../package.json'
+
+const { t } = useI18n()
 
 const matchSidebarFixedWidth = () => window.matchMedia('screen and (min-width: 601px')
 const sidebarFixed = ref(matchSidebarFixedWidth().matches)
@@ -35,7 +38,7 @@ onMounted(() => {
 
 	const showDevNoti = () => {
 		if (import.meta.env.DEV) notiManager.addNoti({
-			content: `Dev mode on ${Date()}`,
+			content: () => t('noti.dev', [ new Date().toLocaleString() ]),
 			onClose: () => showDevNoti()
 		})
 	}
@@ -43,8 +46,8 @@ onMounted(() => {
 
     if (! lastVersion.value || lastVersion.value !== version) {
         lastVersion.value = version
-        notiManager.addNoti({ content: `Welcome to pretty new icelava.top ~ (ζ${version})` })
-        notiManager.addNoti({ content: 'Press ? to see keyboard instructions' })
+        notiManager.addNoti({ content: () => t('noti.welcome', [ version ]) })
+        notiManager.addNoti({ content: () => t('noti.keyboard-ins') })
     }
 
     provide(kNotiManager, notiManager)

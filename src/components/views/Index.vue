@@ -88,7 +88,7 @@ const checkUpdate = async () => {
 
     if (! updateNotified && updatedCount) {
         updateNotified = true
-        notiManager?.addNoti({ content: t('noti.update', [ updatedCount ]) })
+        notiManager?.addNoti({ content: () => t('noti.update', [ updatedCount ]) })
     }
 }
 
@@ -123,7 +123,7 @@ watch(route, async () => {
                     v-model="filterTitle"
                     ref="filterInputEl"
                     class="filter-input"
-                    placeholder="Title"
+                    :placeholder="t('msg.log-title')"
                 />
                 <span
                     @click="toggleUnreadOnly"
@@ -150,7 +150,7 @@ watch(route, async () => {
                     @keypress.enter="sortMethod = method"
                     class="sort-method" :class="{ active: sortMethod === method }"
                     tabindex="0"
-                >{{ method }}</span>
+                >{{ t('op.sort-method.' + method) }}</span>
             </p>
         </div>
         <template v-if="index">

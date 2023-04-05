@@ -2,13 +2,23 @@
   "op": {
     "filter": "筛选",
     "unread-only": "仅未读",
-    "sort": "排序"
+    "sort": "排序",
+    "tag-cloud": "标签云图",
+    "sort-method": {
+      "default": "默认",
+      "newest": "最新",
+      "oldest": "最旧"
+    }
   },
   "noti": {
-    "update": "有 {0} 个更新！"
+    "update": "有 {0} 个更新！",
+    "dev": "调试模式开启于 {0}",
+    "welcome": "欢迎来到全新的 icelava.top ~ (ζ{0})",
+    "keyboard-ins": "按 ? 查看键盘操作指南"
   },
   "msg": {
-    "log-count": "有 {0} 篇日志"
+    "log-count": "有 {0} 篇日志",
+    "log-title": "标题"
   },
   "sidebar": {
     "friends": "友情链接",
@@ -17,7 +27,7 @@
   },
   "route": {
     "home": "首页",
-    "logs": "日志",
+    "log": "日志",
     "not-found": "页面不存在",
     "tags": "标签"
   }

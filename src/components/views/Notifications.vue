@@ -4,7 +4,7 @@ import { reactive } from 'vue'
 import ListTransitionGroup from '../transitions/ListTransitionGroup.vue'
 
 export type Noti = {
-    content: string
+    content: string | (() => string)
 	onClose?: () => void
 }
 
@@ -42,7 +42,9 @@ defineExpose({
             <template v-for="noti, i of notis" :key="i">
                 <div v-if="noti" class="noti-wrapper">
                     <div class="noti">
-                        <div class="noti-content">{{ noti.content }}</div>
+                        <div class="noti-content">{{
+                            typeof noti.content === 'function' ? noti.content() : noti.content
+                        }}</div>
                         <div class="noti-close" @click="notiManager.removeNoti(i)">x</div>
                     </div>
                 </div>

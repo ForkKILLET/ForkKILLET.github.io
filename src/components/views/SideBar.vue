@@ -87,6 +87,8 @@ const items = computed<SideBarItem[]>(() => [
 }
 .langs > .flag {
     margin: 0 .2em;
+
+    user-select: none;
     transition: .5s text-shadow;
 }
 .langs > .flag:hover, .langs > .flag:focus {

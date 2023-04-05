@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Index, useLogStore } from '../../stores/log'
 
 import IndexItem from '../IndexItem.vue'
 import DropTransition from '../transitions/DropTransition.vue'
+
+const { t } = useI18n()
 
 type TagGroups = Record<string, {
     paddings: [ number, number ]
@@ -61,7 +64,7 @@ onMounted(async () => {
                 @keypress.enter="openTagGraph"
                 class="toolbar-button"
                 tabindex="0"
-            >Graph</b>
+            >{{ t('op.tag-cloud') }}</b>
             <b
                 v-if="showTagGraph"
                 @click="closeTagGraph"
