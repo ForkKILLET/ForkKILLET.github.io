@@ -100,7 +100,6 @@ watch(route, async () => {
     if (route.path === '/') {
         keyboardManager.register('focusFilter', {
             key: '/',
-            description: 'Focus filter',
             action: (event) => {
                 filterInputEl.value?.focus()
                 event.preventDefault()

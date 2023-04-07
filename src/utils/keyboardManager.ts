@@ -2,7 +2,6 @@ import { reactive } from 'vue'
 
 export type KeyboardOp = {
     key: string
-    description: string
     action: (event: KeyboardEvent) => void
 }
 
@@ -29,21 +28,18 @@ window.addEventListener('keypress', (event) => {
 
 keyboardManager.register('focusIceLava', {
     key: 'i',
-    description: 'Focus icelava logo',
     action: () => {
         (document.querySelector('.logo-container') as HTMLLinkElement | undefined)?.focus()
     }
 })
 keyboardManager.register('focusMain', {
     key: 'm',
-    description: 'Focus main',
     action: () => {
         document.querySelector('main')?.focus()
     }
 })
 keyboardManager.register('openGitHub', {
     key: 'G',
-    description: 'Open GitHub',
     action: () => {
         window.open('https://github.com/ForkKILLET/ForkKILLET.github.io/')
     }

@@ -82,7 +82,6 @@ watch(route, async () => {
         keyboardManager.dispose('toggleToc')
         keyboardManager.register('toggleToc', {
             key: 't',
-            description: 'Toggle table of content',
             action: () => {
                 toggleToc()
             }

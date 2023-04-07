@@ -18,7 +18,13 @@
   },
   "msg": {
     "log-count": "有 {0} 篇日志",
-    "log-title": "标题"
+    "log-title": "标题",
+    "update-state": {
+      "recent": "新的",
+      "unread": "未读",
+      "updated": "更新"
+    },
+    "keyboard-ins": "键盘操作指南"
   },
   "sidebar": {
     "friends": "友情链接",
@@ -30,5 +36,12 @@
     "log": "日志",
     "not-found": "页面不存在",
     "tags": "标签"
+  },
+  "keyboard-ins": {
+    "focusIceLava": "聚焦 IceLava 图标",
+    "focusMain": "聚焦主页面",
+    "openGitHub": "打开 GitHub",
+    "toggleKeyboardIns": "切换键盘操作指南",
+    "focusFilter": "聚焦筛选"
   }
 }

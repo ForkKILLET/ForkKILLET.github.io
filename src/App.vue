@@ -62,7 +62,6 @@ router.afterEach((from, to) => {
 const showKeyboardIns = ref(false)
 keyboardManager.register('toggleKeyboardIns', {
     key: '?',
-    description: 'Toggle keyboard instruction',
     action: () => {
         showKeyboardIns.value = ! showKeyboardIns.value
     }

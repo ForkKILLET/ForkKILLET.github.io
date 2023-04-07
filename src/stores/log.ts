@@ -9,7 +9,7 @@ export type Index = {
     lastRead?: Date
 }[]
 
-export const LogUpdateStateNames = [ 'Unread', 'Updated', 'Recent' ]
+export const LogUpdateStateNames = [ 'unread', 'updated', 'recent' ]
 export const LogUpdateStates = Object.fromEntries(
     LogUpdateStateNames.map((name, i) => [ name, 1 << i ])
 )
@@ -49,14 +49,14 @@ export const useLogStore = defineStore('log', {
         },
         async getLogUpdateState(log: Index[number]): Promise<number> {
             let state = 0
-            if (! this.lastIndex) return LogUpdateStates.Unread
+            if (! this.lastIndex) return LogUpdateStates.unread
 
 			const origLastLog = this.origLastIndex?.find(i => i.id === log.id)
-            if (! origLastLog) state |= LogUpdateStates.Recent
+            if (! origLastLog) state |= LogUpdateStates.recent
 
             const lastLog = (await this.getLogById(log.id))!
-            if (! lastLog.lastRead) state |= LogUpdateStates.Unread
-            if (new Date(lastLog.lastRead ?? origLastLog?.time ?? log.time) < new Date(log.time)) state |= LogUpdateStates.Updated
+            if (! lastLog.lastRead) state |= LogUpdateStates.unread
+            if (new Date(lastLog.lastRead ?? origLastLog?.time ?? log.time) < new Date(log.time)) state |= LogUpdateStates.updated
 
             return state
         }

@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { keyboardOps } from '../../utils/keyboardManager'
+
+const { t } = useI18n()
 
 const emit = defineEmits<{
     (event: 'close'): void
@@ -8,11 +11,11 @@ const emit = defineEmits<{
 
 <template>
     <div class="keyboard-ins">
-        <h3>Keyboard Instruction</h3>
+        <h3>{{ t('msg.keyboard-ins') }}</h3>
         <span class="toolbar-close" @click="emit('close')">x</span>
         <div class="ins-table">
-            <p v-for="op of keyboardOps" class="ins-item">
-                <kbd>{{ op.key }}</kbd> <span>{{ op.description }}</span>
+            <p v-for="op, name in keyboardOps" class="ins-item">
+                <kbd>{{ op.key }}</kbd> <span>{{ t('keyboard-ins.' + name) }}</span>
             </p>
         </div>
     </div>

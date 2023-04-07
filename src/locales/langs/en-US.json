@@ -18,7 +18,13 @@
   },
   "msg": {
     "log-count": "Found {0} log(s).",
-    "log-title": "Title"
+    "log-title": "Title",
+    "update-state": {
+      "unread": "Unread",
+      "updated": "Updated",
+      "recent": "Recent"
+    },
+    "keyboard-ins": "Keyboard Instruction"
   },
   "sidebar": {
     "friends": "Friends",
@@ -30,5 +36,12 @@
     "log": "Logs",
     "tags": "Tags",
     "not-found": "Not found"
+  },
+  "keyboard-ins": {
+    "focusFilter": "Focus filter",
+    "focusIceLava": "Focus icelava logo",
+    "focusMain": "Focus main area",
+    "openGitHub": "Open GitHub",
+    "toggleKeyboardIns": "Toggle keyboard instruction"
   }
 }

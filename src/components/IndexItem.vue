@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-
+import { useI18n } from 'vue-i18n'
 import { Index, getLogUpdateStateNames } from '../stores/log'
 
 import dayjs from 'dayjs'
+
+const { t } = useI18n()
 
 const props = defineProps<{
     log: Index[number]
@@ -29,7 +31,7 @@ defineEmits<{
                 v-for="stateName of updateStatesNames"
                 class="index-item-state"
                 :data-state="stateName"
-            >{{ stateName }}</span>
+            >{{ t('msg.update-state.' + stateName) }}</span>
         </small>
         <div class="index-item-detail">
             <span>
@@ -81,13 +83,13 @@ defineEmits<{
 
     color: white;
 }
-.index-item-state[data-state=Unread] {
+.index-item-state[data-state=unread] {
     background: #39C5BB;
 }
-.index-item-state[data-state=Updated] {
+.index-item-state[data-state=updated] {
     background: orange;
 }
-.index-item-state[data-state=Recent] {
+.index-item-state[data-state=recent] {
     background: #FF5B5A;
 }
 
