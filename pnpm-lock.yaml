@@ -13,9 +13,6 @@ dependencies:
   '@types/marked':
     specifier: ^4.0.8
     version: 4.0.8
-  '@types/node':
-    specifier: ^18.15.11
-    version: 18.15.11
   '@types/node-emoji':
     specifier: ^1.8.2
     version: 1.8.2
@@ -395,10 +392,6 @@ packages:
 
   /@types/node-emoji@1.8.2:
     resolution: {integrity: sha512-PfF1qL/9veo8BSHLV84C9ORNr3lHSlnWJ6yU8OdNufoftajeWHTLVbGHvp2B7e7DPDS9gMs6cfeSsqo5rqSitg==}
-    dev: false
-
-  /@types/node@18.15.11:
-    resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
     dev: false
 
   /@types/offscreencanvas@2019.7.0:
