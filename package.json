@@ -6,7 +6,8 @@
     "dev": "vite --port 1628",
     "dev:share": "vite --host 0.0.0.0 --port 1628",
     "serve": "serve dist -p 1629",
-    "build": "vue-tsc --noEmit && VITE_BUILD_TIME=\"$(date '+%Y-%m-%d %H:%M:%S')\" VITE_BUILD_ENV=\"$(uname -sr)\" vite build --outDir dist && echo -n icelava.top > dist/CNAME"
+    "build": "vue-tsc --noEmit && VITE_BUILD_TIME=\"$(date '+%Y-%m-%d %H:%M:%S')\" VITE_BUILD_ENV=\"$(uname -sr)\" vite build --outDir dist && echo -n icelava.top > dist/CNAME",
+	"preview": "rm -rf dist/FkLog && ln -s ~/log dist/FkLog && vite preview"
   },
   "dependencies": {
     "@giscus/vue": "^2.2.8",
