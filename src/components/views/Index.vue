@@ -2,12 +2,12 @@
 import { ref, reactive, computed, onMounted, inject, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
-import { useLogStore, Index } from '../../stores/log'
+import { useLogStore, Index } from '@store/log'
 
-import { kNotiManager } from '../../utils/injections'
-import { keyboardManager } from '../../utils/keyboardManager'
+import { kNotiManager } from '@util/injections'
+import { keyboardManager } from '@util/keyboardManager'
 
-import IndexItem from '../IndexItem.vue'
+import IndexItem from '@comp/IndexItem.vue'
 
 const { t } = useI18n()
 

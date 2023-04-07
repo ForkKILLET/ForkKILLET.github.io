@@ -1,9 +1,9 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import IndexView from './components/views/Index.vue'
-import LogView from './components/views/Log.vue'
-import TagsView from './components/views/Tags.vue'
-import NotFoundView from './components/views/NotFoundView.vue'
+import IndexView from '@comp/views/Index.vue'
+import LogView from '@comp/views/Log.vue'
+import TagsView from '@comp/views/Tags.vue'
+import NotFoundView from '@comp/views/NotFoundView.vue'
 
 export default [
     {

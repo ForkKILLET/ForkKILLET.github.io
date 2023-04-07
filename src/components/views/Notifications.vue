@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 
-import ListTransitionGroup from '../transitions/ListTransitionGroup.vue'
+import ListTransitionGroup from '@comp/transitions/ListTransitionGroup.vue'
 
 export type Noti = {
     content: string | (() => string)

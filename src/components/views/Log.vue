@@ -2,15 +2,15 @@
 import { ref, computed, createApp, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useLogStore } from '../../stores/log'
+import { useLogStore } from '@store/log'
 
-import Fetch from '../Fetch.vue'
+import Fetch from '@comp/Fetch.vue'
 import Giscus from '@giscus/vue'
 import { Cuiping } from 'cuiping-component'
 import 'cuiping-component/dist/style.css'
 
-import { marked, markedOption } from '../../utils/marked/markedManager'
-import { keyboardManager } from '../../utils/keyboardManager'
+import { marked, markedOption } from '@util/marked/markedManager'
+import { keyboardManager } from '@util/keyboardManager'
 
 const devMode = import.meta.env.DEV
 const router = useRouter()

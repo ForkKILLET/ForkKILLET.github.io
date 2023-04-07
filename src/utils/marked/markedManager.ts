@@ -6,7 +6,7 @@ import markedCuiping from './markedCuipingExt'
 import markedKatex from './markedKatexExt'
 import markedAnchor from './markedAnchorExt'
 
-import type { NotiManager } from '../../components/views/Notifications.vue'
+import type { NotiManager } from '@comp/views/Notifications.vue'
 
 Prism.manual = true
 

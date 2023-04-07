@@ -1,5 +1,5 @@
 import type { marked } from 'marked'
-import type { NotiManager } from '../../components/views/Notifications.vue'
+import type { NotiManager } from '@comp/views/Notifications.vue'
 
 type katexWrapper = typeof import('./katexWrapper')
 let katexWrapper: Promise<katexWrapper>

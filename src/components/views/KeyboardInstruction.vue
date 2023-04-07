@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { keyboardOps } from '../../utils/keyboardManager'
+import { keyboardOps } from '@util/keyboardManager'
 
 const { t } = useI18n()
 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { langs, locale, MessageLangs } from '../../locales'
+import { langs, locale, MessageLangs } from '@/locales'
 
-import Flag from '../Flag.vue'
+import Flag from '@comp/Flag.vue'
 
-import { version } from '../../../package.json'
+import { version } from '@pack'
 const buildTime = import.meta.env.VITE_BUILD_TIME ?? 'dev'
 const buildEnv = import.meta.env.VITE_BUILD_ENV ?? 'localhost'
 

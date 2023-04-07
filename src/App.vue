@@ -3,18 +3,18 @@ import { onMounted, provide, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
-import Home from './components/views/Home.vue'
-import SideBar from './components/views/SideBar.vue'
-import SideBarButton from './components/SideBarButton.vue'
-import Notifications from './components/views/Notifications.vue'
-import KeyboardInstruction from './components/views/KeyboardInstruction.vue'
+import Home from '@comp/views/Home.vue'
+import SideBar from '@comp/views/SideBar.vue'
+import SideBarButton from '@comp/SideBarButton.vue'
+import Notifications from '@comp/views/Notifications.vue'
+import KeyboardInstruction from '@comp/views/KeyboardInstruction.vue'
 
-import { kNotiManager } from './utils/injections'
-import { loadMarked } from './utils/marked/markedManager'
-import { storageRef } from './utils/storage'
-import { keyboardManager } from './utils/keyboardManager'
+import { kNotiManager } from '@util/injections'
+import { loadMarked } from '@util/marked/markedManager'
+import { storageRef } from '@util/storage'
+import { keyboardManager } from '@util/keyboardManager'
 
-import { version } from '../package.json'
+import { version } from '@pack'
 
 const { t } = useI18n()
 

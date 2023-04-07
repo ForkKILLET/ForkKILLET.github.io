@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Loading from './Loading.vue'
-import useFetch, { FetchRes } from '../utils/useFetch'
+import useFetch, { FetchRes } from '@util/useFetch'
 import { onMounted, reactive, ref } from 'vue'
 
 const props = defineProps<{

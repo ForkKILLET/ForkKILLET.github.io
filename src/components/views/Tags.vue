@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Index, useLogStore } from '../../stores/log'
+import { Index, useLogStore } from '@store/log'
 
-import IndexItem from '../IndexItem.vue'
-import DropTransition from '../transitions/DropTransition.vue'
+import IndexItem from '@comp/IndexItem.vue'
+import DropTransition from '@comp/transitions/DropTransition.vue'
 
 const { t } = useI18n()
 

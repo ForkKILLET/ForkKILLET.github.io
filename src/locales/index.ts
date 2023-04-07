@@ -1,5 +1,5 @@
 import { createI18n } from 'vue-i18n'
-import { storageRef } from '../utils/storage'
+import { storageRef } from '@util/storage'
 
 import enUS from './langs/en-US.json'
 import zhCN from './langs/zh-CN.json'
