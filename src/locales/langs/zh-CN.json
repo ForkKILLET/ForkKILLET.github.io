@@ -42,6 +42,7 @@
     "focusMain": "聚焦主页面",
     "openGitHub": "打开 GitHub",
     "toggleKeyboardIns": "切换键盘操作指南",
-    "focusFilter": "聚焦筛选"
+    "focusFilter": "聚焦筛选",
+    "toggleToc": "切换目录"
   }
 }

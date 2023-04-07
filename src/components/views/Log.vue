@@ -39,9 +39,16 @@ function toggleToc() {
 }
 
 function gotoHeading(id: string) {
-    markdownArea.value?.querySelector(`[id="${id}"]`)?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'start'
+    if (! markdownArea.value) return
+
+    const headingEl = markdownArea.value.querySelector(`[id="${id}"]`) as HTMLElement | undefined
+    if (! headingEl) return
+
+    const mainEl = document.querySelector('main')!
+    const offsetTop = headingEl.tagName === 'SPAN' ? - 10 : 0
+    mainEl.scrollTo({
+        top: headingEl.offsetTop - mainEl.offsetTop + offsetTop,
+        behavior: 'smooth'
     })
 
     router.replace({ query: { anchor: id } })

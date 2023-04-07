@@ -27,7 +27,13 @@ const closeTagGraph = () => {
 }
 
 const gotoTag = (tag: string) => {
-    document.querySelector(`[data-tag=${tag}]`)?.scrollIntoView({ behavior: 'smooth' })
+    const tagEl = document.querySelector(`[data-tag=${tag}]`) as HTMLElement
+    const mainEl = document.querySelector('main')!
+    const offsetTop = - 40
+    mainEl.scrollTo({
+        top: tagEl.offsetTop - mainEl.offsetTop + offsetTop,
+        behavior: 'smooth'
+    })
 }
 
 onMounted(async () => {

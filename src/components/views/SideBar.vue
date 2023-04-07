@@ -148,5 +148,6 @@ const items = computed<SideBarItem[]>(() => [
     position: absolute;
     padding: .5em;
     bottom: 0;
+    background: white;
 }
 </style>

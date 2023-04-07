@@ -17,7 +17,8 @@ onMounted(() => {
 
 <template>
     <div class="home">
-        <h1>{{ t('route.' + (route.name as string)) }}
+        <h1>
+            <span v-if="route.name">{{ t('route.' + (route.name as string)) }}</span>
             <small v-if="routeId">/ {{ routeId }}</small>
         </h1>
         <main :class="{ entering }" tabindex="0">
