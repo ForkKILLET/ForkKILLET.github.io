@@ -72,18 +72,22 @@ export const mathInlineExt = {
     }
 }
 
-export default (options: { notiManager: NotiManager }): marked.MarkedExtension => ({
+export type Options = {
+    onBeforeLoad?: () => void
+    onAfterLoad?: () => void
+}
+
+export default (options: Options): marked.MarkedExtension => ({
     extensions: [ mathBlockExt, mathInlineExt ],
     async: true,
     walkTokens: (token: marked.Token | MathBlockToken | MathInlineToken) => {
         if (token.type === 'math-block' || token.type === 'math-inline') {
-            let nid: number | null = null
             if (! katexWrapper) {
-                nid = options.notiManager.addNoti({ content: 'Loading KaTeX...' })
+                options.onBeforeLoad?.()
                 katexWrapper = import('./katexWrapper')
             }
             return katexWrapper.then(({ katex }) => {
-                if (nid !== null) options.notiManager.removeNoti(nid)
+                options.onAfterLoad?.()
                 token.html = tryKatex(katex, token.formula, {
                     strict: false,
                     displayMode: token.type === 'math-block'

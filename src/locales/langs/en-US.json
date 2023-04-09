@@ -24,7 +24,9 @@
       "updated": "Updated",
       "recent": "Recent"
     },
-    "keyboard-ins": "Keyboard Instruction"
+    "keyboard-ins": "Keyboard Instruction",
+    "loading-cuiping": "Loading Cuiping...",
+    "loading-katex": "Loading KaTeX..."
   },
   "sidebar": {
     "friends": "Friends",

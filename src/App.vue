@@ -34,7 +34,18 @@ const lastVersion = storageRef<string | undefined>('version', undefined)
 const notifications = ref<InstanceType<typeof Notifications>>()
 onMounted(() => {
     const notiManager = notifications.value!.notiManager!
-    loadMarked({ notiManager })
+
+    {
+        let nid: number
+        loadMarked({
+            onBeforeLoad: () => {
+                nid = notiManager.addNoti({ content: () => t('msg.loading-katex') })
+            },
+            onAfterLoad: () => {
+                notiManager.removeNoti(nid)
+            }
+        })
+    }
 
 	const showDevNoti = () => {
 		if (import.meta.env.DEV) notiManager.addNoti({

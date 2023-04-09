@@ -24,7 +24,9 @@
       "unread": "未读",
       "updated": "更新"
     },
-    "keyboard-ins": "键盘操作指南"
+    "keyboard-ins": "键盘操作指南",
+    "loading-cuiping": "加载 Cuiping 中……",
+    "loading-katex": "加载 KaTeX 中……"
   },
   "sidebar": {
     "friends": "友情链接",

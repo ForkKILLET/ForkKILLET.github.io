@@ -1,28 +1,34 @@
 <script setup lang="ts">
-import { ref, computed, createApp, onMounted, watch } from 'vue'
+import { ref, computed, createApp, onMounted, watch, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useLogStore } from '@store/log'
 
 import Fetch from '@comp/Fetch.vue'
 import Giscus from '@giscus/vue'
-import { Cuiping } from 'cuiping-component'
-import 'cuiping-component/dist/style.css'
 
 import { marked, markedOption } from '@util/marked/markedManager'
+import { kNotiManager } from '@/utils/injections'
 import { keyboardManager } from '@util/keyboardManager'
+import { Cuiping, loadCuiping } from '@util/cuipingManager'
 
 const devMode = import.meta.env.DEV
+
+const notiManager = inject(kNotiManager)!
+const { t } = useI18n()
+
 const router = useRouter()
 const route = useRoute()
 const logId = computed(() => route.params.id as string)
+
 const logStore = useLogStore()
 const { showToc } = storeToRefs(logStore)
 
 const html = ref<string | null>(null)
 const markdownArea = ref<HTMLDivElement | null>(null)
-async function loadContent(markdown: string) {
-    html.value = await marked(markdown, markedOption)
+const loadContent = async (markdown: string) => {
+    html.value = await (marked(markdown, markedOption) as unknown as Promise<string>)
 }
 
 type LogToc = {
@@ -32,13 +38,13 @@ type LogToc = {
 } []
 
 const toc = ref<LogToc>()
-function toggleToc() {
+const toggleToc = () => {
     if (logStore.showToc = ! logStore.showToc) {
         (document.querySelector('.log-toc') as HTMLDivElement)?.focus()
     }
 }
 
-function gotoHeading(id: string) {
+const gotoHeading = (id: string) => {
     if (! markdownArea.value) return
 
     const headingEl = markdownArea.value.querySelector(`[id="${id}"]`) as HTMLElement | undefined
@@ -54,32 +60,46 @@ function gotoHeading(id: string) {
     router.replace({ query: { anchor: id } })
 }
 
-function gotoAnchor() {
+const gotoAnchor = () => {
     const { anchor } = route.query
     if (typeof anchor === 'string') {
         setTimeout(() => gotoHeading(anchor), 600)
     }
 }
 
-watch(markdownArea, () => {
-    if (! markdownArea.value) return
-
+const renderToc = (container: HTMLDivElement) => {
     toc.value = Array
-        .from(markdownArea.value.querySelectorAll('h1, h2, .anchor') as NodeListOf<HTMLHeadElement>)
+        .from(container.querySelectorAll('h1, h2, .anchor') as NodeListOf<HTMLHeadElement | HTMLSpanElement>)
         .map(head => ({
             lv: head.tagName === 'SPAN' ? 3 : + head.tagName.slice(1),
             id: head.id,
             html: head.innerHTML
         }))
+}
 
+const renderCuiping = async (container: HTMLDivElement) => {
+    const cuipingEls = container.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
+    if (cuipingEls.length) {
+        if (! Cuiping) {
+            const nid = notiManager.addNoti({ content: () => t('msg.loading-cuiping') })
+            await loadCuiping()
+            notiManager.removeNoti(nid)
+        }
+
+        cuipingEls.forEach(el => {
+            if (! el.dataset.vApp) createApp(Cuiping, {
+                molecule: el.dataset.molecule
+            }).mount(el)
+        })
+    }
+}
+
+watch(markdownArea, () => {
+    if (! markdownArea.value) return
+
+    renderToc(markdownArea.value)
+    renderCuiping(markdownArea.value)
     gotoAnchor()
-
-    const cuipings = markdownArea.value.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
-    cuipings.forEach(el => {
-        if (! el.dataset.vApp) createApp(Cuiping, {
-            molecule: el.dataset.molecule
-        }).mount(el)
-    })
 })
 
 watch(route, async () => {
@@ -89,9 +109,7 @@ watch(route, async () => {
         keyboardManager.dispose('toggleToc')
         keyboardManager.register('toggleToc', {
             key: 't',
-            action: () => {
-                toggleToc()
-            }
+            action: () => toggleToc()
         })
     }
     else {

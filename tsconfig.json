@@ -13,6 +13,13 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "baseUrl": ".",
+    "types": [ // Avoid @types/node
+      "js-yaml",
+      "katex",
+      "marked",
+      "node-emoji",
+      "prismjs",
+    ],
     "paths": {
       "@/*": ["src/*"],
       "@comp/*": ["src/components/*"],

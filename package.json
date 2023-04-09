@@ -1,7 +1,7 @@
 {
   "name": "icelava-top-workspace",
   "private": true,
-  "version": "2.6.3",
+  "version": "2.6.4",
   "scripts": {
     "dev": "vite --port 1628",
     "dev:share": "vite --host 0.0.0.0 --port 1628",
@@ -13,6 +13,7 @@
     "@types/js-yaml": "^4.0.5",
     "@types/katex": "^0.14.0",
     "@types/marked": "^4.0.8",
+    "@types/node": "^18.15.11",
     "@types/node-emoji": "^1.8.2",
     "@types/prismjs": "^1.26.0",
     "cuiping-component": "^1.7.0",
