@@ -1,7 +1,7 @@
 import 'cuiping-component/dist/style.css'
 
-export let Cuiping: typeof import('cuiping-component').Cuiping
+export let cuiping: Promise<typeof import('cuiping-component')>
 
 export const loadCuiping = async () => {
-    ({ Cuiping } = await import('cuiping-component'))
+    cuiping = import('cuiping-component')
 }

@@ -11,7 +11,7 @@ import Giscus from '@giscus/vue'
 import { marked, markedOption } from '@util/marked/markedManager'
 import { kNotiManager } from '@/utils/injections'
 import { keyboardManager } from '@util/keyboardManager'
-import { Cuiping, loadCuiping } from '@util/cuipingManager'
+import { cuiping, loadCuiping } from '@util/cuipingManager'
 
 const devMode = import.meta.env.DEV
 
@@ -80,12 +80,13 @@ const renderToc = (container: HTMLDivElement) => {
 const renderCuiping = async (container: HTMLDivElement) => {
     const cuipingEls = container.querySelectorAll('.cuiping') as NodeListOf<HTMLDivElement>
     if (cuipingEls.length) {
-        if (! Cuiping) {
-            const nid = notiManager.addNoti({ content: () => t('msg.loading-cuiping') })
-            await loadCuiping()
-            notiManager.removeNoti(nid)
+        let nid: number | null = null
+        if (! cuiping) {
+            nid = notiManager.addNoti({ content: () => t('msg.loading-cuiping') })
+            loadCuiping()
         }
-
+        const { Cuiping } = await cuiping
+        if (nid !== null) notiManager.removeNoti(nid)
         cuipingEls.forEach(el => {
             if (! el.dataset.vApp) createApp(Cuiping, {
                 molecule: el.dataset.molecule
