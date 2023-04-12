@@ -26,7 +26,8 @@
     },
     "keyboard-ins": "键盘操作指南",
     "loading-cuiping": "加载 Cuiping 中……",
-    "loading-katex": "加载 KaTeX 中……"
+    "loading-katex": "加载 KaTeX 中……",
+    "build-info": "版本 {0} 由 {1} 用 Vue 在 {2} 于 {3} 构建"
   },
   "sidebar": {
     "friends": "友情链接",

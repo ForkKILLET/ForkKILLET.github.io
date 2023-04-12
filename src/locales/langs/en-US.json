@@ -26,7 +26,8 @@
     },
     "keyboard-ins": "Keyboard Instruction",
     "loading-cuiping": "Loading Cuiping...",
-    "loading-katex": "Loading KaTeX..."
+    "loading-katex": "Loading KaTeX...",
+    "build-info": "Ver {0} made by {1} with Vue at {2} on {3}"
   },
   "sidebar": {
     "friends": "Friends",

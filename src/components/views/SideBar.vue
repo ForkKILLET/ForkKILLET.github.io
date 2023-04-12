@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { useI18n,  } from 'vue-i18n'
 import { langs, locale, MessageLangs } from '@/locales'
 
 import Flag from '@comp/Flag.vue'
@@ -58,11 +58,12 @@ const items = computed<SideBarItem[]>(() => [
             >{{ item.name }}</RouterLink>
         </p>
 
-        <p class="build-info">
-            Ver <a href="https://github.com/ForkKILLET/ForkKILLET.github.io/" tabindex="-1">&zeta;{{ version }}</a>
-            made by <a href="https://github.com/ForkKILLET" tabindex="-1">ForkKILLET</a>
-            with Vue at <u>{{ buildTime }}</u> on <u>{{ buildEnv }}</u>
-        </p>
+        <i18n-t keypath="msg.build-info" tag="p" class="build-info">
+            <a href="https://github.com/ForkKILLET/ForkKILLET.github.io/" tabindex="-1">&zeta;{{ version }}</a>
+            <a href="https://github.com/ForkKILLET" tabindex="-1">ForkKILLET</a>
+            <u>{{ buildTime }}</u>
+            <u>{{ buildEnv }}</u>
+        </i18n-t>
     </nav>
 </template>
 
