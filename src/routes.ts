@@ -1,11 +1,13 @@
+import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 
 import IndexView from '@comp/views/Index.vue'
 import LogView from '@comp/views/Log.vue'
-import TagsView from '@comp/views/Tags.vue'
+import TagsView from '@comp/views/Tags.vue' 
+import SettingsView from '@comp/views/Settings.vue' 
 import NotFoundView from '@comp/views/NotFoundView.vue'
 
-export default [
+export const routes = [
     {
         path: '/',
         component: IndexView,
@@ -22,8 +24,18 @@ export default [
         name: 'tags'
     },
     {
+        path: '/settings',
+        component: SettingsView,
+        name: 'settings'
+    },
+    {
         path: '/:anyway(.*)*',
         component: NotFoundView,
         name: 'not-found'
     }
 ] as RouteRecordRaw[]
+
+export const router = createRouter({
+    history: createWebHashHistory(),
+    routes
+})

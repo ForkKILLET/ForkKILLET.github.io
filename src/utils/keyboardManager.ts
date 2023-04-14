@@ -1,7 +1,9 @@
 import { reactive } from 'vue'
+import { router } from '@/routes'
 
 export type KeyboardOp = {
     key: string
+    ctrl?: true
     action: (event: KeyboardEvent) => void
 }
 
@@ -18,20 +20,14 @@ export const keyboardManager = {
     }
 }
 
-window.addEventListener('keypress', (event) => {
+window.addEventListener('keydown', (event) => {
     if ((event.target as HTMLElement)?.tagName === 'INPUT') return
     for (const name in keyboardOps) {
         const op = keyboardOps[name]
-        if (op.key === event.key) op.action(event)
+        if (op.key === event.key && (! op.ctrl || event.ctrlKey)) op.action(event)
     }
 })
 
-keyboardManager.register('focusIceLava', {
-    key: 'i',
-    action: () => {
-        (document.querySelector('.logo-container') as HTMLLinkElement | undefined)?.focus()
-    }
-})
 keyboardManager.register('focusMain', {
     key: 'm',
     action: () => {
@@ -42,5 +38,13 @@ keyboardManager.register('openGitHub', {
     key: 'G',
     action: () => {
         window.open('https://github.com/ForkKILLET/ForkKILLET.github.io/')
+    }
+})
+
+keyboardManager.register('gotoSettings', {
+    key: ',',
+    ctrl: true,
+    action: () => {
+        router.push('/settings')
     }
 })

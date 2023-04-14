@@ -2,11 +2,13 @@
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Index, useLogStore } from '@store/log'
+import { useSettings } from '@/stores/settings'
 
 import IndexItem from '@comp/IndexItem.vue'
 import DropTransition from '@comp/transitions/DropTransition.vue'
 
 const { t } = useI18n()
+const settings = useSettings()
 
 type TagGroups = Record<string, {
     paddings: [ number, number ]
@@ -32,7 +34,7 @@ const gotoTag = (tag: string) => {
     const offsetTop = - 40
     mainEl.scrollTo({
         top: tagEl.offsetTop - mainEl.offsetTop + offsetTop,
-        behavior: 'smooth'
+        behavior: settings.scrollBehavior
     })
 }
 

@@ -15,7 +15,7 @@ const emit = defineEmits<{
         <span class="toolbar-close" @click="emit('close')">x</span>
         <div class="ins-table">
             <p v-for="op, name in keyboardOps" class="ins-item">
-                <kbd>{{ op.key }}</kbd> <span>{{ t('keyboard-ins.' + name) }}</span>
+                <kbd>{{ (op.ctrl ? 'Ctrl + ' : '') + op.key }}</kbd> <span>{{ t('keyboard-ins.' + name) }}</span>
             </p>
         </div>
     </div>

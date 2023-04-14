@@ -29,6 +29,10 @@ const items = computed<SideBarItem[]>(() => [
         route: '/tags'
     },
     {
+        name: t('route.settings'),
+        route: '/settings'
+    },
+    {
         name: t('sidebar.friends'),
         route: '/log/log-friends'
     }
@@ -58,7 +62,7 @@ const items = computed<SideBarItem[]>(() => [
             >{{ item.name }}</RouterLink>
         </p>
 
-        <i18n-t keypath="msg.build-info" tag="p" class="build-info">
+        <i18n-t scope="global" keypath="msg.build-info" tag="p" class="build-info">
             <a href="https://github.com/ForkKILLET/ForkKILLET.github.io/" tabindex="-1">&zeta;{{ version }}</a>
             <a href="https://github.com/ForkKILLET" tabindex="-1">ForkKILLET</a>
             <u>{{ buildTime }}</u>

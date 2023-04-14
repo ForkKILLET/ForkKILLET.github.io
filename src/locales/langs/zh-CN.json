@@ -38,14 +38,28 @@
     "home": "首页",
     "log": "日志",
     "not-found": "页面不存在",
-    "tags": "标签"
+    "tags": "标签",
+    "settings": "设置"
   },
   "keyboard-ins": {
-    "focusIceLava": "聚焦 IceLava 图标",
+    "focusSidebar": "聚焦侧边栏",
+    "closeSidebar": "关闭侧边栏",
     "focusMain": "聚焦主页面",
     "openGitHub": "打开 GitHub",
     "toggleKeyboardIns": "切换键盘操作指南",
     "focusFilter": "聚焦筛选",
-    "toggleToc": "切换目录"
+    "toggleToc": "切换目录",
+    "gotoSettings": "前往设置"
+  },
+  "settings": {
+    "names": {
+      "scrollBehavior": "滚动方式",
+      "sidebarMode": "侧边栏模式"
+    },
+    "options": {
+      "auto": "自动",
+      "smooth": "平滑",
+      "manual": "手动"
+    }
   }
 }

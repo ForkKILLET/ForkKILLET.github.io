@@ -1,10 +1,9 @@
 import { createApp } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
-import routes from './routes'
 import { i18n } from './locales'
+import { router } from './routes'
 
 import './styles/base.css'
 import './styles/tag.css'
@@ -14,9 +13,6 @@ import 'normalize.css'
 
 createApp(App)
     .use(i18n)
-    .use(createRouter({
-        history: createWebHashHistory(),
-        routes
-    }))
+    .use(router)
     .use(createPinia())
     .mount('#app')

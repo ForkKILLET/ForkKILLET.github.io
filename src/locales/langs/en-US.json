@@ -38,14 +38,28 @@
     "home": "Home",
     "log": "Logs",
     "tags": "Tags",
-    "not-found": "Not found"
+    "not-found": "Not found",
+    "settings": "Settings"
   },
   "keyboard-ins": {
     "focusFilter": "Focus filter",
-    "focusIceLava": "Focus icelava logo",
+    "focusSidebar": "Focus sidebar",
     "focusMain": "Focus main area",
     "toggleToc": "Toggle table of content",
     "openGitHub": "Open GitHub",
-    "toggleKeyboardIns": "Toggle keyboard instruction"
+    "toggleKeyboardIns": "Toggle keyboard instruction",
+    "gotoSettings": "Go to settings",
+    "closeSidebar": "Close sidebar"
+  },
+  "settings": {
+    "names": {
+      "scrollBehavior": "Scroll behavior",
+      "sidebarMode": "Sidebar Mode"
+    },
+    "options": {
+      "smooth": "Smooth",
+      "auto": "Auto",
+      "manual": "Manual"
+    }
   }
 }

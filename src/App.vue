@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted, provide, ref } from 'vue'
+import { onMounted, provide, ref, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useSettings } from './stores/settings'
 
 import Home from '@comp/views/Home.vue'
 import SideBar from '@comp/views/SideBar.vue'
@@ -17,11 +18,14 @@ import { keyboardManager } from '@util/keyboardManager'
 import { version } from '@pack'
 
 const { t } = useI18n()
+const settings = useSettings()
 
+const autoSidebar = computed(() => settings.sidebarMode === 'auto')
 const matchSidebarFixedWidth = () => window.matchMedia('screen and (min-width: 601px')
-const sidebarFixed = ref(matchSidebarFixedWidth().matches)
+const sidebarFixed = ref(autoSidebar.value && matchSidebarFixedWidth().matches)
 const sidebarActive = ref(false)
 matchSidebarFixedWidth().addEventListener('change', event => {
+    if (! autoSidebar.value) return
     sidebarFixed.value = event.matches
     sidebarActive.value = ! event.matches
 })
@@ -77,13 +81,36 @@ keyboardManager.register('toggleKeyboardIns', {
         showKeyboardIns.value = ! showKeyboardIns.value
     }
 })
+keyboardManager.register('focusSidebar', {
+    key: 's',
+    action: () => {
+        if (! sidebarFixed.value && ! sidebarActive.value) sidebarActive.value = true
+        nextTick(() => {
+            (document.querySelector('.sidebar-item') as HTMLLinkElement)?.focus()
+        })
+    }
+})
+keyboardManager.register('closeSidebar', {
+    key: 'Escape',
+    action: event => {
+        if (sidebarActive.value) {
+            event.preventDefault()
+            sidebarActive.value = false
+        }
+    }
+})
 </script>
 
 <template>
 	<div class="root">
         <div class="mask" :class="{ active: ! sidebarFixed && sidebarActive }"></div>
 		<Transition name="side">
-			<SideBar v-show="sidebarFixed || sidebarActive" class="sidebar"></SideBar>
+			<SideBar
+                v-show="sidebarFixed || sidebarActive"
+                :class="{
+                    manual: settings.sidebarMode === 'manual'
+                }"
+            ></SideBar>
 		</Transition>
         <SideBarButton
             @click="toggleSidebar"
@@ -102,11 +129,9 @@ keyboardManager.register('toggleKeyboardIns', {
 </template>
 
 <style scoped>
-@media screen and (max-width: 600px) {
-	.sidebar {
-		position: fixed;
-		z-index: 3;
-	}
+.sidebar.manual {
+    position: fixed;
+    z-index: 3;
 }
 
 .root {

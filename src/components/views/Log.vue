@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useLogStore } from '@store/log'
+import { useSettings } from '@/stores/settings'
 
 import Fetch from '@comp/Fetch.vue'
 import Giscus from '@giscus/vue'
@@ -24,6 +25,8 @@ const logId = computed(() => route.params.id as string)
 
 const logStore = useLogStore()
 const { showToc } = storeToRefs(logStore)
+
+const settings = useSettings()
 
 const html = ref<string | null>(null)
 const markdownArea = ref<HTMLDivElement | null>(null)
@@ -54,16 +57,25 @@ const gotoHeading = (id: string) => {
     const offsetTop = headingEl.tagName === 'SPAN' ? - 10 : 0
     mainEl.scrollTo({
         top: headingEl.offsetTop - mainEl.offsetTop + offsetTop,
-        behavior: 'smooth'
+        behavior: settings.scrollBehavior
     })
 
     router.replace({ query: { anchor: id } })
 }
 
+let anchorTid: number | null = null
+
 const gotoAnchor = () => {
     const { anchor } = route.query
     if (typeof anchor === 'string') {
-        setTimeout(() => gotoHeading(anchor), 600)
+        if (anchorTid !== null) {
+            clearTimeout(anchorTid)
+            anchorTid = null
+        }
+        anchorTid = setTimeout(() => {
+            gotoHeading(anchor), 600
+            anchorTid = null
+        })
     }
 }
 
@@ -75,6 +87,13 @@ const renderToc = (container: HTMLDivElement) => {
             id: head.id,
             html: head.innerHTML
         }))
+}
+
+const gotoTop = () => {
+    document.querySelector('main')!.scrollTo({
+        top: 0,
+        behavior: settings.scrollBehavior
+    })
 }
 
 const renderCuiping = async (container: HTMLDivElement) => {
@@ -132,25 +151,36 @@ onMounted(async () => {
             :url="`/FkLog/${logId}`"
             :success="loadContent"
         >
-            <div class="log-toc markdown" tabindex="0">
-                <span
-                    class="log-toc-button"
+            <div class="log-toolbar">
+                <div
+                    class="log-to-top"
                     tabindex="0"
-                    @click="toggleToc"
-                    @keypress.enter="toggleToc"
-                >#</span>
-                <ul class="log-toc-content" v-if="showToc">
-                    <li
-                        v-for="{ lv, id, html } in toc"
-                        v-html="html"
-                        :key="id"
-                        :data-lv="lv"
-                        class="log-toc-item"
+                    @click="gotoTop"
+                    @keypress.enter="gotoTop"
+                >
+                    <span class="log-button">^</span>
+                </div>
+                <br />
+                <div class="log-toc markdown">
+                    <span
+                        class="log-button"
                         tabindex="0"
-                        @click="gotoHeading(id)"
-                        @keypress.enter="gotoHeading(id)"
-                    ></li>
-                </ul>
+                        @click="toggleToc"
+                        @keypress.enter="toggleToc"
+                    >#</span>
+                    <ul class="log-toc-content" v-if="showToc">
+                        <li
+                            v-for="{ lv, id, html } in toc"
+                            v-html="html"
+                            :key="id"
+                            :data-lv="lv"
+                            class="log-toc-item"
+                            tabindex="0"
+                            @click="gotoHeading(id)"
+                            @keypress.enter="gotoHeading(id)"
+                        ></li>
+                    </ul>
+                </div>
             </div>
             <div ref="markdownArea" class="log-text markdown" v-html="html"></div>
             <div class="giscus-container" v-if="! devMode">
@@ -170,16 +200,17 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.log-content {
-	min-width: 500px;
+.log-toolbar {
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
+.log-toolbar > div:not(:last-child) {
+    margin-bottom: .3em;
 }
 
-.log-toc {
-    position: sticky;
-    left: 0;
-    top: 0;
-    z-index: 2;
-
+.log-toc, .log-to-top {
     display: inline-flex;
     padding: .6em;
 
@@ -188,12 +219,14 @@ onMounted(async () => {
     opacity: .5;
     transition: .5s box-shadow, .5s opacity;
 }
-.log-toc:hover, .log-toc:focus-within {
+
+.log-toc:hover, .log-toc:focus-within,
+.log-to-top:hover, .log-to-top:focus-within {
     opacity: 1;
     box-shadow: 0 0 .5em #39C5BB;
 }
 
-.log-toc-button {
+.log-button {
     display: inline-block;
     width: 1em;
     z-index: 1;
@@ -202,10 +235,10 @@ onMounted(async () => {
     text-align: center;
     transition: color;
 }
-.log-toc-button:hover {
+.log-button:hover {
     cursor: pointer;
 }
-.log-toc-button:hover, .log-toc-button:focus {
+.log-button:hover, .log-button:focus {
     animation: .3s hop;
     color: #39C5BB;
 }

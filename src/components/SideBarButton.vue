@@ -1,8 +1,16 @@
 <script setup lang="ts">
+import { useSettings } from '@/stores/settings';
+
+const settings = useSettings()
 </script>
 
 <template>
-    <div class="sidebar-button">
+    <div
+        class="sidebar-button"
+        :class="{
+            manual: settings.sidebarMode === 'manual'
+        }"
+    >
         <span class="sidebar-button-dots">&middot;&middot;&middot;</span>
     </div>
 </template>
@@ -40,7 +48,7 @@
 }
 
 @media screen and (min-width: 601px) {
-    .sidebar-button {
+    .sidebar-button:not(.manual) {
         display: none;
     }
 }
