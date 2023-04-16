@@ -9,6 +9,7 @@ import SideBar from '@comp/views/SideBar.vue'
 import SideBarButton from '@comp/SideBarButton.vue'
 import Notifications from '@comp/views/Notifications.vue'
 import KeyboardInstruction from '@comp/views/KeyboardInstruction.vue'
+import vClickEnter from '@dir/clickenter'
 
 import { kNotiManager } from '@util/injections'
 import { loadMarked } from '@util/marked/markedManager'
@@ -108,20 +109,16 @@ keyboardManager.register('closeSidebar', {
 			<SideBar
                 v-show="sidebarFixed || sidebarActive"
                 :class="{ docking: ! autoSidebar || ! sidebarFixed }"
-            ></SideBar>
+            />
 		</Transition>
-        <SideBarButton
-            @click="toggleSidebar"
-            @keypress.enter="toggleSidebar"
-            tabindex="0"
-        ></SideBarButton>
-        <Notifications ref="notifications"></Notifications>
-        <Home></Home>
+        <SideBarButton v-click-enter="toggleSidebar" />
+        <Notifications ref="notifications" />
+        <Home />
         <Transition name="fade">
             <KeyboardInstruction
                 v-show="showKeyboardIns"
                 @close="showKeyboardIns = false"
-            ></KeyboardInstruction>
+            />
         </Transition>
     </div>
 </template>

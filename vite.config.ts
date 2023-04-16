@@ -25,6 +25,7 @@ export default defineConfig({
             '@': resolve(root, 'src'),
             '@pack': resolve(root, 'package.json'),
             '@comp': resolve(root, 'src/components'),
+            '@dir': resolve(root, 'src/directives'),
             '@util': resolve(root, 'src/utils'),
             '@store': resolve(root, 'src/stores')
         }

@@ -8,6 +8,7 @@ import { useSettings } from '@/stores/settings'
 
 import Fetch from '@comp/Fetch.vue'
 import Giscus from '@giscus/vue'
+import vClickEnter from '@dir/clickenter'
 
 import { marked, markedOption } from '@util/marked/markedManager'
 import { kNotiManager } from '@/utils/injections'
@@ -154,9 +155,7 @@ onMounted(async () => {
             <div class="log-toolbar">
                 <div
                     class="log-to-top"
-                    tabindex="0"
-                    @click="gotoTop"
-                    @keypress.enter="gotoTop"
+                    v-click-enter="gotoTop"
                 >
                     <span class="log-button">^</span>
                 </div>
@@ -164,9 +163,7 @@ onMounted(async () => {
                 <div class="log-toc markdown">
                     <span
                         class="log-button"
-                        tabindex="0"
-                        @click="toggleToc"
-                        @keypress.enter="toggleToc"
+                        v-click-enter="toggleToc"
                     >#</span>
                     <ul class="log-toc-content" v-if="showToc">
                         <li
@@ -175,9 +172,7 @@ onMounted(async () => {
                             :key="id"
                             :data-lv="lv"
                             class="log-toc-item"
-                            tabindex="0"
-                            @click="gotoHeading(id)"
-                            @keypress.enter="gotoHeading(id)"
+                            v-click-enter="() => gotoHeading(id)"
                         ></li>
                     </ul>
                 </div>

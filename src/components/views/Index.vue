@@ -8,6 +8,7 @@ import { kNotiManager } from '@util/injections'
 import { keyboardManager } from '@util/keyboardManager'
 
 import IndexItem from '@comp/IndexItem.vue'
+import vClickEnter from '@dir/clickenter'
 
 const { t } = useI18n()
 
@@ -73,7 +74,7 @@ const filterInputEl = ref<HTMLInputElement | undefined>()
 let updateNotified = false
 let updatedCount = 0
 const updateStates = ref<Record<string, number>>({})
-const notiManager = inject(kNotiManager)
+const notiManager = inject(kNotiManager)!
 
 const checkUpdate = async () => {
     index.value = await logStore.fetchIndex()
@@ -88,7 +89,7 @@ const checkUpdate = async () => {
 
     if (! updateNotified && updatedCount) {
         updateNotified = true
-        notiManager?.addNoti({ content: () => t('noti.update', [ updatedCount ]) })
+        notiManager.addNoti({ content: () => t('noti.update', [ updatedCount ]) })
     }
 }
 
@@ -125,19 +126,15 @@ watch(route, async () => {
                     :placeholder="t('msg.log-title')"
                 />
                 <span
-                    @click="toggleUnreadOnly"
-                    @keypress.enter="toggleUnreadOnly"
+                    v-click-enter="toggleUnreadOnly"
                     :data-checked="filterUnreadOnly"
                     class="filter-button"
-                    tabindex="0"
                 >{{ t('op.unread-only') }}</span>
                 <span v-if="filterTags.length" class="filter-tags">
                     <span
                         v-for="tag of filterTags"
-                        @click="removeFilterTag(tag)"
-                        @keypress.enter="removeFilterTag(tag)"
+                        v-click-enter="() => removeFilterTag(tag)"
                         class="log-tag inversed filter-tag"
-                        tabindex="0"
                     >{{ tag }}</span>
                 </span>
             </p>
@@ -145,10 +142,8 @@ watch(route, async () => {
                 <b>{{ t('op.sort') }}:</b>
                 <span
                     v-for="method of sortMethods"
-                    @click="sortMethod = method"
-                    @keypress.enter="sortMethod = method"
+                    v-click-enter="() => sortMethod = method"
                     class="sort-method" :class="{ active: sortMethod === method }"
-                    tabindex="0"
                 >{{ t('op.sort-method.' + method) }}</span>
             </p>
         </div>
@@ -161,7 +156,7 @@ watch(route, async () => {
                     :filter-tags="filterTags"
                     :update-state="updateStates[log.id]"
                     @tag-click="tag => addFilterTag(tag)"
-                ></IndexItem>
+                />
             </div>
         </template>
     </div>

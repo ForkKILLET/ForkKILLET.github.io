@@ -23,6 +23,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@comp/*": ["src/components/*"],
+      "@dir/*": ["src/directives/*"],
       "@util/*": ["src/utils/*"],
       "@store/*": ["src/stores/*"],
       "@pack": ["package.json"]

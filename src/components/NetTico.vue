@@ -13,7 +13,7 @@ defineProps<{
             :url="`/FkLog/@icon/${name}.tico`"
             #default="{ data }"
         >
-            <Tico :file="data!"></Tico>
+            <Tico :file="data!" />
         </Fetch>
     </div>
 </template>

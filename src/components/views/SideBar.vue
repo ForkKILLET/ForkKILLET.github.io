@@ -4,6 +4,7 @@ import { useI18n,  } from 'vue-i18n'
 import { langs, locale, MessageLangs } from '@/locales'
 
 import Flag from '@comp/Flag.vue'
+import vClickEnter from '@dir/clickenter'
 
 import { version } from '@pack'
 const buildTime = import.meta.env.VITE_BUILD_TIME ?? 'dev'
@@ -49,10 +50,8 @@ const items = computed<SideBarItem[]>(() => [
             <Flag
                 v-for="lang of langs"
                 :name="lang"
-                tabindex="0"
-                @click="switchLang(lang)"
-                @keypress.enter="switchLang(lang)"
-            ></Flag>
+                v-click-enter="() => switchLang(lang)"
+            />
         </div>
 
         <p v-for="item in items">

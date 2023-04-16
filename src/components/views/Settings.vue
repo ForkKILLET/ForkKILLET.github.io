@@ -2,6 +2,8 @@
 import { useI18n } from 'vue-i18n'
 import { useSettings, settingsSchemas, SettingsValues } from '@/stores/settings'
 
+import vClickEnter from '@dir/clickenter'
+
 const { t } = useI18n()
 const settings = useSettings()
 
@@ -24,9 +26,7 @@ const setItem = <T extends keyof SettingsValues>(name: T, value: SettingsValues[
                             'setting-option-button': true,
                             active: settings[name] === option
                         }"
-                        tabindex="0"
-                        @click="setItem(name, option)"
-                        @keypress="setItem(name, option)"
+                        v-click-enter="() => setItem(name, option)"
                     >{{ t('settings.options.' + option) }}</span>
                 </span>
             </div>

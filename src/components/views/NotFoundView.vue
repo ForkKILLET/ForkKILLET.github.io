@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+import vClickEnter from '@dir/clickenter'
+
 const route = useRoute()
 const router = useRouter()
 const next = ref(route.path.slice(1))
@@ -13,7 +15,9 @@ const goToNext = () => {
 <template>
     <div class="root">
         <p>
-            Sorry but we don't have <input type="text" v-model="next" @keypress.enter="goToNext" /> :(
+            Sorry but we don't have
+            <input type="text" v-model="next" @keypress.enter="goToNext" />
+            :(
         </p>
         <p v-if="route.path === '/anything'">
             Nah. At least we do have a <RouterLink to="/">Home</RouterLink>!
@@ -24,9 +28,7 @@ const goToNext = () => {
         <div
             v-if="next !== route.path.slice(1)"
             class="go-to-next"
-            @click="goToNext"
-            @keypress.enter="goToNext"
-            tabindex="0"
+            v-click-enter="goToNext"
         >Next step!</div>
     </div>
 </template>

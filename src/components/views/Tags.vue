@@ -6,6 +6,7 @@ import { useSettings } from '@/stores/settings'
 
 import IndexItem from '@comp/IndexItem.vue'
 import DropTransition from '@comp/transitions/DropTransition.vue'
+import vClickEnter from '@dir/clickenter'
 
 const { t } = useI18n()
 const settings = useSettings()
@@ -68,17 +69,13 @@ onMounted(async () => {
     <div>
         <div class="toolbar">
             <b
-                @click="openTagGraph"
-                @keypress.enter="openTagGraph"
+                v-click-enter="openTagGraph"
                 class="toolbar-button"
-                tabindex="0"
             >{{ t('op.tag-cloud') }}</b>
             <b
                 v-if="showTagGraph"
-                @click="closeTagGraph"
-                @keypress.enter="closeTagGraph"
+                v-click-enter="closeTagGraph"
                 class="toolbar-close"
-                tabindex="0"
             >x</b>
         </div>
 
@@ -105,7 +102,7 @@ onMounted(async () => {
                 <span class="log-tag" :data-tag="tag">{{ tag }}</span> <span>({{ logs.length }})</span>
             </div>
             <template v-for="log of logs">
-                <IndexItem :log="log"></IndexItem>
+                <IndexItem :log="log" />
             </template>
         </div>
     </div>
