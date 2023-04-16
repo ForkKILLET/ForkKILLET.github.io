@@ -20,8 +20,8 @@ import { version } from '@pack'
 const { t } = useI18n()
 const settings = useSettings()
 
-const autoSidebar = computed(() => settings.sidebarMode === 'auto')
 const matchSidebarFixedWidth = () => window.matchMedia('screen and (min-width: 601px')
+const autoSidebar = computed(() => settings.sidebarMode === 'auto')
 const sidebarFixed = ref(autoSidebar.value && matchSidebarFixedWidth().matches)
 const sidebarActive = ref(false)
 matchSidebarFixedWidth().addEventListener('change', event => {
@@ -107,9 +107,7 @@ keyboardManager.register('closeSidebar', {
 		<Transition name="side">
 			<SideBar
                 v-show="sidebarFixed || sidebarActive"
-                :class="{
-                    manual: settings.sidebarMode === 'manual'
-                }"
+                :class="{ docking: ! autoSidebar || ! sidebarFixed }"
             ></SideBar>
 		</Transition>
         <SideBarButton
@@ -129,9 +127,13 @@ keyboardManager.register('closeSidebar', {
 </template>
 
 <style scoped>
-.sidebar.manual {
+.sidebar.docking {
     position: fixed;
     z-index: 3;
+}
+
+.sidebar:not(.docking) + .sidebar-button {
+    display: none;
 }
 
 .root {
