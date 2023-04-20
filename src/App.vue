@@ -41,6 +41,13 @@ const notifications = ref<InstanceType<typeof Notifications>>()
 onMounted(() => {
     const notiManager = notifications.value!.notiManager!
 
+    keyboardManager.register('clearNotis', {
+        key: 'c',
+        action: () => {
+            notiManager.removeAllNotis()
+        }
+    })
+
     {
         let nid: number
         loadMarked({
@@ -99,7 +106,8 @@ keyboardManager.register('closeSidebar', {
             event.preventDefault()
             sidebarActive.value = false
         }
-    }
+    },
+    enabled: () => sidebarActive.value
 })
 </script>
 

@@ -1,10 +1,11 @@
-import { reactive } from 'vue'
+import { reactive, Ref } from 'vue'
 import { router } from '@/routes'
 
 export type KeyboardOp = {
     key: string
     ctrl?: true
     action: (event: KeyboardEvent) => void
+    enabled?: () => boolean
 }
 
 export const keyboardOps: Record<string, KeyboardOp> = reactive({})
@@ -24,6 +25,7 @@ window.addEventListener('keydown', (event) => {
     if ((event.target as HTMLElement)?.tagName === 'INPUT') return
     for (const name in keyboardOps) {
         const op = keyboardOps[name]
+        if (op.enabled?.() === false) continue
         if (op.key === event.key && (! op.ctrl || event.ctrlKey)) op.action(event)
     }
 })

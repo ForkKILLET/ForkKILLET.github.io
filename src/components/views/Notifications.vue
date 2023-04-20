@@ -13,6 +13,7 @@ export type Notis = (Noti | undefined)[]
 export type NotiManager = {
     addNoti: (noti: Noti) => number
     removeNoti: (id: number) => void
+    removeAllNotis: () => Notis
 }
 
 const notis = reactive<Notis>([])
@@ -28,6 +29,11 @@ const notiManager: NotiManager = {
             noti.onClose?.()
             notis[id] = undefined
         }
+    },
+    removeAllNotis: () => {
+        const removed = notis.splice(0)
+        removed.forEach(noti => noti?.onClose?.())
+        return removed
     }
 }
 

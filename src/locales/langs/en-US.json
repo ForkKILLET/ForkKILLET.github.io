@@ -49,7 +49,8 @@
     "openGitHub": "Open GitHub",
     "toggleKeyboardIns": "Toggle keyboard instruction",
     "gotoSettings": "Go to settings",
-    "closeSidebar": "Close sidebar"
+    "closeSidebar": "Close sidebar",
+    "clearNotis": "Clear notifications"
   },
   "settings": {
     "names": {
