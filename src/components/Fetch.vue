@@ -32,9 +32,11 @@ onMounted(load)
 </script>
 
 <template>
-    <p v-if="loading"><Loading /></p>
-    <div v-else-if="res.err" style="color: red">
-        {{ res.err }}
-    </div>
+    <slot v-if="loading" name="load">
+        <Loading />
+    </slot>
+    <slot v-else-if="res.err" name="error" :error="res.err">
+        <span style="color: red">{{ res.err }}</span>
+    </slot>
     <slot v-else :data="res.data"></slot>
 </template>

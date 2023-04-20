@@ -139,7 +139,8 @@ watch(route, async () => {
 }, { immediate: true })
 
 onMounted(async () => {
-    const logItem = (await logStore.getLogById(logId.value))!
+    const logItem = await logStore.getLogById(logId.value)
+    if (! logItem) return
     logItem.lastRead = new Date
     logStore.updateLastIndex()
 })
@@ -152,44 +153,50 @@ onMounted(async () => {
             :url="`/FkLog/${logId}`"
             :success="loadContent"
         >
-            <div class="log-toolbar">
-                <div
-                    class="log-to-top"
-                    v-click-enter="gotoTop"
-                >
-                    <span class="log-button">^</span>
+            <template #default>
+                <div class="log-toolbar">
+                    <div
+                        class="log-to-top"
+                        v-click-enter="gotoTop"
+                    >
+                        <span class="log-button">^</span>
+                    </div>
+                    <br />
+                    <div class="log-toc markdown">
+                        <span
+                            class="log-button"
+                            v-click-enter="toggleToc"
+                        >#</span>
+                        <ul class="log-toc-content" v-if="showToc">
+                            <li
+                                v-for="{ lv, id, html } in toc"
+                                v-html="html"
+                                :key="id"
+                                :data-lv="lv"
+                                class="log-toc-item"
+                                v-click-enter="() => gotoHeading(id)"
+                            ></li>
+                        </ul>
+                    </div>
                 </div>
-                <br />
-                <div class="log-toc markdown">
-                    <span
-                        class="log-button"
-                        v-click-enter="toggleToc"
-                    >#</span>
-                    <ul class="log-toc-content" v-if="showToc">
-                        <li
-                            v-for="{ lv, id, html } in toc"
-                            v-html="html"
-                            :key="id"
-                            :data-lv="lv"
-                            class="log-toc-item"
-                            v-click-enter="() => gotoHeading(id)"
-                        ></li>
-                    </ul>
+                <div ref="markdownArea" class="log-text markdown" v-html="html"></div>
+                <div class="giscus-container" v-if="! devMode && html">
+                    <Giscus
+                        repo="ForkKILLET/FkLog"
+                        repo-id="R_kgDOHeN7yQ"
+                        category="Announcements"
+                        category-id="DIC_kwDOHeN7yc4CTXKN"
+                        mapping="specific"
+                        :term="logId"
+                        theme="preferred_color_scheme"
+                        lang="zh-CN"
+                    />
                 </div>
-            </div>
-            <div ref="markdownArea" class="log-text markdown" v-html="html"></div>
-            <div class="giscus-container" v-if="! devMode">
-                <Giscus
-                    repo="ForkKILLET/FkLog"
-                    repo-id="R_kgDOHeN7yQ"
-                    category="Announcements"
-                    category-id="DIC_kwDOHeN7yc4CTXKN"
-                    mapping="specific"
-                    :term="logId"
-                    theme="preferred_color_scheme"
-                    lang="zh-CN"
-                />
-            </div>
+            </template>
+
+            <template #error="err">
+                {{ err }}
+            </template>
         </Fetch>
     </div>
 </template>

@@ -15,8 +15,9 @@ export const loadMarked = (options: MarkedKateXOptions) => {
 
 export const markedOption = {
     baseUrl: './FkLog/',
-    highlight: (code: string, lang: string) => (
-        Prism.highlight(code, Prism.languages[lang], lang)
+    highlight: (code: string, lang: string) => {
+        lang ||= 'plain'
+        return Prism.highlight(code, Prism.languages[lang], lang)
             .split('\n')
             .map((ln, i, lines, n = lines.length.toString().length) =>
                 `<span class="prism-line-number">${
@@ -24,7 +25,7 @@ export const markedOption = {
                 }${i + 1}. </span>${ln}`
             )
             .join('\n')
-    )
+    }
 }
 
 export {
