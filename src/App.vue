@@ -21,13 +21,14 @@ import { version } from '@pack'
 const { t } = useI18n()
 const settings = useSettings()
 
-const matchSidebarFixedWidth = () => window.matchMedia('screen and (min-width: 601px')
+const matchLargeScreen = window.matchMedia('screen and (min-width: 601px')
 const autoSidebar = computed(() => settings.sidebarMode === 'auto')
-const sidebarFixed = ref(autoSidebar.value && matchSidebarFixedWidth().matches)
+const isLargeScreen = ref(matchLargeScreen.matches)
+const sidebarFixed = computed(() => autoSidebar.value && isLargeScreen.value)
 const sidebarActive = ref(false)
-matchSidebarFixedWidth().addEventListener('change', event => {
+matchLargeScreen.addEventListener('change', event => {
     if (! autoSidebar.value) return
-    sidebarFixed.value = event.matches
+    isLargeScreen.value = event.matches
     sidebarActive.value = ! event.matches
 })
 const toggleSidebar = () => {
