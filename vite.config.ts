@@ -12,7 +12,7 @@ export default defineConfig({
         splitVendorChunkPlugin(),
         vue(),
         prismjs({
-            languages: [ 'javascript', 'typescript', 'bash', 'markup' ],
+            languages: [ 'javascript', 'typescript', 'bash', 'markup', 'haskell' ],
             theme: 'okaidia',
             css: true
         })
