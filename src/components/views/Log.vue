@@ -297,7 +297,7 @@ onMounted(async () => {
     background-color: #EEEEEE;
 }
 
-.markdown img {
+.markdown > img {
     max-width: 80%;
 }
 
