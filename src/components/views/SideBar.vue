@@ -35,7 +35,7 @@ const items = computed<SideBarItem[]>(() => [
     },
     {
         name: t('sidebar.friends'),
-        route: '/log/log-friends'
+        route: '/log/life/friends.md'
     }
 ])
 </script>

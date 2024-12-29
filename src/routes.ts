@@ -14,7 +14,7 @@ export const routes = [
         name: 'home'
     },
     {
-        path: '/log/:id',
+        path: '/log/:id(.*)',
         component: LogView,
         name: 'log'
     },
@@ -29,7 +29,7 @@ export const routes = [
         name: 'settings'
     },
     {
-        path: '/:anyway(.*)*',
+        path: '/:anyway(.*)',
         component: NotFoundView,
         name: 'not-found'
     }
