@@ -1,0 +1,6 @@
+blog:
+  blogTitle: ForkKILLET's Blog
+  dataEndpoint: https://icelava.top/FkLog
+
+dev:
+  dataDir: ./data
